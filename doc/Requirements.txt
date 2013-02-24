@@ -108,6 +108,11 @@ Functional requirements
 50. The system should show full file name on hover as a title
 51. The user should be able to sort files by name, size or date, ascending or descending
 
+Aditional:
+52. The owner should be able to enable or disable password protection on the page
+53. The owner should be able to change password for the password protection on the page
+54. The owner should be able to change his password on the page
+
 
 Nonfunctional requirements
 ==========================
