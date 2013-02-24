@@ -41,7 +41,8 @@ owner_password=xxx                        # this is an password for owner
 allow_zip=true
 # Allowed modes, first one is the default one. Default value: list
 modes=list,gallery
-
+# blacklisted files and folders
+blacklist="file1","/path/from/root/"
 
 Dictionary
 ==========
@@ -107,23 +108,21 @@ Functional requirements
 49. The system should short all file and folder names if they are too long
 50. The system should show full file name on hover as a title
 51. The user should be able to sort files by name, size or date, ascending or descending
-
-Aditional:
 52. The owner should be able to enable or disable password protection on the page
 53. The owner should be able to change password for the password protection on the page
 54. The owner should be able to change his password on the page
+55. The system should be able to log file manipulation (IP, time, file, owner)
+56. The system should not allow gallery mode if it can’t create thumbnails
 
 
 Nonfunctional requirements
 ==========================
 1. Without MySQL
-2. No PHP framework
+2. Nette framework
 3. thumbnails for gallery mode should be in a temp directory (must be accessible by browser)
 4. The system should create thumbnails on a first view
-5. The system should not allow gallery mode if it can’t create thumbnails
-6. The system should have some default settings
-7. The system should allow easy change of the theme
-8. The system should be able to log file manipulation (IP, time, file, owner)
-9. The system should be easy to extend for adding some more view mode, or anything else
-10. The system should be able to show pages properly on any display size
-11. The system should be documented and opensource
+5. The system should have some default settings
+6. The system should allow easy change of the theme
+7. The system should be easy to extend for adding some more view mode, or anything else
+8. The system should be able to show pages properly on any display size
+9. The system should be documented and opensource
