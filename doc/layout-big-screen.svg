@@ -134,9 +134,9 @@
      borderopacity="0.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="0"
-     inkscape:zoom="0.70710678"
-     inkscape:cx="-70.837226"
-     inkscape:cy="-285.62144"
+     inkscape:zoom="1"
+     inkscape:cx="-144.59448"
+     inkscape:cy="-3474.817"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -3281,21 +3281,6 @@
          width="22"
          id="rect3970-9"
          style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
-      <text
-         xml:space="preserve"
-         style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-         x="-479.25113"
-         y="645.06183"
-         id="text7609"
-         sodipodi:linespacing="125%"><tspan
-           sodipodi:role="line"
-           id="tspan7611"
-           x="-479.25113"
-           y="645.06183">An example with anonymous user in folder </tspan><tspan
-           sodipodi:role="line"
-           x="-479.25113"
-           y="685.06183"
-           id="tspan7613">where is disabled gallery and downloading</tspan></text>
     </g>
     <rect
        y="2450.3462"
@@ -3518,6 +3503,663 @@
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m -343.6539,1422.8861 1.41422,-260.2153"
        id="path7174"
+       inkscape:connector-curvature="0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       y="3303.9463"
+       x="-507.74887"
+       height="703"
+       width="1011"
+       id="rect3529"
+       style="fill:#cdcdcd;fill-opacity:1;stroke:#b7b7b7;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       y="3307.9463"
+       x="-476.74887"
+       height="700"
+       width="950"
+       id="rect3531"
+       style="fill:#f7f7f7;fill-opacity:1;stroke:#a6a6a6;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       y="3305.9453"
+       x="-476.68918"
+       height="127.64838"
+       width="949.94128"
+       id="rect3533"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.99806952;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path3535"
+       d="m 365.06275,3529.2582 91.2168,0 0,475.706 -915.49945,0 0,-475.8828 c 232.28451,0.1369 591.99844,-0.2767 824.28265,0.1768 z"
+       style="fill:#e1e1e1;fill-opacity:1;stroke:#a29f9f;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       style="fill:#f1f1f1;fill-opacity:1;stroke:#cdcdcd;stroke-width:3.05612754999999980;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3537"
+       width="901.44836"
+       height="470.18719"
+       x="-457.71545"
+       y="3530.9548"
+       ry="0" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.99806952;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3633"
+       width="949.94128"
+       height="127.64838"
+       x="-476.68918"
+       y="3305.9453" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       sodipodi:linespacing="125%"
+       id="text3635"
+       y="3400.9463"
+       x="-456.74887"
+       style="font-size:48px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="3400.9463"
+         x="-456.74887"
+         id="tspan3637"
+         sodipodi:role="line">Server name</tspan></text>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       sodipodi:linespacing="125%"
+       id="text3639"
+       y="3471.4609"
+       x="-458.74887"
+       style="font-size:36px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="3471.4609"
+         x="-458.74887"
+         id="tspan3641"
+         sodipodi:role="line">File.php</tspan></text>
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       ry="0"
+       rx="0"
+       y="3529.6963"
+       x="445.00113"
+       height="474.25"
+       width="10.25"
+       id="rect3663"
+       style="opacity:0.37906141;fill:#a6a6a6;fill-opacity:1;stroke:#b7b7b7;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       y="3533.2075"
+       x="444.76212"
+       height="102.47811"
+       width="11.228113"
+       id="rect3665"
+       style="fill:#f1f1f1;fill-opacity:1;stroke:#b7b7b7;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:connector-curvature="0"
+       id="path3667"
+       d="m -506.74888,3304.9464 0,700 1010.00003,0 0,-700 z"
+       style="fill:none;stroke:#da0000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       sodipodi:linespacing="125%"
+       id="text3669"
+       y="3451.9463"
+       x="411.17502"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="3451.9463"
+         x="411.17502"
+         id="tspan3671"
+         sodipodi:role="line">Login</tspan></text>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       sodipodi:linespacing="125%"
+       id="text3673"
+       y="3323.9463"
+       x="263.25113"
+       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="3323.9463"
+         x="263.25113"
+         id="tspan3675"
+         sodipodi:role="line">Some picture on the background</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-447.5986"
+       y="3518.397"
+       id="text3782"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3784"
+         x="-447.5986"
+         y="3518.397">Back to folder</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-294.15643"
+       y="3518.397"
+       id="text3786"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3788"
+         x="-294.15643"
+         y="3518.397">Download</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-504"
+       y="3274.3623"
+       id="text3790"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="-504"
+         y="3274.3623"
+         id="tspan4679">Source higlighter with highligted lines 8-10</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-486.84375"
+       y="2386.6904"
+       id="text7609"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan7611"
+         x="-486.84375"
+         y="2386.6904">An example with anonymous user in folder </tspan><tspan
+         sodipodi:role="line"
+         x="-486.84375"
+         y="2426.6904"
+         id="tspan7613">where is disabled gallery and downloading</tspan></text>
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none"
+       id="rect4677"
+       width="898.5"
+       height="50"
+       x="-456.5"
+       y="3649.3623" />
+    <text
+       xml:space="preserve"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#777777;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-451.5"
+       y="3549.3623"
+       id="text4604"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4606"
+         x="-451.5"
+         y="3549.3623">1</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3565.6123"
+         id="tspan4608">2</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3581.8623"
+         id="tspan4610">3</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3598.1123"
+         id="tspan4612">4</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3614.3623"
+         id="tspan4614">5</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3630.6123"
+         id="tspan4616">6</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3646.8623"
+         id="tspan4618">7</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3663.1123"
+         id="tspan4620">8</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3679.3623"
+         id="tspan4622">9</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3695.6123"
+         id="tspan4624">10</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3711.8623"
+         id="tspan4626">11</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3728.1123"
+         id="tspan4628">12</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3744.3623"
+         id="tspan4630">13</tspan><tspan
+         sodipodi:role="line"
+         x="-451.5"
+         y="3760.6123"
+         id="tspan4632">14</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-423"
+       y="3549.3623"
+       id="text4636"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3549.3623"
+         id="tspan4642">&lt;!DOCTYPE html&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3565.6123"
+         id="tspan4651">&lt;html&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3581.8623"
+         id="tspan4653">    &lt;head&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3598.1123"
+         id="tspan4655">        &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot;&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3614.3623"
+         id="tspan4657">        &lt;title&gt;&lt;/title&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3630.6123"
+         id="tspan4659">    &lt;/head&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3646.8623"
+         id="tspan4661">    &lt;body&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3663.1123"
+         id="tspan4663">        &lt;?php</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3679.3623"
+         id="tspan4665">        // put your code here</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3695.6123"
+         id="tspan4667">        ?&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3711.8623"
+         id="tspan4669">        Hello</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3728.1123"
+         id="tspan4671">    &lt;/body&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3744.3623"
+         id="tspan4673">&lt;/html&gt;</tspan><tspan
+         sodipodi:role="line"
+         x="-423"
+         y="3760.6123"
+         id="tspan4675" /></text>
+    <rect
+       style="fill:#cdcdcd;fill-opacity:1;stroke:#b7b7b7;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4683"
+       width="1011"
+       height="703"
+       x="-507.74887"
+       y="4141.1606"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#f7f7f7;fill-opacity:1;stroke:#a6a6a6;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4685"
+       width="950"
+       height="700"
+       x="-476.74887"
+       y="4145.1606"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.99806952;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4687"
+       width="949.94128"
+       height="127.64838"
+       x="-476.68918"
+       y="4143.1597"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#e1e1e1;fill-opacity:1;stroke:#a29f9f;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1"
+       d="m 365.06275,4366.4726 91.2168,0 0,462.706 -758.49945,0 0,-462.8828 c 232.28451,0.1369 434.99844,-0.2767 667.28265,0.1768 z"
+       id="path4689"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       y="4143.1597"
+       x="-476.68918"
+       height="127.64838"
+       width="949.94128"
+       id="rect4693"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.99806952;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-456.74887"
+       y="4238.1606"
+       id="text4695"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4697"
+         x="-456.74887"
+         y="4238.1606">Server name</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:36px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-458.74887"
+       y="4308.6753"
+       id="text4699"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4701"
+         x="-458.74887"
+         y="4308.6753">File.php</tspan></text>
+    <path
+       style="fill:none;stroke:#da0000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m -506.74888,4142.1608 0,700 1010.00003,0 0,-700 z"
+       id="path4707"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="411.17502"
+       y="4289.1606"
+       id="text4709"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4711"
+         x="411.17502"
+         y="4289.1606">Login</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="263.25113"
+       y="4161.1606"
+       id="text4713"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan4715"
+         x="263.25113"
+         y="4161.1606">Some picture on the background</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4717"
+       y="4355.6113"
+       x="-447.5986"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="4355.6113"
+         x="-447.5986"
+         id="tspan4719"
+         sodipodi:role="line">Back to folder</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4721"
+       y="4355.6113"
+       x="-294.15643"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="4355.6113"
+         x="-294.15643"
+         id="tspan4723"
+         sodipodi:role="line">Download</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4725"
+       y="4111.5767"
+       x="-504"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         id="tspan4727"
+         y="4111.5767"
+         x="-504"
+         sodipodi:role="line">Image viewer</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-465"
+       y="4398.3623"
+       id="text4791"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="-465"
+         y="4398.3623"
+         id="tspan4795">Axguuu text </tspan><tspan
+         sodipodi:role="line"
+         x="-465"
+         y="4418.3623"
+         id="tspan4800">something what is </tspan><tspan
+         sodipodi:role="line"
+         x="-465"
+         y="4438.3623"
+         id="tspan4808">name of the </tspan><tspan
+         sodipodi:role="line"
+         x="-465"
+         y="4458.3623"
+         id="tspan4802">photo file</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-465"
+       y="4623.3623"
+       id="text4810"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="-465"
+         y="4623.3623"
+         id="tspan4814">Created:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-465"
+       y="4673.3623"
+       id="text4818"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4820"
+         x="-465"
+         y="4673.3623">Resolution:</tspan><tspan
+         sodipodi:role="line"
+         x="-465"
+         y="4693.3623"
+         id="tspan4822" /></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-465"
+       y="4719.3623"
+       id="text4824"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4826"
+         x="-465"
+         y="4719.3623">Exif informations:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-431"
+       y="4644.3623"
+       id="text4830"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4832"
+         x="-431"
+         y="4644.3623">2012/02/22</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-428"
+       y="4694.3623"
+       id="text4834"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4836"
+         x="-428"
+         y="4694.3623">1024x768</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-440"
+       y="4741.3623"
+       id="text4838"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4840"
+         x="-440"
+         y="4741.3623">blah blah bla</tspan><tspan
+         sodipodi:role="line"
+         x="-440"
+         y="4757.6123"
+         id="tspan4842">GPS: somwhere</tspan></text>
+    <g
+       transform="matrix(4.5165563,0,0,2.8874172,959.87749,-781.00479)"
+       id="g5425-3">
+      <g
+         transform="matrix(0.13048873,0,0,0.16156808,-226.35627,1722.3951)"
+         id="g5429-1"
+         inkscape:label="Capa 1">
+        <g
+           transform="matrix(1.0023453,0,0,1.0070904,-147.82989,420.81833)"
+           id="g5431-5">
+          <g
+             id="g5433-5"
+             transform="translate(-2.1428571,-7.8571429)">
+            <rect
+               y="209.89496"
+               x="151.52289"
+               height="424.26407"
+               width="426.28436"
+               id="rect5435-9"
+               style="opacity:0.6;fill:#c8c9e8;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+            <path
+               sodipodi:nodetypes="ccc"
+               inkscape:connector-curvature="0"
+               id="path5437-1"
+               d="m 578.57142,212.36218 -425.71428,1.42857 0,420"
+               style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          </g>
+          <g
+             id="g5439-5"
+             transform="translate(16.162441,-406.08132)">
+            <path
+               inkscape:connector-curvature="0"
+               id="path5441-5"
+               d="m 195.99806,661.54494 0,217.15625 177.125,0 0,-161.4375 -51.40625,0 0,-55.71875 -125.71875,0 z"
+               style="fill:#f2f2f2;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+            <g
+               transform="translate(-196.42857,-120)"
+               id="g5443-3">
+              <path
+                 sodipodi:type="arc"
+                 style="opacity:0.58431373;fill:#8b8bae;fill-opacity:1;stroke:#000000;stroke-width:7;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+                 id="path5445-1"
+                 sodipodi:cx="237.89093"
+                 sodipodi:cy="801.84436"
+                 sodipodi:rx="33.840111"
+                 sodipodi:ry="32.324883"
+                 d="m 271.73104,801.84436 c 0,17.85254 -15.15073,32.32488 -33.84011,32.32488 -18.68938,0 -33.84011,-14.47234 -33.84011,-32.32488 0,-17.85254 15.15073,-32.32488 33.84011,-32.32488 18.68938,0 33.84011,14.47234 33.84011,32.32488 z"
+                 transform="translate(202.90791,28.126878)" />
+              <rect
+                 style="opacity:0.58431373;fill:#8b8bae;fill-opacity:1;stroke:#000000;stroke-width:5.00818014;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+                 id="rect5447-6"
+                 width="50.479275"
+                 height="46.438477"
+                 x="498.89688"
+                 y="916.85864" />
+              <path
+                 style="opacity:0.58431373;fill:#8b8bae;fill-opacity:1;stroke:#000000;stroke-width:5.60203171;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+                 d="m 414.34338,899.53145 0,81.65277 56.87147,0 -56.87147,-81.65277 z"
+                 id="path5449-3"
+                 inkscape:connector-curvature="0" />
+            </g>
+            <path
+               sodipodi:nodetypes="cccc"
+               inkscape:connector-curvature="0"
+               id="path5451-2"
+               d="m 322.74374,662.19077 49.75001,54.04315 -50.25509,0.25254 z"
+               style="fill:#f2f2f2;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+          </g>
+        </g>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-207"
+       y="4882.3623"
+       id="text4901"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4903"
+         x="-207"
+         y="4882.3623">Click on the image - go to the next (right half) /previous (left half)</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 82,4859.3622 0,-77"
+       id="path4905"
        inkscape:connector-curvature="0" />
   </g>
 </svg>
