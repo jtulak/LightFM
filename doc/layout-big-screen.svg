@@ -135,8 +135,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="0"
      inkscape:zoom="1"
-     inkscape:cx="-144.59448"
-     inkscape:cy="-3474.817"
+     inkscape:cx="-15.434052"
+     inkscape:cy="-4260.649"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1023,7 +1023,7 @@
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="317"
+       x="394"
        y="875.36218"
        id="text4209"
        sodipodi:linespacing="125%"
@@ -1032,8 +1032,8 @@
        inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan4211"
-         x="317"
-         y="875.36218">Show hidden files</tspan></text>
+         x="394"
+         y="875.36218">Options</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
@@ -1701,16 +1701,16 @@
        sodipodi:linespacing="125%"
        id="text4471"
        y="1685.7065"
-       x="317"
+       x="393"
        style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        xml:space="preserve"
        inkscape:export-filename="/home/dragon/Obrázky/filemanager-big.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><tspan
          y="1685.7065"
-         x="317"
+         x="393"
          id="tspan4473"
-         sodipodi:role="line">Show hidden files</tspan></text>
+         sodipodi:role="line">Options</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4479"
@@ -3547,7 +3547,7 @@
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
        inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
-       style="fill:#f1f1f1;fill-opacity:1;stroke:#cdcdcd;stroke-width:3.05612754999999980;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#f1f1f1;fill-opacity:1;stroke:none;stroke-width:3.05612754999999980;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3537"
        width="901.44836"
        height="470.18719"
@@ -3991,11 +3991,11 @@
          sodipodi:role="line"
          x="-465"
          y="4418.3623"
-         id="tspan4800">something what is </tspan><tspan
+         id="tspan4800">something what </tspan><tspan
          sodipodi:role="line"
          x="-465"
          y="4438.3623"
-         id="tspan4808">name of the </tspan><tspan
+         id="tspan4808">is name of the </tspan><tspan
          sodipodi:role="line"
          x="-465"
          y="4458.3623"
@@ -4161,5 +4161,338 @@
        d="m 82,4859.3622 0,-77"
        id="path4905"
        inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path6390-9"
+       d="m -305.46875,4532.3778 -10,20 10,19.9688 -3.03125,0 -9.96875,-19.9688 9.96875,-20 3.03125,0 z m -7.1875,0 -9.96875,20 9.96875,19.9688 -3,0 -9.96875,-19.9688 9.96875,-20 3,0 z m -6.875,0 -10,20 10,19.9688 -3,0 -10,-19.9688 10,-20 3,0 z"
+       style="fill:#d6d6d6;fill-opacity:1;stroke:none"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-big.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-174.15643"
+       y="4355.6113"
+       id="text3672"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3674"
+         x="-174.15643"
+         y="4355.6113">View a full size</tspan></text>
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       y="5039.1865"
+       x="-507.74887"
+       height="703"
+       width="1011"
+       id="rect4411"
+       style="fill:#cdcdcd;fill-opacity:1;stroke:#b7b7b7;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       y="5043.1865"
+       x="-476.74887"
+       height="700"
+       width="950"
+       id="rect4414"
+       style="fill:#f7f7f7;fill-opacity:1;stroke:#a6a6a6;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       y="5041.1855"
+       x="-476.68918"
+       height="127.64838"
+       width="949.94128"
+       id="rect4416"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.99806952;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path4418"
+       d="m 365.06275,5264.4982 91.2168,0 0,475.706 -915.49945,0 0,-475.8828 c 232.28451,0.1369 591.99844,-0.2767 824.28265,0.1768 z"
+       style="fill:#e1e1e1;fill-opacity:1;stroke:#a29f9f;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       sodipodi:linespacing="125%"
+       id="text4434"
+       y="5254.1865"
+       x="-449.1778"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="5254.1865"
+         x="-449.1778"
+         id="tspan4436"
+         sodipodi:role="line">Back to the folder</tspan></text>
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.99806952;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4510"
+       width="949.94128"
+       height="127.64838"
+       x="-476.68918"
+       y="5041.1855" />
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       sodipodi:linespacing="125%"
+       id="text4512"
+       y="5136.1865"
+       x="-456.74887"
+       style="font-size:48px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="5136.1865"
+         x="-456.74887"
+         id="tspan4514"
+         sodipodi:role="line">Server name</tspan></text>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       sodipodi:linespacing="125%"
+       id="text4516"
+       y="5206.7012"
+       x="-458.74887"
+       style="font-size:36px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="5206.7012"
+         x="-458.74887"
+         id="tspan4518"
+         sodipodi:role="line">Options</tspan></text>
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       ry="0"
+       rx="0"
+       y="5264.9365"
+       x="445.00113"
+       height="474.25"
+       width="10.25"
+       id="rect4540"
+       style="opacity:0.37906141;fill:#a6a6a6;fill-opacity:1;stroke:#b7b7b7;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       y="5268.4478"
+       x="444.76212"
+       height="102.47811"
+       width="11.228113"
+       id="rect4542"
+       style="fill:#f1f1f1;fill-opacity:1;stroke:#b7b7b7;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       inkscape:connector-curvature="0"
+       id="path4544"
+       d="m -506.74888,5040.1864 0,700 1010.00003,0 0,-700 z"
+       style="fill:none;stroke:#da0000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4467-9"
+       y="5185.7764"
+       x="321"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-big.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="5185.7764"
+         x="321"
+         id="tspan4469-7"
+         sodipodi:role="line">Loged as: Owner</tspan></text>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-example.png"
+       sodipodi:linespacing="125%"
+       id="text4550"
+       y="5059.1865"
+       x="263.25113"
+       style="font-size:12px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="5059.1865"
+         x="263.25113"
+         id="tspan4552"
+         sodipodi:role="line">Some picture on the background</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4570"
+       y="5016.5298"
+       x="-507.84375"
+       style="font-size:32px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         id="tspan4574"
+         y="5016.5298"
+         x="-507.84375"
+         sodipodi:role="line">Options menu</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3906-4-1"
+       width="22"
+       height="22"
+       x="-398"
+       y="5415.3623"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-360"
+       y="5431.3623"
+       id="text4616"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4619"
+         x="-360"
+         y="5431.3623">Show hidden files</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-239"
+       y="5328.3623"
+       id="text4621"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4623"
+         x="-239"
+         y="5328.3623">Folder password (leave empty for public access)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-399"
+       y="5301.3623"
+       id="text4625"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4627"
+         x="-399"
+         y="5301.3623">Options for folder &quot;Folder2&quot;:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-399"
+       y="5402.3623"
+       id="text4629"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4631"
+         x="-399"
+         y="5402.3623">General options:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-242"
+       y="5498.3623"
+       id="text4633"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4635"
+         x="-242"
+         y="5498.3623">Your new password (leave empty if you do not want to change it)</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-243"
+       y="5532.3623"
+       id="text4637"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4639"
+         x="-243"
+         y="5532.3623">Your new password again for verify</tspan></text>
+    <rect
+       ry="0"
+       y="5312.3623"
+       x="-398"
+       height="22"
+       width="149"
+       id="rect4645"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4647"
+       width="149"
+       height="22"
+       x="-398"
+       y="5481.3623"
+       ry="0" />
+    <rect
+       ry="0"
+       y="5514.3623"
+       x="-398"
+       height="22"
+       width="149"
+       id="rect4651"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       style="fill:#c8c8c8;fill-opacity:1;stroke:#b4b4b4;stroke-width:0.91456044;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
+       id="rect4427-2"
+       width="100.08543"
+       height="30.08544"
+       x="-399.04272"
+       y="5572.3193"
+       ry="2.4714851"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-big.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-373"
+       y="5595.3623"
+       id="text4653"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4656"
+         x="-373"
+         y="5595.3623">Save</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-666"
+       y="5329.3623"
+       id="text4676"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4678"
+         x="-666"
+         y="5329.3623">Folder password</tspan><tspan
+         sodipodi:role="line"
+         x="-666"
+         y="5351.8623"
+         id="tspan4681">as visible text</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-665"
+       y="5520.3623"
+       id="text4683"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4685"
+         x="-665"
+         y="5520.3623">User password</tspan><tspan
+         sodipodi:role="line"
+         x="-665"
+         y="5542.8623"
+         id="tspan4687">as asterisked</tspan><tspan
+         sodipodi:role="line"
+         x="-665"
+         y="5565.3623"
+         id="tspan4689">text :)</tspan></text>
   </g>
 </svg>
