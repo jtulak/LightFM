@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="11.5.1">
-  <zoom_level>8</zoom_level>
+  <zoom_level>10</zoom_level>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>496</x>
+      <x>670</x>
       <y>0</y>
-      <w>40</w>
-      <h>72</h>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;56;24;24</additional_attributes>
+    <additional_attributes>30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.InitialState</type>
     <coordinates>
-      <x>512</x>
-      <y>16</y>
-      <w>16</w>
-      <h>16</h>
+      <x>690</x>
+      <y>20</y>
+      <w>20</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>i</panel_attributes>
     <additional_attributes/>
@@ -26,10 +26,10 @@
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>472</x>
-      <y>56</y>
-      <w>96</w>
-      <h>40</h>
+      <x>640</x>
+      <y>70</y>
+      <w>120</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>Parse GET,
 POST, Cookies...</panel_attributes>
@@ -38,10 +38,10 @@ POST, Cookies...</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>568</x>
-      <y>1144</y>
-      <w>96</w>
-      <h>32</h>
+      <x>760</x>
+      <y>1570</y>
+      <w>120</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>Render page</panel_attributes>
     <additional_attributes/>
@@ -49,33 +49,23 @@ POST, Cookies...</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>472</x>
-      <y>360</y>
-      <w>96</w>
-      <h>32</h>
+      <x>550</x>
+      <y>1170</y>
+      <w>120</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>Find directory</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.umlet.element.custom.State</type>
-    <coordinates>
-      <x>472</x>
-      <y>880</y>
-      <w>96</w>
-      <h>32</h>
-    </coordinates>
-    <panel_attributes>Load dir
+    <panel_attributes>bg=white
+Load dir
 content</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>472</x>
-      <y>144</y>
-      <w>96</w>
-      <h>32</h>
+      <x>640</x>
+      <y>270</y>
+      <w>120</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>Create path
 from request</panel_attributes>
@@ -84,21 +74,21 @@ from request</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>496</x>
-      <y>72</y>
-      <w>40</w>
-      <h>88</h>
+      <x>670</x>
+      <y>90</y>
+      <w>50</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;72;24;24</additional_attributes>
+    <additional_attributes>30;60;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>504</x>
-      <y>200</y>
-      <w>32</w>
-      <h>32</h>
+      <x>680</x>
+      <y>150</y>
+      <w>40</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -106,45 +96,45 @@ from request</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>496</x>
-      <y>152</y>
-      <w>40</w>
-      <h>64</h>
+      <x>670</x>
+      <y>280</y>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;48;24;24</additional_attributes>
+    <additional_attributes>30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>448</x>
-      <y>208</y>
-      <w>136</w>
-      <h>88</h>
+      <x>600</x>
+      <y>160</y>
+      <w>186</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[Path is under the root]</panel_attributes>
-    <additional_attributes>72;72;72;24</additional_attributes>
+    <additional_attributes>100;110;100;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>512</x>
-      <y>192</y>
-      <w>296</w>
-      <h>816</h>
+      <x>690</x>
+      <y>140</y>
+      <w>370</w>
+      <h>1220</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[Path is not under the root]</panel_attributes>
-    <additional_attributes>280;800;280;24;24;24</additional_attributes>
+    <additional_attributes>350;1200;350;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>504</x>
-      <y>280</y>
-      <w>32</w>
-      <h>32</h>
+      <x>800</x>
+      <y>440</y>
+      <w>40</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -152,34 +142,34 @@ m2=[Path is not under the root]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>472</x>
-      <y>288</y>
-      <w>84</w>
-      <h>88</h>
+      <x>710</x>
+      <y>450</y>
+      <w>160</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[Path exists]</panel_attributes>
-    <additional_attributes>48;72;48;24</additional_attributes>
+    <additional_attributes>30;180;30;110;110;110;110;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>512</x>
-      <y>272</y>
-      <w>272</w>
-      <h>736</h>
+      <x>810</x>
+      <y>430</y>
+      <w>284</w>
+      <h>930</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=[Path do not existsor blacklisted]</panel_attributes>
-    <additional_attributes>256;720;256;24;24;24</additional_attributes>
+m2=[Path do not exists or blacklisted]</panel_attributes>
+    <additional_attributes>200;910;200;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>720</x>
-      <y>1016</y>
-      <w>96</w>
-      <h>32</h>
+      <x>950</x>
+      <y>1370</y>
+      <w>120</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>Create error
 layout</panel_attributes>
@@ -188,10 +178,10 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>672</x>
-      <y>984</y>
-      <w>128</w>
-      <h>16</h>
+      <x>890</x>
+      <y>1330</y>
+      <w>160</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -199,32 +189,32 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>744</x>
-      <y>968</y>
-      <w>40</w>
-      <h>64</h>
+      <x>980</x>
+      <y>1310</y>
+      <w>50</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;48;24;24</additional_attributes>
+    <additional_attributes>30;60;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>616</x>
-      <y>1024</y>
-      <w>168</w>
-      <h>104</h>
+      <x>980</x>
+      <y>1380</y>
+      <w>50</w>
+      <h>170</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;88;24;40;152;40;152;24</additional_attributes>
+    <additional_attributes>30;150;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>536</x>
-      <y>1104</y>
-      <w>112</w>
-      <h>16</h>
+      <x>520</x>
+      <y>1520</y>
+      <w>530</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -232,21 +222,21 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>592</x>
-      <y>1088</y>
-      <w>40</w>
-      <h>72</h>
+      <x>790</x>
+      <y>1500</y>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;56;24;24</additional_attributes>
+    <additional_attributes>30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.FinalState</type>
     <coordinates>
-      <x>608</x>
-      <y>1208</y>
-      <w>16</w>
-      <h>16</h>
+      <x>810</x>
+      <y>1650</y>
+      <w>20</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes>i</panel_attributes>
     <additional_attributes/>
@@ -254,21 +244,21 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>592</x>
-      <y>1152</y>
-      <w>40</w>
-      <h>72</h>
+      <x>790</x>
+      <y>1580</y>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;56;24;24</additional_attributes>
+    <additional_attributes>30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>504</x>
-      <y>624</y>
-      <w>32</w>
-      <h>32</h>
+      <x>680</x>
+      <y>720</y>
+      <w>40</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -276,103 +266,104 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>496</x>
-      <y>888</y>
-      <w>40</w>
-      <h>112</h>
+      <x>580</x>
+      <y>1180</y>
+      <w>50</w>
+      <h>190</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;96;24;24</additional_attributes>
+    <additional_attributes>30;170;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>432</x>
-      <y>632</y>
-      <w>164</w>
-      <h>96</h>
+      <x>590</x>
+      <y>730</y>
+      <w>212</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[Selected mode permitted]</panel_attributes>
-    <additional_attributes>88;80;88;24</additional_attributes>
+    <additional_attributes>110;100;110;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>504</x>
-      <y>736</y>
-      <w>32</w>
-      <h>32</h>
+      <x>590</x>
+      <y>880</y>
+      <w>40</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes/>
+    <panel_attributes>bg=white</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>440</x>
-      <y>744</y>
-      <w>154</w>
-      <h>152</h>
+      <x>500</x>
+      <y>890</y>
+      <w>216</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=[Mode conditions fullfilled]</panel_attributes>
-    <additional_attributes>80;136;80;24</additional_attributes>
+m2=[Layout conditions fullfilled]</panel_attributes>
+    <additional_attributes>110;110;110;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>480</x>
-      <y>984</y>
-      <w>80</w>
-      <h>32</h>
+      <x>530</x>
+      <y>1420</y>
+      <w>100</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>Create mode
+    <panel_attributes>bg=white
+Create
 layout</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>496</x>
-      <y>992</y>
-      <w>112</w>
-      <h>136</h>
+      <x>550</x>
+      <y>1430</y>
+      <w>100</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>96;120;96;72;24;72;24;24</additional_attributes>
+    <additional_attributes>80;100;80;70;30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>512</x>
-      <y>616</y>
-      <w>206</w>
-      <h>184</h>
+      <x>690</x>
+      <y>710</y>
+      <w>268</w>
+      <h>280</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[Selected mode not permitted]</panel_attributes>
-    <additional_attributes>152;168;152;24;24;24</additional_attributes>
+    <additional_attributes>190;260;190;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>512</x>
-      <y>728</y>
-      <w>172</w>
-      <h>72</h>
+      <x>600</x>
+      <y>870</y>
+      <w>260</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m2=[Mode conditions failure]</panel_attributes>
-    <additional_attributes>120;56;120;24;24;24</additional_attributes>
+m2=[Layout conditions failure]</panel_attributes>
+    <additional_attributes>240;100;240;30;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>480</x>
-      <y>552</y>
-      <w>136</w>
-      <h>32</h>
+      <x>650</x>
+      <y>630</y>
+      <w>170</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>Select view
 mode (user or default)</panel_attributes>
@@ -381,21 +372,21 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>496</x>
-      <y>560</y>
-      <w>40</w>
-      <h>80</h>
+      <x>670</x>
+      <y>640</y>
+      <w>50</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;64;24;24</additional_attributes>
+    <additional_attributes>30;80;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>496</x>
-      <y>704</y>
-      <w>72</w>
-      <h>16</h>
+      <x>670</x>
+      <y>820</y>
+      <w>90</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -403,10 +394,10 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>616</x>
-      <y>776</y>
-      <w>64</w>
-      <h>16</h>
+      <x>820</x>
+      <y>960</y>
+      <w>80</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -414,10 +405,10 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>632</x>
-      <y>816</y>
-      <w>32</w>
-      <h>32</h>
+      <x>840</x>
+      <y>1010</y>
+      <w>40</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -425,70 +416,70 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>624</x>
-      <y>760</y>
-      <w>40</w>
-      <h>72</h>
+      <x>830</x>
+      <y>940</y>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;56;24;24</additional_attributes>
+    <additional_attributes>30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>592</x>
-      <y>824</y>
-      <w>180</w>
-      <h>184</h>
+      <x>790</x>
+      <y>1020</y>
+      <w>234</w>
+      <h>340</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-[can't try another mode]</panel_attributes>
-    <additional_attributes>136;168;136;144;56;144;56;24</additional_attributes>
+[can't try another layout]</panel_attributes>
+    <additional_attributes>170;320;170;290;70;290;70;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>640</x>
-      <y>792</y>
-      <w>120</w>
-      <h>88</h>
+      <x>840</x>
+      <y>980</y>
+      <w>166</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 [can try 
-another mode]</panel_attributes>
-    <additional_attributes>64;72;64;40;24;40</additional_attributes>
+another layout]</panel_attributes>
+    <additional_attributes>90;90;90;50;40;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>656</x>
-      <y>864</y>
-      <w>88</w>
-      <h>48</h>
+      <x>870</x>
+      <y>1070</y>
+      <w>110</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>Select another
-mode from 
+layout from 
 permitted</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>528</x>
-      <y>664</y>
-      <w>240</w>
-      <h>280</h>
+      <x>710</x>
+      <y>770</y>
+      <w>300</w>
+      <h>400</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;48;24;24;224;24;224;264;168;264;168;248</additional_attributes>
+    <additional_attributes>30;60;30;30;280;30;280;380;210;380;210;360</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>504</x>
-      <y>432</y>
-      <w>32</w>
-      <h>32</h>
+      <x>680</x>
+      <y>350</y>
+      <w>40</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -496,35 +487,35 @@ permitted</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>504</x>
-      <y>424</y>
-      <w>188</w>
-      <h>144</h>
+      <x>690</x>
+      <y>320</y>
+      <w>230</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 [No password needed
 or password correct]</panel_attributes>
-    <additional_attributes>24;128;24;96;112;96;112;24;32;24</additional_attributes>
+    <additional_attributes>130;120;130;50;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>352</x>
-      <y>424</y>
-      <w>168</w>
-      <h>184</h>
+      <x>240</x>
+      <y>340</y>
+      <w>460</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[password needed]</panel_attributes>
-    <additional_attributes>24;168;24;24;152;24</additional_attributes>
+    <additional_attributes>30;340;30;30;440;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>344</x>
-      <y>624</y>
-      <w>112</w>
-      <h>32</h>
+      <x>230</x>
+      <y>720</y>
+      <w>140</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>Create password
 request layout</panel_attributes>
@@ -533,10 +524,10 @@ request layout</panel_attributes>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>368</x>
-      <y>584</y>
-      <w>72</w>
-      <h>16</h>
+      <x>260</x>
+      <y>670</y>
+      <w>110</w>
+      <h>20</h>
     </coordinates>
     <panel_attributes/>
     <additional_attributes/>
@@ -544,10 +535,10 @@ request layout</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>400</x>
-      <y>504</y>
-      <w>96</w>
-      <h>32</h>
+      <x>290</x>
+      <y>570</y>
+      <w>120</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>Show password
 error</panel_attributes>
@@ -556,68 +547,270 @@ error</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>416</x>
-      <y>440</y>
-      <w>150</w>
-      <h>80</h>
+      <x>320</x>
+      <y>360</y>
+      <w>440</w>
+      <h>230</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[bad password]</panel_attributes>
-    <additional_attributes>24;64;24;48;104;48;104;24</additional_attributes>
+    <additional_attributes>30;210;30;60;380;60;380;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>408</x>
-      <y>512</y>
-      <w>40</w>
-      <h>96</h>
+      <x>320</x>
+      <y>580</y>
+      <w>50</w>
+      <h>120</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;80;24;24</additional_attributes>
+    <additional_attributes>30;100;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>384</x>
-      <y>568</y>
-      <w>40</w>
-      <h>72</h>
+      <x>280</x>
+      <y>650</y>
+      <w>50</w>
+      <h>90</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;56;24;24</additional_attributes>
+    <additional_attributes>30;70;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>384</x>
-      <y>632</y>
-      <w>192</w>
-      <h>496</h>
+      <x>280</x>
+      <y>730</y>
+      <w>300</w>
+      <h>820</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>176;480;176;456;24;456;24;24</additional_attributes>
+    <additional_attributes>280;800;280;770;30;770;30;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>496</x>
-      <y>368</y>
+      <x>580</x>
+      <y>800</y>
+      <w>140</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;80;30;50;120;50;120;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Decision</type>
+    <coordinates>
+      <x>590</x>
+      <y>1000</y>
       <w>40</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>550</x>
+      <y>1010</y>
+      <w>112</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=[is directory]</panel_attributes>
+    <additional_attributes>60;160;60;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>500</x>
+      <y>990</y>
+      <w>110</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=[is file]</panel_attributes>
+    <additional_attributes>30;90;30;30;90;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Decision</type>
+    <coordinates>
+      <x>510</x>
+      <y>1080</y>
+      <w>40</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>340</x>
+      <y>1070</y>
+      <w>190</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=[do not has a layout]</panel_attributes>
+    <additional_attributes>80;230;80;30;170;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>470</x>
+      <y>1090</y>
+      <w>118</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=[has a layout]</panel_attributes>
+    <additional_attributes>60;140;60;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.State</type>
+    <coordinates>
+      <x>480</x>
+      <y>1230</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>bg=white
+Load data</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.SynchBarHorizontal</type>
+    <coordinates>
+      <x>510</x>
+      <y>1340</y>
+      <w>120</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>550</x>
+      <y>1320</y>
+      <w>50</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;100;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>500</x>
+      <y>1240</y>
+      <w>50</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>30;110;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.State</type>
+    <coordinates>
+      <x>370</x>
+      <y>1300</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>bg=white
+Redirect
+to the file</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>390</x>
+      <y>1310</y>
+      <w>440</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>420;350;30;350;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>360</x>
+      <y>30</y>
+      <w>170</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;64;24;24</additional_attributes>
+    <panel_attributes>How the system
+decides when user
+requests to view an
+file or directory</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
-    <type>com.umlet.element.Relation</type>
+    <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>496</x>
-      <y>688</y>
-      <w>40</w>
-      <h>64</h>
+      <x>790</x>
+      <y>270</y>
+      <w>140</w>
+      <h>40</h>
     </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>24;48;24;24</additional_attributes>
+    <panel_attributes>See flow-create
+path.uxf</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>340</x>
+      <y>910</y>
+      <w>390</w>
+      <h>560</h>
+    </coordinates>
+    <panel_attributes>bg=light_gray
+Layout
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Text</type>
+    <coordinates>
+      <x>730</x>
+      <y>10</y>
+      <w>100</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>HTTP request</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.custom.Text</type>
+    <coordinates>
+      <x>840</x>
+      <y>1650</y>
+      <w>120</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>HTTP response</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>530</x>
+      <y>450</y>
+      <w>240</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>If user don't know password, 
+he shouldn't know if the path 
+exists!</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>

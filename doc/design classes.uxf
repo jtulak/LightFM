@@ -4,8 +4,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>180</x>
-      <y>900</y>
+      <x>160</x>
+      <y>680</y>
       <w>200</w>
       <h>60</h>
     </coordinates>
@@ -13,37 +13,36 @@
 --
 +suffix: string
 --
-delete()</panel_attributes>
+delete():void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>340</x>
-      <y>680</y>
-      <w>210</w>
+      <x>310</x>
+      <y>460</y>
+      <w>250</w>
       <h>180</h>
     </coordinates>
     <panel_attributes>Directory
 --
-+password: string
-+owner: User
-+allowedView: array
-+defaultView: int
-(index of allowedView)
-+allowZip: bool
 +dirsList: array(Directory)
 +filesList: array(File)
++usedChild: Node
 --
-delete()
++delete(): void
++createSubdir(name: string): void
++findSubdirs(): array(Directory)
++findFiles(): array(File)
++findPath(path: string): Node
 </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>180</x>
-      <y>1030</y>
+      <x>160</x>
+      <y>810</y>
       <w>200</w>
       <h>50</h>
     </coordinates>
@@ -56,8 +55,8 @@ delete()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>210</x>
-      <y>930</y>
+      <x>190</x>
+      <y>710</y>
       <w>50</w>
       <h>120</h>
     </coordinates>
@@ -67,8 +66,8 @@ delete()
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>720</x>
-      <y>680</y>
+      <x>750</x>
+      <y>510</y>
       <w>160</w>
       <h>60</h>
     </coordinates>
@@ -81,68 +80,68 @@ delete()
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>190</x>
-      <y>750</y>
-      <w>170</w>
-      <h>170</h>
+      <x>180</x>
+      <y>560</y>
+      <w>154</w>
+      <h>140</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..n
 &lt;contain files</panel_attributes>
-    <additional_attributes>150;50;80;50;80;150</additional_attributes>
+    <additional_attributes>130;50;80;50;80;120</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>460</x>
-      <y>810</y>
-      <w>228</w>
+      <x>470</x>
+      <y>590</y>
+      <w>198</w>
       <h>120</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..1
 m2=0..n
 &lt;contain subfolders</panel_attributes>
-    <additional_attributes>90;30;130;30;130;100;30;100;30;50</additional_attributes>
+    <additional_attributes>90;30;100;30;100;100;30;100;30;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>520</x>
-      <y>680</y>
-      <w>220</w>
+      <x>530</x>
+      <y>490</y>
+      <w>240</w>
       <h>70</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..n
 m2=0..1
 &lt;Owns</panel_attributes>
-    <additional_attributes>30;50;200;50</additional_attributes>
+    <additional_attributes>30;50;220;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>420</x>
-      <y>780</y>
-      <w>270</w>
+      <x>450</x>
+      <y>560</y>
+      <w>220</w>
       <h>170</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..1
 m2=1
 &lt;is parent</panel_attributes>
-    <additional_attributes>130;30;210;30;210;150;30;150;30;80</additional_attributes>
+    <additional_attributes>110;30;160;30;160;150;30;150;30;80</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>160</x>
-      <y>420</y>
-      <w>200</w>
-      <h>210</h>
+      <x>130</x>
+      <y>200</y>
+      <w>220</w>
+      <h>220</h>
     </coordinates>
-    <panel_attributes>Node
+    <panel_attributes>/Node/
 --
 +hidden: bool
 +path: string
@@ -150,43 +149,206 @@ m2=1
 +name: string
 +size: int
 +lastModified: datetime
++needPassword: bool
 --
-move(target: Directory)
-/delete()/
-rename(name: string)</panel_attributes>
+move(target: Directory): void
+/delete():void/
+rename(name: string): void</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>170</x>
-      <y>600</y>
+      <x>150</x>
+      <y>390</y>
       <w>50</w>
-      <h>320</h>
+      <h>310</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;300</additional_attributes>
+    <additional_attributes>30;30;30;290</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>170</x>
-      <y>680</y>
-      <w>190</w>
+      <x>150</x>
+      <y>480</y>
+      <w>180</w>
       <h>50</h>
     </coordinates>
     <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>30;30;170;30</additional_attributes>
+    <additional_attributes>30;30;160;30</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>130</x>
-      <y>380</y>
-      <w>550</w>
+      <x>110</x>
+      <y>160</y>
+      <w>610</w>
       <h>710</h>
     </coordinates>
     <panel_attributes>Files</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>770</x>
+      <y>80</y>
+      <w>220</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>System
+--
++root: Directory
++defaultOptions: ConfigFile
++requestedLayout
++requestedNode
+--
++render()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>960</x>
+      <y>280</y>
+      <w>290</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Layout
+--
+-conditions: array(lambda functions)
+--
++test(file): bool
++test(dir): bool</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>960</x>
+      <y>120</y>
+      <w>152</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+request&gt;</panel_attributes>
+    <additional_attributes>30;50;100;50;100;160</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>410</x>
+      <y>230</y>
+      <w>280</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>ConfigFile
+--
++password: array(string)
++owner: array(User)
++allowedViews: array(Layout)
++defaultView: indexOf(allowedViews)
++allowZip: bool
++blacklist: array(string)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>530</x>
+      <y>330</y>
+      <w>206</w>
+      <h>204</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..1
+Contain&gt;
+&lt;isConfigured</panel_attributes>
+    <additional_attributes>30;160;130;160;130;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>140</x>
+      <y>70</y>
+      <w>650</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..0
+m2=1
+&lt;request Node</panel_attributes>
+    <additional_attributes>90;130;90;50;630;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>660</x>
+      <y>240</y>
+      <w>204</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..n
+m2=0..1
+&lt;IsWrittenIn</panel_attributes>
+    <additional_attributes>30;50;140;50;140;270</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Note</type>
+    <coordinates>
+      <x>1060</x>
+      <y>460</y>
+      <w>210</w>
+      <h>280</h>
+    </coordinates>
+    <panel_attributes>test() will call all its
+conditions, e.g. there
+will be a condition:
+isFile or isDir for
+testing if the layout can
+be called on this item.
+If any of this lambda
+functions fail, then draw
+return false.
+-
+E.g., the gallery will test
+if it can write into the
+temp dir to create
+thumbnails.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>310</x>
+      <y>150</y>
+      <w>480</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+point to root</panel_attributes>
+    <additional_attributes>80;310;80;50;460;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>120</x>
+      <y>390</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..1
+&lt;child used in path</panel_attributes>
+    <additional_attributes>190;80;100;80;100;30</additional_attributes>
   </element>
 </diagram>

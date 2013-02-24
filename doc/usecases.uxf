@@ -317,8 +317,8 @@ permissions
   <element>
     <type>com.umlet.element.UseCase</type>
     <coordinates>
-      <x>180</x>
-      <y>540</y>
+      <x>220</x>
+      <y>500</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -376,11 +376,11 @@ hidden files
     <coordinates>
       <x>110</x>
       <y>410</y>
-      <w>120</w>
-      <h>150</h>
+      <w>160</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes/>
-    <additional_attributes>30;30;100;130</additional_attributes>
+    <additional_attributes>30;30;140;90</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -393,18 +393,6 @@ hidden files
     <panel_attributes>lt=.&gt;
 &lt;&lt;include&gt;&gt;</panel_attributes>
     <additional_attributes>50;30;120;60</additional_attributes>
-  </element>
-  <element>
-    <type>com.umlet.element.Relation</type>
-    <coordinates>
-      <x>380</x>
-      <y>390</y>
-      <w>154</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=.&gt;
-&lt;&lt;include&gt;&gt;</panel_attributes>
-    <additional_attributes>40;50;130;50</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
@@ -548,5 +536,52 @@ files</panel_attributes>
     </coordinates>
     <panel_attributes/>
     <additional_attributes>30;100;120;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>220</x>
+      <y>550</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Set password
+protection
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.UseCase</type>
+    <coordinates>
+      <x>150</x>
+      <y>600</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Change his
+password</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>110</x>
+      <y>420</y>
+      <w>140</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>30;30;120;140</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>110</x>
+      <y>440</y>
+      <w>100</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes/>
+    <additional_attributes>30;30;80;160</additional_attributes>
   </element>
 </diagram>

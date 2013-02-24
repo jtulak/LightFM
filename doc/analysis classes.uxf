@@ -4,10 +4,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>360</x>
-      <y>390</y>
+      <x>470</x>
+      <y>580</y>
       <w>120</w>
-      <h>150</h>
+      <h>200</h>
     </coordinates>
     <panel_attributes>File
 --
@@ -17,14 +17,18 @@
 +name
 +suffix
 +size
-+lastModified</panel_attributes>
++lastModified
+--
+move(target)
+delete()
+rename(name)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>520</x>
-      <y>140</y>
+      <x>630</x>
+      <y>380</y>
       <w>130</w>
       <h>240</h>
     </coordinates>
@@ -34,21 +38,21 @@
 +path
 +parent
 +name
-+password
-+owner
-+allowGallery
-+allowList
-+defaultView
-+allowZip
++configFile
 +dirsList
-+filesList</panel_attributes>
++filesList
+--
+move(target)
+delete()
+createSubir()
+rename(name)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>800</x>
-      <y>190</y>
+      <x>1050</x>
+      <y>440</y>
       <w>100</w>
       <h>90</h>
     </coordinates>
@@ -61,36 +65,36 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>360</x>
-      <y>260</y>
+      <x>470</x>
+      <y>500</y>
       <w>180</w>
-      <h>150</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..n
 &lt;contain</panel_attributes>
-    <additional_attributes>160;50;60;50;60;130</additional_attributes>
+    <additional_attributes>160;50;60;50;60;80</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>620</x>
-      <y>190</y>
+      <x>870</x>
+      <y>400</y>
       <w>200</w>
-      <h>70</h>
+      <h>100</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..n
 m2=0..1
-&lt;Owns</panel_attributes>
-    <additional_attributes>30;50;180;50</additional_attributes>
+&lt;Written in</panel_attributes>
+    <additional_attributes>70;30;70;80;180;80</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>520</x>
-      <y>290</y>
+      <x>630</x>
+      <y>530</y>
       <w>270</w>
       <h>170</h>
     </coordinates>
@@ -103,8 +107,8 @@ m2=1
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>560</x>
-      <y>320</y>
+      <x>670</x>
+      <y>560</y>
       <w>228</w>
       <h>120</h>
     </coordinates>
@@ -117,10 +121,10 @@ m2=0..n
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>200</x>
-      <y>390</y>
+      <x>310</x>
+      <y>580</y>
       <w>120</w>
-      <h>170</h>
+      <h>220</h>
     </coordinates>
     <panel_attributes>Image
 --
@@ -131,21 +135,185 @@ m2=0..n
 +suffix
 +size
 +lastModified
-+resolution</panel_attributes>
++resolution
+--
+move(target)
+delete()
+rename(name)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>210</x>
-      <y>230</y>
-      <w>330</w>
-      <h>180</h>
+      <x>350</x>
+      <y>470</y>
+      <w>300</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=1
 m2=0..n
 &lt;contain</panel_attributes>
-    <additional_attributes>310;50;60;50;60;160</additional_attributes>
+    <additional_attributes>280;50;60;50;60;110</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>760</x>
+      <y>140</y>
+      <w>150</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>System
+--
++root
++defaultOptions
++requestedLayout
++requestedItem</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>290</x>
+      <y>240</y>
+      <w>710</w>
+      <h>590</h>
+    </coordinates>
+    <panel_attributes>Files</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>600</x>
+      <y>150</y>
+      <w>180</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+point to root</panel_attributes>
+    <additional_attributes>80;230;80;50;160;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>870</x>
+      <y>300</y>
+      <w>120</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>ConfigFile
+--
++password
++owner
++allowedViews
++defaultView
++allowZip
++blacklist</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>730</x>
+      <y>350</y>
+      <w>160</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=0..1
+Contain&gt;</panel_attributes>
+    <additional_attributes>30;140;100;140;100;30;140;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1040</x>
+      <y>160</y>
+      <w>200</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>Layout
+--
++for (Filetype or directory)
++conditions
+--
++test(file)
++test(dir)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>880</x>
+      <y>160</y>
+      <w>180</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=1
+request&gt;</panel_attributes>
+    <additional_attributes>30;50;160;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>630</x>
+      <y>180</y>
+      <w>150</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..0
+m2=1
+&lt;request dir</panel_attributes>
+    <additional_attributes>80;200;80;50;130;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>410</x>
+      <y>130</y>
+      <w>370</w>
+      <h>470</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..0
+m2=1
+&lt;request file</panel_attributes>
+    <additional_attributes>80;450;80;50;350;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>280</x>
+      <y>110</y>
+      <w>500</w>
+      <h>490</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1..0
+m2=1
+&lt;request image</panel_attributes>
+    <additional_attributes>90;470;90;50;480;50</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>730</x>
+      <y>470</y>
+      <w>340</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..n
+m2=0..1
+&lt;Owns</panel_attributes>
+    <additional_attributes>30;50;320;50</additional_attributes>
   </element>
 </diagram>
