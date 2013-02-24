@@ -1,0 +1,124 @@
+﻿What is and isn’t important:
+============================
+1. view files in directory (and the directories) - without mysql
+2. Images can be seen also as in a gallery (opt-in)
+3. syntax highlighter for source files (with lines numbers)
+1. can also highlight specific lines
+1. download all files in a directory as an archive (opt-in) - or a few selected?
+2. protect folders by password
+3. hidden folders
+4. chroot (do not go upper than root folder)
+5. php files of this system can be placed anywhere (loader)
+6. icons according file type (suffix)
+7. file management 
+1. Protected by user account - account has permissions for all subdirectories of the one directory (root owner can anywhere)
+2. upload
+3. delete 
+4. rename
+5. move (probably only dropdown menu with “up” and list of subfolders)
+1. passwords for access to a private folder and passwords for file management are two independent things
+2. everything configured in .conf
+3. info about file
+1. size
+2. modify date
+3. details about pictures in pic view (from EXIF?)
+
+
+
+
+.filemanager.conf:
+==================
+Ignore all behind with # symbol
+This file has NOT to be accessible - system will not read it and it must be protected also by .htaccess
+
+
+# This is access password - without it the folder will be public. Default: empty
+access_password=some secret         
+# Owner is needed for file management. Default: empty
+owner_username=usr1                # this is an owner
+owner_password=xxx                        # this is an password for owner
+# If is set to true, visitors can download all or selected files as a zip. Default: false
+allow_zip=true
+# Allowed modes, first one is the default one. Default value: list
+modes=list,gallery
+
+
+Dictionary
+==========
+User - anyone who is accessing the page
+Owner - User who is authorized by an username and a password
+Admin - Person who has access directly to the filesystem; who has an account on the machine - via ssh, ftp, or on local machine
+Display - see Show
+Show - make it visible for an user
+List (mode) - items are arranged on lines, one line contain a filename, size and date and a icon of filetype
+Gallery (mode) - items are arranged in a grid of big icons/thumbnails
+
+
+Functional requirements
+=======================
+1. The system should not be able to go above the root directory
+2. The system should be able to follow symlinks (avoiding the root check)
+3. The system should display files in a directory as a list 
+4. The system should display folders always before files
+5. The system should place a “go up” link always before folders
+6. The user should be able to download a single file by clicking on its name
+7. The system should display images in a directory as a gallery 
+8. The system should be able to switch between list and gallery
+9. Admin should be able to permit or disable list and gallery view
+10. Admin should be able to set default view mode (list or gallery)
+11. The system should show images in a viewer on click instead of downloading
+12. The user should be able to download a single image from the viewer
+13. The system should highlight syntax for text files on click instead of downloading
+14. The system should detect the language from file suffix
+15. The system should allow to download text files from highlight view
+16. The system should be able to highlight some lines in text files
+17. The system should allow user to download some files in a folder as an archive (both in list and gallery mode)
+18. The system should not create an archive if the user has selected only one file
+19. The system should allow user to select all or none or invert selection for downloading
+20. Admin should be able to permit or disable archive downloading for a directory
+21. Admin should be able to set a size limit for allowing the archive download
+22. Admin should be able to set a password protection for access to a directory
+23. The system should not show files and directories starting with a dot in the list/gallery
+24. The system should be able to enter directories beginning with a dot
+25. Admin should be able to set a blacklist of files and folders (by name or by path) to prevent them to show
+26. The system should not be placed directly in the showed directories
+27. The system should display icons of the filetype
+28. Admin should be able to set an owner to a directory and all its subdirectories in the tree
+29. The system should authentify the owner by an username and a password
+30. The system should prevent logins for few minutes after too much bad attempts
+31. The owner should be able to upload files into its directories
+32. The system should be able to extract an archive if the owner select it on upload
+33. The owner should be able to create a new subdirectories
+34. The owner should be able to rename files and subdirectories
+35. The system should ask for names one-by-one if selected more files for rename
+36. The system should allow owner to cancel future renaming and do not ask for more
+37. The owner should be able to delete files and subdirectories
+38. The owner should be able to move files and subdirectories inside directories he owns
+39. The system should not permit to move a file or directory outside of owned space
+40. The owner should be able to see hidden files and folders (except blacklisted)
+41. The system should use same selection for file manipulation as for downloading
+42. The system should read configuration for specific directory from a config file placed directly inside of it
+43.  The system should use settings from the parent directory if something is not set
+44. The system should use a default settings if no configuration found
+45. The system should be able to change user language (english, czech, ...)
+46. The system should show to user the actual path in the file tree
+47. User should be able to navigate up directly using the path
+48. The system should hide part of the patch if it is too long
+49. The system should short all file and folder names if they are too long
+50. The system should show full file name on hover as a title
+51. The user should be able to sort files by name, size or date, ascending or descending
+
+
+Nonfunctional requirements
+==========================
+1. Without MySQL
+2. No PHP framework
+3. thumbnails for gallery mode should be in a temp directory (must be accessible by browser)
+4. The system should create thumbnails on a first view
+5. The system should not allow gallery mode if it can’t create thumbnails
+6. The system should have some default settings
+7. The system should allow easy change of the theme
+8. The system should be able to log file manipulation (IP, time, file, owner)
+9. The system should be easy to extend for adding some more view mode, or anything else
+10. The system should be able to show pages properly on any display size
+11. The system should be documented and opensource
