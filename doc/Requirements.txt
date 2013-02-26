@@ -126,3 +126,8 @@ Nonfunctional requirements
 7. The system should be easy to extend for adding some more view mode, or anything else
 8. The system should be able to show pages properly on any display size
 9. The system should be documented and opensource
+
+
+Notes
+=====
+Look at Jquery mobile for responsive design
