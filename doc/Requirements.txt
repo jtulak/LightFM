@@ -43,6 +43,8 @@ allow_zip=true
 modes=list,gallery
 # blacklisted files and folders
 blacklist="file1","/path/from/root/"
+# time of last change - for testing if someone changed it alredy
+last_changed=2012/02/11 21:21:15
 
 Dictionary
 ==========
@@ -126,3 +128,4 @@ Nonfunctional requirements
 7. The system should be easy to extend for adding some more view mode, or anything else
 8. The system should be able to show pages properly on any display size
 9. The system should be documented and opensource
+10. The system configuration should be threat-safe
