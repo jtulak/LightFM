@@ -4,8 +4,8 @@
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>670</x>
-      <y>0</y>
+      <x>560</x>
+      <y>50</y>
       <w>50</w>
       <h>90</h>
     </coordinates>
@@ -15,8 +15,8 @@
   <element>
     <type>com.umlet.element.custom.InitialState</type>
     <coordinates>
-      <x>690</x>
-      <y>20</y>
+      <x>580</x>
+      <y>70</y>
       <w>20</w>
       <h>20</h>
     </coordinates>
@@ -26,8 +26,8 @@
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>640</x>
-      <y>70</y>
+      <x>530</x>
+      <y>120</y>
       <w>120</w>
       <h>50</h>
     </coordinates>
@@ -38,8 +38,8 @@ POST, Cookies...</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>760</x>
-      <y>1570</y>
+      <x>650</x>
+      <y>1620</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -49,8 +49,8 @@ POST, Cookies...</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>550</x>
-      <y>1170</y>
+      <x>440</x>
+      <y>1220</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -62,8 +62,8 @@ content</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>640</x>
-      <y>270</y>
+      <x>530</x>
+      <y>320</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -74,8 +74,8 @@ from request</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>670</x>
-      <y>90</y>
+      <x>560</x>
+      <y>140</y>
       <w>50</w>
       <h>80</h>
     </coordinates>
@@ -85,8 +85,8 @@ from request</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>680</x>
-      <y>150</y>
+      <x>570</x>
+      <y>200</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -96,8 +96,8 @@ from request</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>670</x>
-      <y>280</y>
+      <x>560</x>
+      <y>330</y>
       <w>50</w>
       <h>90</h>
     </coordinates>
@@ -107,8 +107,8 @@ from request</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>600</x>
-      <y>160</y>
+      <x>490</x>
+      <y>210</y>
       <w>186</w>
       <h>130</h>
     </coordinates>
@@ -119,8 +119,8 @@ m2=[Path is under the root]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>690</x>
-      <y>140</y>
+      <x>580</x>
+      <y>190</y>
       <w>370</w>
       <h>1220</h>
     </coordinates>
@@ -131,8 +131,8 @@ m2=[Path is not under the root]</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>800</x>
-      <y>440</y>
+      <x>690</x>
+      <y>490</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -142,8 +142,8 @@ m2=[Path is not under the root]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>710</x>
-      <y>450</y>
+      <x>600</x>
+      <y>500</y>
       <w>160</w>
       <h>200</h>
     </coordinates>
@@ -154,8 +154,8 @@ m2=[Path exists]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>810</x>
-      <y>430</y>
+      <x>700</x>
+      <y>480</y>
       <w>284</w>
       <h>930</h>
     </coordinates>
@@ -166,8 +166,8 @@ m2=[Path do not exists or blacklisted]</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>950</x>
-      <y>1370</y>
+      <x>840</x>
+      <y>1420</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -178,8 +178,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>890</x>
-      <y>1330</y>
+      <x>780</x>
+      <y>1380</y>
       <w>160</w>
       <h>20</h>
     </coordinates>
@@ -189,8 +189,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>980</x>
-      <y>1310</y>
+      <x>870</x>
+      <y>1360</y>
       <w>50</w>
       <h>80</h>
     </coordinates>
@@ -200,8 +200,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>980</x>
-      <y>1380</y>
+      <x>870</x>
+      <y>1430</y>
       <w>50</w>
       <h>170</h>
     </coordinates>
@@ -211,8 +211,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>520</x>
-      <y>1520</y>
+      <x>410</x>
+      <y>1570</y>
       <w>530</w>
       <h>20</h>
     </coordinates>
@@ -222,8 +222,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>790</x>
-      <y>1500</y>
+      <x>680</x>
+      <y>1550</y>
       <w>50</w>
       <h>90</h>
     </coordinates>
@@ -233,8 +233,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.custom.FinalState</type>
     <coordinates>
-      <x>810</x>
-      <y>1650</y>
+      <x>700</x>
+      <y>1700</y>
       <w>20</w>
       <h>20</h>
     </coordinates>
@@ -244,8 +244,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>790</x>
-      <y>1580</y>
+      <x>680</x>
+      <y>1630</y>
       <w>50</w>
       <h>90</h>
     </coordinates>
@@ -255,8 +255,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>680</x>
-      <y>720</y>
+      <x>570</x>
+      <y>770</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -266,8 +266,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>580</x>
-      <y>1180</y>
+      <x>470</x>
+      <y>1230</y>
       <w>50</w>
       <h>190</h>
     </coordinates>
@@ -277,8 +277,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>590</x>
-      <y>730</y>
+      <x>480</x>
+      <y>780</y>
       <w>212</w>
       <h>120</h>
     </coordinates>
@@ -289,8 +289,8 @@ m2=[Selected mode permitted]</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>590</x>
-      <y>880</y>
+      <x>480</x>
+      <y>930</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -300,8 +300,8 @@ m2=[Selected mode permitted]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>500</x>
-      <y>890</y>
+      <x>390</x>
+      <y>940</y>
       <w>216</w>
       <h>130</h>
     </coordinates>
@@ -312,8 +312,8 @@ m2=[Layout conditions fullfilled]</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>530</x>
-      <y>1420</y>
+      <x>420</x>
+      <y>1470</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -325,8 +325,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>550</x>
-      <y>1430</y>
+      <x>440</x>
+      <y>1480</y>
       <w>100</w>
       <h>120</h>
     </coordinates>
@@ -336,8 +336,8 @@ layout</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>690</x>
-      <y>710</y>
+      <x>580</x>
+      <y>760</y>
       <w>268</w>
       <h>280</h>
     </coordinates>
@@ -348,8 +348,8 @@ m2=[Selected mode not permitted]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>600</x>
-      <y>870</y>
+      <x>490</x>
+      <y>920</y>
       <w>260</w>
       <h>120</h>
     </coordinates>
@@ -360,8 +360,8 @@ m2=[Layout conditions failure]</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>650</x>
-      <y>630</y>
+      <x>540</x>
+      <y>680</y>
       <w>170</w>
       <h>40</h>
     </coordinates>
@@ -372,8 +372,8 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>670</x>
-      <y>640</y>
+      <x>560</x>
+      <y>690</y>
       <w>50</w>
       <h>100</h>
     </coordinates>
@@ -383,8 +383,8 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>670</x>
-      <y>820</y>
+      <x>560</x>
+      <y>870</y>
       <w>90</w>
       <h>20</h>
     </coordinates>
@@ -394,8 +394,8 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>820</x>
-      <y>960</y>
+      <x>710</x>
+      <y>1010</y>
       <w>80</w>
       <h>20</h>
     </coordinates>
@@ -405,8 +405,8 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>840</x>
-      <y>1010</y>
+      <x>730</x>
+      <y>1060</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -416,8 +416,8 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>830</x>
-      <y>940</y>
+      <x>720</x>
+      <y>990</y>
       <w>50</w>
       <h>90</h>
     </coordinates>
@@ -427,8 +427,8 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>790</x>
-      <y>1020</y>
+      <x>680</x>
+      <y>1070</y>
       <w>234</w>
       <h>340</h>
     </coordinates>
@@ -439,8 +439,8 @@ mode (user or default)</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>840</x>
-      <y>980</y>
+      <x>730</x>
+      <y>1030</y>
       <w>166</w>
       <h>110</h>
     </coordinates>
@@ -452,21 +452,21 @@ another layout]</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>870</x>
-      <y>1070</y>
+      <x>760</x>
+      <y>1120</y>
       <w>110</w>
       <h>60</h>
     </coordinates>
     <panel_attributes>Select another
 layout from 
-permitted</panel_attributes>
+permitteds</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>710</x>
-      <y>770</y>
+      <x>600</x>
+      <y>820</y>
       <w>300</w>
       <h>400</h>
     </coordinates>
@@ -476,8 +476,8 @@ permitted</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>680</x>
-      <y>350</y>
+      <x>570</x>
+      <y>400</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -487,8 +487,8 @@ permitted</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>690</x>
-      <y>320</y>
+      <x>580</x>
+      <y>370</y>
       <w>230</w>
       <h>140</h>
     </coordinates>
@@ -500,8 +500,8 @@ or password correct]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>240</x>
-      <y>340</y>
+      <x>130</x>
+      <y>390</y>
       <w>460</w>
       <h>360</h>
     </coordinates>
@@ -512,8 +512,8 @@ m2=[password needed]</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>230</x>
-      <y>720</y>
+      <x>120</x>
+      <y>770</y>
       <w>140</w>
       <h>40</h>
     </coordinates>
@@ -524,8 +524,8 @@ request layout</panel_attributes>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>260</x>
-      <y>670</y>
+      <x>150</x>
+      <y>720</y>
       <w>110</w>
       <h>20</h>
     </coordinates>
@@ -535,8 +535,8 @@ request layout</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>290</x>
-      <y>570</y>
+      <x>180</x>
+      <y>620</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -547,8 +547,8 @@ error</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>320</x>
-      <y>360</y>
+      <x>210</x>
+      <y>410</y>
       <w>440</w>
       <h>230</h>
     </coordinates>
@@ -559,8 +559,8 @@ m2=[bad password]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>320</x>
-      <y>580</y>
+      <x>210</x>
+      <y>630</y>
       <w>50</w>
       <h>120</h>
     </coordinates>
@@ -570,8 +570,8 @@ m2=[bad password]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>280</x>
-      <y>650</y>
+      <x>170</x>
+      <y>700</y>
       <w>50</w>
       <h>90</h>
     </coordinates>
@@ -581,8 +581,8 @@ m2=[bad password]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>280</x>
-      <y>730</y>
+      <x>170</x>
+      <y>780</y>
       <w>300</w>
       <h>820</h>
     </coordinates>
@@ -592,8 +592,8 @@ m2=[bad password]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>580</x>
-      <y>800</y>
+      <x>470</x>
+      <y>850</y>
       <w>140</w>
       <h>100</h>
     </coordinates>
@@ -603,8 +603,8 @@ m2=[bad password]</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>590</x>
-      <y>1000</y>
+      <x>480</x>
+      <y>1050</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -614,8 +614,8 @@ m2=[bad password]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>550</x>
-      <y>1010</y>
+      <x>440</x>
+      <y>1060</y>
       <w>112</w>
       <h>180</h>
     </coordinates>
@@ -626,8 +626,8 @@ m2=[is directory]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>500</x>
-      <y>990</y>
+      <x>390</x>
+      <y>1040</y>
       <w>110</w>
       <h>110</h>
     </coordinates>
@@ -638,8 +638,8 @@ m2=[is file]</panel_attributes>
   <element>
     <type>com.umlet.element.custom.Decision</type>
     <coordinates>
-      <x>510</x>
-      <y>1080</y>
+      <x>400</x>
+      <y>1130</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -649,8 +649,8 @@ m2=[is file]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>340</x>
-      <y>1070</y>
+      <x>230</x>
+      <y>1120</y>
       <w>190</w>
       <h>250</h>
     </coordinates>
@@ -661,8 +661,8 @@ m2=[do not has a layout]</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>470</x>
-      <y>1090</y>
+      <x>360</x>
+      <y>1140</y>
       <w>118</w>
       <h>160</h>
     </coordinates>
@@ -673,8 +673,8 @@ m2=[has a layout]</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>480</x>
-      <y>1230</y>
+      <x>370</x>
+      <y>1280</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -685,8 +685,8 @@ Load data</panel_attributes>
   <element>
     <type>com.umlet.element.custom.SynchBarHorizontal</type>
     <coordinates>
-      <x>510</x>
-      <y>1340</y>
+      <x>400</x>
+      <y>1390</y>
       <w>120</w>
       <h>20</h>
     </coordinates>
@@ -696,8 +696,8 @@ Load data</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>550</x>
-      <y>1320</y>
+      <x>440</x>
+      <y>1370</y>
       <w>50</w>
       <h>120</h>
     </coordinates>
@@ -707,8 +707,8 @@ Load data</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>500</x>
-      <y>1240</y>
+      <x>390</x>
+      <y>1290</y>
       <w>50</w>
       <h>130</h>
     </coordinates>
@@ -718,8 +718,8 @@ Load data</panel_attributes>
   <element>
     <type>com.umlet.element.custom.State</type>
     <coordinates>
-      <x>370</x>
-      <y>1300</y>
+      <x>260</x>
+      <y>1350</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -731,8 +731,8 @@ to the file</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>390</x>
-      <y>1310</y>
+      <x>280</x>
+      <y>1360</y>
       <w>440</w>
       <h>370</h>
     </coordinates>
@@ -742,8 +742,8 @@ to the file</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>360</x>
-      <y>30</y>
+      <x>250</x>
+      <y>80</y>
       <w>170</w>
       <h>80</h>
     </coordinates>
@@ -756,8 +756,8 @@ file or directory</panel_attributes>
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>790</x>
-      <y>270</y>
+      <x>680</x>
+      <y>320</y>
       <w>140</w>
       <h>40</h>
     </coordinates>
@@ -768,8 +768,8 @@ path.uxf</panel_attributes>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>340</x>
-      <y>910</y>
+      <x>230</x>
+      <y>960</y>
       <w>390</w>
       <h>560</h>
     </coordinates>
@@ -781,8 +781,8 @@ Layout
   <element>
     <type>com.umlet.element.custom.Text</type>
     <coordinates>
-      <x>730</x>
-      <y>10</y>
+      <x>620</x>
+      <y>60</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -792,8 +792,8 @@ Layout
   <element>
     <type>com.umlet.element.custom.Text</type>
     <coordinates>
-      <x>840</x>
-      <y>1650</y>
+      <x>730</x>
+      <y>1700</y>
       <w>120</w>
       <h>30</h>
     </coordinates>
@@ -803,8 +803,8 @@ Layout
   <element>
     <type>com.umlet.element.Note</type>
     <coordinates>
-      <x>530</x>
-      <y>450</y>
+      <x>420</x>
+      <y>500</y>
       <w>240</w>
       <h>60</h>
     </coordinates>
