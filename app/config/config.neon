@@ -6,6 +6,17 @@
 #
 common:
 	parameters:
+		dirConfig: '.filemanager.ini'
+		defaults:
+			accessPassword: ''
+			ownerUsername: 'admin'
+			ownerPassword: 'admin'
+			allowZip: false
+			modes:
+			blacklist:
+				- /filemanager
+				- .htaccess
+				- .htpasswd
 
 	php:
 		date.timezone: Europe/Prague
