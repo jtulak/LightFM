@@ -153,9 +153,11 @@ m2=1
 +lastModified: datetime
 +needPassword: bool
 --
-move(target: Directory): void
-/delete():void/
-rename(name: string): void</panel_attributes>
++move(target: Directory): void
++/delete():void/
++rename(name: string): void
++::createPath
+-isImage</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

@@ -26,25 +26,41 @@
 
 
 
-.filemanager.conf:
+.filemanager.ini:
 ==================
 Ignore all behind with # symbol
 This file has NOT to be accessible - system will not read it and it must be protected also by .htaccess
 
 
-# This is access password - without it the folder will be public. Default: empty
-access_password=some secret         
-# Owner is needed for file management. Default: empty
-owner_username=usr1                # this is an owner
-owner_password=xxx                        # this is an password for owner
-# If is set to true, visitors can download all or selected files as a zip. Default: false
-allow_zip=true
-# Allowed modes, first one is the default one. Default value: list
-modes=list,gallery
-# blacklisted files and folders
-blacklist="file1","/path/from/root/"
-# time of last change - for testing if someone changed it alredy
-last_changed=2012/02/11 21:21:15
+; This is access password - without it the folder will be public. Default: empty
+
+accessPassword="some secret"
+; Owner is needed for file management. Default: empty
+
+ownerUsername=usr1                ; this is an owner
+
+ownerPassword=xxx                        ; this is an password for owner
+
+; If is set to true, visitors can download all or selected files as a zip. Default: false
+allowZip=true
+
+
+; Allowed modes, first one is the default one. Default value: list
+modes[]=list
+modes[]=gallery
+
+; blacklisted files and folders
+blacklist[]="file1"
+blacklist[]="/path/from/root/"
+
+
+; time of last change - for testing if someone changed it alredy
+lastChanged=123456789
+
+
+
+
+
 
 Dictionary
 ==========
