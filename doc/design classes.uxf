@@ -44,12 +44,14 @@ delete():void</panel_attributes>
       <x>110</x>
       <y>860</y>
       <w>200</w>
-      <h>50</h>
+      <h>70</h>
     </coordinates>
     <panel_attributes>Image
 --
 +resolution: {int x, int y}
-</panel_attributes>
++thumbList: {}
+--
+createThumb()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -184,7 +186,7 @@ rename(name: string): void</panel_attributes>
       <x>60</x>
       <y>210</y>
       <w>610</w>
-      <h>710</h>
+      <h>740</h>
     </coordinates>
     <panel_attributes>Files</panel_attributes>
     <additional_attributes/>
