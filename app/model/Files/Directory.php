@@ -38,7 +38,7 @@ class Directory extends Node implements IDirectory{
     
     
     public function delete() {
-	
+	throw new \Nette\NotImplementedException;
     }
     
        
