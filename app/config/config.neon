@@ -13,10 +13,12 @@ common:
 			ownerPassword: 'admin'
 			allowZip: false
 			modes:
+				guu
 			blacklist:
-				- /filemanager
-				- .htaccess
-				- .htpasswd
+				- "/filemanager"
+				- ".htaccess"
+				- ".htpasswd"
+				- "blacklisted"
 
 	php:
 		date.timezone: Europe/Prague

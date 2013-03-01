@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * 
  * Homepage presenter.
  */
 class HomepagePresenter extends BasePresenter
@@ -10,9 +11,9 @@ class HomepagePresenter extends BasePresenter
 	{
 		$this->template->anyVariable = 'any value';
 		
-	    $this->template->config = new \LightFM\DirConfig(DATA_ROOT);
-	    $this->template->config->inherite(NULL);
-	    dump($this->template->config);
+		
+		$find = \LightFM\Directory::sfindPath("/data1/data2/password/");
+		dump($find);
 	}
 
 }
