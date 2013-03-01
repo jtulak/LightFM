@@ -21,7 +21,6 @@ namespace LightFM;
         
     
     public static function knownFileType($file) {
-	// generic file - know everything
 	return \LightFM\Filetypes::isImage($file);
     }
 
