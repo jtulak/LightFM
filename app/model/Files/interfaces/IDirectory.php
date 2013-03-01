@@ -15,7 +15,7 @@ namespace LightFM;
  * 
  * 
  */
- interface IDirectory extends INode {
+ interface IDirectory {
     /**
      * 
      * @param string $path

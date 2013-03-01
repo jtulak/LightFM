@@ -15,7 +15,7 @@ namespace LightFM;
  * 
  * 
  */
- interface IFile extends INode {
+ interface IFile {
     
     
 }
