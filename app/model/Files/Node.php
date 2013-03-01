@@ -14,7 +14,7 @@ namespace LightFM;
  * 
  * 
  */
-abstract class Node extends \Nette\Object{
+abstract class Node extends \Nette\Object implements INode{
 
     /** 
      * When filled by some data, set to FALSE 
@@ -84,21 +84,7 @@ abstract class Node extends \Nette\Object{
 	
     }
 
-    public abstract function delete();
 
-    
-    
-    
-    
-    
-
-    /**
-     * 
-     * @param string $path path relatively to the data root
-     * @return \LightFM\Node
-     * @throws \Nette\FileNotFoundException
-     * @throws \Nette\Application\ForbiddenRequestException
-     */
     public function __construct($path) {
 	if ($path == NULL) {
 	    // if no path given, we want only empty node

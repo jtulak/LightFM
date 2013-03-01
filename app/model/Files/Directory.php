@@ -15,7 +15,7 @@ namespace LightFM;
  * 
  * 
  */
-class Directory extends Node {
+class Directory extends Node implements IDirectory{
 
     /** 
      * child in the line of the path 
@@ -43,17 +43,6 @@ class Directory extends Node {
     
        
     
-    /**
-     * Create hierarchical path from root to the given path 
-     * 
-     * @param string $path
-     * @return \LightFM\Node
-     */
-    public static function sfindPath($path){
-	return \LightFM\IO::createPath($path, $path);
-
-	
-    }
     
     
     /**
@@ -93,11 +82,6 @@ class Directory extends Node {
 	}
     }
 
-    /**
-     * 
-     * @param string $path
-     * @return \LightFM\Directory
-     */
     public function __construct($path) {
 	parent::__construct($path);
 

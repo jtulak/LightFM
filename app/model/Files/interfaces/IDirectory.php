@@ -15,7 +15,12 @@ namespace LightFM;
  * 
  * 
  */
- class File extends Node implements IFile {
-    
+ interface IDirectory extends INode {
+    /**
+     * 
+     * @param string $path
+     * @return \LightFM\Directory
+     */
+    public function __construct($path);
     
 }

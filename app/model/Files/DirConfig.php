@@ -18,7 +18,7 @@ define('BAD_INI_SYNTAX', 1);
  * 
  * 
  */
-class DirConfig extends \Nette\Object {
+class DirConfig extends \Nette\Object implements IDirConfig{
 
     /** @var Array List of blacklisted names/paths */
     private $blacklist = array();
@@ -41,11 +41,8 @@ class DirConfig extends \Nette\Object {
     /** @var string	Absolute path to the connected dir */
     private $dir = NULL;
 
-    /**
-     * Test if the path is blacklisted.
-     * @param string $file - full path from system root
-     * @return boolean
-     */
+    
+    
     public function isBlacklisted($file) {
 	if($file == "") return FALSE;
 	// remove slash at the end
@@ -56,18 +53,11 @@ class DirConfig extends \Nette\Object {
 	return FALSE;
     }
 
-    /**
-     * Tet array of owners.
-     * @return array
-     */
+    
     public function getOwners(){
 	return $this->owners;
     }
     
-    /**
-     * Get access password.
-     * @return string
-     */
     public function getAccessPassword(){
 	return $this->accessPassword;
     }
@@ -120,13 +110,7 @@ class DirConfig extends \Nette\Object {
 	$this->modes = array_merge($this->modes,$new);
     }
 
-    /**
-     * Inherite settings from parent, if weren't specified elseway. 
-     * If null given, use default as a parent.
-     * 
-     * @param \LightFM\DirConfig $parentsConfig
-     * 
-     */
+    
     public function inherite(\LightFM\DirConfig $parentsConfig = NULL) {
 	if ($parentsConfig == NULL) {
 	    $config = \Nette\Environment::getConfig('defaults');
@@ -166,12 +150,7 @@ class DirConfig extends \Nette\Object {
 
     }
 
-    /**
-     * Will load config from the dir and fill itself.
-     * 
-     * @param string $dir  absolute folder path
-     * @return \LightFM\DirConfig
-     */
+   
     public function __construct($dir) {
 	$this->dir = $dir;
 	
@@ -215,6 +194,10 @@ class DirConfig extends \Nette\Object {
 	return $this;
     }
 
+    public function addOwners(array $owners){
+	$this->owners = array_merge($this->owners,$owners);
+	return $this;
+    }
     
     /**
      * Add owner into the list
@@ -248,14 +231,6 @@ class DirConfig extends \Nette\Object {
     }
     
     
-    /**
-     * 
-     * @param array $owners
-     * @return \LightFM\DirConfig
-     */
-    public function addOwners(array $owners){
-	$this->owners = array_merge($this->owners,$owners);
-	return $this;
-    }
+   
 
 }

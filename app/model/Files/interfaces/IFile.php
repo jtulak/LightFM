@@ -15,7 +15,7 @@ namespace LightFM;
  * 
  * 
  */
- class File extends Node implements IFile {
+ interface IFile extends INode {
     
     
 }

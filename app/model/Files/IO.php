@@ -49,6 +49,17 @@ abstract class IO extends \Nette\Object {
 	return false;
     }
 
+    
+    /**
+     * Create hierarchical path from root to the given path 
+     * 
+     * @param string $path
+     * @return \LightFM\Node
+     */
+    public static function findPath($path){
+	return self::createPath($path, $path);	
+    }
+    
     /**
      * 
      * @param string $restOfPath
