@@ -16,7 +16,11 @@ define('BAD_INI_SYNTAX', 1);
 
 /**
  * 
- * 
+ * @property-read array $Owners 
+ * @property-read bool  $AllowZip
+ * @property-read array $Modes 
+ * @property-read array $Blacklist 
+ * @property-read string $AccessPassword
  */
 class DirConfig extends \Nette\Object implements IDirConfig{
 
@@ -53,6 +57,14 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 	return FALSE;
     }
 
+    
+    public function getModes(){
+	return $this->modes;
+    }
+    
+    public function getAllowZip(){
+	return $this->allowZip;
+    }
     
     public function getOwners(){
 	return $this->owners;
@@ -155,19 +167,16 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 	$this->dir = $dir;
 	
 	$defaults = \Nette\Environment::getConfig('defaults');
-	
-	
 	// if no file exists, simply use default settings and end
-	if(!is_file($this->dir . '/' . \Nette\Environment::getConfig('dirConfig'))){
+	if(!@is_file(DATA_ROOT.$this->dir . '/' . \Nette\Environment::getConfig('dirConfig'))){
 		$this->inherite();
 		return $this;
 	}
 	
+	$ini_array = parse_ini_file(DATA_ROOT.$this->dir . '/' . \Nette\Environment::getConfig('dirConfig'));
 
-	$ini_array = parse_ini_file($this->dir . '/' . \Nette\Environment::getConfig('dirConfig'));
-
-	if (isset($ini_array['access_password']))
-	    $this->accessPassword = $ini_array['access_password'];
+	if (isset($ini_array['accessPassword']))
+	    $this->accessPassword = $ini_array['accessPassword'];
 
 	// set owner (at first test if something exist)
 	$ini_array['ownerUsername']=empty($ini_array['ownerUsername'])?"":$ini_array['ownerUsername'];
@@ -178,8 +187,8 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 	$this->addOwner($defaults['ownerUsername'], $defaults['ownerPassword']) ;
 	
 	
-	if (isset($ini_array['allow_zip']))
-	    $this->allowZip = $ini_array['allow_zip'];
+	if (isset($ini_array['allowZip']))
+	    $this->allowZip = $ini_array['allowZip'];
 
 	if (isset($ini_array['modes']))
 	    $this->addToModes ($ini_array['modes']);

@@ -168,7 +168,7 @@ abstract class IO extends \Nette\Object {
 	$created->usedChild->parent = $created;
 
 	// save a child config for case of emptying of $created
-	$childConf = $created->usedChild->config;
+	$childPass = $created->usedChild->password;
 	$childHidden = $created->usedChild->hidden;
 	if ($created->usedChild->dummy) {
 	    // if the subdir is blacklisted, replace by empty node
@@ -176,7 +176,7 @@ abstract class IO extends \Nette\Object {
 	}
 
 	// copy the needs password from the child
-	$created->password = $childConf->getAccessPassword();
+	$created->password = $childPass;
 	$created->hidden = $childHidden;
 
 	return $created;
