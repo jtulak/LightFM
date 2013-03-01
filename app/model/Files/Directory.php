@@ -50,7 +50,7 @@ class Directory extends Node {
      * @return \LightFM\Node
      */
     public static function sfindPath($path){
-	return self::createPath($path, $path);
+	return \LightFM\IO::createPath($path, $path);
 
 	
     }
@@ -82,7 +82,7 @@ class Directory extends Node {
 	    while (false !== ($entry = readdir($handle))) {
 		if ($entry != "." && $entry != "..") {
 		    
-		   if(self::is_dir($this->fullPath.'/'.$entry)){
+		   if(\LightFM\IO::is_dir($this->fullPath.'/'.$entry)){
 		       $this->addSubdir($entry);
 		   }else{
 		       $this->addSubfile($entry);
