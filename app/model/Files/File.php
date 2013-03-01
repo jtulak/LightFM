@@ -17,5 +17,7 @@ namespace LightFM;
  */
  class File extends Node implements IFile {
     
-    
+     public function delete() {
+	 ;
+     }
 }

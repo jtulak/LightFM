@@ -43,13 +43,11 @@ class Filetypes extends \Nette\Object {
      * @return boolean
      */
     public static function isImage($path) {
-	
-	$a = getimagesize($path);
-	$image_type = $a[2];
-	if (in_array($image_type, self::$exstensionsImages)) {
-	    return true;
-	}
-	return false;
+	list($type,$suffix) = explode('/', finfo_file (finfo_open(FILEINFO_MIME_TYPE), $path ));
+	if($type == "image")	    
+	    return TRUE;
+	return FALSE;
     }
+    
 
 }

@@ -49,17 +49,16 @@ abstract class IO extends \Nette\Object {
 	return false;
     }
 
-    
     /**
      * Create hierarchical path from root to the given path 
      * 
      * @param string $path
      * @return \LightFM\Node
      */
-    public static function findPath($path){
-	return self::createPath($path, $path);	
+    public static function findPath($path) {
+	return self::createPath($path, $path);
     }
-    
+
     /**
      * 
      * @param string $restOfPath
@@ -87,7 +86,6 @@ abstract class IO extends \Nette\Object {
 	return array($dir, $restOfPath);
     }
 
-    
     /**
      * 
      * @param string $fullPath
@@ -151,14 +149,17 @@ abstract class IO extends \Nette\Object {
      */
     private static function createPath_tryCreate($fullPath, $fullDir, $restOfPath, \LightFM\DirConfig $config) {
 
+
 	if ($restOfPath == "") {
-	    // if the $restOfPath is empty - then we are creating path 
-	    // thats end in this directory
-	    $created = self::createPath_tryCreate_final($fullPath);
-	} else if (strpos('/', $restOfPath) === FALSE && self::is_file($restOfPath)) {
-	    // the end of the path is a file in this dir
-	    // FIXME chain of symlinks to a directory interpreted as a file
-	    $created = self::createPath_tryCreate_file($fullPath, $fullDir);
+	    // We are at the end of the path
+
+	    if (self::is_file(DATA_ROOT . '/' . $fullPath)) {
+		// the end of the path is a !file! in this dir
+		$created = self::createPath_tryCreate_file($fullPath, $fullDir);
+	    } else {
+
+		$created = self::createPath_tryCreate_final($fullPath);
+	    }
 	} else {
 	    // this dir is not the final node, there is a subdir
 	    // create node for this dir
