@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of LightFM web file manager.
  * 
@@ -8,16 +9,30 @@
  * the file license.txt that was distributed with this source code.
  */
 
-
 namespace LightFM;
 
 /**
  * 
  * 
  */
- class File extends Node implements IFile {
+class File extends Node implements IFile {
+
+    private static $priority = -1000;
     
-     public function delete() {
-	 throw new \Nette\NotImplementedException;
-     }
+    public function delete() {
+	throw new \Nette\NotImplementedException;
+    }
+
+    
+    public static function getPriority(){
+	return self::$priority;
+    }
+    
+    
+    public static function knownFileType($file) {
+	// generic file - know everything
+
+	return TRUE;
+    }
+
 }

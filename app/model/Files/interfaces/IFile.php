@@ -12,10 +12,22 @@
 namespace LightFM;
 
 /**
+ * Interface for each class that wants to represent an file view/file type.
  * 
  * 
  */
  interface IFile {
     
+     /**
+      * 
+      */
+     public static function getPriority();
+     
+     
+     /**
+      * Test if the implementing class know how to work with this file
+      * @param string $file
+      */
+     public static function knownFileType($file);
     
 }

@@ -60,6 +60,41 @@ abstract class IO extends \Nette\Object {
     }
 
     /**
+     * Return an array of classes which implements an interface
+     * 
+     * 
+     * @param string $interfaceName
+     * @return array
+     */
+    public static function getImplementingClasses($interfaceName) {
+	$classes = NULL;
+	// At first find instance of robotLoader and get classes.
+	foreach (\Nette\Loaders\RobotLoader::getLoaders() as $i => $loader) {
+	    if ($loader instanceof \Nette\Loaders\RobotLoader) {
+		$classes = $loader->getIndexedClasses();
+		// robot loader is in nette only once, no need to search longer
+		break;
+	    }
+	}
+
+	// And then get all classes that implements the interface.
+	// http://stackoverflow.com/questions/3993759/php-how-to-get-a-list-of-classes-that-implement-certain-interface
+	return array_filter(
+		array_keys($classes), function( $className ) use ( $interfaceName ) {
+		    return in_array($interfaceName, class_implements($className));
+		}
+	);
+    }
+
+    /**
+     * Return an array of classes which provides an file view
+     * @return type
+     */
+    public static function getFileModules() {
+	return self::getImplementingClasses('LightFM\IFile');
+    }
+
+    /**
      * 
      * @param string $restOfPath
      * @return type
@@ -102,11 +137,19 @@ abstract class IO extends \Nette\Object {
      * @return \LightFM\Image|\LightFM\File
      */
     private static function createPath_tryCreate_file($fullPath, $fullDir) {
-	if (\LightFM\Filetypes::isImage(DATA_ROOT . $fullPath)) {
-	    return new \LightFM\Image($fullDir);
-	} else {
-	    return new \LightFM\File($fullDir);
+	$file = DATA_ROOT . $fullPath;
+	$classes = array();
+	foreach (self::getFileModules() as $class){
+	    if($class::knownFileType($file)){
+		// if the class know this filetype
+		$classes[$class::getPriority()] = $class;
+	    }
 	}
+	rsort($classes);
+	if(count($classes)==0)
+	    throw new \Nette\FatalErrorException("No possible view mode found! Probably missing the default class LightFM\File.");
+	
+	return new $classes[0]($fullDir);
     }
 
     /**

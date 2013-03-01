@@ -15,7 +15,24 @@ namespace LightFM;
  * 
  * 
  */
- class Image extends File {
+ class Image extends File implements IFile{
+     
+    private static $priority = 0;
     
+    public function delete() {
+	throw new \Nette\NotImplementedException;
+    }
+
+    
+    public static function getPriority(){
+	return self::$priority;
+    }
+    
+    
+    public static function knownFileType($file) {
+	// generic file - know everything
+	return \LightFM\Filetypes::isImage($file);
+    }
+
     
 }
