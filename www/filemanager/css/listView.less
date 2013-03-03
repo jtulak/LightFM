@@ -107,6 +107,18 @@ ol,ul {
     font-size: 120%;
     line-height: 150%;
     margin-top: 5pt;
+    .list-tab {
+	background-image: url('../images/list.png');
+	background-repeat: no-repeat;
+	background-position: 2pt 50%;
+	padding-left: 25px;
+    }   
+    .gallery-tab {
+	background-image: url('../images/gallery.png');
+	background-repeat: no-repeat;
+	background-position: 2pt 50%;
+	padding-left: 25px;
+    }   
     ul {
 	
 	li {
@@ -120,7 +132,7 @@ ol,ul {
 		&.active {
 			background-color: @color-medium;
 			border-bottom:1px solid  @color-medium;
-			color: @nav-text;
+			color: @color-text;
 			cursor:default;
 		}
 		
