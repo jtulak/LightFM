@@ -2,9 +2,9 @@
 
 /**
  * 
- * Homepage presenter.
+ * List presenter.
  */
-class HomepagePresenter extends BasePresenter
+class ListPresenter extends BasePresenter
 {
 
 	public function renderDefault()

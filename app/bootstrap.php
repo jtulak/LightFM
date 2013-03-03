@@ -22,4 +22,13 @@ $configurator->addConfig(__DIR__ . '/config/config.neon');
 $configurator->addConfig(__DIR__ . '/config/config.local.neon', $configurator::NONE); // none section
 $container = $configurator->createContainer();
 
+
+use Nette\Application\Routers\RouteList,
+    Nette\Application\Routers\Route;
+
+$router = new RouteList;
+$router[] = new Route('<presenter>/<action>[/<id>]', 'List:default');
+
+$container->addService('router', $router);
+
 return $container;
