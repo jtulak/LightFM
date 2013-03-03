@@ -131,27 +131,30 @@ abstract class IO extends \Nette\Object {
     }
 
     /**
+     * Get correct class which represents the given path - already create an object.
+     * Usage: 
+     * $node = IO::getNodeType($file); // path from this system's root
      * 
      * @param string $fullPath
-     * @param string $fullDir
-     * @return \LightFM\Image|\LightFM\File
+     * @return \LightFM\classes
+     * @throws \Nette\FatalErrorException
      */
-    private static function createPath_tryCreate_file($fullPath, $fullDir) {
-	$file = DATA_ROOT . $fullPath;
+    public static function createFileType($fullPath) {
 	$classes = array();
-	foreach (self::getFileModules() as $class){
-	    if($class::knownFileType($file)){
+	foreach (self::getFileModules() as $class) {
+	    if ($class::knownFileType(DATA_ROOT . $fullPath)) {
 		// if the class know this filetype
 		$classes[$class::getPriority()] = $class;
 	    }
 	}
 	rsort($classes);
-	if(count($classes)==0)
-	    throw new \Nette\FatalErrorException("No possible view mode found! Probably missing the default class LightFM\File.");
-	
-	return new $classes[0]($fullDir);
+	if (count($classes) == 0)
+	    throw new \Nette\FatalErrorException("No possible node typefound! Probably missing the default class LightFM\File.");
+
+	return new $classes[0]($fullPath);
     }
 
+    
     /**
      * 
      * @param string $fullPath
@@ -198,7 +201,7 @@ abstract class IO extends \Nette\Object {
 
 	    if (self::is_file(DATA_ROOT . '/' . $fullPath)) {
 		// the end of the path is a !file! in this dir
-		$created = self::createPath_tryCreate_file($fullPath, $fullDir);
+		$created = self::createFileType($fullPath);
 	    } else {
 
 		$created = self::createPath_tryCreate_final($fullPath);

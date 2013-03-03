@@ -23,4 +23,17 @@ namespace LightFM;
      */
     public function __construct($path);
     
+    
+    /**
+     * Return array of subdirs as instances of Directory - lazzy calling.
+     * @return Array
+     */
+    public function getSubdirs();
+    
+    /**
+     * Return array of files as instances of File - lazzy calling.
+     * @return Array
+     */
+    public function getFiles();
+    
 }

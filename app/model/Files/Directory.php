@@ -24,16 +24,27 @@ class Directory extends Node implements IDirectory{
     public $usedChild;
 
     /** 
-     * List of subfolders 
+     * List of subfolders as strings
      * @var array	
      */
-    public $listDirs = array();
+    protected $listDirs = array();
+    /** 
+     * List of subfolders as objects
+     * @var array	
+     */
+    protected $listDirsObj = array();
 
     /** 
-     * List of subfiles 
+     * List of subfiles as strings
      * @var array	
      */
-    public $listFiles = array();
+    protected $listFiles = array();
+    
+    /** 
+     * List of subfiles as objects
+     * @var array	
+     */
+    protected $listFilesObj = array();
 
     
     
@@ -41,8 +52,29 @@ class Directory extends Node implements IDirectory{
 	throw new \Nette\NotImplementedException;
     }
     
-       
     
+    
+    public function getSubdirs() {
+	if(count($this->listDirsObj) == 0 && count($this->listDirs) != 0){
+	    // if this function wasn't called yet
+	    foreach($this->listDirs as $dir){
+		array_push($this->listDirsObj, new Directory($this->path.'/'.$dir));
+	    }
+	}
+	return $this->listDirsObj;
+    }   
+    
+    
+    
+    public function getFiles() {
+	if(count($this->listFilesObj) == 0 && count($this->listFiles) != 0){
+	    // if this function wasn't called yet
+	    foreach($this->listFiles as $file){
+		array_push($this->listFilesObj, IO::createFileType($this->path.'/'.$file));
+	    }
+	}
+	return $this->listFilesObj;
+    }   
     
     
     /**
@@ -92,5 +124,6 @@ class Directory extends Node implements IDirectory{
 	// create list of dirs and files
 	$this->scanDir();
     }
+    
 
 }

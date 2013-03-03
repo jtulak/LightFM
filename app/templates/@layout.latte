@@ -4,6 +4,7 @@
  * @param string   $basePath web base path
  * @param string   $robots   tell robots how to index the content of a page (optional)
  * @param array    $flashes  flash messages
+ * @param string   $filename Name of actual file/folder
  *}
 
 <!DOCTYPE html>
@@ -37,7 +38,7 @@
 		<h1>LightFM file manager</h1>
 	    </header>
 	    <section>
-		<h2>{block filename|striptags}Folder{/block}</h2>
+		<h2>{$filename|striptags}</h2>
 		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 		
 		<div class="options">

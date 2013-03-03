@@ -32,7 +32,7 @@ abstract class Node extends \Nette\Object implements INode{
      * Contain path to the node from the lighFM data root as a string 
      * @var string     
      */
-    public $path;
+    protected $path;
 
     /** 
      * LightContain parent directory (object) 
@@ -44,19 +44,19 @@ abstract class Node extends \Nette\Object implements INode{
      * Contain file/directory name 
      * @var string     
      */
-    public $name;
+    protected $name;
 
     /**
      * Size of the node in bytes 
      * @var int   
      */
-    public $size;
+    protected $size;
 
     /**
      * When was the file last modified (timestamp) 
      * @var int      
      */
-    public $lastModified;
+    protected $lastModified;
 
     /**
      * Contains the last password in row, if any node in the path needs password 
@@ -75,13 +75,27 @@ abstract class Node extends \Nette\Object implements INode{
      * @var string 
      */
     protected $fullPath;
+    
+    public function getName() {
+	return $this->name;
+    }
+    public function getDate() {
+	return $this->lastModified;
+    }
+    public function getSize() {
+	return $this->size;
+    }
+    public function getPath() {
+	return $this->path;
+    }
+    
 
     public function move(Directory $newParent) {
-	
+	throw new \Nette\NotImplementedException;
     }
 
     public function rename(Nette\Utils\Strings $newName) {
-	
+	throw new \Nette\NotImplementedException;
     }
 
 
@@ -121,5 +135,5 @@ abstract class Node extends \Nette\Object implements INode{
 
 	return $this;
     }
-
+    
 }

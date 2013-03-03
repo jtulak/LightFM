@@ -1,15 +1,24 @@
-{* This is the welcome page, you can delete it *}
+{** 
+ * @param array $path	list of directories from root to the actual folder/file
+ * @param array $listFiles
+ * @param array $listDirs
+ *}
 
 {block content}
 <div id="list-view">
     <div id="navigation">
     Path: 
 	<ol>
-	    <li><a href="#">/</a>
-	    <li><a href="#">aa/</a>
-	    <li><a href="#">something long/</a>
-	    <li><a href="#">bb/</a>
-	    <li><a class="inactive" title="You are here">folder/</a>
+	    {foreach $path as $uri => $item}
+		
+		<li><a n:href="default, path => $uri " {last}class="inactive" title="You are here"{/last}>
+			{if $iterator->first}
+			    /
+			{else}
+			    {$item}
+			{/if}
+		    </a>
+	    {/foreach}
 	</ol>
     </div>
     
@@ -17,7 +26,7 @@
     <div id="views">
 	<ul>
 	    <li><a  class="list-tab active">List</a>
-	    <li><a class="gallery-tab" href="#">Gallery</a>
+	    <li><a class="gallery-tab" href="{link Gallery:default}">Gallery</a>
 	</ul>
     </div>
     <div style="clear:both"></div>
@@ -33,36 +42,35 @@
 		</tr>
 	    </table>
 	</section>
-	{for $i=0;$i<10;$i++}
+	{foreach $listDirs as $dir}
 	<section class="folder">
 	    <table>
 		<tr>
 		    <td class="checkbox"><input type="checkbox"></td>
-		    <td class="name">folder {$i}</td>
+		    <td class="name"><a n:href="default, path => $dir->Path ">{$dir->Name}</a></td>
 		    <td class="suffix"></td>
-		    <td class="size">1 MB</td>
-		    <td class="date">2013/02/28 11:31:58</td>
+		    <td class="size">{$dir->Size|Bytes}</td>
+		    <td class="date">{$dir->Date|date:'%Y/%m/%d %H:%M:%S'}</td>
 		</tr>
 	    </table>
 	</section>
-	{/for}
-	
+	{/foreach}
+	{foreach $listFiles as $file}
 	<section class="file">
 	    <table>
 		<tr>
 		    <td class="checkbox"><input type="checkbox"></td>
 		    <td class="name">
-			<span>file {$i} abcdef</span>
+			<a n:href="File:default, path => $file->Path "><span>{$file->Name}</span></a>
 		    </td>
-		    <td class="suffix">
-			.docx
-		    </td>
-		    <td class="size">1 MB</td>
-		    <td class="date">2013/02/28 11:31:58</td>
+		    <td class="suffix">{$file->Suffix}</td>
+		    <td class="size">{$file->Size|Bytes}</td>
+		    <td class="date">{$file->Date|date:'%Y/%m/%d %H:%M:%S'}</td>
 		</tr>
 	    </table>
 	</section>
-	{for $i=0;$i<20;$i++}
+	{/foreach}
+	{* for $i=0;$i<20;$i++}
 	<section class="file">
 	    <table>
 		<tr>
@@ -78,7 +86,7 @@
 		</tr>
 	    </table>
 	</section>
-	{/for}
+	{/for *}
     </div>
 </div>
 {/block}

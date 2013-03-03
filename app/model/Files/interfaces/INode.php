@@ -17,6 +17,11 @@ namespace LightFM;
  */
  interface INode {
     
+     public function getName();
+     public function getSize();
+     public function getDate();
+     public function getPath();
+     
     
     public function move(Directory $newParent);
 

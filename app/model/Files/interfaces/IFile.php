@@ -18,8 +18,11 @@ namespace LightFM;
  */
  interface IFile {
     
+     public function getSuffix();
+     
      /**
-      * 
+      * Return priority of implementing class - used for correct order
+      * if more classes know same filetype
       */
      public static function getPriority();
      
@@ -30,4 +33,5 @@ namespace LightFM;
       */
      public static function knownFileType($file);
     
+     
 }

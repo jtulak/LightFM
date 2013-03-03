@@ -17,8 +17,24 @@ namespace LightFM;
  */
 class File extends Node implements IFile {
 
+    /**
+     * Priority of this class
+     * @var int 
+     */
     private static $priority = -1000;
     
+    /**
+     *	Suffix of this file
+     * @var string
+     */
+    protected $suffix;
+
+    public function getSuffix() {
+	return $this->suffix;
+    }
+    
+
+
     public function delete() {
 	throw new \Nette\NotImplementedException;
     }
@@ -31,8 +47,21 @@ class File extends Node implements IFile {
     
     public static function knownFileType($file) {
 	// generic file - know everything
-
 	return TRUE;
+    }
+    
+    public function __construct($path) {
+	parent::__construct($path);
+	$fileparts = pathinfo($path);
+	// split to suffix and name
+	$this->suffix = !empty($fileparts['extension'])?$fileparts['extension']:'';
+	$this->name = $fileparts['filename'];
+	if(strlen($this->name) == 0 ){
+	    // files like .htaccess
+	    $this->name = '.'.$this->suffix;
+	    $this->suffix = "";
+	}
+	return $this;
     }
 
 }
