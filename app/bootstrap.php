@@ -27,7 +27,7 @@ use Nette\Application\Routers\RouteList,
     Nette\Application\Routers\Route;
 
 $router = new RouteList;
-$router[] = new Route('<presenter>/<action>[/<id>]', 'List:default');
+$router[] = new Route('<presenter>/', 'List:default');
 
 $container->addService('router', $router);
 
