@@ -6,8 +6,8 @@ Options -Indexes
 # enable cool URL
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-	# RewriteBase /
-
+	 RewriteBase /~dragon/LightFM/src/www/
+	
 	# prevents files starting with dot to be viewed by browser
 	RewriteRule /\.|^\. - [F]
 
