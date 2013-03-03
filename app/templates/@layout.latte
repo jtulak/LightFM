@@ -36,17 +36,17 @@
 	<div id="outer-box">
 	    <header>
 		<h1>LightFM file manager</h1>
-	    </header>
-	    <section>
-		<h2>{$filename|striptags}</h2>
-		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-		
 		<div class="options">
 		    <ul>
 			<li>Logged as Zopper (<a href="#">logout</a>)
 			<li><a href="#">Options</a>
 		    </ul>
 		</div>
+	    </header>
+	    <section>
+		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+		
+		
 		<div id="inner-box">
 		    <div id="sidebar">
 			<div class="border">
