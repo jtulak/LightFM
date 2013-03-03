@@ -1,0 +1,201 @@
+@import "./params.less";
+
+
+html{
+    padding:0;
+    margin:0;
+    height:100%;
+}
+body {
+    font-size: @font-size;
+    line-height: 1.6;
+    color: @color-text;
+    background: @color-dark;
+    font-family: 'Dejavu sans',arial, 'Liberation Sans', Freesans, sans-serif;
+    padding:0pt 0 0 0;
+    margin:0;
+    height:100%;
+}
+
+#cleaner {
+    clear: both;
+}
+
+h1 {
+    color: #3484D2;
+    margin:0;
+}
+
+.nowrap{
+		white-space: nowrap;
+}
+
+#outer-box {
+    margin: 0;
+    padding: 0;
+    background-color: @color-light;
+    width: 100%;
+    .box-shadow(0 0 5pt, 30%);
+
+    @media only screen and (min-width: @page-width-plus){
+	    margin: 0 auto;
+	    border: 0px solid  @color-outerBorder;
+	    border-width: 0 1px 1px 1px;
+	    width: @page-width;
+    }
+    section {
+	position:relative;
+    }
+
+    .options {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding-right:10pt;
+	text-align: right;
+	ul {
+	    margin:0;
+	    padding:0;
+	    list-style:none;
+	    li{
+		margin:0;
+		padding:0;
+	    }
+	}
+    }
+}
+
+
+header {
+    border-bottom: 1px solid @color-outerBorder;
+    background-color: white;
+    margin:0;
+}
+
+#inner-box {
+    padding: 8pt;
+    display: table;
+    table-layout: fixed;
+    max-width: 100%;
+    
+}
+#outer-content{
+    display: table-cell;
+    width:100%;
+}
+
+#sidebar {
+    display: table-cell;
+    width: @sidebar-width;
+    overflow: hidden;
+.border{
+    padding-right: 20px; // width of the image
+    position: relative;
+    
+}
+    h3 {
+	font-size: 100%;
+	color: lighten(@color-text,30%);
+	font-weight:normal;
+	padding-bottom:0;
+	margin:0;
+    }
+    ul{
+	margin-top:0;
+	padding:0 15pt 0 0 ;
+    }
+    li {
+	list-style: none;
+    }
+    a {
+	display:block;
+	padding: 3pt 5pt;
+	color: @color-text;
+	text-decoration: none;
+	font-size: 150%;
+	line-height: 150%;
+	@media only screen and (min-width: @screen-small){
+	    font-size: 120%;
+	    line-height: 120%;
+	}
+
+	.rounded-corners() ;
+	&:hover{
+	    background-color: #BA3E23;
+	    color: @color-light;;
+	}
+    }
+}
+#sidebar-controll {
+    width: @sidebar-control-width;
+    
+    position: absolute;
+    right: 0;
+    background-image: url(../images/resize-horiz.png);
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    .opacity (0.6);
+}
+.sidebar-content-width {
+    width: @sidebar-content-width;
+}
+#sidebar-content{
+    position: relative;
+    overflow: hidden;
+    width: 0;
+    //display: none;
+    .for-fixed { 
+	width: 0;
+	display: none;
+    }
+    @tmp: @screen-small + @sidebar-width;
+    @media only screen and (min-width: @tmp){
+	width: @sidebar-content-width;
+	//display: block;
+	.for-fixed { 
+	    width: @sidebar-content-width;
+	    display: block;
+	}
+    }
+    .fixed{
+	position: fixed;
+	top: 0px;
+    }
+}
+
+
+#ajax-spinner {
+	margin: 15px 0 0 15px;
+	padding: 13px;
+	background: white url('../images/spinner.gif') no-repeat 50% 50%;
+	font-size: 0;
+	z-index: 123456;
+	display: none;
+}
+
+div.flash {
+	color: black;
+	background: #FFF9D7;
+	border: 1px solid #E2C822;
+	padding: 1em;
+	margin: 1em 0;
+}
+
+a[href^="error:"] {
+	background: red;
+	color: white;
+}
+
+form tr, form td {
+	vertical-align: top;
+	font-weight: normal;
+}
+
+form .required label {
+	font-weight: bold;
+}
+
+form .error {
+	color: #D00;
+	font-weight: bold;
+}

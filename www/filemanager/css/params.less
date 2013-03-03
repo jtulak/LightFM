@@ -1,0 +1,64 @@
+@screen-tiny: 300pt;
+@screen-small: 500pt;
+@screen-middle: 1100pt;
+@screen-big: 1300pt;
+
+@screen-tiny-1: @screen-tiny;
+@screen-tiny-2: @screen-tiny-1 + 50;
+@screen-tiny-3: @screen-tiny-2 + 50;
+@screen-tiny-4: @screen-tiny-3 + 50;
+@screen-tiny-5: @screen-tiny-4 + 50;
+
+@screen-small-1: @screen-small;
+@screen-small-2: @screen-small-1 + 120;
+@screen-small-3: @screen-small-2 + 120;
+@screen-small-4: @screen-small-3 + 120;
+@screen-small-5: @screen-small-4 + 120;
+
+
+@color-dark: #cdcdcd;
+@color-light: #f7f7f7;
+@color-medium: #e1e1e1;
+@color-outerBorder: #aaa;
+@color-innerBorder: #aaa;
+
+@color-text: #333;
+
+@font-size: 12pt;
+
+@page-width: 700pt;
+@page-width-plus: @page-width + 5pt;
+
+@box-margin: 8pt;
+//@content-
+
+@sidebar-width: 115pt;
+@sidebar-control-width:16pt;
+@sidebar-content-width: @sidebar-width - @sidebar-control-width;
+
+
+
+
+.rounded-corners (@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+  -o-border-radius: @radius;
+  border-radius: @radius;
+}
+
+.box-shadow(@style, @c) when (iscolor(@c)) {
+  box-shadow:         @style @c;
+  -webkit-box-shadow: @style @c;
+  -moz-box-shadow:    @style @c;
+}
+.box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
+  .box-shadow(@style, rgba(0, 0, 0, @alpha));
+}
+
+.opacity (@num){
+@perc: @num *100;
+-moz-opacity: @num;
+opacity: @num;
+-ms-filter:~"progid:DXImageTransform.Microsoft.Alpha(Opacity=@{perc})";
+}

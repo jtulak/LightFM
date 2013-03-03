@@ -12,8 +12,9 @@ class HomepagePresenter extends BasePresenter
 		$this->template->anyVariable = 'any value';
 		
 		
-		$find = \LightFM\IO::findPath("/data1/data2/password/");
-		dump($find);
+		//$find =  \LightFM\IO::findPath("/");
+		//$find = \LightFM\IO::findPath("/data1/gallery/gallery");
+		//dump($find);
 	}
 
 }
