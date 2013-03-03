@@ -110,20 +110,22 @@ ol,ul {
     .list-tab {
 	background-image: url('../images/list.png');
 	background-repeat: no-repeat;
-	background-position: 2pt 50%;
-	padding-left: 25px;
+	background-position: 5px 50%;
+	padding-left: 28px;
+	
     }   
     .gallery-tab {
 	background-image: url('../images/gallery.png');
 	background-repeat: no-repeat;
 	background-position: 2pt 50%;
-	padding-left: 25px;
+	padding-left: 28px;
     }   
     ul {
 	
 	li {
 	    
 	    a{
+		display: inline-block;
 		border-color: @color-innerBorder;
 		border-width: 1px 1px 0px 0px;
 		//border-bottom:1px solid  @nav-bg;
@@ -133,7 +135,7 @@ ol,ul {
 			background-color: @color-medium;
 			border-bottom:1px solid  @color-medium;
 			color: @color-text;
-			cursor:default;
+			cursor: default;
 		}
 		
 	    }
@@ -254,6 +256,13 @@ ol,ul {
 	 }
 
 	&.header {
+	    a {
+		font-weight: bold;	
+		color: @color-text;
+		&:hover{
+		    color: lighten(@color-text,20%);
+		}
+	    }
 	    /* Gradient ************************************************************/
 	    background: -moz-linear-gradient(top, @list-dark 0%, @list-light 100%); /* FF3.6+ */
 	    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@list-dark), color-stop(100%,@list-light)); /* Chrome,Safari4+ */
