@@ -30,7 +30,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * TODO - switching
      * @var bool
      */
-    protected $showHidden = false;
+    protected $showHidden = true;
 
 
 

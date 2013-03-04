@@ -123,7 +123,7 @@ abstract class Node extends \Nette\Object implements INode{
 	$this->size = filesize($this->fullPath);
 	$this->lastModified = filemtime($this->fullPath);
 	$this->path = $path;
-	$this->name = basename($this->fullPath);
+	$this->name = basename($fullPath);
 
 	// test for hidden file/dir
 	if (substr($this->name, 0, 1) == '.') {
