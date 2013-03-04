@@ -9,6 +9,7 @@
     <div id="navigation">
     Path: 
 	<ol>
+	    {var $backpath = '/'}
 	    {foreach $path as $uri => $item}
 		
 		<li><a n:href="default, path => $uri " {last}class="inactive" title="You are here"{/last}>
@@ -16,6 +17,10 @@
 			    /
 			{else}
 			    {$item}
+			    {* creating the backpath *}
+			    {if !$iterator->last}
+				{? $backpath .= $item}
+			    {/if}
 			{/if}
 		    </a>
 	    {/foreach}
@@ -42,6 +47,25 @@
 		</tr>
 	    </table>
 	</section>
+	
+	{*
+	 * Up dir -only if we are in a subdir
+	 *}
+	{if count($path) > 1}
+	<section class="folder-up">
+	    <a n:href="default, path => $backpath ">
+		<table>
+		    <tr>
+			<td class="checkbox"></td>
+			<td class="name">[...]</td>
+			<td class="suffix"></td>
+			<td class="size"></td>
+			<td class="date"></td>
+		    </tr>
+		</table>
+		</a>
+	</section>
+	{/if}
 	
 	
 	{foreach $listDirs as $dir}
