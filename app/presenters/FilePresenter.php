@@ -28,7 +28,6 @@ class FilePresenter extends BasePresenter {
 	    if ($this->last->getTemplateName() == "") {
 		// If we do not know how to display this file, download it
 		$this->redirectUrl($this->getHttpRequest()->url->basePath .$this->path);
-	//$this->sendResponse(new Nette\Application\Responses\FileResponse($this->last->FullPath));
 	    }
 	} else {
 	    throw new Nette\Application\BadRequestException('Not directory and not implementing IFile for path: ' . $this->path, 500);
