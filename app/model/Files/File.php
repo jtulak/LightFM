@@ -12,10 +12,17 @@
 namespace LightFM;
 
 /**
- * 
+ * @property-read  string $IconName Name for icon file
  * 
  */
 class File extends Node implements IFile {
+
+    /**
+     *	css class for the node
+     * @var string 
+     */
+    protected $iconName = '';
+
 
     /**
      * Priority of this class
@@ -29,6 +36,10 @@ class File extends Node implements IFile {
      */
     protected $suffix;
 
+    public function getIconName(){
+	return $this->iconName;
+    }
+    
     public function getSuffix() {
 	return $this->suffix;
     }

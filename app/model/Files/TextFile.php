@@ -17,6 +17,10 @@ namespace LightFM;
  */
  class TextFile extends File implements IFile{
      
+     
+     // overwriting parent's value
+    protected $iconName = 'file-text';
+     
      // overwriting parent's value
     private static $priority = 0;
     

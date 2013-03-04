@@ -27,6 +27,8 @@ namespace LightFM;
       */
      public function getTemplateName();
      
+     public function getIconName();
+     
      
      /**
       * Return priority of implementing class - used for correct order

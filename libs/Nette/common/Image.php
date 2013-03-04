@@ -495,7 +495,7 @@ class Image extends Object
 	 * @param  int  opacity 0..100
 	 * @return Image  provides a fluent interface
 	 */
-	public function place(Image $image, $left = 0, $top = 0, $opacity = 100)
+	public function place(ImageFile $image, $left = 0, $top = 0, $opacity = 100)
 	{
 		$opacity = max(0, min(100, (int) $opacity));
 

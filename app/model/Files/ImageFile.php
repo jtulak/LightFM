@@ -15,7 +15,12 @@ namespace LightFM;
  * 
  * 
  */
- class Image extends File implements IFile{
+ class ImageFile extends File implements IFile{
+     
+     
+     // overwriting parent's value
+    protected $iconName = 'file-image';
+     
      
     private static $priority = 0;
         

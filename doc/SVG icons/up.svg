@@ -15,7 +15,10 @@
    inkscape:label="Pozadí"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="up.svg">
+   sodipodi:docname="up.svg"
+   inkscape:export-filename="/home/dragon/public_html/LightFM/src/doc/SVG icons/28/up.png"
+   inkscape:export-xdpi="4.4522967"
+   inkscape:export-ydpi="4.4522967">
   <defs
      id="defs3007" />
   <sodipodi:namedview
@@ -55,7 +58,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -65,15 +68,19 @@
      id="layer1"
      transform="translate(0,-486.36218)">
     <path
-       style="fill:none;stroke:#020202;stroke-width:170;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 533.81692,475.20465 -323.72259,0 0,-256.45123"
+       style="fill:none;stroke:#888888;stroke-width:170;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 533.81692,423.41644 -323.72259,0 0,-164.82594"
        id="path3813"
        inkscape:connector-curvature="0"
-       transform="translate(0,486.36218)" />
+       transform="translate(0,486.36218)"
+       sodipodi:nodetypes="ccc" />
     <path
-       style="fill:#000000;fill-opacity:1;stroke:none"
-       d="M 18.623729,674.76019 210.00029,495.75931 401.37686,674.76019 z"
+       style="fill:#888888;fill-opacity:1;stroke:none"
+       d="M 18.623729,709.28566 210.00029,530.28478 401.37686,709.28566 z"
        id="path2996"
-       inkscape:connector-curvature="0" />
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/dragon/public_html/LightFM/src/doc/SVG icons/34/path2996.png"
+       inkscape:export-xdpi="5"
+       inkscape:export-ydpi="5" />
   </g>
 </svg>
