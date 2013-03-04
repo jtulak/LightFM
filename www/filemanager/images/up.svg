@@ -15,7 +15,10 @@
    inkscape:label="Pozadí"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="file.svg">
+   sodipodi:docname="up.svg"
+   inkscape:export-filename="/home/dragon/public_html/LightFM/src/doc/SVG icons/28/up.png"
+   inkscape:export-xdpi="4.4522967"
+   inkscape:export-ydpi="4.4522967">
   <defs
      id="defs3007" />
   <sodipodi:namedview
@@ -25,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.175"
-     inkscape:cx="-1622.101"
-     inkscape:cy="715.62425"
+     inkscape:zoom="0.75306718"
+     inkscape:cx="-153.88233"
+     inkscape:cy="274.45097"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -39,17 +42,13 @@
      showguides="true"
      inkscape:guide-bbox="true">
     <sodipodi:guide
-       orientation="1,0"
-       position="100,482.14286"
-       id="guide3022" />
-    <sodipodi:guide
-       orientation="1,0"
-       position="467.14286,275"
-       id="guide3024" />
-    <sodipodi:guide
        orientation="0,1"
-       position="535.88593,547.25015"
-       id="guide3026" />
+       position="540.8714,90.795353"
+       id="guide3809" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="210.09433,370.65804"
+       id="guide3811" />
   </sodipodi:namedview>
   <metadata
      id="metadata3010">
@@ -59,7 +58,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -69,15 +68,19 @@
      id="layer1"
      transform="translate(0,-486.36218)">
     <path
-       style="fill:#888888;fill-opacity:1;stroke:none"
-       d="M 283.9375 18.84375 L 100 18.84375 L 100 538.84375 L 467 538.84375 L 467 201.875 L 283.9375 18.84375 z "
-       id="path3805"
-       transform="translate(0,486.36218)" />
-    <path
-       style="fill:none;stroke:#ffffff;stroke-width:20;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 467.14286,201.33493 -183.79507,0 0,-182.58508 0,182.60729 z"
-       id="path3802"
+       style="fill:none;stroke:#888888;stroke-width:170;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 533.81692,423.41644 -323.72259,0 0,-164.82594"
+       id="path3813"
        inkscape:connector-curvature="0"
-       transform="translate(0,486.36218)" />
+       transform="translate(0,486.36218)"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:#888888;fill-opacity:1;stroke:none"
+       d="M 18.623729,709.28566 210.00029,530.28478 401.37686,709.28566 z"
+       id="path2996"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/dragon/public_html/LightFM/src/doc/SVG icons/34/path2996.png"
+       inkscape:export-xdpi="5"
+       inkscape:export-ydpi="5" />
   </g>
 </svg>

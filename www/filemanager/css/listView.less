@@ -25,12 +25,11 @@
 
 .filetype-icon (@name){
 
-    background-image: url('../images/34/@{name}.png');
-    @media only screen and (min-width: @screen-small){
-    background-image: url('../images/28/@{name}.png');
-    }
+    //background-image: url('../images/34/@{name}.png');
+    background-image: url('../images/@{name}.svg');
+    background-size: contain;
     background-repeat: no-repeat;
-    background-position: 25pt 50%;
+    background-position: 23pt 50%;
 }
 
 ol,ul {
@@ -113,14 +112,18 @@ ol,ul {
     line-height: 150%;
     margin-top: 5pt;
     .list-tab {
-	background-image: url('../images/list.png');
+	//background-image: url('../images/list.png');
+	background-image: url('../images/list-icon.svg');
+	background-size: 20px;
 	background-repeat: no-repeat;
 	background-position: 5px 50%;
 	padding-left: 28px;
 	
     }   
     .gallery-tab {
-	background-image: url('../images/gallery.png');
+	//background-image: url('../images/gallery.png');
+	background-image: url('../images/gallery.svg');
+	background-size: 20px;
 	background-repeat: no-repeat;
 	background-position: 2pt 50%;
 	padding-left: 28px;

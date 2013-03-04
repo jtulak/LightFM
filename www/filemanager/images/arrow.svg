@@ -15,7 +15,7 @@
    inkscape:label="Pozadí"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="file.svg">
+   sodipodi:docname="arrow.svg">
   <defs
      id="defs3007" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.175"
-     inkscape:cx="-1622.101"
-     inkscape:cy="715.62425"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="-65.825351"
+     inkscape:cy="284.18269"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -35,22 +35,7 @@
      inkscape:window-height="1062"
      inkscape:window-x="-4"
      inkscape:window-y="-6"
-     inkscape:window-maximized="1"
-     showguides="true"
-     inkscape:guide-bbox="true">
-    <sodipodi:guide
-       orientation="1,0"
-       position="100,482.14286"
-       id="guide3022" />
-    <sodipodi:guide
-       orientation="1,0"
-       position="467.14286,275"
-       id="guide3024" />
-    <sodipodi:guide
-       orientation="0,1"
-       position="535.88593,547.25015"
-       id="guide3026" />
-  </sodipodi:namedview>
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata3010">
     <rdf:RDF>
@@ -69,15 +54,12 @@
      id="layer1"
      transform="translate(0,-486.36218)">
     <path
-       style="fill:#888888;fill-opacity:1;stroke:none"
-       d="M 283.9375 18.84375 L 100 18.84375 L 100 538.84375 L 467 538.84375 L 467 201.875 L 283.9375 18.84375 z "
-       id="path3805"
-       transform="translate(0,486.36218)" />
-    <path
-       style="fill:none;stroke:#ffffff;stroke-width:20;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
-       d="m 467.14286,201.33493 -183.79507,0 0,-182.58508 0,182.60729 z"
-       id="path3802"
        inkscape:connector-curvature="0"
-       transform="translate(0,486.36218)" />
+       id="path6762"
+       d="m 458.31568,519.22028 -122.21446,244.42892 122.21446,244.0476 -37.04626,0 -121.83254,-244.0476 121.83254,-244.42892 37.04626,0 z m -87.84164,0 -121.83254,244.42892 121.83254,244.0476 -36.66434,0 -121.83254,-244.0476 121.83254,-244.42892 36.66434,0 z m -84.02244,0 -122.21446,244.42892 122.21446,244.0476 -36.66434,0 -122.21446,-244.0476 122.21446,-244.42892 36.66434,0 z"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       inkscape:export-filename="/home/dragon/Obrázky/filemanager-mobile.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>
