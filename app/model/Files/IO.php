@@ -170,19 +170,19 @@ abstract class IO extends \Nette\Object {
 
 	// recursively create rest of the path
 	$created->usedChild = self::createPath($fullPath, $restOfPath, $config);
-	$created->usedChild->parent = $created;
+	$created->usedChild->Parent = $created;
 
 	// save a child config for case of emptying of $created
-	$childPass = $created->usedChild->password;
-	$childHidden = $created->usedChild->hidden;
+	$childPass = $created->usedChild->Password;
+	$childHidden = $created->usedChild->Hidden;
 	if ($created->usedChild->dummy) {
 	    // if the subdir is blacklisted, replace by empty node
 	    $created = new \LightFM\Directory(NULL);
 	}
 
 	// copy the needs password from the child
-	$created->password = $childPass;
-	$created->hidden = $childHidden;
+	$created->Password = $childPass;
+	$created->Hidden = $childHidden;
 
 	return $created;
     }
@@ -250,9 +250,9 @@ abstract class IO extends \Nette\Object {
 	    $created = new \LightFM\Directory(NULL);
 	}
 
-	if (empty($created->password)) {
+	if (empty($created->Password)) {
 	    // if subdirs do not needs a password, check this one and set if needed
-	    $created->password = $config->getAccessPassword();
+	    $created->Password = $config->getAccessPassword();
 	}
 	
 	if ($config->isBlacklisted($dir) ||$config->isBlacklisted(DATA_ROOT ."/$dir") ||
@@ -262,7 +262,7 @@ abstract class IO extends \Nette\Object {
 	}
 
 	// assign the config for this directory
-	$created->config = $config;
+	$created->Config = $config;
 
 
 	return $created;

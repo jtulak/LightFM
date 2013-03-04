@@ -45,7 +45,7 @@ class ListPresenter extends BasePresenter {
      */
     protected function removeHidden(&$arr){
 	foreach ($arr as $key => $item){
-	    if($item->hidden) unset($arr[$key]);
+	    if($item->Hidden) unset($arr[$key]);
 	}
 	
     }

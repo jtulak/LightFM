@@ -15,7 +15,12 @@ namespace LightFM;
  * @property-read timestamp $Date Date and time of last modification
  * @property-read int $Size File/dir size
  * @property-read string $Path path to the file/dir
- * @property-read string $FullPath path to the file/dir
+ * @property-read string $FullPath Absolute path to the file/dir
+ * @property string $Password 
+ * @property DirConfig $Config
+ * @property Directory $Parent 
+ * @property-read bool $Dummy 
+ * @property bool $Hidden 
  * 
  */
 abstract class Node extends \Nette\Object implements INode{
@@ -24,13 +29,13 @@ abstract class Node extends \Nette\Object implements INode{
      * When filled by some data, set to FALSE 
      * @var bool 
      */
-    public $dummy = TRUE;
+    protected $dummy = TRUE;
 
     /** 
      * Contain true if the node is hidden (see hidden files in doc)" 
      * @var bool       
      */
-    public $hidden;
+    protected $hidden;
 
     /** 
      * Contain path to the node from the lighFM data root as a string 
@@ -42,7 +47,7 @@ abstract class Node extends \Nette\Object implements INode{
      * LightContain parent directory (object) 
      * @var \LightFM\Directory     
      */
-    public $parent;
+    protected $parent;
 
     /** 
      * Contain file/directory name 
@@ -64,21 +69,62 @@ abstract class Node extends \Nette\Object implements INode{
 
     /**
      * Contains the last password in row, if any node in the path needs password 
-     *  @var bool   
+     *  @var string   
      */
-    public $password;
+    protected $password;
 
     /**
      * settings for this directory 
      *  @var \LightFM\DirConfig  
      */
-    public $config;
+    protected $config;
 
     /** 
      * Absolute path in filesystem 
      * @var string 
      */
     protected $fullPath;
+    
+    // password
+    public function getPassword(){
+	return $this->password;
+    }
+    public function setPassword($pass){
+	$this->password = $pass;
+	return $this;
+    }
+    
+    // config
+    public function getConfig(){
+	return $this->config;
+    }
+    public function setConfig($conf){
+	$this->config = $conf;
+	return $this;
+    }
+    
+    // parent
+    public function getParent(){
+	return $this->parent;
+    }
+    public function setParent($p){
+	$this->parent= $p;
+	return $this;
+    }
+    
+    // parent
+    public function getHidden(){
+	return $this->hidden;
+    }
+    public function setHidden($p){
+	$this->hidden= $p;
+	return $this;
+    }
+    
+    //dummy 
+    public function getDummy() {
+	return $this->dummy;
+    }
     
     public function getName() {
 	return $this->name;

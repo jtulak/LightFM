@@ -53,7 +53,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	    $this->last = $this->getLastNode($this->root);
 	    
 	    // && $this->root->usedChild == NULL
-	    if($this->root->dummy ) throw new Nette\Application\BadRequestException($this->path);
+	    if($this->root->Dummy ) throw new Nette\Application\BadRequestException($this->path);
 	    
 	}catch(Nette\Application\ForbiddenRequestException $e){
 	    $this->forward('Error:default', array('exception' => $e));
@@ -73,8 +73,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     protected function getLastNode(LightFM\Node $node){
 	$last = $node;
 	while($last instanceof \LightFM\Directory){
-	    if($last->usedChild == NULL) break;
-	    $last=  $last->usedChild;
+	    if($last->UsedChild == NULL) break;
+	    $last=  $last->UsedChild;
 	}
 	return $last;
     }
