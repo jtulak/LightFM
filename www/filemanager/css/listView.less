@@ -280,16 +280,21 @@ ol,ul {
 	    //padding-left: 55pt;
 	    .filetype-icon('folder');
 	    &:hover,&:active{
-		background: @list-hover;
-		.filetype-icon('folder');
+		background-color: @list-hover;
+	    }
+	}
+	&.folder-up{
+	    //padding-left: 55pt;
+	    .filetype-icon('up');
+	    &:hover,&:active{
+		background-color: @list-hover;
 	    }
 	}
 	&.file{
 	    //padding-left: 55pt;
 	    .filetype-icon('file');
 	    &:hover,&:active{
-		background: @list-hover;
-		.filetype-icon('file');
+		background-color: @list-hover;
 	    }
 	}
    }
