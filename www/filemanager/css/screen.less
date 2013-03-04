@@ -1,3 +1,4 @@
+@import "./reset.css";
 @import "./params.less";
 
 
@@ -12,8 +13,6 @@ body {
     color: @color-text;
     background: @color-dark;
     font-family: 'Dejavu sans',arial, 'Liberation Sans', Freesans, sans-serif;
-    padding:0pt 0 0 0;
-    margin:0;
     height:100%;
 }
 
@@ -23,19 +22,18 @@ body {
 
 h1 {
     color: #3484D2;
-    margin:0;
+    font-size:200%;
+    font-weight: bold;
 }
 
 .nowrap{
-		white-space: nowrap;
+    white-space: nowrap;
 }
 .error-path{
     font-size: 90%;
     color: lighten(@color-text,20%);
 }
 #outer-box {
-    margin: 0;
-    padding: 0;
     background-color: @color-light;
     width: 100%;
     .box-shadow(0 0 5pt, 30%);
@@ -52,8 +50,12 @@ h1 {
 
     }
     footer {
+	border-top: 1px solid lighten(@color-innerBorder,10%);
 	text-align: center;
+	line-height: 200%;
 	color: darken(@color-light,30%);
+	font-size: 80%;
+	background-color: darken(@color-light,10%);
     }
 
     .options {
@@ -63,13 +65,7 @@ h1 {
 	padding-right:10pt;
 	text-align: right;
 	ul {
-	    margin:0;
-	    padding:0;
 	    list-style:none;
-	    li{
-		margin:0;
-		padding:0;
-	    }
 	}
     }
 }
@@ -78,7 +74,6 @@ h1 {
 header {
     border-bottom: 1px solid @color-outerBorder;
     background-color: white;
-    margin:0;
 }
 
 #inner-box {
@@ -105,13 +100,10 @@ header {
     h3 {
 	font-size: 100%;
 	color: lighten(@color-text,30%);
-	font-weight:normal;
-	padding-bottom:0;
-	margin:0;
+	font-weight: normal;
     }
     ul{
-	margin-top:0;
-	padding:0 15pt 0 0 ;
+	padding:0 15pt 15pt 0 ;
     }
     li {
 	list-style: none;
@@ -121,11 +113,10 @@ header {
 	padding: 3pt 5pt;
 	color: @color-text;
 	text-decoration: none;
-	font-size: 150%;
-	line-height: 150%;
-	@media only screen and (min-width: @screen-small){
-	    font-size: 120%;
-	    line-height: 120%;
+	font-size: 110%;
+	line-height: 100%;
+	@media only screen and (max-width: @screen-small){
+	    line-height: 150%;
 	}
 
 	.rounded-corners() ;

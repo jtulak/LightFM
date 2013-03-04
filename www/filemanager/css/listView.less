@@ -72,9 +72,14 @@ ol,ul {
 
 #navigation {
 	display: inline-block;
-    font-size: 120%;
-    line-height: 150%;
+    line-height: 130%;
+	font-size: 110%;
     margin-bottom:5pt;
+    @media only screen and (max-width: @screen-small){
+	    line-height: 150%;
+    }
+
+
     ol {
 	li {
 	    
@@ -104,7 +109,7 @@ ol,ul {
 #views {
     display: inline-block;
     float: right;
-    font-size: 120%;
+	font-size: 110%;
     line-height: 150%;
     margin-top: 5pt;
     .list-tab {
@@ -169,7 +174,7 @@ ol,ul {
 	position: relative;
 	border-bottom: 1px solid lighten(@color-outerBorder,20%);
 	background: @list-light;
-
+	
 	a {
 	    color: @color-text;
 	    text-decoration: none;
@@ -261,7 +266,8 @@ ol,ul {
 
 	&.header {
 	    a {
-		font-weight: bold;	
+		//font-weight: bold;	
+		text-decoration: underline;
 		color: @color-text;
 		&:hover{
 		    color: lighten(@color-text,20%);
@@ -283,12 +289,18 @@ ol,ul {
 	    &:hover,&:active{
 		background-color: @list-hover;
 	    }
+	    a {
+		color: lighten(@color-text,30%);
+	    }
 	}
 	&.folder-up{
 	    //padding-left: 55pt;
 	    .filetype-icon('up');
 	    &:hover,&:active{
 		background-color: @list-hover;
+	    }
+	    a {
+		color: lighten(@color-text,30%);
 	    }
 	}
 	&.file{
