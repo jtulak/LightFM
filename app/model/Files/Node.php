@@ -86,7 +86,7 @@ abstract class Node extends \Nette\Object implements INode{
 	return $this->size;
     }
     public function getPath() {
-	return $this->path;
+	return preg_replace('/\/\/?/','/',$this->path);
     }
     
 
