@@ -60,7 +60,10 @@ class Directory extends Node implements IDirectory{
 	    foreach($this->listDirs as $dir){
 		//array_push($this->listDirsObj, new Directory($this->path.'/'.$dir));
 		//createPath($fullPath, $restOfPath, \LightFM\DirConfig $parentsConfig = NULL)
-		array_push($this->listDirsObj, IO::createPath($this->path.'/'.$dir,$dir,  $this->config));
+		$subdir = IO::createPath($this->path.'/'.$dir,$dir,  $this->config);
+		if(!$subdir->dummy){
+		    array_push($this->listDirsObj, $subdir);
+		}
 	    }
 	}
 	return $this->listDirsObj;
@@ -71,9 +74,12 @@ class Directory extends Node implements IDirectory{
     public function getFiles() {
 	if(count($this->listFilesObj) == 0 && count($this->listFiles) != 0){
 	    // if this function wasn't called yet
-	    foreach($this->listFiles as $file){
+	    foreach($this->listFiles as $filepath){
 		//array_push($this->listFilesObj, IO::createFileType($this->path.'/'.$file,$this->config));
-		array_push($this->listFilesObj, IO::createPath($this->path.'/'.$file,$file,  $this->config));
+		$file = IO::createPath($this->path.'/'.$filepath,$filepath,  $this->config);
+		if(!$file->dummy){
+		    array_push($this->listFilesObj, $file);
+		}
 	    }
 	}
 	return $this->listFilesObj;
