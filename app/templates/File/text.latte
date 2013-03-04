@@ -1,0 +1,25 @@
+{** 
+ * @param string $filename
+ * @param LightFM\File $file
+ *}
+
+{block content}
+<div id="text-view">
+    <h2>{$filename}</h2>
+    <div class="content">
+	{$file->getContent()}
+	
+    </div>
+</div>
+{/block}
+
+
+{block scripts}
+{include #parent}
+{/block}
+
+
+{block head}
+<style>
+</style>
+{/block}

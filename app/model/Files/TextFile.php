@@ -17,13 +17,22 @@ namespace LightFM;
  */
  class TextFile extends File implements IFile{
      
+     // overwriting parent's value
     private static $priority = 0;
     
     
+    public function getTemplateName() {
+	return "text";
+    }
     
     public static function knownFileType($file) {
 	return \LightFM\Filetypes::isText($file);
     }
 
+    
+    
+    public function getContent(){
+	return $this->fullPath;
+    }
     
 }

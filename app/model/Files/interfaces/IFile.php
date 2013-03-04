@@ -21,6 +21,14 @@ namespace LightFM;
      public function getSuffix();
      
      /**
+      * Will return name of the template for using. If empty string is returned,
+      * then the system will redirect to the file itself for downloading.
+      * @return string
+      */
+     public function getTemplateName();
+     
+     
+     /**
       * Return priority of implementing class - used for correct order
       * if more classes know same filetype
       */

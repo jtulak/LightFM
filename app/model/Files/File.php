@@ -33,6 +33,9 @@ class File extends Node implements IFile {
 	return $this->suffix;
     }
     
+    public function getTemplateName() {
+	return "";
+    }
 
 
     public function delete() {

@@ -11,7 +11,11 @@
 namespace LightFM;
 
 /**
- * 
+ * @property-read string $Name File/dir name
+ * @property-read timestamp $Date Date and time of last modification
+ * @property-read int $Size File/dir size
+ * @property-read string $Path path to the file/dir
+ * @property-read string $FullPath path to the file/dir
  * 
  */
 abstract class Node extends \Nette\Object implements INode{
@@ -87,6 +91,9 @@ abstract class Node extends \Nette\Object implements INode{
     }
     public function getPath() {
 	return preg_replace('/\/\/?/','/',$this->path);
+    }
+    public function getFullPath() {
+	return preg_replace('/\/\/?/','/',$this->fullPath);
     }
     
 
