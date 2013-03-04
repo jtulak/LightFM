@@ -1,10 +1,12 @@
 {var $robots = noindex}
 {block #content}
 
-<h1 n:block=title>Page Not Found</h1>
+<h2 n:block=title>Page Not Found</h2>
+{if !empty($message)}
+<p>You have requested page with file/directory: <span class="error-path">{$message}</span></p>
+{/if}
 
 <p>The page you requested could not be found. It is possible that the address is
-incorrect, or that the page no longer exists. Please use a search engine to find
-what you are looking for.</p>
+incorrect, or that the page no longer exists.</p>
 
 <p><small>error 404</small></p>

@@ -31,16 +31,29 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * parse path, find the root and so..
      */
     public function actionDefault(){
-	// if path is empty, it means it is a root
-	if(strlen($this->path) == 0) $this->path = '/';
-	// test for forbidden "../" and similar
-	$this->path = $this->verifyPath($this->path);
+	// if we are in error presenter, do nothing
+	if($this instanceof ErrorPresenter) return;
 	
-	// get path
-	$this->root = LightFM\IO::findPath($this->path);
-	// get the item
-	$this->last = $this->getLastNode($this->root);
+	try {
+	    // if path is empty, it means it is a root
+	    if(strlen($this->path) == 0) $this->path = '/';
+	    // test for forbidden "../" and similar
+	    $this->path = $this->verifyPath($this->path);
 
+	    // get path
+	    $this->root = LightFM\IO::findPath($this->path);
+	    // get the item
+	    $this->last = $this->getLastNode($this->root);
+	    
+	    if($this->root->dummy) throw new Nette\Application\BadRequestException($this->path);
+	    
+	}catch(Nette\Application\ForbiddenRequestException $e){
+	    $this->forward('Error:default', array('exception' => $e));
+	}catch(Nette\Application\BadRequestException $e){
+	    $this->forward('Error:default', array('exception' => $e));
+	    //throw $e;
+	}
+	
     }
     
     /**

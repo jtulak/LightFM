@@ -24,6 +24,7 @@ class ListPresenter extends BasePresenter {
 	//dump($last->Subdirs);
 	$this->template->listDirs = $this->last->Subdirs;
 	$this->template->listFiles = $this->last->Files;
+	$this->template->showSidebar = true;
 	//dump($last->Files);
 
 	//$find = \LightFM\IO::findPath("/data1/gallery/gallery");
