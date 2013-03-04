@@ -15,11 +15,11 @@ common:
 			modes:
 				guu
 			blacklist:
-				- "/filemanager"
-				- ".filemanager.ini"
-				- ".htaccess"
-				- ".htpasswd"
-				- "blacklisted"
+			#	- "/filemanager"
+			#	- ".filemanager.ini"
+			#	- ".htaccess"
+			#	- ".htpasswd"
+			#	- "blacklisted"
 
 	php:
 		date.timezone: Europe/Prague
