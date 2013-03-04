@@ -126,15 +126,20 @@ header {
 	}
     }
 }
+
+//the column for showing/hiding the sidebar
 #sidebar-controll {
     width: @sidebar-control-width;
-    
+    cursor: pointer;
     position: absolute;
     right: 0;
     background-image: url(../images/resize-horiz.png);
     background-position: 100% 50%;
     background-repeat: no-repeat;
     .opacity (0.6);
+    &:hover{
+	background-color: lighten(@color-light,2%);
+    }
 }
 .sidebar-content-width {
     width: @sidebar-content-width;

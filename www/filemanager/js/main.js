@@ -60,8 +60,10 @@ $(function(){
       }, function(e) {
 	$(this).hoverFlow(e.type, { opacity: 0.6 }, 'fast');
       });
+      
+      
     /*
-     * scrolling sidebar
+     * enabling scrolling sidebar
      */
     $(".for-fixed").addClass("fixed");
     sidebarFixing();
@@ -73,21 +75,35 @@ $(function(){
     
 });
 
+
+/**
+ * scrolling sidebar
+ * 
+ */
 function sidebarFixing(){
     var fixed = $(".fixed");
 	var sidebar = $("#sidebar");
     var offset = sidebar.offset().top;
+    /** menu */
     if($(window).height() > fixed.height()+offset){
-	// protection for small screens where some buttons could become inaccesible
+	// if there is enough of space, then we can have the bar fixed
 	fixed.css({"position":"fixed","top":Math.max(offset-$(this).scrollTop(),0)});
 
     }else{
+	// protection for small screens where some buttons could become inaccesible
+	// so there keep the scrollbar static
 	fixed.css({"position":"relative", "top":0});
     }
-    var middle = Math.max(
+    
+    
+    var middle = fixed.offset().top+offset;
+    console.log(middle);
+    /** control (the arrow on the side) */
+    /*var middle = Math.max(
 	    $(this).scrollTop()+$(window).height()/2-offset,
 	    80
 	);
+    */
     $("#sidebar-controll").height(sidebar.height()).css({'background-position':'100% '+middle+'px'})
     .find(".gradient").height(sidebar.height());
     
@@ -111,10 +127,10 @@ function selectInvert(){
 
 
 function forEachCallback(arr){
-    if(typeof arr != 'object') return;
+    if(typeof arr !== 'object') return;
     var l=arr.length;
     for(var i=0; i < l; i++){
-	if(typeof arr[i] == 'function'){
+	if(typeof arr[i] === 'function'){
 	    arr[i]();
 	}
     }
