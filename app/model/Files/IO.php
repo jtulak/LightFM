@@ -251,11 +251,11 @@ abstract class IO extends \Nette\Object {
 	}
 
 	if (empty($created->password)) {
-	    // if subdirs do not needs a password, check this one
+	    // if subdirs do not needs a password, check this one and set if needed
 	    $created->password = $config->getAccessPassword();
 	}
-
-	if ($config->isBlacklisted($dir) ||
+	
+	if ($config->isBlacklisted($dir) ||$config->isBlacklisted(DATA_ROOT ."/$dir") ||
 		$config->isBlacklisted(DATA_ROOT . $fullDir)) {
 	    // if the file/dir is blacklisted, replace by empty node
 	    $created = new \LightFM\Directory(NULL);
