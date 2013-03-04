@@ -6,33 +6,24 @@
  */
 class ListPresenter extends BasePresenter {
 
-    /**
-     * @persistent
-     */
-    public $path = "/";
 
-    public function renderDefault() {
-	if(strlen($this->path) == 0) $this->path = '/';
+    public function actionDefault(){
+	parent::actionDefault();
 	
-	$find = LightFM\IO::findPath($this->path);
-	$last = $this->getLastNode($find);
-
 	// If this is not a directory, then go to another presenter
-	if (!($last instanceof LightFM\Directory)) {
+	if (!($this->last instanceof LightFM\Directory)) {
 	    $this->forward('File:default', array('path' => $this->path));
 	}
+    }
+    
+    public function renderDefault() {
 
-	$this->template->path = $this->getPath($find);
-	if($this->path == '/'){
-	    // test for the file/dir name - if at root, show simply slash
-	    $this->template->filename = '/';
-	}else {
-	    // else show the name
-	    $this->template->filename = $last->Name;
-	}
+	// send to template
+	$this->template->path = $this->getPath($this->root);
+	
 	//dump($last->Subdirs);
-	$this->template->listDirs = $last->Subdirs;
-	$this->template->listFiles = $last->Files;
+	$this->template->listDirs = $this->last->Subdirs;
+	$this->template->listFiles = $this->last->Files;
 	//dump($last->Files);
 
 	//$find = \LightFM\IO::findPath("/data1/gallery/gallery");
