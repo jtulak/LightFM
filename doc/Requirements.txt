@@ -131,6 +131,7 @@ Functional requirements
 54. The owner should be able to change his password on the page
 55. The system should be able to log file manipulation (IP, time, file, owner)
 56. The system should not allow gallery mode if it can’t create thumbnails
+57. The system should not allow upload, move or rename file to a name which is in blacklist
 
 
 Nonfunctional requirements
@@ -149,4 +150,5 @@ Nonfunctional requirements
 
 Notes
 =====
-Look at Jquery mobile for responsive design
+- Look at Jquery mobile for responsive design
+- Blacklisted file/dir can be still accessed directly by http://server.com/blacklisted/file
