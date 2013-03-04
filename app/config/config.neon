@@ -16,6 +16,7 @@ common:
 				guu
 			blacklist:
 				- "/filemanager"
+				- ".filemanager.ini"
 				- ".htaccess"
 				- ".htpasswd"
 				- "blacklisted"
