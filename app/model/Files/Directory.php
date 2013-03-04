@@ -58,7 +58,9 @@ class Directory extends Node implements IDirectory{
 	if(count($this->listDirsObj) == 0 && count($this->listDirs) != 0){
 	    // if this function wasn't called yet
 	    foreach($this->listDirs as $dir){
-		array_push($this->listDirsObj, new Directory($this->path.'/'.$dir));
+		//array_push($this->listDirsObj, new Directory($this->path.'/'.$dir));
+		//createPath($fullPath, $restOfPath, \LightFM\DirConfig $parentsConfig = NULL)
+		array_push($this->listDirsObj, IO::createPath($this->path.'/'.$dir,$dir,  $this->config));
 	    }
 	}
 	return $this->listDirsObj;
@@ -70,7 +72,8 @@ class Directory extends Node implements IDirectory{
 	if(count($this->listFilesObj) == 0 && count($this->listFiles) != 0){
 	    // if this function wasn't called yet
 	    foreach($this->listFiles as $file){
-		array_push($this->listFilesObj, IO::createFileType($this->path.'/'.$file));
+		//array_push($this->listFilesObj, IO::createFileType($this->path.'/'.$file,$this->config));
+		array_push($this->listFilesObj, IO::createPath($this->path.'/'.$file,$file,  $this->config));
 	    }
 	}
 	return $this->listFilesObj;

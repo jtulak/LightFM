@@ -130,6 +130,8 @@ abstract class IO extends \Nette\Object {
 	return new \LightFM\Directory($fullPath);
     }
 
+    
+    
     /**
      * Get correct class which represents the given path - already create an object.
      * Usage: 
@@ -229,18 +231,19 @@ abstract class IO extends \Nette\Object {
 
 	// create path to this dir - remove the rest from the full path to get 
 	// path to this dir
+	
 	$restLen = strlen($restOfPath);
 	if ($restLen) {
-	    $fullDir = substr($fullPath, 0, -($restLen + 1));
+	    $fullDir = substr($fullPath, 0, -($restLen ));
 	} else {
 	    $fullDir = $fullPath;
 	}
 	$config = new \LightFM\DirConfig($fullDir);
+	
 	try {
 	    // load config
 	    // and inherite
 	    $config->inherite($parentsConfig);
-
 	    $created = self::createPath_tryCreate($fullPath, $fullDir, $restOfPath, $config);
 	} catch (\Nette\FileNotFoundException $e) {
 	    // file not found - create empty node

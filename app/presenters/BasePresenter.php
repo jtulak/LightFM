@@ -24,6 +24,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      * @var LightFM\Node
      */
     protected $last;
+    
+    /**
+     * If show hidden files/foldes
+     * TODO - switching
+     * @var bool
+     */
+    protected $showHidden = false;
 
 
 
@@ -45,11 +52,13 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	    // get the item
 	    $this->last = $this->getLastNode($this->root);
 	    
-	    if($this->root->dummy) throw new Nette\Application\BadRequestException($this->path);
+	    // && $this->root->usedChild == NULL
+	    if($this->root->dummy ) throw new Nette\Application\BadRequestException($this->path);
 	    
 	}catch(Nette\Application\ForbiddenRequestException $e){
 	    $this->forward('Error:default', array('exception' => $e));
 	}catch(Nette\Application\BadRequestException $e){
+	    dump($this->root);
 	    $this->forward('Error:default', array('exception' => $e));
 	    //throw $e;
 	}
@@ -78,7 +87,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     protected function verifyPath($path){
 	if(preg_match('/(^\.\.\/)|(\/\.\.$)|(\/\.\.\/)/', $path) != FALSE) throw new Nette\Application\ForbiddenRequestException;
-	$path = preg_replace('/\/\/+/', '/', $path);
+	$path = preg_replace('/\/\/+/', '/', $path); // remove double slashes
+	$path = preg_replace('/(?!^)\/$/', '', $path); // remove trailing slash
 	return $path;
     }
 

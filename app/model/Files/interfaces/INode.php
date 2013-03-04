@@ -22,6 +22,7 @@ namespace LightFM;
      public function getDate();
      public function getPath();
      
+     
     
     public function move(Directory $newParent);
 

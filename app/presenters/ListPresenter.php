@@ -21,15 +21,35 @@ class ListPresenter extends BasePresenter {
 	// send to template
 	$this->template->path = $this->getPath($this->root);
 	
-	//dump($last->Subdirs);
-	$this->template->listDirs = $this->last->Subdirs;
-	$this->template->listFiles = $this->last->Files;
+	// push subdirs and files
+	$subdirs = $this->last->Subdirs;
+	if(!$this->showHidden) $this->removeHidden ($subdirs);
+	$this->template->listDirs = $subdirs;
+	//dump($subdirs);
+	
+	$files = $this->last->Files;
+	if(!$this->showHidden) $this->removeHidden ($files);
+	$this->template->listFiles = $files;
+	
+	// enable sidebar
 	$this->template->showSidebar = true;
 	//dump($last->Files);
 
 	//$find = \LightFM\IO::findPath("/data1/gallery/gallery");
 	//dump();
     }
+
+    /**
+     * Will remove hidden items from the array
+     * @param type $arr
+     */
+    protected function removeHidden(&$arr){
+	foreach ($arr as $key => $item){
+	    if($item->hidden) unset($arr[$key]);
+	}
+	
+    }
+
 
 
     /**
@@ -38,7 +58,7 @@ class ListPresenter extends BasePresenter {
      * @param LightFM\Node $node
      * @return array
      */
-    private function getPath(LightFM\Node $node) {
+    protected function getPath(LightFM\Node $node) {
 	$path = array();
 	$last = $node;
 	while ($last instanceof \LightFM\Directory) {
