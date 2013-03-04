@@ -97,7 +97,7 @@ function sidebarFixing(){
     
     
     var middle = fixed.offset().top+offset;
-    console.log(middle);
+    //console.log(middle);
     /** control (the arrow on the side) */
     /*var middle = Math.max(
 	    $(this).scrollTop()+$(window).height()/2-offset,
