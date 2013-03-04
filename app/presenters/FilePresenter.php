@@ -36,7 +36,6 @@ class FilePresenter extends BasePresenter {
 
     public function renderDefault() {
 
-	dump( $this->last->Name);
 	$this->template->filename = $this->last->Name;
 	$this->template->file = $this->last;
 	

@@ -29,10 +29,15 @@ namespace LightFM;
 	return \LightFM\Filetypes::isText($file);
     }
 
+    public function __construct($path) {
+	parent::__construct($path);
+	
+	
+    }
     
     
     public function getContent(){
-	return $this->fullPath;
+	return file($this->fullPath);
     }
     
 }

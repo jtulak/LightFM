@@ -56,14 +56,14 @@ class File extends Node implements IFile {
     public function __construct($path) {
 	parent::__construct($path);
 	$fileparts = pathinfo($path);
-	// split to suffix and name
+// split to suffix and name
 	$this->suffix = !empty($fileparts['extension'])?$fileparts['extension']:'';
 	$this->name = $fileparts['filename'];
 	if(strlen($this->name) == 0 ){
 	    // files like .htaccess
 	    $this->name = '.'.$this->suffix;
 	    $this->suffix = "";
-	}
+	}	
 	return $this;
     }
 

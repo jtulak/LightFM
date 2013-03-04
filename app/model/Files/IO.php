@@ -226,7 +226,7 @@ abstract class IO extends \Nette\Object {
     public static function createPath($fullPath, $restOfPath, \LightFM\DirConfig $parentsConfig = NULL) {
 	// Remove slashes from begining and end (if any)
 	// and get top dir from the path
-
+	
 	list($dir, $restOfPath) = self::createPath_explodePath($restOfPath);
 
 	// create path to this dir - remove the rest from the full path to get 
@@ -260,6 +260,7 @@ abstract class IO extends \Nette\Object {
 	    // if the file/dir is blacklisted, replace by empty node
 	    $created = new \LightFM\Directory(NULL);
 	}
+	
 
 	// assign the config for this directory
 	$created->Config = $config;

@@ -159,11 +159,14 @@ abstract class Node extends \Nette\Object implements INode{
 	}
 
 	$fullPath = str_replace("//",'/',DATA_ROOT . '/' . $path);
+	
 	// create full path
-	if(\LightFM\IO::is_dir($fullPath)){
+	/*if(\LightFM\IO::is_dir($fullPath)){
 		$this->fullPath = $fullPath;
 	}else if(\LightFM\IO::is_file($fullPath)){
-		$this->fullPath = dirname($fullPath);
+		$this->fullPath = dirname($fullPath);*/
+	if(\LightFM\IO::is_dir($fullPath)||\LightFM\IO::is_file($fullPath)){
+		$this->fullPath = $fullPath;
 	}else{
 	    throw new \Nette\FileNotFoundException;
 	}

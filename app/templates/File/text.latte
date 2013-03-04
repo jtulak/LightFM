@@ -7,7 +7,10 @@
 <div id="text-view">
     <h2>{$filename}</h2>
     <div class="content">
-	{$file->getContent()}
+	{var $content = $file->getContent()}
+	{foreach $content as $line=>$text}
+	    {$text}<br>
+	{/foreach}
 	
     </div>
 </div>
