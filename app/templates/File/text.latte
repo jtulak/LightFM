@@ -7,8 +7,8 @@
 <div id="text-view">
     <h2>{$filename}</h2>
     <div class="buttons">
-	<a class="button" n:href="List:default, path=>$file->Parent->Path">Back to the directory</a>
-	<a class="butotn" n:href="File:download, path=>$file->Path">Raw</a></div>
+	<a  class="button"  n:href="List:default, path=>$file->Parent->Path">Back to the directory</a>
+	<a  class="button"  n:href="File:download, path=>$file->Path">Raw</a></div>
     <pre class="content">{!$file->getContent()}</pre>
     
     {*<pre class="content">{foreach $content as $line=>$text}<code><i></i><span>{$text}</span></code>{/foreach}</pre>*}

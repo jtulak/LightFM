@@ -25,6 +25,25 @@ h1 {
     font-weight: bold;
 }
 
+
+.button {
+	display: inline-block;
+	padding: 3pt 5pt;
+	color: @color-text;
+	text-decoration: none;
+	font-size: 110%;
+	line-height: 100%;
+	@media only screen and (max-width: @screen-small){
+	    line-height: 150%;
+	}
+
+	.rounded-corners() ;
+	&:hover{
+	    background-color: #BA3E23;
+	    color: @color-light;
+	}
+}
+
 .nowrap{
     white-space: nowrap;
 }
@@ -109,7 +128,7 @@ header {
 	list-style: none;
     }
     a {
-	display: block;
+	/*display: block;
 	padding: 3pt 5pt;
 	color: @color-text;
 	text-decoration: none;
@@ -123,7 +142,7 @@ header {
 	&:hover{
 	    background-color: #BA3E23;
 	    color: @color-light;
-	}
+	}*/
     }
 }
 
