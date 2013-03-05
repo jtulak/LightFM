@@ -129,10 +129,16 @@
 
 {block scripts}
 {include #parent}
+<script src="{$basePath}/filemanager/js/listView.js"></script>
 {/block}
 
 
 {block head}
+{if $debug_less}
+<link rel="stylesheet/less" type="text/css" href="{$basePath}/filemanager/css/listView.less" />
+{else}
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/filemanager/css/listView.css">
+{/if}
 <style>
 </style>
 {/block}

@@ -21,6 +21,11 @@
 
 
 {block head}
+{if $debug_less}
+<link rel="stylesheet/less" type="text/css" href="{$basePath}/filemanager/css/textFile.less" />
+{else}
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/filemanager/css/textFile.css">
+{/if}
 <style>
 </style>
 {/block}
