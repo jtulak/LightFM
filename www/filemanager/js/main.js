@@ -81,8 +81,12 @@ $(function(){
  * 
  */
 function sidebarFixing(){
+    var sidebar = $("#sidebar");
+    // break if sidebar do not exists
+    if(typeof sidebar.offset() === 'undefined') return;
+    
     var fixed = $(".fixed");
-	var sidebar = $("#sidebar");
+	
     var offset = sidebar.offset().top;
     /** menu */
     if($(window).height() > fixed.height()+offset){
