@@ -55,7 +55,7 @@
 .ini-array-border {color: #003663;font-weight: bold;}
 .ini-array {color: #003663;}
 .ini-value {color: #993300;}
-.ini-comment {color: gray}
+.ini-comment {color: #c0c0c0; }
 
 /* Java */
 .java-keywords1 {color: #0000ff; font-weight: bold;}
