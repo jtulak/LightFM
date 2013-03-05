@@ -28,19 +28,27 @@ h1 {
 
 .button {
 	display: inline-block;
-	padding: 3pt 5pt;
-	color: @color-text;
+	padding: 0pt 10pt;
+	margin:0;
+	margin-left: -1px;
+	border: 1px solid lighten(@nav-border,10%);
+	//border-width: 1px 1px 1px 0; // we want to have thiner borders between links
+	background-color: @nav-bg;
+	color: @nav-text;
 	text-decoration: none;
-	font-size: 110%;
-	line-height: 100%;
-	@media only screen and (max-width: @screen-small){
-	    line-height: 150%;
-	}
+	line-height: 150%;
 
-	.rounded-corners() ;
+	.rounded-corners();
 	&:hover{
-	    background-color: #BA3E23;
-	    color: @color-light;
+	    background-color: @nav-bg-hover;
+	    color: @nav-text-hover;
+	    border-color:  @nav-border-hover
+	}
+	&.inactive {
+	    .opacity(@nav-inactive-opacity);
+	    background-color: @nav-bg;
+	    color: @nav-text;
+	    cursor:default;
 	}
 }
 
@@ -128,7 +136,7 @@ header {
 	list-style: none;
     }
     a {
-	/*display: block;
+	display: block;
 	padding: 3pt 5pt;
 	color: @color-text;
 	text-decoration: none;
@@ -142,7 +150,7 @@ header {
 	&:hover{
 	    background-color: #BA3E23;
 	    color: @color-light;
-	}*/
+	}
     }
 }
 
