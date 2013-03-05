@@ -1,68 +1,192 @@
+html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
 body {
-	font-size: 10pt;
-	line-height: 1.6;
-	color: #333;
-	background: #cdcdcd;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: #333333;
+  background: #aaaaaa;
+  font-family: 'Dejavu sans', arial, 'Liberation Sans', Freesans, sans-serif;
+  height: 100%;
 }
-
+#cleaner {
+  clear: both;
+}
 h1 {
-	color: #3484D2;
+  color: #3484D2;
+  font-size: 200%;
+  font-weight: bold;
 }
-
+.nowrap {
+  white-space: nowrap;
+}
+.error-path {
+  font-size: 90%;
+  color: #666666;
+}
 #outer-box {
-	margin: 0px auto;
-	background-color: #f7f7f7;
-	width:700pt;
-	border: 1px solid  #aaa;
+  background-color: #f7f7f7;
+  width: 100%;
+  box-shadow: 0 0 5pt rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 0 5pt rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 0 5pt rgba(0, 0, 0, 0.3);
+}
+@media only screen and (min-width: 705pt) {
+  #outer-box {
+    margin: 0 auto;
+    border: 0px solid #aaaaaa;
+    border-width: 0 1px 1px 1px;
+    width: 700pt;
+  }
+}
+#outer-box header {
+  position: relative;
+}
+#outer-box footer {
+  border-top: 1px solid #c3c3c3;
+  text-align: center;
+  line-height: 200%;
+  color: #ababab;
+  font-size: 80%;
+  background-color: #dedede;
+}
+#outer-box .options {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding-right: 10pt;
+  text-align: right;
+}
+#outer-box .options ul {
+  list-style: none;
+}
+header {
+  border-bottom: 1px solid #aaaaaa;
+  background-color: white;
 }
 #inner-box {
-    padding: 8pt;
+  padding: 8pt;
+  display: table;
+  table-layout: fixed;
+  max-width: 100%;
 }
-#sidebar{
-    float:left;
-    width: 80pt;
+#outer-content {
+  display: table-cell;
+  width: 100%;
 }
-#outer-content{
-    margin-left: 80pt;
+#sidebar {
+  display: table-cell;
+  width: 115pt;
+  overflow: hidden;
 }
-
-#content-inner {
-    background-color: #e1e1e1;
-	border: 1px solid  #aaa;
+#sidebar .border {
+  padding-right: 20px;
+  position: relative;
 }
-
+#sidebar h3 {
+  font-size: 100%;
+  color: #808080;
+  font-weight: normal;
+}
+#sidebar ul {
+  padding: 0 15pt 15pt 0 ;
+}
+#sidebar li {
+  list-style: none;
+}
+#sidebar a {
+  display: block;
+  padding: 3pt 5pt;
+  color: #333333;
+  text-decoration: none;
+  font-size: 110%;
+  line-height: 100%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+@media only screen and (max-width: 500pt) {
+  #sidebar a {
+    line-height: 150%;
+  }
+}
+#sidebar a:hover {
+  background-color: #BA3E23;
+  color: #f7f7f7;
+}
+#sidebar-controll {
+  width: 16pt;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  background-image: url(../images/resize-horiz.svg);
+  background-size: 20px 19px;
+  background-position: 100% 50%;
+  background-repeat: no-repeat;
+  -moz-opacity: 0.6;
+  opacity: 0.6;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+}
+#sidebar-controll:hover {
+  background-color: #fcfcfc;
+}
+.sidebar-content-width {
+  width: 99pt;
+}
+#sidebar-content {
+  position: relative;
+  overflow: hidden;
+  width: 0;
+}
+#sidebar-content .for-fixed {
+  width: 0;
+  display: none;
+}
+@media only screen and (min-width: 615pt) {
+  #sidebar-content {
+    width: 99pt;
+  }
+  #sidebar-content .for-fixed {
+    width: 99pt;
+    display: block;
+  }
+}
+#sidebar-content .fixed {
+  position: fixed;
+  top: 0px;
+}
 #ajax-spinner {
-	margin: 15px 0 0 15px;
-	padding: 13px;
-	background: white url('../images/spinner.gif') no-repeat 50% 50%;
-	font-size: 0;
-	z-index: 123456;
-	display: none;
+  margin: 15px 0 0 15px;
+  padding: 13px;
+  background: #ffffff url('../images/spinner.gif') no-repeat 50% 50%;
+  font-size: 0;
+  z-index: 123456;
+  display: none;
 }
-
 div.flash {
-	color: black;
-	background: #FFF9D7;
-	border: 1px solid #E2C822;
-	padding: 1em;
-	margin: 1em 0;
+  color: black;
+  background: #FFF9D7;
+  border: 1px solid #E2C822;
+  padding: 1em;
+  margin: 1em 0;
 }
-
 a[href^="error:"] {
-	background: red;
-	color: white;
+  background: red;
+  color: white;
 }
-
-form tr, form td {
-	vertical-align: top;
-	font-weight: normal;
+form tr,
+form td {
+  vertical-align: top;
+  font-weight: normal;
 }
-
 form .required label {
-	font-weight: bold;
+  font-weight: bold;
 }
-
 form .error {
-	color: #D00;
-	font-weight: bold;
+  color: #D00;
+  font-weight: bold;
 }
