@@ -19,23 +19,15 @@ class Filetypes extends \Nette\Object {
 
     
     private static $imageFiles = array(
-	'image'=>array(
-	    'image/x-icon'
-	)
+	    'image/'
     );
     /**
      * Array of categories (for highlight lexer) of mime-types
      * @var array
      */
     private static $textFiles = array(
-	'html' =>array(
-	    'text/x-php',
-	    'text/html',
+	    'text/',
 	    'application/xml',
-	),
-	'text'=>array(
-	    'text/plain'
-	)
     ); 
     
 
@@ -46,14 +38,14 @@ class Filetypes extends \Nette\Object {
      */
     public static function isImage($path) {
 	$mime = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
-	return self::searchArray($mime, self::$textFiles);
+	return self::searchArray($mime, self::$imageFiles);
     }
 
     /**
      *  
      *  return category of text file or false, if it is not an image
      * @param string $path
-     * @return mixed
+     * @return boolean
      */
     public static function isText($path) {
 	$mime = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
@@ -70,8 +62,9 @@ class Filetypes extends \Nette\Object {
      * @return mixed
      */
     private static function searchArray($mime,$array){
-	foreach($array as $key=>$list){
-	    if(in_array($mime, $list)) return $key;
+	foreach($array as $item){
+	    if($item == $mime) return TRUE;
+	    if($item == substr($mime,0,strlen($item))) return TRUE;
 	}
 	return FALSE;
     }
