@@ -1,0 +1,37 @@
+@import "./highlighter.css";
+#text-view {
+  width: 100%;
+}
+#text-view h2 {
+  font-size: 150%;
+}
+#text-view .buttons {
+  margin-bottom: 5pt;
+}
+#text-view .content {
+  background-color: #eeeeee;
+  border: 1px solid #aaaaaa;
+  padding: 0;
+  margin: 0;
+  counter-reset: listing;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow: hidden;
+  min-height: 300pt;
+  display: block;
+}
+#text-view .content code {
+  display: block;
+  background-color: #ffffff;
+  margin-left: 33pt;
+}
+#text-view .content i:before {
+  content: attr(data-line) ". ";
+  color: #777;
+  padding-left: 3pt;
+}
+#text-view .content i {
+  float: left;
+  clear: both;
+  min-width: 33pt;
+}

@@ -22,8 +22,8 @@
 }
 #list-view ol li a:hover,
 #list-view ul li a:hover {
-  background-color: #ffffff;
-  color: #333333;
+  background-color: #eeeeee;
+  color: #000000;
 }
 #list-view ol li a.inactive,
 #list-view ul li a.inactive {
@@ -49,21 +49,28 @@
     line-height: 150%;
   }
 }
+#list-view #navigation ol li a {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+}
 #list-view #navigation ol li:first-child a {
-  -webkit-border-top-left-radius: 3px;
-  -webkit-border-bottom-left-radius: 3px;
-  -moz-border-radius-topleft: 3px;
-  -moz-border-radius-bottomleft: 3px;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
+  -webkit-border-top-left-radius: 3pt;
+  -moz-border-radius-topleft: 3pt;
+  border-top-left-radius: 3pt;
+  -webkit-border-bottom-left-radius: 3pt;
+  -moz-border-radius-bottomleft: 3pt;
+  border-bottom-left-radius: 3pt;
 }
 #list-view #navigation ol li:last-child a {
-  -webkit-border-top-right-radius: 3px;
-  -webkit-border-bottom-right-radius: 3px;
-  -moz-border-radius-topright: 3px;
-  -moz-border-radius-bottomright: 3px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
+  -webkit-border-top-right-radius: 3pt;
+  -moz-border-radius-topright: 3pt;
+  border-top-right-radius: 3pt;
+  -webkit-border-bottom-right-radius: 3pt;
+  -moz-border-radius-bottomright: 3pt;
+  border-bottom-right-radius: 3pt;
 }
 #list-view #views {
   display: inline-block;
@@ -101,14 +108,14 @@
 }
 #list-view #views ul li:first-child a {
   border-left-width: 1px;
-  -webkit-border-top-left-radius: 3px;
-  -moz-border-radius-topleft: 3px;
-  border-top-left-radius: 3px;
+  -webkit-border-top-left-radius: 3pt;
+  -moz-border-radius-topleft: 3pt;
+  border-top-left-radius: 3pt;
 }
 #list-view #views ul li:last-child a {
-  -webkit-border-top-right-radius: 3px;
-  -moz-border-radius-topright: 3px;
-  border-top-right-radius: 3px;
+  -webkit-border-top-right-radius: 3pt;
+  -moz-border-radius-topright: 3pt;
+  border-top-right-radius: 3pt;
 }
 #list-view #data {
   margin: -1px auto 0 auto;

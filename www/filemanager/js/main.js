@@ -82,8 +82,8 @@ $(function(){
  */
 function sidebarFixing(){
     var sidebar = $("#sidebar");
-    // break if sidebar do not exists
-    if(typeof sidebar.offset() === 'undefined') return;
+    // break if sidebar has nothing inside
+    if(typeof sidebar.children('.border').offset() === 'undefined') return;
     
     var fixed = $(".fixed");
 	

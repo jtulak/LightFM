@@ -31,8 +31,6 @@ class ListPresenter extends BasePresenter {
 	if(!$this->showHidden) $this->removeHidden ($files);
 	$this->template->listFiles = $files;
 	
-	// enable sidebar
-	$this->template->showSidebar = true;
 	//dump($last->Files);
 
 	//$find = \LightFM\IO::findPath("/data1/gallery/gallery");

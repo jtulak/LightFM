@@ -5,10 +5,7 @@
  * @param string   $robots   tell robots how to index the content of a page (optional)
  * @param array    $flashes  flash messages
  * @param string   $filename Name of actual file/folder
- * @param bool	   $showSidebar If an presenter wants to show sidebar, it has to enable it by setting to true
  *}
-
-{default $showSidebar = false }
 
 
 {var $debug_less = TRUE }
@@ -62,16 +59,17 @@
 		
 		
 		<div id="inner-box">
-		    {if $showSidebar}
 		    <div id="sidebar">
+		    {*if $showSidebar*}
+		    {ifset #sidebar}
 			<div class="border">
 			    <div id="sidebar-controll">&nbsp;</div>
 			    <div id="sidebar-content">
-				<div class="for-fixed">{block sidebar}{/block}</div>
+				<div class="for-fixed">{*block sidebar}{/block*}{include #sidebar}</div>
 			    </div>
 			</div>
+		    {/ifset}
 		    </div>
-		    {/if}
 		    <div id="outer-content">
 			{include #content}
 		    </div>
