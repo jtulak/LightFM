@@ -1,5 +1,8 @@
 <?php
-
+/* Needed veeeery looooooooooooooooooong liineeeeeee xxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxx
+ * aaaaaaaaaand moooooooooooreeeeeeeee xxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxx
+ * xxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxxxxxxxxxxxxxx
+ */
 header('HTTP/1.1 503 Service Unavailable');
 header('Retry-After: 300'); // 5 minutes in seconds
 

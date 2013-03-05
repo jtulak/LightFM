@@ -1,0 +1,36 @@
+@import "./params.less";
+
+@import "./highlighter.css";
+
+#text-view{
+    h2{
+	font-size: 150%;
+    }
+    width:100%;
+    .content
+    {
+	background-color: lighten(@color-medium,5%);
+	border: 1px solid  @color-innerBorder;
+	padding:0;
+	min-height: 300pt;
+	counter-reset: listing; 
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	overflow: hidden;
+	width: 100%;
+	@media only screen and (min-width: @page-width-plus){
+	    @tmp: @page-width - 22pt;
+	   // max-width: @tmp;
+	}
+	code {
+	    display: block;
+	    background-color: lighten(@color-medium,15%);
+	    margin-left: 33pt;
+	}
+
+	i:before { content: attr(data-line)". "; color: #777; padding-left: 3pt; }
+	 i { float: left; clear: both; min-width: 33pt; }
+	
+    }
+
+}

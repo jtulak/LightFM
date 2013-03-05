@@ -6,13 +6,11 @@
 {block content}
 <div id="text-view">
     <h2>{$filename}</h2>
-    <div class="content">
 	{var $content = $file->getContent()}
-	{foreach $content as $line=>$text}
-	    {$text}<br>
-	{/foreach}
-	
-    </div>
+
+	<pre class="content">{!$content}</pre>
+    
+    {*<pre class="content">{foreach $content as $line=>$text}<code><i></i><span>{$text}</span></code>{/foreach}</pre>*}
 </div>
 {/block}
 
