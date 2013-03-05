@@ -12,10 +12,16 @@
 namespace LightFM;
 
 /**
+ * @property string $Syntax
  * @property-read object $Highlighter Syntax highlighter
  */
  class TextFile extends File implements IFile{
      
+    /**
+     *	The presenter called for this file
+     * @var string
+     */
+    protected $presenter =  'TextFile';
      
      // overwriting parent's value
     protected $iconName = 'file-text';
@@ -23,7 +29,7 @@ namespace LightFM;
      // overwriting parent's value
     private static $priority = 0;
     
-    private $suffixHighlight = array(
+    private static $suffixHighlight = array(
 	'css'=>'css',
 	'js'=>'js',
 	'sh'=>'bash',
@@ -38,9 +44,10 @@ namespace LightFM;
 	'py'=>'python',
 	'texy'=>'texy',
 	'html'=>'html',
+	'text'=>'text',
     );
     
-    private $mimeHighlight = array(
+    private static $mimeHighlight = array(
 	'text/x-php'=>'html',
 	'text/x-shellscript'=>'bash',
 	'text/html'=>'html',
@@ -55,17 +62,24 @@ namespace LightFM;
     
     private $fshl;
 
-    
+    /**
+     * Return array of known languages for highlighting
+     * @return array
+     */
+    public static function getAvailableSyntax(){
+	//return array_unique(self::$suffixHighlight);
+	return self::$suffixHighlight;
+    }
     
     public function getSyntax(){
 	if($this->syntax == NULL){
 	    
-	    if(isset($this->mimeHighlight[$this->getMimeType()])){
+	    if(isset(self::$mimeHighlight[$this->getMimeType()])){
 		// at first try it by mime
-		$this->syntax = $this->mimeHighlight[$this->getMimeType()];
-	    }else  if(isset($this->suffixHighlight[$this->getSuffix()])){
+		$this->syntax = self::$mimeHighlight[$this->getMimeType()];
+	    }else  if(isset(self::$suffixHighlight[$this->getSuffix()])){
 		// if mimetype does not return specific thing, try suffix
-		$this->syntax = $this->suffixHighlight[$this->getSuffix()];
+		$this->syntax = self::$suffixHighlight[$this->getSuffix()];
 	    }else{
 		// and if still nothing, than set plaintext
 		$this->syntax = 'text';

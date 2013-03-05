@@ -32,6 +32,20 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      */
     protected $showHidden = true;
 
+    
+    /**
+     * Will select presenter for the file.
+     * If we are already in it, will do nothing,
+     * else it will do a redirect.
+     * 
+     * @param \LightFM\Node $file
+     */
+    protected function selectCorrectPresenter(\LightFM\Node $file){
+	// do nothing if we are alredy in it
+	if( get_class( $this ) == $this->viewed->Presenter.'Presenter') return;
+	
+	$this->redirect($this->viewed->Presenter.':default');
+    }
 
 
     /**
@@ -40,6 +54,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     public function actionDefault(){
 	// if we are in error presenter, do nothing
 	if($this instanceof ErrorPresenter) return;
+	
 	
 	try {
 	    // if path is empty, it means it is a root
@@ -54,6 +69,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	    
 	    // && $this->root->usedChild == NULL
 	    if($this->root->Dummy ) throw new Nette\Application\BadRequestException($this->path);
+	    
+	    
+	    $this->selectCorrectPresenter($this->viewed);
 	    
 	}catch(Nette\Application\ForbiddenRequestException $e){
 	    $this->forward('Error:default', array('exception' => $e));

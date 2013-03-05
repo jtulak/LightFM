@@ -9,6 +9,7 @@
     <div class="buttons">
 	<a  class="button"  n:href="List:default, path=>$file->Parent->Path">Back to the directory</a>
 	<a  class="button"  n:href="File:download, path=>$file->Path">Raw</a>
+	{control selectSyntax}
     </div>
     
     <pre class="content brush: {$file->Syntax}">{!$file->getHighlightedContent('fshl')}</pre>

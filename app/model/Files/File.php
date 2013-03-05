@@ -19,6 +19,13 @@ namespace LightFM;
  */
 class File extends Node implements IFile {
 
+    
+    /**
+     *	The presenter called for this file
+     * @var string
+     */
+    protected $presenter =  'File';
+    
     /**
      *	css class for the node
      * @var string 

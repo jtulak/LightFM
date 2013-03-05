@@ -21,9 +21,20 @@ namespace LightFM;
  * @property Directory $Parent 
  * @property-read bool $Dummy 
  * @property bool $Hidden 
+ * @property-read string $Presenter
  * 
  */
 abstract class Node extends \Nette\Object implements INode{
+
+    
+    /**
+     *	The presenter called for this file
+     * @var string
+     */
+    protected $presenter =  'List';
+
+
+
 
     /** 
      * When filled by some data, set to FALSE 
@@ -84,6 +95,12 @@ abstract class Node extends \Nette\Object implements INode{
      * @var string 
      */
     protected $fullPath;
+    
+    
+    // presenter
+    public function getPresenter(){
+	return $this->presenter;
+    }
     
     // password
     public function getPassword(){

@@ -17,6 +17,13 @@ namespace LightFM;
  */
 class Directory extends Node implements IDirectory {
 
+    
+    /**
+     *	The presenter called for this file
+     * @var string
+     */
+    protected $presenter =  'List';
+    
     /**
      * child in the line of the path 
      * @var \LightFM\Node	
