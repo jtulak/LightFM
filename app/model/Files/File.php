@@ -13,6 +13,7 @@ namespace LightFM;
 
 /**
  * @property-read  string $IconName Name for icon file
+ * @property-read  string $Suffix   File suffix
  * 
  */
 class File extends Node implements IFile {

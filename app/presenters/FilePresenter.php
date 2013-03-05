@@ -14,9 +14,9 @@
 class FilePresenter extends BasePresenter {
 
     public function actionDownload($path) {
-	$this->sendResponse(new DownloadResponse($path));
+	$this->redirectUrl($this->getHttpRequest()->url->basePath .$this->path);
     }
-
+    
     public function actionDefault() {
 	parent::actionDefault();
 

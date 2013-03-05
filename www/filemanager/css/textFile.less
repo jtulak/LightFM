@@ -3,25 +3,29 @@
 @import "./highlighter.css";
 
 #text-view{
+    width:100%;
     h2{
 	font-size: 150%;
     }
-    width:100%;
+    .buttons{
+	
+
+    }
     .content
     {
 	background-color: lighten(@color-medium,5%);
 	border: 1px solid  @color-innerBorder;
 	padding:0;
-	min-height: 300pt;
+	margin: 0;
 	counter-reset: listing; 
 	word-wrap: break-word;
 	white-space: pre-wrap;
 	overflow: hidden;
+
 	width: 100%;
-	@media only screen and (min-width: @page-width-plus){
-	    @tmp: @page-width - 22pt;
-	   // max-width: @tmp;
-	}
+	min-height: 300pt;
+	display: block;
+
 	code {
 	    display: block;
 	    background-color: lighten(@color-medium,15%);
