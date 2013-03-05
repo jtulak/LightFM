@@ -12,7 +12,6 @@
 namespace LightFM;
 
 /**
- * 
  * @property-read object $Highlighter Syntax highlighter
  */
  class TextFile extends File implements IFile{
@@ -24,16 +23,108 @@ namespace LightFM;
      // overwriting parent's value
     private static $priority = 0;
     
-    private $highlighter;
+    private $suffixHighlight = array(
+	'css'=>'css',
+	'js'=>'js',
+	'sh'=>'bash',
+	'php'=>'html',
+	'less'=>'css',
+	'ini'=>'ini',
+	'c'=>'cpp',
+	'cpp'=>'cpp',
+	'h'=>'cpp',
+	'neon'=>'neon',
+	'sql'=>'sql',
+	'py'=>'python',
+	'texy'=>'texy',
+	'html'=>'html',
+    );
+    
+    private $mimeHighlight = array(
+	'text/x-php'=>'html',
+	'text/x-shellscript'=>'bash',
+	'text/html'=>'html',
+	'application/xml'=>'html',
+    );
+    
+    /**
+     * language used for highlight
+     * @var string
+     */
+    public $syntax;
+    
+    private $fshl;
 
-    public function getHighlighter(){
-	if($this->highlighter == NULL){
-	    $this->highlighter =  new \FSHL\Highlighter(new \FSHL\Output\Html(),\FSHL\Highlighter::OPTION_LINE_COUNTER);
+    
+    
+    public function getSyntax(){
+	if($this->syntax == NULL){
+	    
+	    if(isset($this->mimeHighlight[$this->getMimeType()])){
+		// at first try it by mime
+		$this->syntax = $this->mimeHighlight[$this->getMimeType()];
+	    }else  if(isset($this->suffixHighlight[$this->getSuffix()])){
+		// if mimetype does not return specific thing, try suffix
+		$this->syntax = $this->suffixHighlight[$this->getSuffix()];
+	    }else{
+		// and if still nothing, than set plaintext
+		$this->syntax = 'text';
+	    }
 	}
-	return   $this->highlighter;
+	return $this->syntax;
+    }
+    public function setSyntax($syntax){
+	$this->syntax = $syntax;
+    }
+    
+    protected function getFSHL(){
+	if($this->fshl == NULL){
+	    $this->fshl =  new \FSHL\Highlighter(new \FSHL\Output\Html(),\FSHL\Highlighter::OPTION_LINE_COUNTER);
+	}
+	return   $this->fshl;
     }
 
-
+    public function getFSHLSyntax(){
+	    // now create correct output filter
+	    switch($this->syntax){
+		
+		case 'cpp':
+		    $output = new \FSHL\Lexer\Cpp();
+		    break;
+		
+		case 'css':
+		    $output = new \FSHL\Lexer\Css();
+		    break;
+		
+		case 'html':
+		    $output = new \FSHL\Lexer\Html();
+		    break;
+		
+		case 'js':
+		    $output = new \FSHL\Lexer\Javascript();
+		    break;
+		
+		case 'neon':
+		    $output = new \FSHL\Lexer\Neon();
+		    break;
+		
+		case 'python':
+		    $output = new \FSHL\Lexer\Python();
+		    break;
+		
+		case 'sql':
+		    $output = new \FSHL\Lexer\Sql();
+		    break;
+		
+		case 'texy':
+		    $output = new \FSHL\Lexer\Texy();
+		    break;
+		
+		default:
+		    $output = new \FSHL\Lexer\Minimal();
+	    }
+	    return $output;
+    }
 
 
     public function getTemplateName() {
@@ -47,15 +138,30 @@ namespace LightFM;
     public function __construct($path) {
 	parent::__construct($path);
 	
-	
     }
     
     
+    /**
+     * Return highlighted content
+     * @return string
+     */
+    public function getHighlightedContent($parser){
+	if($parser == 'geshi'){
+	    $g = new \GeSHi(implode(file($this->fullPath)), 'HTML');
+	    return $g->parse_code();
+	    
+	}else if($parser == 'fshl'){
+	    $this->getFSHL()->setLexer($this->getFSHLSyntax());
+	    $text = $this->getFSHL()->highlight(implode(file($this->fullPath)));
+	    $this->parse($text);
+	    return $this->parse($text);
+	}else{
+	    return "No highlighter selected.";
+	}
+    }
+    
     public function getContent(){
-	$this->Highlighter->setLexer(new \FSHL\Lexer\Html());
-	$text = $this->Highlighter->highlight(implode(file($this->fullPath)));
-	$this->parse($text);
-	return $this->parse($text);
+	return implode(file($this->fullPath));
     }
  
     

@@ -8,8 +8,10 @@
     <h2>{$filename}</h2>
     <div class="buttons">
 	<a  class="button"  n:href="List:default, path=>$file->Parent->Path">Back to the directory</a>
-	<a  class="button"  n:href="File:download, path=>$file->Path">Raw</a></div>
-    <pre class="content">{!$file->getContent()}</pre>
+	<a  class="button"  n:href="File:download, path=>$file->Path">Raw</a>
+    </div>
+    
+    <pre class="content brush: {$file->Syntax}">{!$file->getHighlightedContent('fshl')}</pre>
     
     {*<pre class="content">{foreach $content as $line=>$text}<code><i></i><span>{$text}</span></code>{/foreach}</pre>*}
 </div>
@@ -18,6 +20,16 @@
 
 {block scripts}
 {include #parent}
+{* 
+<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shBrushBash.js"></script>
+<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shBrushCpp.js"></script>
+<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shBrushPlain.js"></script>
+<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shBrushPhp.js"></script>
+<script type="text/javascript">
+    SyntaxHighlighter.all()
+</script> {* *}
 {/block}
 
 
@@ -29,4 +41,6 @@
 {/if}
 <style>
 </style>
+<link href="{$basePath}/filemanager/js/syntaxhighlighter/styles/shCore.css" rel="stylesheet" type="text/css" />
+<link href="{$basePath}/filemanager/js/syntaxhighlighter/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 {/block}

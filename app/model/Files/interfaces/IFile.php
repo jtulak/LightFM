@@ -29,6 +29,8 @@ namespace LightFM;
      
      public function getIconName();
      
+     public function getMimeType();
+     public function setMimeType($mimetype);
      
      /**
       * Return priority of implementing class - used for correct order

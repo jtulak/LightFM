@@ -14,6 +14,7 @@ namespace LightFM;
 /**
  * @property-read  string $IconName Name for icon file
  * @property-read  string $Suffix   File suffix
+ * @property string $MimeType
  * 
  */
 class File extends Node implements IFile {
@@ -24,6 +25,12 @@ class File extends Node implements IFile {
      */
     protected $iconName = '';
 
+    
+    /**
+     *	Contain mimetype of this file
+     * @var string
+     */
+    protected $mimetype = '';
 
     /**
      * Priority of this class
@@ -37,6 +44,18 @@ class File extends Node implements IFile {
      */
     protected $suffix;
 
+    public function getMimeType(){
+	if($this->mimetype == NULL){
+	    $this->mimetype=\LightFM\Filetypes::getMimeType($this->FullPath);
+	}
+	return $this->mimetype;
+    }
+    public function setMimeType($mimetype){
+	$this->mimetype = $mimetype;
+	return $this;
+    }
+    
+    
     public function getIconName(){
 	return $this->iconName;
     }

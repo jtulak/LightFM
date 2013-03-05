@@ -37,7 +37,7 @@ class Filetypes extends \Nette\Object {
      * @return mixed
      */
     public static function isImage($path) {
-	$mime = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
+	$mime = self::getMimeType($path);
 	return self::searchArray($mime, self::$imageFiles);
     }
 
@@ -48,7 +48,7 @@ class Filetypes extends \Nette\Object {
      * @return boolean
      */
     public static function isText($path) {
-	$mime = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
+	$mime = self::getMimeType($path);
 	//dump($path);
 	dump($mime);
 	return self::searchArray($mime, self::$textFiles);
@@ -67,6 +67,15 @@ class Filetypes extends \Nette\Object {
 	    if($item == substr($mime,0,strlen($item))) return TRUE;
 	}
 	return FALSE;
+    }
+    
+    /**
+     * Return mime type of the node
+     * @param string $path
+     * @return string
+     */
+    public static function getMimeType($path){
+	return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
     }
     
 }
