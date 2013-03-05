@@ -17,49 +17,63 @@ namespace LightFM;
  */
 class Filetypes extends \Nette\Object {
 
-    /** @var array Note we do not use the IMAGETYPE_XXX constants 
-     * as these will not be defined if GD is not enabled. */
-    private static $exstensionsImages = array(
-	1 => 'gif',
-	2 => 'jpeg',
-	3 => 'png',
-	4 => 'swf',
-	5 => 'psd',
-	6 => 'bmp',
-	7 => 'tiff',
-	8 => 'tiff',
-	9 => 'jpc',
-	10 => 'jp2',
-	11 => 'jpf',
-	12 => 'jb2',
-	13 => 'swc',
-	14 => 'aiff',
-	15 => 'wbmp',
-	16 => 'xbm',
+    
+    private static $imageFiles = array(
+	'image'=>array(
+	    'image/x-icon'
+	)
     );
+    /**
+     * Array of categories (for highlight lexer) of mime-types
+     * @var array
+     */
+    private static $textFiles = array(
+	'html' =>array(
+	    'text/x-php',
+	    'text/html',
+	    'application/xml',
+	),
+	'text'=>array(
+	    'text/plain'
+	)
+    ); 
+    
 
     /**
-     *  http://www.codekites.com/php-check-if-file-is-an-image/
+     *  return category of image or false, if it is not an image
      * @param string $path
-     * @return boolean
+     * @return mixed
      */
     public static function isImage($path) {
-	list($type, $suffix) = explode('/', finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path));
-	if ($type == "image")
-	    return TRUE;
-	return FALSE;
+	$mime = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
+	return self::searchArray($mime, self::$textFiles);
     }
 
     /**
      *  
+     *  return category of text file or false, if it is not an image
      * @param string $path
-     * @return boolean
+     * @return mixed
      */
     public static function isText($path) {
-	list($type, $suffix) = explode('/', finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path));
-	if ($type == "text")
-	    return TRUE;
-	return FALSE;
+	$mime = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
+	//dump($path);
+	dump($mime);
+	return self::searchArray($mime, self::$textFiles);
     }
 
+    
+    /**
+     * Search the given array for mime type and return category o false
+     * @param string $mime
+     * @param array $array
+     * @return mixed
+     */
+    private static function searchArray($mime,$array){
+	foreach($array as $key=>$list){
+	    if(in_array($mime, $list)) return $key;
+	}
+	return FALSE;
+    }
+    
 }
