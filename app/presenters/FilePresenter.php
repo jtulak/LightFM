@@ -13,6 +13,7 @@
 
 class FilePresenter extends BasePresenter {
 
+
     public function actionDownload($path) {
 	$this->redirectUrl($this->getHttpRequest()->url->basePath .$this->path);
     }
@@ -20,12 +21,12 @@ class FilePresenter extends BasePresenter {
     public function actionDefault() {
 	parent::actionDefault();
 
-	if (($this->last instanceof LightFM\Directory)) {
+	if (($this->viewed instanceof LightFM\Directory)) {
 	    // we are in a bad presenter
 	    $this->redirect('List:default', array('path' => $this->path));
-	} else if ($this->last instanceof \LightFM\IFile) {
+	} else if ($this->viewed instanceof \LightFM\IFile) {
 	    // it is a file
-	    if ($this->last->getTemplateName() == "") {
+	    if ($this->viewed->getTemplateName() == "") {
 		// If we do not know how to display this file, download it
 		//$this->redirectUrl($this->getHttpRequest()->url->basePath .$this->path);
 		$this->redirect('download');
@@ -37,11 +38,11 @@ class FilePresenter extends BasePresenter {
 
     public function renderDefault() {
 
-	$this->template->filename = $this->last->Name;
-	$this->template->file = $this->last;
+	$this->template->filename = $this->viewed->Name;
+	$this->template->file = $this->viewed;
 	
 	// set the view 
-	$this->setView($this->last->getTemplateName() );
+	$this->setView($this->viewed->getTemplateName() );
     }
 
 }

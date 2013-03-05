@@ -23,7 +23,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
      *	item that user wants to view
      * @var LightFM\Node
      */
-    protected $last;
+    protected $viewed;
     
     /**
      * If show hidden files/foldes
@@ -50,7 +50,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 	    // get path
 	    $this->root = LightFM\IO::findPath($this->path);
 	    // get the item
-	    $this->last = $this->getLastNode($this->root);
+	    $this->viewed = $this->getLastNode($this->root);
 	    
 	    // && $this->root->usedChild == NULL
 	    if($this->root->Dummy ) throw new Nette\Application\BadRequestException($this->path);
