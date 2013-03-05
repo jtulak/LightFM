@@ -100,6 +100,10 @@ namespace LightFM;
 		    $output = new \FSHL\Lexer\Html();
 		    break;
 		
+		case 'ini':
+		    $output = new \FSHL\Lexer\Ini();
+		    break;
+		
 		case 'js':
 		    $output = new \FSHL\Lexer\Javascript();
 		    break;
@@ -147,12 +151,15 @@ namespace LightFM;
      */
     public function getHighlightedContent($parser){
 	if($parser == 'geshi'){
+	    /** will we use GeSHi? */
 	    $g = new \GeSHi(implode(file($this->fullPath)), 'HTML');
 	    return $g->parse_code();
 	    
 	}else if($parser == 'fshl'){
+	    /** Or FSHL? */
 	    $this->getFSHL()->setLexer($this->getFSHLSyntax());
-	    $text = $this->getFSHL()->highlight(implode(file($this->fullPath)));
+	    // the \n is there because the lexer needs \n at the end
+	    $text = $this->getFSHL()->highlight(implode(file($this->fullPath))."\n");
 	    $this->parse($text);
 	    return $this->parse($text);
 	}else{

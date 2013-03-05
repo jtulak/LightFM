@@ -48,6 +48,15 @@
 .html-comment {color: #999999; background-color: #f1fae4;}
 .html-entity {color: #89a315;}
 
+/* ini */
+.ini-section-border {color: #598527; font-weight: bold;}
+.ini-section {color: #598527; }
+.ini-key {color: #003663;}
+.ini-array-border {color: #003663;font-weight: bold;}
+.ini-array {color: #003663;}
+.ini-value {color: #993300;}
+.ini-comment {color: gray}
+
 /* Java */
 .java-keywords1 {color: #0000ff; font-weight: bold;}
 .java-num {color: #ff0000;}
