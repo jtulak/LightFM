@@ -38,7 +38,6 @@ class FilePresenter extends BasePresenter {
 
     public function renderDefault() {
 
-	$this->template->filename = $this->viewed->Name;
 	$this->template->file = $this->viewed;
 	
 	// set the view 
