@@ -74,7 +74,7 @@
 		<table>
 		    <tr>
 			<td class="checkbox"><input type="checkbox"></td>
-			<td class="name"><span>{$dir->Name}</span></td>
+			<td class="name"><span title="{$dir->Name}">{$dir->Name}</span></td>
 			<td class="suffix"></td>
 			<td class="size">{$dir->Size|Bytes}</td>
 			<td class="date">{$dir->Date|date:'%Y/%m/%d %H:%M:%S'}</td>
@@ -91,7 +91,7 @@
 		<table>
 		    <tr>
 			<td class="checkbox"><input type="checkbox"></td>
-			<td class="name">
+			<td class="name"  title="{$file->Name}">
 			    <span>{$file->Name}</span>
 			</td>
 			<td class="suffix">{$file->Suffix}</td>
