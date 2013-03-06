@@ -63,16 +63,23 @@
 	    background-color: lighten(@color-medium,15%);
 	    margin-left: 33pt;
 	}
-	.highlighted code{
+
+	i:before { content: attr(data-line)". "; color: #777; padding-left: 3pt; }
+	 i { float: left; clear: both; min-width: 33pt; }
+
+	.highlighted{ 
+	    display: block;
 	    background-color: #BBEDED;
+	    code{
+		background-color: #BBEDED;
+	    }
+	    i:before { font-weight: bold;}
 	}
 
 	code:hover{
 	    background-color: #EAEBBA ;
 	}
 
-	i:before { content: attr(data-line)". "; color: #777; padding-left: 3pt; }
-	 i { float: left; clear: both; min-width: 33pt; }
 	
     }
 

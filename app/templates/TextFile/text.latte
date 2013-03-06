@@ -16,7 +16,7 @@
     <pre class="content brush: {$file->Syntax}" n:inner-foreach="$file->getHighlightedContent('fshl') as $row"><span n:class="in_array($iterator->Counter,$highlightLines)? highlighted">{!$row}</span></pre>
     
     {*<pre class="content">{foreach $content as $line=>$text}<code><i></i><span>{$text}</span></code>{/foreach}</pre>*}
-<small>Hint: For highlight selected lines use parameter hLine, for example: <i>{$basePath}/text-file/?path=/file.txt<b>&amp;hLines=2-3,10</b></i></small>
+<small>Hint: For highlight selected lines use parameter hLines, for example: <i>{$basePath}/text-file/?path=/file.txt<b>&amp;hLines=2-3,10</b></i></small>
 </div>
 {/block}
 
