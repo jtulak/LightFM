@@ -99,7 +99,7 @@ header {
     width: @sidebar-width;
     overflow: hidden;
     .border{
-	padding-right: 20px; // width of the image
+	padding-right: 2em; // width of the image
 	position: relative;
 
     }
@@ -109,14 +109,14 @@ header {
 	font-weight: normal;
     }
     ul{
-	padding:0 15pt 15pt 0 ;
+	padding:0 0 1em 0 ;
     }
     li {
 	list-style: none;
     }
     a {
 	display: block;
-	padding: 3pt 5pt;
+	padding: 0.3em 0.4em;
 	color: @color-text;
 	text-decoration: none;
 	font-size: 110%;
@@ -140,8 +140,8 @@ header {
     position: absolute;
     right: 0;
     //background-image: url(../images/resize-horiz.png);
-background-image: url(../images/resize-horiz.svg);
-background-size: 20px 19px;
+    background-image: url(../images/resize-horiz.svg);
+    background-size: contain;
     background-position: 100% 50%;
     background-repeat: no-repeat;
     .opacity (0.6);

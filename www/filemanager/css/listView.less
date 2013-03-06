@@ -6,9 +6,9 @@
 @list-hover:lighten(@color-medium,3%);
 @list-dark:lighten(@color-medium,@low);
 
-@list-line-height-big: 26pt;
-@list-line-height-small: 23pt;
-@list-checkbox-size: 15pt;
+@list-line-height-big: 2.5em;
+@list-line-height-small: 2.2em;
+@list-checkbox-size: 1.5em;
 
 
 @list-checkbox-top-small: (@list-line-height-small - @list-checkbox-size)/2;
@@ -27,7 +27,7 @@ ol,ul {
 	    list-style:none;
 	    a {
 		display: inline-block;
-		padding: 0pt 10pt;
+		padding: 0pt 1em;
 		margin:0;
 		margin-left: -1px;
 		border: 1px solid lighten(@color-outerBorder,10%);
@@ -59,7 +59,7 @@ ol,ul {
 	display: inline-block;
     line-height: 130%;
 	font-size: 110%;
-    margin-bottom:5pt;
+    margin-bottom:0.5em;
     @media only screen and (max-width: @screen-small){
 	    line-height: 150%;
     }
@@ -87,23 +87,21 @@ ol,ul {
     float: right;
 	font-size: 110%;
     line-height: 150%;
-    margin-top: 5pt;
-    .list-tab {
-	//background-image: url('../images/list.png');
-	background-image: url('../images/list-icon.svg');
-	background-size: 20px;
+    margin-top: 0.5em;
+    .tab {
+	background-size: 1.4em;
 	background-repeat: no-repeat;
 	background-position: 5px 50%;
-	padding-left: 28px;
+	padding-left: 2em;
+    }
+    .list {
+	//background-image: url('../images/list.png');
+	background-image: url('../images/list-icon.svg');
 	
     }   
-    .gallery-tab {
+    .gallery {
 	//background-image: url('../images/gallery.png');
 	background-image: url('../images/gallery.svg');
-	background-size: 20px;
-	background-repeat: no-repeat;
-	background-position: 2pt 50%;
-	padding-left: 28px;
     }   
     ul {
 	
@@ -159,7 +157,7 @@ ol,ul {
 	input {
 	    margin: 0;
 	    position: absolute;
-	    left: 5pt;
+	    left: 0.5em;
 	    top: @list-checkbox-top-big;
 	    @media only screen and (min-width: @screen-small){
 		top: @list-checkbox-top-small;
@@ -175,7 +173,7 @@ ol,ul {
 	    td {  
 	    }
 	    .checkbox {
-		 width:50pt;
+		 width:4.8em;
 	     }
 	    .name {	
 		span {
@@ -183,25 +181,25 @@ ol,ul {
 			width: 100pt;
 		    // pseudo dynamic resize of file name length
 		    @media only screen and (min-width: @screen-tiny-1) {
-			width: 150pt;
+			width: 14em;
 		    }
 		    @media only screen and (min-width: @screen-tiny-2) {
-			width: 150pt;
+			width: 14em;
 		    }
 		    @media only screen and (min-width: @screen-tiny-3) {
-			width: 200pt;
+			width: 18em;
 		    }
 		    @media only screen and (min-width: @screen-tiny-4) {
-			width: 250pt;
+			width: 23em;
 		    }
 		    @media only screen and (min-width: @screen-small-1) {
-			width: 150pt;
+			width: 15em;
 		    }
 		    @media only screen and (min-width: @screen-small-2) {
-			width: 190pt;
+			width: 20em;
 		    }
 		    @media only screen and (min-width: @screen-small-3) {
-			width: 270pt;
+			width: 28em;
 		    }
 
 		    overflow: hidden;
@@ -218,11 +216,11 @@ ol,ul {
 	     }
 
 	    .suffix {
-		 width:40pt;
+		 width:4em;
 	     }
 	    .size {
 		    white-space:nowrap; 
-		 width:58pt;
+		 width:5em;
 		 display:none;
 		@media only screen and (min-width: @screen-tiny-2){
 		    display:table-cell;
@@ -230,7 +228,7 @@ ol,ul {
 	     }
 	    .date{
 		    white-space:nowrap; 
-		 width:130pt;
+		 width:11em;
 		 display:none;
 
 		@media only screen and (min-width: @screen-small){
@@ -260,7 +258,7 @@ ol,ul {
 	    /* Gradient ************************************************************/
 	}
 	&.folder{
-	    //padding-left: 55pt;
+	    
 	    .filetype-icon('folder');
 	    &:hover,&:active{
 		background-color: @list-hover;
@@ -270,7 +268,7 @@ ol,ul {
 	    }
 	}
 	&.folder-up{
-	    //padding-left: 55pt;
+	    
 	    .filetype-icon('up');
 	    &:hover,&:active{
 		background-color: @list-hover;
@@ -280,43 +278,43 @@ ol,ul {
 	    }
 	}
 	&.file{
-	    //padding-left: 55pt;
+	    
 	    .filetype-icon('file');
 	    &:hover,&:active{
 		background-color: @list-hover;
 	    }
 	
 	    &.file-text{
-		//padding-left: 55pt;
+		
 		.filetype-icon('file-text');
 
 		&.css{
-		    //padding-left: 55pt;
+		    
 		    .filetype-icon('file-text-css');
 		}
 		&.js{
-		    //padding-left: 55pt;
+		    
 		    .filetype-icon('file-text-js');
 		}
 		&.ini{
-		    //padding-left: 55pt;
+		    
 		    .filetype-icon('file-text-ini');
 		}
 		&.xml{
-		    //padding-left: 55pt;
+		    
 		    .filetype-icon('file-text-xml');
 		}
 		&.php{
-		    //padding-left: 55pt;
+		    
 		    .filetype-icon('file-text-php');
 		}
 		&.html{
-		    //padding-left: 55pt;
+		    
 		    .filetype-icon('file-text-html');
 		}
 	    }
 	    &.file-image{
-		//padding-left: 55pt;
+		
 		.filetype-icon('file-image');
 	    }
 	}
