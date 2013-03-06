@@ -17,14 +17,6 @@
 
 
 
-.filetype-icon (@name){
-
-    //background-image: url('../images/34/@{name}.png');
-    background-image: url('../images/@{name}.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: 23pt 50%;
-}
 
 ol,ul {
 	display: inline-block;
@@ -293,19 +285,39 @@ ol,ul {
 	    &:hover,&:active{
 		background-color: @list-hover;
 	    }
-	}
-	&.file-text{
-	    //padding-left: 55pt;
-	    .filetype-icon('file-text');
-	    &:hover,&:active{
-		background-color: @list-hover;
+	
+	    &.file-text{
+		//padding-left: 55pt;
+		.filetype-icon('file-text');
+
+		&.css{
+		    //padding-left: 55pt;
+		    .filetype-icon('file-text-css');
+		}
+		&.js{
+		    //padding-left: 55pt;
+		    .filetype-icon('file-text-js');
+		}
+		&.ini{
+		    //padding-left: 55pt;
+		    .filetype-icon('file-text-ini');
+		}
+		&.xml{
+		    //padding-left: 55pt;
+		    .filetype-icon('file-text-xml');
+		}
+		&.php{
+		    //padding-left: 55pt;
+		    .filetype-icon('file-text-php');
+		}
+		&.html{
+		    //padding-left: 55pt;
+		    .filetype-icon('file-text-html');
+		}
 	    }
-	}
-	&.file-image{
-	    //padding-left: 55pt;
-	    .filetype-icon('file-image');
-	    &:hover,&:active{
-		background-color: @list-hover;
+	    &.file-image{
+		//padding-left: 55pt;
+		.filetype-icon('file-image');
 	    }
 	}
    }

@@ -5,7 +5,7 @@
 
 {block content}
 <div id="text-view">
-    <h2>{$filename}</h2>
+    <h2 class="{$file->IconName}">{$filename}</h2>
     <div class="buttons">
 	<a  class="button"  n:href="List:default, path=>$file->Parent->Path">Back to the directory</a>
 	<a  class="button"  n:href="File:download, path=>$file->Path">Raw</a>

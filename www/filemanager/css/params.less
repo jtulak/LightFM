@@ -133,3 +133,13 @@ opacity: @num;
 	    cursor:default;
 	}
 }
+
+
+.filetype-icon (@name, @offset:23pt 50%){
+
+    //background-image: url('../images/34/@{name}.png');
+    background-image: url('../images/@{name}.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: @offset;
+}

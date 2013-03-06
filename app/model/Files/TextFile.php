@@ -33,25 +33,26 @@ namespace LightFM;
 	'css'=>'CSS',
 	'js'=>'JS',
 	'sh'=>'Bash',
-	'php'=>'HTML',
+	'php'=>'PHP',
 	'less'=>'CSS',
 	'ini'=>'ini',
 	'c'=>'Cpp',
 	'cpp'=>'Cpp',
-	'h'=>'Cpp',
+	'h'=>'h',
 	'neon'=>'Neon',
 	'sql'=>'SQL',
 	'py'=>'Python',
 	'texy'=>'Texy!',
 	'html'=>'HTML',
+	'xml'=>'XML',
 	'text'=>'Plain text',
     );
     
     private static $mimeHighlight = array(
-	'text/x-php'=>'html',
-	'text/x-shellscript'=>'bash',
-	'text/html'=>'html',
-	'application/xml'=>'html',
+	'text/x-php'=>'PHP',
+	'text/x-shellscript'=>'Bash',
+	'text/html'=>'HTML',
+	'application/xml'=>'XML',
     );
     
     /**
@@ -114,17 +115,20 @@ namespace LightFM;
 
     public function getFSHLSyntax(){
 	    // now create correct output filter
-	    switch($this->syntax){
+	    switch(strtolower($this->syntax)){
 		
-		case 'Cpp':
+		case 'cpp':
+		case 'h':
 		    $output = new \FSHL\Lexer\Cpp();
 		    break;
 		
-		case 'CSS':
+		case 'css':
 		    $output = new \FSHL\Lexer\Css();
 		    break;
 		
-		case 'HTML':
+		case 'html':
+		case 'php':
+		case 'xml':
 		    $output = new \FSHL\Lexer\Html();
 		    break;
 		
@@ -132,23 +136,23 @@ namespace LightFM;
 		    $output = new \FSHL\Lexer\Ini();
 		    break;
 		
-		case 'JS':
+		case 'js':
 		    $output = new \FSHL\Lexer\Javascript();
 		    break;
 		
-		case 'Neon':
+		case 'neon':
 		    $output = new \FSHL\Lexer\Neon();
 		    break;
 		
-		case 'Python':
+		case 'python':
 		    $output = new \FSHL\Lexer\Python();
 		    break;
 		
-		case 'SQL':
+		case 'sql':
 		    $output = new \FSHL\Lexer\Sql();
 		    break;
 		
-		case 'Texy!':
+		case 'texy!':
 		    $output = new \FSHL\Lexer\Texy();
 		    break;
 		
@@ -170,6 +174,7 @@ namespace LightFM;
     public function __construct($path) {
 	parent::__construct($path);
 	
+	$this->iconName .= ' '. strtolower($this->getSyntax());
     }
     
     
