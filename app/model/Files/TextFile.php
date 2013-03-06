@@ -194,7 +194,7 @@ namespace LightFM;
 	    // the \n is there because the lexer needs \n at the end
 	    $text = $this->getFSHL()->highlight(implode(file($this->fullPath))."\n");
 	    $this->parse($text);
-	    return $this->parse($text);
+	    return explode("<ROWEND />",$this->parse($text));
 	}else{
 	    return "No highlighter selected.";
 	}
@@ -212,8 +212,9 @@ namespace LightFM;
 	$string="";
 	for($i=1; $i<$len-1;$i++){
 	    // because first and last lines are empty
-	    $string .= '<span class="row"><i data-line="'.($i).'"></i><code>'.$array[$i].'</code></span>';
+	    $string .= '<span class="row"><i data-line="'.($i).'"></i><code>'.$array[$i].'</code></span><ROWEND />';
 	}
 	return $string;
     }
+    
 }

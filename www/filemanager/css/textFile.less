@@ -62,12 +62,13 @@
 	    display: block;
 	    background-color: lighten(@color-medium,15%);
 	    margin-left: 33pt;
-	    &.highlighted{
-		background-color: #FFEDED;
-	    }
-	    &:hover{
-		background-color: #EAEBBA ;
-	    }
+	}
+	.highlighted code{
+	    background-color: #BBEDED;
+	}
+
+	code:hover{
+	    background-color: #EAEBBA ;
 	}
 
 	i:before { content: attr(data-line)". "; color: #777; padding-left: 3pt; }

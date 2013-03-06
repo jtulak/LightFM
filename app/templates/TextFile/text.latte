@@ -1,19 +1,19 @@
 {** 
  * @param string $filename
  * @param LightFM\File $file
+ * @param array $highlightLines
  *}
 
 {block content}
 <div id="text-view">
     <h2 class="{$file->IconName}">{$filename}</h2>
-    <div class="buttons">
+    <div class="buttons">{dump $highlightLines}
 	<a  class="button"  n:href="List:default, path=>$file->Parent->Path">Back to the directory</a>
 	<a  class="button"  n:href="File:download, path=>$file->Path">Raw</a>
 	{control selectSyntax}
 	<span class=".cleaner"></span>
     </div>
-    
-    <pre class="content brush: {$file->Syntax}">{!$file->getHighlightedContent('fshl')}</pre>
+    <pre class="content brush: {$file->Syntax}" n:inner-foreach="$file->getHighlightedContent('fshl') as $row"><span n:class="in_array($iterator->Counter,$highlightLines)? highlighted">{!$row}</span></pre>
     
     {*<pre class="content">{foreach $content as $line=>$text}<code><i></i><span>{$text}</span></code>{/foreach}</pre>*}
 </div>

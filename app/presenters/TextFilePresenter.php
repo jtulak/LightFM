@@ -21,17 +21,37 @@ class TextFilePresenter extends FilePresenter {
      */
     public $syntax;
     
+    /**
+     * Highlight given lines
+     * @persistent
+     * @var string 
+     */
+    public $hLines;
+    
     public function actionDefault() {
 	parent::actionDefault();
 
 	if(!empty($this->syntax)){
 	    $this->viewed->Syntax = $this->syntax;
 	}
-	
     }
 
     public function renderDefault() {
 	parent::renderDefault();
+	
+	// split string for highlight lines to ranges
+	// and then to lines
+	$ranges = explode(',',$this->hLines);
+	$lines = array();
+	foreach($ranges as $l){
+	    if(strpos($l, '-') !== FALSE){
+		$lines = array_merge($lines,explode('-', $l));
+	    }else{
+		array_push($lines, $l); 
+	    }
+	}
+	$this->template->highlightLines = $lines;
+	
     }
     
     /**
