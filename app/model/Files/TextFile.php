@@ -27,24 +27,24 @@ namespace LightFM;
     protected $iconName = 'file-text';
      
      // overwriting parent's value
-    private static $priority = 0;
+    protected static $priority = 0;
     
     private static $suffixHighlight = array(
-	'css'=>'css',
-	'js'=>'js',
-	'sh'=>'bash',
-	'php'=>'html',
-	'less'=>'css',
+	'css'=>'CSS',
+	'js'=>'JS',
+	'sh'=>'Bash',
+	'php'=>'HTML',
+	'less'=>'CSS',
 	'ini'=>'ini',
-	'c'=>'cpp',
-	'cpp'=>'cpp',
-	'h'=>'cpp',
-	'neon'=>'neon',
-	'sql'=>'sql',
-	'py'=>'python',
-	'texy'=>'texy',
-	'html'=>'html',
-	'text'=>'text',
+	'c'=>'Cpp',
+	'cpp'=>'Cpp',
+	'h'=>'Cpp',
+	'neon'=>'Neon',
+	'sql'=>'SQL',
+	'py'=>'Python',
+	'texy'=>'Texy!',
+	'html'=>'HTML',
+	'text'=>'Plain text',
     );
     
     private static $mimeHighlight = array(
@@ -62,13 +62,27 @@ namespace LightFM;
     
     private $fshl;
 
+    
+    
     /**
-     * Return array of known languages for highlighting
+     * Return array of known languages for highlighting.
+     * Make an unique array, but take care about actually selected
+     * syntax.
      * @return array
      */
-    public static function getAvailableSyntax(){
+    public function getAvailableSyntax(){
 	//return array_unique(self::$suffixHighlight);
-	return self::$suffixHighlight;
+	$uniq = array();
+	if(($actualKey = array_search($this->getSyntax(),self::$suffixHighlight))){
+	    $uniq[$actualKey]=$this->getSyntax();
+	}
+	foreach(self::$suffixHighlight as $key=>$item){
+	    if(!in_array($item, $uniq)){
+		$uniq[$key]=$item;
+	    }
+	}
+	
+	return $uniq;
     }
     
     public function getSyntax(){
@@ -102,15 +116,15 @@ namespace LightFM;
 	    // now create correct output filter
 	    switch($this->syntax){
 		
-		case 'cpp':
+		case 'Cpp':
 		    $output = new \FSHL\Lexer\Cpp();
 		    break;
 		
-		case 'css':
+		case 'CSS':
 		    $output = new \FSHL\Lexer\Css();
 		    break;
 		
-		case 'html':
+		case 'HTML':
 		    $output = new \FSHL\Lexer\Html();
 		    break;
 		
@@ -118,23 +132,23 @@ namespace LightFM;
 		    $output = new \FSHL\Lexer\Ini();
 		    break;
 		
-		case 'js':
+		case 'JS':
 		    $output = new \FSHL\Lexer\Javascript();
 		    break;
 		
-		case 'neon':
+		case 'Neon':
 		    $output = new \FSHL\Lexer\Neon();
 		    break;
 		
-		case 'python':
+		case 'Python':
 		    $output = new \FSHL\Lexer\Python();
 		    break;
 		
-		case 'sql':
+		case 'SQL':
 		    $output = new \FSHL\Lexer\Sql();
 		    break;
 		
-		case 'texy':
+		case 'Texy!':
 		    $output = new \FSHL\Lexer\Texy();
 		    break;
 		

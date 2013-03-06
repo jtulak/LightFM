@@ -43,7 +43,7 @@ class File extends Node implements IFile {
      * Priority of this class
      * @var int 
      */
-    private static $priority = -1000;
+    protected static $priority = -1000;
     
     /**
      *	Suffix of this file
@@ -82,7 +82,7 @@ class File extends Node implements IFile {
 
     
     public static function getPriority(){
-	return self::$priority;
+	return static::$priority;
     }
     
     

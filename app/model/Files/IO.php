@@ -146,6 +146,7 @@ abstract class IO extends \Nette\Object {
 	foreach (self::getFileModules() as $class) {
 	    if ($class::knownFileType(DATA_ROOT . $fullPath)) {
 		// if the class know this filetype
+		
 		$classes[$class::getPriority()] = $class;
 	    }
 	}
@@ -153,6 +154,7 @@ abstract class IO extends \Nette\Object {
 	if (count($classes) == 0)
 	    throw new \Nette\FatalErrorException("No possible node typefound! Probably missing the default class LightFM\File.");
 
+	
 	return new $classes[0]($fullPath);
     }
 

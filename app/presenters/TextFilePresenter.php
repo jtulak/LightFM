@@ -42,7 +42,7 @@ class TextFilePresenter extends FilePresenter {
      protected function createComponentSelectSyntax($name)
     {
         $form = new Nette\Application\UI\Form($this, $name);
-        $form->addSelect('syntax', '', \LightFM\TextFile::getAvailableSyntax())
+        $form->addSelect('syntax', '', $this->viewed->getAvailableSyntax())
 		->setDefaultValue($this->viewed->Syntax);
 	$form->addSubmit('submit','Change language');
 	

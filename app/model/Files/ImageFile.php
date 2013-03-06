@@ -22,7 +22,7 @@ namespace LightFM;
     protected $iconName = 'file-image';
      
      
-    private static $priority = 0;
+    protected static $priority = 0;
         
     
     public static function knownFileType($file) {
