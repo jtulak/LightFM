@@ -62,6 +62,7 @@ class TextFilePresenter extends FilePresenter {
         $values = $form->getValues();
 	
         $this->syntax = $values->syntax;
+	$this->redirect('//this');
     }
 
 }
