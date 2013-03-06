@@ -11,11 +11,11 @@ body {
     line-height: 1.6;
     color: @color-text;
     background: @color-dark;
-    font-family: 'Dejavu sans',arial, 'Liberation Sans', Freesans, sans-serif;
+    font-family: @general-fonts;
     height:100%;
 }
 
-#cleaner {
+.cleaner {
     clear: both;
 }
 
@@ -26,31 +26,7 @@ h1 {
 }
 
 
-.button {
-	display: inline-block;
-	padding: 0pt 10pt;
-	margin:0;
-	margin-left: -1px;
-	border: 1px solid lighten(@nav-border,10%);
-	//border-width: 1px 1px 1px 0; // we want to have thiner borders between links
-	background-color: @nav-bg;
-	color: @nav-text;
-	text-decoration: none;
-	line-height: 150%;
-
-	.rounded-corners();
-	&:hover{
-	    background-color: @nav-bg-hover;
-	    color: @nav-text-hover;
-	    border-color:  @nav-border-hover
-	}
-	&.inactive {
-	    .opacity(@nav-inactive-opacity);
-	    background-color: @nav-bg;
-	    color: @nav-text;
-	    cursor:default;
-	}
-}
+.button{.button()}
 
 .nowrap{
     white-space: nowrap;

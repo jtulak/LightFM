@@ -44,7 +44,14 @@ class TextFilePresenter extends FilePresenter {
         $form = new Nette\Application\UI\Form($this, $name);
         $form->addSelect('syntax', '', \LightFM\TextFile::getAvailableSyntax())
 		->setDefaultValue($this->viewed->Syntax);
-	$form->addSubmit('submit');
+	$form->addSubmit('submit','Change language');
+	
+	$renderer = $form->getRenderer();
+	$renderer->wrappers['controls']['container'] = 'span';
+	$renderer->wrappers['pair']['container'] = NULL;
+	$renderer->wrappers['label']['container'] = 'span';
+	$renderer->wrappers['control']['container'] = 'span';
+	
         $form->onSuccess[] = callback($this, 'selectSyntaxSubmitted');
         return $form;
     }

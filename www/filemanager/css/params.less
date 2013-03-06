@@ -15,6 +15,7 @@
 @screen-small-4: @screen-small-3 + 120;
 @screen-small-5: @screen-small-4 + 120;
 
+@general-fonts: 'Dejavu sans',arial, 'Liberation Sans', Freesans, sans-serif;
 
 @color-dark: #aaa;
 @color-light: #f7f7f7;
@@ -102,4 +103,33 @@ opacity: @num;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+
+.button() {
+	display: inline-block;
+	padding: 0pt 10pt;
+	margin:0;
+	margin-left: -1px;
+	border: 1px solid lighten(@nav-border,10%);
+	//border-width: 1px 1px 1px 0; // we want to have thiner borders between links
+	background-color: @nav-bg;
+	font-family: @general-fonts;
+	color: @nav-text;
+	text-decoration: none;
+	line-height: 150%;
+	font-size: 100%;
+
+	.rounded-corners();
+	&:hover{
+	    background-color: @nav-bg-hover;
+	    color: @nav-text-hover;
+	    border-color:  @nav-border-hover
+	}
+	&.inactive {
+	    .opacity(@nav-inactive-opacity);
+	    background-color: @nav-bg;
+	    color: @nav-text;
+	    cursor:default;
+	}
 }
