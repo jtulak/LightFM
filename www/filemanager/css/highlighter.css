@@ -32,7 +32,7 @@
 .css-value {color: #448ccb;}
 .css-func {color: #448ccb; font-weight: bold;}
 .css-color {color: #0076a3;}
-.css-comment {background-color: #e5f8ff; color: #999999;}
+.css-comment { color: #999999;}
 
 /* CPP */
 .cpp-keywords1 {color: #0000ff; font-weight: bold;}
@@ -45,7 +45,7 @@
 .html-tag {color: #598527; font-weight: bold;}
 .html-tagin {color: #89a315}
 .html-quote {color: #598527; font-weight: bold;}
-.html-comment {color: #999999; background-color: #f1fae4;}
+.html-comment {color: #999999; }
 .html-entity {color: #89a315;}
 
 /* ini */
@@ -69,7 +69,7 @@
 .js-keywords1 {color: #575757; font-weight: bold;}
 .js-num {color: #575757;}
 .js-quote {color: #575757; font-weight: bold;}
-.js-comment {color: #898993; background-color: #f4f4f4;}
+.js-comment {color: #898993; }
 
 /* Neon */
 .neon-section {color: #598527;}
@@ -88,7 +88,7 @@
 .php-var {color: #ffaa00; font-weight: bold;}
 .php-num {color: #ff0000;}
 .php-quote {color: #884433; font-weight: bold;}
-.php-comment {color: #999999; background-color: #ffffee;}
+.php-comment {color: #999999; }
 
 /* Python */
 .py-keyword1 {color: #0033cc; font-weight: bold;}
@@ -110,7 +110,7 @@
 
 /* Texy */
 .texy-hlead {color: #4444bb; font-weight: bold;}
-.texy-hbody {background-color: #eeeeff; color: #4444bb;}
+.texy-hbody { color: #4444bb;}
 .texy-hr {color: #bb4444;}
 .texy-code {color: #666666;}
 .texy-html {color: #66aa66;}
