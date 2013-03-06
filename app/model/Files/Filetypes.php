@@ -18,6 +18,11 @@ namespace LightFM;
 class Filetypes extends \Nette\Object {
 
     
+    
+    // primary for developing/debugging
+    public static $usedMimetypes = array();
+    
+    
     private static $imageFiles = array(
 	    'image/'
     );
@@ -50,7 +55,9 @@ class Filetypes extends \Nette\Object {
     public static function isText($path) {
 	$mime = self::getMimeType($path);
 	//dump($path);
-	dump($mime);
+	// for debuging
+	array_push(self::$usedMimetypes,$mime);
+	
 	return self::searchArray($mime, self::$textFiles);
     }
 
