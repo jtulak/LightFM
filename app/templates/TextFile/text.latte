@@ -6,7 +6,7 @@
 {block content}
 <div id="text-view">
     <h2 class="{$file->IconName}">{$file->Name}.{$file->Suffix}</h2>
-    <div class="buttons">{dump $highlightLines}
+    <div class="buttons">
 	<a  class="button"  n:href="List:default, path=>$file->Parent->Path">Back to the directory</a>
 	<a  class="button"  n:href="File:download, path=>$file->Path">Raw</a>
 	{control selectSyntax}
