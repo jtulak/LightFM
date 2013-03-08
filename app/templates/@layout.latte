@@ -55,7 +55,11 @@
 		</div>
 	    </header>
 	    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-
+	    
+	    <noscript>
+	    <div class="flash error">This site needs Javascript for enhancing 
+	    of your experience.</div>
+	    </noscript>
 
 	    <div id="inner-box">
 		<div id="sidebar">
