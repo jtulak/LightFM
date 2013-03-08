@@ -71,11 +71,11 @@ $(function(){
     /*
      * enabling scrolling sidebar
      */
-    $(".for-fixed").addClass("fixed");
-    sidebarFixing();
+    //$(".for-fixed").addClass("fixed");
+   /* sidebarFixing();
     $(window).scroll(function(){
 	sidebarFixing();
-    });
+    });*/
     
     
     
@@ -87,35 +87,35 @@ $(function(){
  * 
  */
 function sidebarFixing(){
-    var sidebar = $("#sidebar");
-    // break if sidebar has nothing inside
-    if(typeof sidebar.children('.border').offset() === 'undefined') return;
-    
-    var fixed = $(".fixed");
-	
-    var offset = sidebar.offset().top;
-    /** menu */
-    if($(window).height() > fixed.height()+offset){
-	// if there is enough of space, then we can have the bar fixed
-	fixed.css({"position":"fixed","top":Math.max(offset-$(this).scrollTop(),0)});
-
-    }else{
-	// protection for small screens where some buttons could become inaccesible
-	// so there keep the scrollbar static
-	fixed.css({"position":"relative", "top":0});
-    }
-    
-    
-    var middle = fixed.offset().top+offset;
-    //console.log(middle);
-    /** control (the arrow on the side) */
-    /*var middle = Math.max(
-	    $(this).scrollTop()+$(window).height()/2-offset,
-	    80
-	);
-    */
-    $("#sidebar-controll").height(sidebar.height()).css({'background-position':'100% '+middle+'px'})
-    .find(".gradient").height(sidebar.height());
+//    var sidebar = $("#sidebar");
+//    // break if sidebar has nothing inside
+//    if(typeof sidebar.children('.border').offset() === 'undefined') return;
+//    
+//    var fixed = $(".fixed");
+//	
+//    var offset = sidebar.offset().top;
+//    /** menu */
+//    if($(window).height() > fixed.height()+offset){
+//	// if there is enough of space, then we can have the bar fixed
+//	fixed.css({"position":"fixed","top":Math.max(offset-$(this).scrollTop(),0)});
+//
+//    }else{
+//	// protection for small screens where some buttons could become inaccesible
+//	// so there keep the scrollbar static
+//	fixed.css({"position":"relative", "top":0});
+//    }
+//    
+//    
+//    var middle = fixed.offset().top+offset;
+//    //console.log(middle);
+//    /** control (the arrow on the side) */
+//    /*var middle = Math.max(
+//	    $(this).scrollTop()+$(window).height()/2-offset,
+//	    80
+//	);
+//    */
+//    $("#sidebar-controll").height(sidebar.height()).css({'background-position':'100% '+middle+'px'})
+//    .find(".gradient").height(sidebar.height());
     
 }
 
