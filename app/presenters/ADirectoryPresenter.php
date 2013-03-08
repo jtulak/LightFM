@@ -70,6 +70,19 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	$this->template->directoryPresenters = $this->getAllDirectoryPresenters();
 	$this->template->actualPresenter = preg_replace('/Presenter$/','',get_class($this));
 	
+	
+	// send to template
+	$path = $this->getPath($this->root);
+	$this->template->path = $path;
+	// backpath
+	$this->template->backpath = '/';
+	$i = count($path);
+	foreach($path as $item){
+	    if($i-- > 1 && $i < count($path)-1){
+		$this->template->backpath .= $item;
+	    }
+	}
+	
     }
 
 }

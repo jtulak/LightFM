@@ -21,8 +21,6 @@ class GalleryPresenter extends ADirectoryPresenter{
 
     public function renderDefault() {
 	parent::renderDefault();
-	// send to template
-	$this->template->path = $this->getPath($this->root);
 	
 	// push subdirs and files
 	$subdirs = $this->viewed->Subdirs;

@@ -4,42 +4,16 @@
  * @param array $path	list of directories from root to the actual folder/file
  * @param array $listFiles
  * @param array $listDirs
+ * @param string $backpath - path to parent directory for links
  *}
 
 {block content}
 <div id="list-view">
-    <div id="navigation">
-    Path: 
-	<ol>
-	    {var $backpath = '/'}
-	    {foreach $path as $uri => $item}
-		
-		<li><a n:href="default, path => $uri " class="button {last}inactive{/last}" {last}title="You are here"{/last}>
-			{if $iterator->first}
-			    /
-			{else}
-			    {$item}
-			    {* creating the backpath *}
-			    {if !$iterator->last}
-				{? $backpath .= $item}
-			    {/if}
-			{/if}
-		    </a>
-	    {/foreach}
-	</ol>
-    </div>
+    
+    {include '../pathNavigation.latte'}
+    {include '../viewsMenu.latte'}
     
     
-    <div id="views">
-	<ul>
-	    {foreach $directoryPresenters as $i => $presenter}
-	    <li><a  n:class="tab, strtolower($presenter['presenter']), $actualPresenter == $presenter['presenter']? active"
-		    n:href="$presenter['presenter'].':default'">{$presenter['name']}</a>
-	    {/foreach}
-	    
-	    {*<li><a class="tab gallery" href="{link Gallery:default}">Gallery</a>*}
-	</ul>
-    </div>
     <div style="clear:both"></div>
     <div id="data">
 	<section class="header">
