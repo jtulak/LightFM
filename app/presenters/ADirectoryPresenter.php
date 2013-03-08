@@ -18,15 +18,8 @@ abstract class ADirectoryPresenter extends BasePresenter  implements IDirectoryP
     
     protected $knownInterfaces = array('IDirectory');
     
-    public function actionDefault() {
-	parent::actionDefault();
-
-	// If this is not a directory, then go to another presenter
-	if (!($this->viewed instanceof LightFM\Directory)) {
-	    
-	    //$this->forward('File:default', array('path' => $this->path));
-	}
-    }
+   
+   
     
 }
 
