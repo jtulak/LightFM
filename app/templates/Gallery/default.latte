@@ -1,0 +1,144 @@
+{** 
+ * @param array $path	list of directories from root to the actual folder/file
+ * @param array $listFiles
+ * @param array $listDirs
+ *}
+
+{block content}
+<div id="list-view">
+    <div id="navigation">
+    Path: 
+	<ol>
+	    {var $backpath = '/'}
+	    {foreach $path as $uri => $item}
+		
+		<li><a n:href="default, path => $uri " class="button {last}inactive{/last}" {last}title="You are here"{/last}>
+			{if $iterator->first}
+			    /
+			{else}
+			    {$item}
+			    {* creating the backpath *}
+			    {if !$iterator->last}
+				{? $backpath .= $item}
+			    {/if}
+			{/if}
+		    </a>
+	    {/foreach}
+	</ol>
+    </div>
+    
+    
+    <div id="views">
+	<ul>
+	    <li><a  class="tab list active">List</a>
+	    <li><a class="tab gallery" href="{link Gallery:default}">Gallery</a>
+	</ul>
+    </div>
+    <div style="clear:both"></div>
+    <div id="data">
+	<section class="header">
+	    <table>
+		<tr>
+		    <td class="checkbox"></td>
+		    <td class="name"><a href="#">Filename</a></td>
+		    <td class="suffix"><a href="#">Suffix</a></td>
+		    <td class="size"><a href="#">Size</a></td>
+		    <td class="date"><a href="#">Date</a></td>
+		</tr>
+	    </table>
+	</section>
+	
+	{*
+	 * Up dir -only if we are in a subdir
+	 *}
+	{if count($path) > 1}
+	<section class="folder-up">
+	    <a n:href="default, path => $backpath ">
+		<table>
+		    <tr>
+			<td class="checkbox"></td>
+			<td class="name"><span>[..] Go to upper directory</span></td>
+			<td class="suffix"></td>
+			<td class="size"></td>
+			<td class="date"></td>
+		    </tr>
+		</table>
+		</a>
+	</section>
+	{/if}
+	
+	
+	{foreach $listDirs as $dir}
+	<section class="folder">
+	    <a n:href="default, path => $dir->Path ">
+		<table>
+		    <tr>
+			<td class="checkbox"><input type="checkbox"></td>
+			<td class="name"><span title="{$dir->Name}">{$dir->Name}</span></td>
+			<td class="suffix"></td>
+			<td class="size">{$dir->Size|Bytes}</td>
+			<td class="date">{$dir->Date|date:'%Y/%m/%d %H:%M:%S'}</td>
+		    </tr>
+		</table>
+		</a>
+	</section>
+	{/foreach}
+	
+	
+	{foreach $listFiles as $file}
+	<section class="file {$file->IconName}">
+	    <a n:href="File:default, path => $file->Path ">
+		<table>
+		    <tr>
+			<td class="checkbox"><input type="checkbox"></td>
+			<td class="name"  title="{$file->Name}">
+			    <span>{$file->Name}</span>
+			</td>
+			<td class="suffix">{$file->Suffix}</td>
+			<td class="size">{$file->Size|Bytes}</td>
+			<td class="date">{$file->Date|date:'%Y/%m/%d %H:%M:%S'}</td>
+		    </tr>
+		</table>
+	    </a>
+	</section>
+	{/foreach}
+	
+    </div>
+</div>
+{/block}
+
+{block sidebar}
+<h3>Select:</h3>
+<ul>
+    <li><a href="javascript:selectAll()">All</a>
+    <li><a  href="javascript:selectNone()">None</a>
+    <li><a  href="javascript:selectInvert()">Invert</a>
+</ul>
+
+<ul>
+    <li><a  href="#">Download</a>
+    <li><a  href="#">Move</a>
+    <li><a  href="#">Rename</a>
+    <li><a  href="#">Delete</a>
+</ul>
+<ul>
+    <li><a  href="#">Upload</a>
+</ul>
+{/block}
+
+
+{block scripts}
+{include #parent}
+<script src="{$basePath}/filemanager/js/listView.js"></script>
+{/block}
+
+
+{block head}
+{if $debug_less}
+<link rel="stylesheet/less" type="text/css" href="{$basePath}/filemanager/css/listView.less" />
+{else}
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/filemanager/css/listView.css">
+{/if}
+<style>
+</style>
+{/block}

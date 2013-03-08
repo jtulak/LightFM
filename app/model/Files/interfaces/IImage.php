@@ -12,22 +12,11 @@
 namespace LightFM;
 
 /**
+ * Interface for each class that wants to represent an image file.
  * 
  * 
  */
- class ImageFile extends File implements IImage{
-     
-     
-     // overwriting parent's value
-    protected $iconName = 'file-image';
-     
-     
-    protected static $priority = 0;
-        
+ interface IImage {
     
-    public static function knownFileType($file) {
-	return \LightFM\Filetypes::isImage($file);
-    }
-
     
 }

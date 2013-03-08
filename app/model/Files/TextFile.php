@@ -15,7 +15,7 @@ namespace LightFM;
  * @property string $Syntax
  * @property-read object $Highlighter Syntax highlighter
  */
- class TextFile extends File implements IFile{
+ class TextFile extends File implements IText{
      
     /**
      *	The presenter called for this file
@@ -86,6 +86,10 @@ namespace LightFM;
 	return $uniq;
     }
     
+    /**
+     * Return actually used syntax
+     * @return string
+     */
     public function getSyntax(){
 	if($this->syntax == NULL){
 	    
@@ -164,7 +168,7 @@ namespace LightFM;
 
 
     public function getTemplateName() {
-	return "text";
+	return "default";
     }
     
     public static function knownFileType($file) {
@@ -200,6 +204,10 @@ namespace LightFM;
 	}
     }
     
+    /**
+     * return raw content from the file
+     * @return string
+     */
     public function getContent(){
 	return implode(file($this->fullPath));
     }

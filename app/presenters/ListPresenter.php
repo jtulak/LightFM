@@ -37,35 +37,4 @@ class ListPresenter extends BasePresenter {
 	//dump();
     }
 
-    /**
-     * Will remove hidden items from the array
-     * @param type $arr
-     */
-    protected function removeHidden(&$arr){
-	foreach ($arr as $key => $item){
-	    if($item->Hidden) unset($arr[$key]);
-	}
-	
-    }
-
-
-
-    /**
-     * Return path in given node in array where URI is as a key and dir name
-     * is as a value. The root is on first place.
-     * @param LightFM\Node $node
-     * @return array
-     */
-    protected function getPath(LightFM\Node $node) {
-	$path = array();
-	$last = $node;
-	while ($last instanceof \LightFM\Directory) {
-	    $path[$last->Path] = $last->name . '/';
-	    if ($last->usedChild == NULL)
-		break;
-	    $last = $last->usedChild;
-	}
-	return $path;
-    }
-
 }
