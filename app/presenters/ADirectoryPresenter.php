@@ -78,8 +78,6 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	$this->template->backpath = '/';
 	$i = count($path);
 	foreach($path as $item){
-	    // instead of the root we want only '/' and we want to ommit 
-	    // the last item in the path
 	    if($i-- > 1 && $i < count($path)-1){
 		$this->template->backpath .= $item;
 	    }
