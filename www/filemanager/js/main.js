@@ -34,24 +34,24 @@ $(function(){
 	
 	if(sidebar.width() != 0){
 	    // if the sidebar is hidden show it
-	    sidebar.animate({'width':'0'},200);
-	    sidebar.children().animate({'width':'0'},200).hide(200,function(){
+	    sidebar.animate({'width':'0'},200,function(){
 		// call callbacks After and disable during
 		forEachCallback(sidebarOnChangeAfter);
 		// delay for ensuring that the callbacks will be called also after
 		// finishing
 		setTimeout(function(){clearInterval(sidebarOnChangeDuringTimer)},50);
 	    });
+	    //sidebar.children().animate({'width':'0'},200).hide(200);
 	}else{
 	    // else hide it
-	    sidebar.animate({width:width},200)
-	    sidebar.children().css({'width':width}).show(200,function(){
+	    sidebar.animate({width:width},200,function(){
 		// call callbacks After and disable during
 		forEachCallback(sidebarOnChangeAfter);
 		// delay for ensuring that the callbacks will be called also after
 		// finishing
 		setTimeout(function(){clearInterval(sidebarOnChangeDuringTimer)},50);
 	    });
+	    //sidebar.children().css({'width':width}).show(200);
 	    
 	}
     }).hover(function(e) {
@@ -65,11 +65,11 @@ $(function(){
     /*
      * enabling scrolling sidebar
      */
-    $(".for-fixed").addClass("fixed");
-    sidebarFixing();
+    //$(".for-fixed").addClass("fixed");
+   /* sidebarFixing();
     $(window).scroll(function(){
 	sidebarFixing();
-    });
+    });*/
     
     
     
@@ -81,35 +81,35 @@ $(function(){
  * 
  */
 function sidebarFixing(){
-    var sidebar = $("#sidebar");
-    // break if sidebar has nothing inside
-    if(typeof sidebar.children('.border').offset() === 'undefined') return;
-    
-    var fixed = $(".fixed");
-	
-    var offset = sidebar.offset().top;
-    /** menu */
-    if($(window).height() > fixed.height()+offset){
-	// if there is enough of space, then we can have the bar fixed
-	fixed.css({"position":"fixed","top":Math.max(offset-$(this).scrollTop(),0)});
-
-    }else{
-	// protection for small screens where some buttons could become inaccesible
-	// so there keep the scrollbar static
-	fixed.css({"position":"relative", "top":0});
-    }
-    
-    
-    var middle = fixed.offset().top+offset;
-    //console.log(middle);
-    /** control (the arrow on the side) */
-    /*var middle = Math.max(
-	    $(this).scrollTop()+$(window).height()/2-offset,
-	    80
-	);
-    */
-    $("#sidebar-controll").height(sidebar.height()).css({'background-position':'100% '+middle+'px'})
-    .find(".gradient").height(sidebar.height());
+//    var sidebar = $("#sidebar");
+//    // break if sidebar has nothing inside
+//    if(typeof sidebar.children('.border').offset() === 'undefined') return;
+//    
+//    var fixed = $(".fixed");
+//	
+//    var offset = sidebar.offset().top;
+//    /** menu */
+//    if($(window).height() > fixed.height()+offset){
+//	// if there is enough of space, then we can have the bar fixed
+//	fixed.css({"position":"fixed","top":Math.max(offset-$(this).scrollTop(),0)});
+//
+//    }else{
+//	// protection for small screens where some buttons could become inaccesible
+//	// so there keep the scrollbar static
+//	fixed.css({"position":"relative", "top":0});
+//    }
+//    
+//    
+//    var middle = fixed.offset().top+offset;
+//    //console.log(middle);
+//    /** control (the arrow on the side) */
+//    /*var middle = Math.max(
+//	    $(this).scrollTop()+$(window).height()/2-offset,
+//	    80
+//	);
+//    */
+//    $("#sidebar-controll").height(sidebar.height()).css({'background-position':'100% '+middle+'px'})
+//    .find(".gradient").height(sidebar.height());
     
 }
 
