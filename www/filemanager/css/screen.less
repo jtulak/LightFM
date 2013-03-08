@@ -38,6 +38,8 @@ h1 {
 #outer-box {
     background-color: @color-light;
     width: 100%;
+    //max-height: 100%;
+    position: relative;
     .box-shadow(0 0 5pt, 30%);
 
     @media only screen and (min-width: @page-width-plus){
@@ -50,17 +52,6 @@ h1 {
     header {
 	position:relative;
 
-    }
-    section {
-	width: 100%;
-    }
-    footer {
-	border-top: 1px solid lighten(@color-innerBorder,10%);
-	text-align: center;
-	line-height: 200%;
-	color: darken(@color-light,30%);
-	font-size: 80%;
-	background-color: darken(@color-light,10%);
     }
 
     .options {
@@ -75,8 +66,16 @@ h1 {
     }
 }
 
+#footer {
+    border-top: 1px solid lighten(@color-innerBorder,10%);
+    text-align: center;
+    line-height: 200%;
+    color: darken(@color-light,30%);
+    font-size: 80%;
+    background-color: darken(@color-light,10%);
+}
 
-header {
+#header {
     border-bottom: 1px solid @color-outerBorder;
     background-color: white;
 }
@@ -138,7 +137,7 @@ header {
 }
 
 //the column for showing/hiding the sidebar
-#sidebar-controll {
+#sidebar-control {
     width: @sidebar-control-width;
     height: 100%;
     cursor: pointer;

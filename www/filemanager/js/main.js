@@ -19,7 +19,7 @@ $(function(){
     /** 
      * showing/hiding the sidebar
      */
-    $("#sidebar-controll ").click(function(){
+    $("#sidebar-control ").click(function(){
 	// test if it is hidden or not
 	var width = $(".sidebar-content-width").width();
 	var sidebar = $("#sidebar-content");
@@ -60,6 +60,12 @@ $(function(){
       }, function(e) {
 	$(this).hoverFlow(e.type, { opacity: 0.6 }, 'fast');
       });
+      
+      
+      
+      /************************************************************************/
+      
+      
       
       
     /*
