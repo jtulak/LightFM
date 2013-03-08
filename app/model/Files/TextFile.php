@@ -132,8 +132,11 @@ namespace LightFM;
 		
 		case 'html':
 		case 'php':
-		case 'xml':
 		    $output = new \FSHL\Lexer\Html();
+		    break;
+		
+		case 'xml':
+		    $output = new \FSHL\Lexer\HtmlOnly();
 		    break;
 		
 		case 'ini':
