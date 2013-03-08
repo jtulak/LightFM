@@ -16,9 +16,11 @@
 class GalleryPresenter extends ADirectoryPresenter{
 
     
-    protected $displayName = 'Gallery';
+    protected static  $displayName = 'Gallery';
+    protected static $order = 1;
 
     public function renderDefault() {
+	parent::renderDefault();
 	// send to template
 	$this->template->path = $this->getPath($this->root);
 	

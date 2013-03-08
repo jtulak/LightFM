@@ -15,10 +15,11 @@
  */
 class ListPresenter extends ADirectoryPresenter{
 
-    protected $displayName = 'List';
+    protected  static $displayName = 'List';
+    protected static $order = 0;
     
     public function renderDefault() {
-
+	parent::renderDefault();
 	// send to template
 	$this->template->path = $this->getPath($this->root);
 	

@@ -1,4 +1,6 @@
 {** 
+ * @param array $directoryPresenters
+ * @param string   $actualPresenter - [presenter] from $directoryPresenters
  * @param array $path	list of directories from root to the actual folder/file
  * @param array $listFiles
  * @param array $listDirs
@@ -30,8 +32,12 @@
     
     <div id="views">
 	<ul>
-	    <li><a  class="tab list active">List</a>
-	    <li><a class="tab gallery" href="{link Gallery:default}">Gallery</a>
+	    {foreach $directoryPresenters as $i => $presenter}
+	    <li><a  n:class="tab, strtolower($presenter['presenter']), $actualPresenter == $presenter['presenter']? active"
+		    n:href="$presenter['presenter'].':default'">{$presenter['name']}</a>
+	    {/foreach}
+	    
+	    {*<li><a class="tab gallery" href="{link Gallery:default}">Gallery</a>*}
 	</ul>
     </div>
     <div style="clear:both"></div>
