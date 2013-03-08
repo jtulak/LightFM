@@ -7,6 +7,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     // TODO move comments to INode
 
     /**
+     * List of all know interfaces this presenter can show.
+     * Eg. IText for only text files, IDirectory for directories, IFile for 
+     * all files or INode for everything.
+     * 
+     * @var array 
+     */
+    protected $knownInterfaces = array();
+
+
+    /**
      * @persistent
      */
     public $path = "/";
@@ -38,10 +48,19 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      * @param \LightFM\Node $file
      */
     protected function selectCorrectPresenter(\LightFM\Node $file) {
-	// do nothing if we are alredy in it
-	if (get_class($this) == $this->viewed->Presenter . 'Presenter')
-	    return;
-
+	// test if this presenter knows the file
+	// and if knows, do nothing
+	foreach ($this->knownInterfaces as $interface){
+	    if($file instanceof $interface ){
+		return;
+	    }
+	    $interface = "\\LightFM\\".$interface;
+	    if($file instanceof $interface ){
+		return;
+	    }
+		
+	}
+	// else redirect to the default one
 	$this->redirect($this->viewed->Presenter . ':default');
     }
 
@@ -103,7 +122,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      * Return verified and corrected patch (removed "//" and so)
      * @param string $path
      * @throw Nette\Application\ForbiddenRequestException
-     * @return stríjg
+     * @return string
      */
     protected function verifyPath($path) {
 	if (preg_match('/(^\.\.\/)|(\/\.\.$)|(\/\.\.\/)/', $path) != FALSE)

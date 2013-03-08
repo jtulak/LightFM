@@ -13,6 +13,9 @@
 
 class TextFilePresenter extends FilePresenter {
 
+    
+    protected $knownInterfaces = array('IText');
+    
     /**
      * User selected syntax highlight
      * 

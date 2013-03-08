@@ -13,6 +13,7 @@
 
 class FilePresenter extends BasePresenter {
 
+    protected $knownInterfaces = array('IFile');
 
     public function actionDownload($path) {
 	$this->redirectUrl($this->getHttpRequest()->url->basePath .$this->path);

@@ -28,7 +28,9 @@ abstract class Node extends \Nette\Object implements INode{
 
     
     /**
-     *	The presenter called for this file
+     *	The DEFAULT presenter called for this file
+     *	Note: If the given presenter will not know any interface which this
+     * class is implementing, it will lead to a infinite redirecting!
      * @var string
      */
     protected $presenter =  'List';

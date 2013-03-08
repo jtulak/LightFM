@@ -6,6 +6,9 @@
  */
 class GalleryPresenter extends BasePresenter {
 
+    
+    protected $knownInterfaces = array('IDirectory');
+    
     public function actionDefault() {
 	parent::actionDefault();
 

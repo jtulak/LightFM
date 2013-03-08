@@ -87,7 +87,7 @@
 	
 	{foreach $listFiles as $file}
 	<section class="file {$file->IconName}">
-	    <a n:href="File:default, path => $file->Path ">
+	    <a n:href="{$file->Presenter}:default, path => $file->Path ">
 		<table>
 		    <tr>
 			<td class="checkbox"><input type="checkbox"></td>
