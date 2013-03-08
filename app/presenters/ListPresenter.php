@@ -15,6 +15,7 @@
  */
 class ListPresenter extends ADirectoryPresenter{
 
+    protected $displayName = 'List';
     
     public function renderDefault() {
 

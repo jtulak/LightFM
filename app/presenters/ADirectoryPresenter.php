@@ -11,15 +11,26 @@
 
 /**
  * Description of ADirectoryPresenter
- *
+ * @property-read string $DisplayName Displayed name of the presenter
  */
 abstract class ADirectoryPresenter extends BasePresenter  implements IDirectoryPresenter {
 
-    
+    /**
+     *	List of known interfaces for displaying files
+     * @var array
+     */
     protected $knownInterfaces = array('IDirectory');
     
+    /**
+     * Displayed name of the presenter
+     * @var String
+     */
+    protected $displayName;
+    
    
-   
+   public function getDisplayName(){
+       return $this->displayName;
+   }
     
 }
 

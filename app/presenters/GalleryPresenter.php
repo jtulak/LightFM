@@ -16,6 +16,7 @@
 class GalleryPresenter extends ADirectoryPresenter{
 
     
+    protected $displayName = 'Gallery';
 
     public function renderDefault() {
 	// send to template
