@@ -65,11 +65,11 @@ $(function(){
     /*
      * enabling scrolling sidebar
      */
-  /*  $(".for-fixed").addClass("fixed");
+    $(".for-fixed").addClass("fixed");
     sidebarFixing();
     $(window).scroll(function(){
 	sidebarFixing();
-    });*/
+    });
     
     
     
@@ -108,8 +108,8 @@ function sidebarFixing(){
 	    80
 	);
     */
-    /*$("#sidebar-controll").height(sidebar.height()).css({'background-position':'100% '+middle+'px'})
-    .find(".gradient").height(sidebar.height());*/
+    $("#sidebar-controll").height(sidebar.height()).css({'background-position':'100% '+middle+'px'})
+    .find(".gradient").height(sidebar.height());
     
 }
 
