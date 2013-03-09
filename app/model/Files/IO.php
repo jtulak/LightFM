@@ -143,14 +143,16 @@ abstract class IO extends \Nette\Object {
      */
     public static function createFileType($fullPath) {
 	$classes = array();
+	
+	//dump($fullPath);
 	foreach (self::getFileModules() as $class) {
 	    if ($class::knownFileType(DATA_ROOT . $fullPath)) {
 		// if the class know this filetype
-		
+		//dump($class::getPriority() . ' # '.$class);
 		$classes[$class::getPriority()] = $class;
 	    }
 	}
-	rsort($classes);
+	krsort($classes);
 	if (count($classes) == 0)
 	    throw new \Nette\FatalErrorException("No possible node typefound! Probably missing the default class LightFM\File.");
 
