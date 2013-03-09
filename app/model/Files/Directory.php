@@ -73,7 +73,7 @@ class Directory extends Node implements IDirectory {
 	    // if this function wasn't called yet
 	    foreach ($this->listDirs as $dir) {
 		$subdir = IO::createPath($this->path . '/' . $dir, $dir, $this->Config);
-		$file->Parent = $this;
+		$subdir->Parent = $this;
 		if (!$subdir->Dummy) {
 		    array_push($this->listDirsObj, $subdir);
 		}
