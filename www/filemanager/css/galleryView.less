@@ -155,14 +155,7 @@ ol,ul {
 	border-bottom: 1px solid lighten(@color-outerBorder,20%);
 	background: @list-light;
 	
-	&.image{
-	    margin: 1em;
-	    display: inline-block;
-	    width: 15em;
-	    text-align: center;
-	    .rounded-corners(0.8em);
-	    border:1px solid lighten(@color-outerBorder,20%);
-	}
+	
 	a {
 	    color: @color-text;
 	    text-decoration: none;
@@ -185,11 +178,12 @@ ol,ul {
 	    td {  
 	    }
 	    .checkbox {
+		 width:4.8em;
+		 text-align: left;
 	     }
-	    .name {	
+	    .name {
 		span {
 		    display: block;
-			width: 15em;
 		   
 
 		    overflow: hidden;
@@ -262,10 +256,6 @@ ol,ul {
 		position: absolute;
 		left:0.5em;
 	    }
-	    .checkbox {
-		 width:4.8em;
-		 text-align: left;
-	     }
 	}
 	&.folder-up{
 	    .date{
@@ -324,6 +314,20 @@ ol,ul {
 		
 		.filetype-icon('file-image');
 	    }
+	}
+
+	&.image{
+
+	    .checkbox {
+		 width:auto;
+		 text-align: center;
+	     }
+	    margin: 1em;
+	    display: inline-block;
+	    width: 15em;
+	    text-align: center;
+	    .rounded-corners(0.8em);
+	    border:1px solid lighten(@color-outerBorder,20%);
 	}
    }
 }
