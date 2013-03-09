@@ -23,6 +23,10 @@ class Filetypes extends \Nette\Object {
     protected static $usedMimetypes = array();
     
     
+    private static $archiveFiles = array(
+	    'application/zip'
+    );
+    
     private static $imageFiles = array(
 	    'image/'
     );
@@ -42,9 +46,20 @@ class Filetypes extends \Nette\Object {
     }
 
     /**
-     *  return category of image or false, if it is not an image
+     *  return true, if the file is an archive file
      * @param string $path
-     * @return mixed
+     * @return boolean
+     */
+    public static function isArchive($path) {
+	$mime = self::getMimeType($path);
+	array_push(self::$usedMimetypes,$mime);
+	return self::searchArray($mime, self::$archiveFiles);
+    }
+    
+    /**
+     *  return true, if the file is an image file
+     * @param string $path
+     * @return boolean
      */
     public static function isImage($path) {
 	$mime = self::getMimeType($path);
@@ -54,7 +69,7 @@ class Filetypes extends \Nette\Object {
 
     /**
      *  
-     *  return category of text file or false, if it is not an image
+     *  return true, if the file is a text file
      * @param string $path
      * @return boolean
      */
