@@ -60,6 +60,13 @@ class ImagePresenter extends FilePresenter{
 	    // we have an thumbnail
 	    $image = \Nette\Image::fromString($cache->load($imagePath));
 	}
+	
+	// prepare for sending - enable browser cache 
+	$httpResponse = $this->getHttpResponse();
+	$httpResponse->setExpiration('+ 1 hour');
+	$httpResponse->setHeader('Pragma', 'cache');
+	
+	// send
 	$image->send();
 	$this->terminate();
     }
