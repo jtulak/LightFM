@@ -153,11 +153,12 @@ abstract class IO extends \Nette\Object {
 	    }
 	}
 	krsort($classes);
+	
 	if (count($classes) == 0)
 	    throw new \Nette\FatalErrorException("No possible node typefound! Probably missing the default class LightFM\File.");
 
-	
-	return new $classes[0]($fullPath);
+	$top=array_shift($classes);
+	return new $top($fullPath);
     }
 
     
