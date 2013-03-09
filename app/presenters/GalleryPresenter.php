@@ -38,6 +38,9 @@ class GalleryPresenter extends ADirectoryPresenter{
 	//$find =  \LightFM\IO::findPath("/");
 	//$find = \LightFM\IO::findPath("/data1/gallery/gallery");
 	//dump($find);
+	
+	// TODO removing of old thumbnails - if no item in this dir has the hash, solve directory diferenciating.
+	// TODO thumbnails in FF are bad
     }
     
     /**
