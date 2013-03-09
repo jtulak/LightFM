@@ -20,7 +20,7 @@ class Filetypes extends \Nette\Object {
     
     
     // primary for developing/debugging
-    public static $usedMimetypes = array();
+    protected static $usedMimetypes = array();
     
     
     private static $imageFiles = array(
@@ -35,6 +35,11 @@ class Filetypes extends \Nette\Object {
 	    'application/xml',
     ); 
     
+    
+    public static function getUsedMimetypes(){
+	self::$usedMimetypes = array_unique(self::$usedMimetypes);
+	return static::$usedMimetypes;
+    }
 
     /**
      *  return category of image or false, if it is not an image
@@ -43,6 +48,7 @@ class Filetypes extends \Nette\Object {
      */
     public static function isImage($path) {
 	$mime = self::getMimeType($path);
+	array_push(self::$usedMimetypes,$mime);
 	return self::searchArray($mime, self::$imageFiles);
     }
 
