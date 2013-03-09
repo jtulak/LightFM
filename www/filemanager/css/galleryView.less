@@ -1,0 +1,339 @@
+@import "./params.less";
+#list-view {
+@low:0%;
+@high:5%;
+@list-light:lighten(@color-medium,@high);
+@list-hover:lighten(@color-medium,3%);
+@list-dark:lighten(@color-medium,@low);
+
+@list-line-height-big: 2.5em;
+@list-line-height-small: 2.2em;
+@list-checkbox-size: 1.5em;
+
+
+@list-checkbox-top-small: (@list-line-height-small - @list-checkbox-size)/2;
+@list-checkbox-top-big: (@list-line-height-big - @list-checkbox-size)/2;
+
+
+
+
+ol,ul {
+	display: inline-block;
+	margin:0;
+	padding:0;
+	li {
+	    display: inline-block;
+	    list-style:none;
+	    a {
+		display: inline-block;
+		padding: 0pt 1em;
+		margin:0;
+		margin-left: -1px;
+		border: 1px solid lighten(@color-outerBorder,10%);
+		//border-width: 1px 1px 1px 0; // we want to have thiner borders between links
+		background-color: @nav-bg;
+		color: @nav-text;
+		text-decoration: none;
+		
+		&:hover{
+		    background-color: @nav-bg-hover;
+		    color: @nav-text-hover;
+		}
+		&.inactive {
+		    .opacity(@nav-inactive-opacity);
+		    background-color: @nav-bg;
+		    color: @nav-text;
+		    cursor:default;
+		}
+	    }
+	    // first item needs to has all borders
+	    &:first-child {a { 
+		border-width: 1px;
+	    }}
+	}
+    }
+
+
+#navigation {
+	display: inline-block;
+    line-height: 130%;
+	font-size: 110%;
+    margin-bottom:0.5em;
+    @media only screen and (max-width: @screen-small){
+	    line-height: 150%;
+    }
+
+    ol {
+	li {
+	    a{.rounded-corners(0);}
+	    // first item needs to has all borders
+	    &:first-child {a { 
+		.rounded-corners-top-left();
+		.rounded-corners-bottom-left();
+	    }}
+	    &:last-child {a{ 
+		.rounded-corners-top-right();
+		.rounded-corners-bottom-right();
+	    }}
+	    
+	}
+    }
+
+}
+
+#views {
+    position: relative;
+    z-index: 10; // because the tab should looks like part of #data, so it must
+		// be over the #data
+    display: inline-block;
+    float: right;
+    font-size: 110%;
+    line-height: 150%;
+    margin-top: 0.5em;
+    margin-right:0;
+    .tab {
+	background-size: 1.4em;
+	background-repeat: no-repeat;
+	background-position: 5px 50%;
+	padding-left: 2em;
+    }
+    .list {
+	//background-image: url('../images/list.png');
+	background-image: url('../images/list-icon.svg');
+	
+    }   
+    .gallery {
+	//background-image: url('../images/gallery.png');
+	background-image: url('../images/gallery.svg');
+    }   
+    ul {
+	
+	li {
+	    
+	    a{
+		display: inline-block;
+		border-color: @color-innerBorder;
+		border-width: 1px 1px 0px 0px;
+		//border-bottom:1px solid  @nav-bg;
+		border-bottom:0;
+		margin:0;
+		&.active {
+			background-color: @color-medium;
+			border-bottom:1px solid  @color-medium;
+			color: @color-text;
+			cursor: default;
+		}
+		
+	    }
+	    // first item needs to has all borders
+	    &:first-child {a { 
+
+		border-left-width: 1px;
+		.rounded-corners-top-left();
+	    }}
+	    &:last-child {a { 
+		.rounded-corners-top-right();
+	    }}
+	}
+    }
+}
+
+#data{
+    position: relative;
+    top: -1px;
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+    background-color: @color-medium;
+    border: 1px solid  @color-innerBorder;
+    //padding:4pt;
+    min-height: 200pt;
+    height: 100%;
+    section{
+	position: relative;
+	border-bottom: 1px solid lighten(@color-outerBorder,20%);
+	background: @list-light;
+	
+	&.image{
+	    margin: 1em;
+	    display: inline-block;
+	    width: 15em;
+	    text-align: center;
+	    .rounded-corners(0.8em);
+	    border:1px solid lighten(@color-outerBorder,20%);
+	}
+	a {
+	    color: @color-text;
+	    text-decoration: none;
+	}
+		    
+	input {
+	    margin: 0 auto;
+	    top: @list-checkbox-top-big;
+	    @media only screen and (min-width: @screen-small){
+		top: @list-checkbox-top-small;
+	    }
+	    height: @list-checkbox-size;
+	    width: @list-checkbox-size;
+	    border: 1px solid lighten(@color-outerBorder,20%);
+	    background: darken(@list-light,10%);
+	}
+
+	table {
+	    width: 100%;
+	    td {  
+	    }
+	    .checkbox {
+	     }
+	    .name {	
+		span {
+		    display: block;
+			width: 15em;
+		   
+
+		    overflow: hidden;
+		    white-space:nowrap; 
+		    text-overflow:ellipsis;
+
+		    line-height: @list-line-height-big;
+		    height: @list-line-height-big;
+		    @media only screen and (min-width: @screen-small){
+			line-height: @list-line-height-small;
+			height:@list-line-height-small;
+		    }
+		}
+	     }
+	    .thumb{
+		padding: 0.8em;
+		img {
+		    background-image: url('../images/missing-image.svg');
+		    background-size: contain;
+		    background-repeat: no-repeat;
+		}
+	    }
+	    .resolution {
+		width:6.5em;
+	    }
+	    
+	    .date{
+		white-space:nowrap; 
+		width:6.5em;
+		font-size: 90%;
+		 
+    	     }
+	     
+	 }
+
+	&.header {
+	    a {
+		//font-weight: bold;	
+		text-decoration: underline;
+		color: @color-text;
+		&:hover{
+		    color: lighten(@color-text,20%);
+		}
+	    }
+	    /* Gradient ************************************************************/
+	    background: -moz-linear-gradient(top, @list-dark 0%, @list-light 100%); /* FF3.6+ */
+	    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@list-dark), color-stop(100%,@list-light)); /* Chrome,Safari4+ */
+	    background: -webkit-linear-gradient(top, @list-dark 0%,@list-light 100%); /* Chrome10+,Safari5.1+ */
+	    background: -o-linear-gradient(top, @list-dark 0%,@list-light 100%); /* Opera 11.10+ */
+	    background: -ms-linear-gradient(top, @list-dark 0%,@list-light 100%); /* IE10+ */
+	    background: linear-gradient(to bottom, @list-dark 0%,@list-light 100%); /* W3C */
+	    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@{list-dark}', endColorstr='@{list-light}',GradientType=0 ); /* IE6-9 */
+	    /* Gradient ************************************************************/
+	}
+	&.folder{
+	    .date{
+		white-space:nowrap; 
+		width:10em;
+    	     }
+	    .filetype-icon('folder');
+	    &:hover,&:active{
+		background-color: @list-hover;
+	    }
+	    a {
+		color: lighten(@color-text,30%);
+	    }
+	    input {
+		position: absolute;
+		left:0.5em;
+	    }
+	    .checkbox {
+		 width:4.8em;
+		 text-align: left;
+	     }
+	}
+	&.folder-up{
+	    .date{
+		white-space:nowrap; 
+		width:10em;
+    	     }
+	    .checkbox {
+		 width:4.8em;
+		 text-align: left;
+	     }
+	    .filetype-icon('up');
+	    &:hover,&:active{
+		background-color: @list-hover;
+	    }
+	    a {
+		color: lighten(@color-text,30%);
+	    }
+	}
+	&.file{
+	    
+	    .filetype-icon('file');
+	    &:hover,&:active{
+		background-color: @list-hover;
+	    }
+	
+	    &.file-text{
+		
+		.filetype-icon('file-text');
+
+		&.css{
+		    
+		    .filetype-icon('file-text-css');
+		}
+		&.js{
+		    
+		    .filetype-icon('file-text-js');
+		}
+		&.ini{
+		    
+		    .filetype-icon('file-text-ini');
+		}
+		&.xml{
+		    
+		    .filetype-icon('file-text-xml');
+		}
+		&.php{
+		    
+		    .filetype-icon('file-text-php');
+		}
+		&.html{
+		    
+		    .filetype-icon('file-text-html');
+		}
+	    }
+	    &.file-image{
+		
+		.filetype-icon('file-image');
+	    }
+	}
+   }
+}
+
+
+} // end of list-view
+.js{#list-view{
+     #data {
+	min-height: inherit;
+	//height: 18em;
+	//overflow: hidden;
+	overflow-y: scroll;
+    }
+    
+}}

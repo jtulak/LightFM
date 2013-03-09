@@ -18,5 +18,18 @@ namespace LightFM;
  */
  interface IImage {
     
+     /**
+      * 
+      * @param type $bigSide	Size of the bigger side of image
+      * @param bool $crop   If the image should be cropped to fit into a rectangle
+      * @return string Relative URL for the thumbnail
+      */
+    public function getThumbnail($bigSide,$crop=TRUE);
     
+    
+    /**
+     * Return resolution of the image as a string in format AAAxBBB
+     * @return string 
+     */
+    public function getResolution();
 }

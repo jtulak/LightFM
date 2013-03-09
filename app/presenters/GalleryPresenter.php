@@ -30,12 +30,32 @@ class GalleryPresenter extends ADirectoryPresenter{
 	
 	$files = $this->viewed->Files;
 	if(!$this->showHidden) $this->removeHidden ($files);
+	$this->removeNonImages($files);
 	$this->template->listFiles = $files;
 
 
+	$this->template->basepath =$this->getHttpRequest()->url->basePath;
 	//$find =  \LightFM\IO::findPath("/");
 	//$find = \LightFM\IO::findPath("/data1/gallery/gallery");
 	//dump($find);
+    }
+    
+    /**
+     * Will remove all items that do not implements \LightFM\IImage
+     * @param array $files
+     */
+    protected function removeNonImages(array &$files){
+	if(count($files) == 0){
+	    return;
+	}
+	// get all class implementing IImage
+	$implements = \LightFM\IO::getImplementingClasses('LightFM\IImage');
+	foreach ($files as $key => $item) {
+	    // remove this object if not instance one of implementing classes
+	    if (!array_search(get_class($item), $implements) )
+		unset($files[$key]);
+	}
+	
     }
 
 }
