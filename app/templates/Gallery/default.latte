@@ -65,8 +65,8 @@
 	    <a  n:href="{$file->Presenter}:default, path => $file->Path" >
 		<table>
 		    <tr>
-			{var $thumbnail = $file->getThumbnail(190)}
-			<td colspan="3" class="thumb"><img alt="{$file->Name}" {if $thumbnail}src="{$basepath}/{$thumbnail}"{/if} width="190" height="190"/></td>
+			
+			<td colspan="3" class="thumb"><img alt="{$file->Name}" src="{link Image:thumbnail, path=>$file->Path,crop=>true,bigSide=>190}" width="190" height="190"/></td>
 		    </tr>
 		    <tr>
 			<td colspan="3" class="name" >

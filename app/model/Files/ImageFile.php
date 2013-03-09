@@ -13,10 +13,16 @@ namespace LightFM;
 
 /**
  * @property-read string $Resolution Image resolution
+ * @property-read string $Thumbnail Path to the thumbnail
  * 
  */
  class ImageFile extends File implements IImage{
      
+    /**
+     *	The presenter called for this file
+     * @var string
+     */
+    protected $presenter =  'Image';
      
      // overwriting parent's value
     protected $iconName = 'file-image';
@@ -27,15 +33,38 @@ namespace LightFM;
      */
     private $_hash;
     
+    /**
+     *	path relatively from data root to a folder in which is the image thumb
+     * @var string 
+     */
+    private $_thumbnailDirectory;
+    /**
+     * Path from data_root to the file
+     * @var String
+     */
     private $_thumbnailPath;
+    
+    
 
 
+    /**
+     * if the image is somethign what we can edit in php
+     * @var bool
+     */
     protected $isUnknown = true;
     
      
+    // overwrite from parent
     protected static $priority = 0;
     
+    
+    /**
+     * subdir in DATA_ROOT/DATA_TEMP
+     */
     const imagesDir = '/thumbnails/';
+    /**
+     * Suffix for thumb files
+     */
     const thumbSuffix = '.jpg';
     
     /**
@@ -54,9 +83,25 @@ namespace LightFM;
 	}
     }
     
+    public function getTemplateName() {
+	return "default";
+    }
+    
     protected function getThumbnailPath(){
+	if($this->_thumbnailDirectory == NULL){
+	    $this->_thumbnailDirectory = DATA_TEMP.self::imagesDir.$this->Parent->Path.'/';
+	}
+	return $this->_thumbnailDirectory;
+    }
+    
+    
+    public function getThumbnail($bigSide, $crop = TRUE) {
+	if($this->isUnknown){
+	    return '';
+	}
 	if($this->_thumbnailPath == NULL){
-	    $this->_thumbnailPath = DATA_TEMP.self::imagesDir.$this->getHash();
+	    $cropped = $crop?'_crop':'';
+	    $this->_thumbnailPath =  '/'.$this->getThumbnailPath().$this->getHash().'_'.$bigSide.$cropped.self::thumbSuffix;
 	}
 	return $this->_thumbnailPath;
     }
@@ -99,20 +144,22 @@ namespace LightFM;
       * @param bool $crop   If the image should be cropped to fit into a rectangle
       * @return string Relative URL for the thumbnail
       */
-    public function getThumbnail($bigSide,$crop=TRUE){
+    public function createThumbnail($bigSide,$crop=TRUE){
 	if($this->isUnknown){
 	    return '';
 	}
 	
-	$relativePath =  '/'.$this->getThumbnailPath().'_'.$bigSide.self::thumbSuffix;
-	$thumbPath=DATA_ROOT.$relativePath;
+	$cropped = $crop?'_crop':'';
 	
-	if(!file_exists($thumbPath)){
-	    // if thumbnail does not exists, create it
-	    if(!file_exists(DATA_ROOT.'/'.DATA_TEMP.self::imagesDir)){
-		// and maybe also create the thumbnails folder in temp
-		mkdir(DATA_ROOT.'/'.DATA_TEMP.self::imagesDir);
-	    }
+	$relativePath =  '/'.$this->getThumbnailPath().$this->getHash().'_'.$bigSide.$cropped.self::thumbSuffix;
+	//$relativePath = $this->getPath().$bigSide.$cropped;
+	
+	// $container is a global variable (from bootstrap)
+	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'thumbnails');
+	
+	
+	if($cache->load($relativePath) == NULL){
+
 	    // create thumbnail
 	    $image = \Nette\Image::fromFile($this->FullPath);
 	    if($crop){
@@ -121,8 +168,11 @@ namespace LightFM;
 		$image->resize($bigSide,$bigSide);
 	    }
 	    $image->sharpen();
-	    $image->save($thumbPath, 70);
-	    $image->destroy();
+	    $cache->save($relativePath, (string) $image, array(
+		\Nette\Caching\Cache::EXPIRE => '+ 2 weeks',
+		\Nette\Caching\Cache::SLIDING => TRUE,
+	    ));
+	    unset($image);
 	}
 	return $relativePath;
     }
@@ -136,7 +186,9 @@ namespace LightFM;
 	if($this->isUnknown){
 	    return 'Unknown';
 	}
-	return $this->getImage()->getWidth().'x'.$this->getImage()->getHeight();
+	//return $this->getImage()->getWidth().'x'.$this->getImage()->getHeight();
+	list($w,$h) = getimagesize($this->getFullPath());
+	return $w.'x'.$h;
     }
     
 }
