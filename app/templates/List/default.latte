@@ -17,13 +17,36 @@
     <div style="clear:both"></div>
     <div id="data">
 	<section class="header">
-	    <table>
+	    <table n:class="($orderReversed)?desc:asc">
 		<tr>
 		    <td class="checkbox"></td>
-		    <td class="name"><a href="#">Filename</a></td>
-		    <td class="suffix"><a href="#">Suffix</a></td>
-		    <td class="size"><a href="#">Size</a></td>
-		    <td class="date"><a href="#">Date</a></td>
+		    <td class="name" >
+			<a n:class="($orderBy=='filename')? 'sort-active' : ''" 
+			   n:href="this, orderBy=>'filename',
+				orderReversed=>($orderBy=='filename')? !$orderReversed:$orderReversed"
+			>
+			    Filename
+			</a>
+		    </td>
+		    <td class="suffix"><a n:class="($orderBy=='suffix')? 'sort-active' : ''" 
+			   n:href="this, orderBy=>'suffix',
+				orderReversed=>($orderBy=='suffix')? !$orderReversed:$orderReversed"
+			>
+			    Suffix
+			</a></td>
+		    <td class="size"><a n:class="($orderBy=='size')? 'sort-active' : ''" 
+			   n:href="this, orderBy=>'size',
+				orderReversed=>($orderBy=='size')? !$orderReversed:$orderReversed"
+			>
+			    Size
+			</a></td>
+		    <td class="date"><a n:class="($orderBy=='date')? 'sort-active' : ''" 
+			   n:href="this, orderBy=>'date',
+				orderReversed=>($orderBy=='date')? !$orderReversed:$orderReversed"
+			>
+			    Date
+			</a>
+		    </td>
 		</tr>
 	    </table>
 	</section>

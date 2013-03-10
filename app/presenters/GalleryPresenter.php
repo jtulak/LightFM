@@ -25,22 +25,23 @@ class GalleryPresenter extends ADirectoryPresenter{
 	// push subdirs and files
 	$subdirs = $this->viewed->Subdirs;
 	if(!$this->showHidden) $this->removeHidden ($subdirs);
+	$this->sortList($subdirs, $this->orderBy, $this->orderReversed);
+	
 	$this->template->listDirs = $subdirs;
 	//dump($subdirs);
 	
 	$files = $this->viewed->Files;
 	if(!$this->showHidden) $this->removeHidden ($files);
 	$this->removeNonImages($files);
+	$this->sortList($files, $this->orderBy, $this->orderReversed);
+	
 	$this->template->listFiles = $files;
 
 
 	$this->template->basepath =$this->getHttpRequest()->url->basePath;
-	//$find =  \LightFM\IO::findPath("/");
-	//$find = \LightFM\IO::findPath("/data1/gallery/gallery");
-	//dump($find);
+	
 	
 	// TODO removing of old thumbnails - if no item in this dir has the hash, solve directory diferenciating.
-	// TODO thumbnails in FF are bad
     }
     
     /**

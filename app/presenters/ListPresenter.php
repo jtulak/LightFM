@@ -24,11 +24,15 @@ class ListPresenter extends ADirectoryPresenter{
 	// push subdirs and files
 	$subdirs = $this->viewed->Subdirs;
 	if(!$this->showHidden) $this->removeHidden ($subdirs);
+	$this->sortList($subdirs, $this->orderBy, $this->orderReversed);
+	
 	$this->template->listDirs = $subdirs;
 	//dump($subdirs);
 	
 	$files = $this->viewed->Files;
 	if(!$this->showHidden) $this->removeHidden ($files);
+	$this->sortList($files, $this->orderBy, $this->orderReversed);
+	
 	$this->template->listFiles = $files;
 	
 	//dump($last->Files);

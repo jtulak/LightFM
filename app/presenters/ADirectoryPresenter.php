@@ -16,6 +16,27 @@
  */
 abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPresenter {
 
+    const ORDER_FILENAME = 'filename';
+    const ORDER_SUFFIX = 'suffix';
+    const ORDER_SIZE = 'size';
+    const ORDER_DATE = 'date';
+    const ORDER_ASC = FALSE;
+    const ORDER_DESC = TRUE;
+
+    /**
+     * Column for sorting
+     * @persistent
+     * @var string
+     */
+    public $orderBy = self::ORDER_FILENAME;
+
+    /**
+     * Way of sorting - asc/desc
+     * @persistent
+     * @var boolean
+     */
+    public $orderReversed = self::ORDER_ASC;
+
     /**
      * 	List of known interfaces for displaying files
      * @var array
@@ -28,6 +49,7 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
      * @var String
      */
     protected static $displayName;
+
     /**
      * Order of the presenters in menu - 0 is the most left
      * @var int
@@ -37,12 +59,13 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
     public static function getDisplayName() {
 	return static::$displayName;
     }
+
     public static function getOrder() {
 	return static::$order;
     }
 
     /**
-     *	Return list of all presenters that implements IDirectoryPresenter
+     * 	Return list of all presenters that implements IDirectoryPresenter
      * @return array
      */
     public function getAllDirectoryPresenters() {
@@ -53,38 +76,80 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 		unset($presenters[$key]);
 	    }
 	    $this->allDirectoryPresenters = array();
-	    foreach($presenters as $presenter){
+	    foreach ($presenters as $presenter) {
 		$this->allDirectoryPresenters[$presenter::getOrder()] = array(
-		    'name'=>$presenter::getDisplayName(),
-		    'presenter'=>  preg_replace('/Presenter$/', '', $presenter)
-		    );
+		    'name' => $presenter::getDisplayName(),
+		    'presenter' => preg_replace('/Presenter$/', '', $presenter)
+		);
 	    }
 	    ksort($this->allDirectoryPresenters);
-	    
 	}
 	return $this->allDirectoryPresenters;
     }
-    
-    public function renderDefault(){
+
+    public function renderDefault() {
 	// save the accessible presenters to a template variable
 	$this->template->directoryPresenters = $this->getAllDirectoryPresenters();
-	$this->template->actualPresenter = preg_replace('/Presenter$/','',get_class($this));
-	
-	
-	// send to template
+	$this->template->actualPresenter = preg_replace('/Presenter$/', '', get_class($this));
+
+
+	// send to template ---------
+	$this->template->orderReversed = $this->orderReversed;
+	$this->template->orderBy = $this->orderBy;
+
+	// create backpath
 	$path = $this->getPath($this->root);
 	$this->template->path = $path;
 	// backpath
 	$this->template->backpath = '/';
 	$i = count($path);
-	foreach($path as $item){
+	foreach ($path as $item) {
 	    // instead of the root we want only '/' and we want to ommit 
 	    // the last item in the path
-	    if($i-- > 1 && $i < count($path)-1){
+	    if ($i-- > 1 && $i < count($path) - 1) {
 		$this->template->backpath .= $item;
 	    }
 	}
-	
+    }
+
+    /**
+     * sort the array acording of given parameters
+     * @param array $list
+     * @param string $orderBy
+     * @param booolean $order
+     * @return array 
+     */
+    protected function sortList(array &$list, $orderBy, $order) {
+	$t = $this;
+	usort($list, function(\LightFM\Node $a, \LightFM\Node $b) use($orderBy, $order, $t) {
+		    $result = 0;
+		    switch ($orderBy) {
+			case $t::ORDER_FILENAME:
+			    $result = strcmp($a->Name, $b->Name);
+			    break;
+			case $t::ORDER_SUFFIX:
+			    if($a instanceof \LightFM\IFile && $b instanceof \LightFM\IFile){
+				$result = strcmp($a->Suffix, $b->Suffix);
+			    }
+			    break;
+			case $t::ORDER_SIZE:
+			    if ($a->Size != $b->Size) {
+				$result = ($a->Size < $b->Size) ? -1 : 1;
+			    }
+			    break;
+			case $t::ORDER_DATE:
+			    if ($a->Date != $b->Date) {
+				$result = ($a->Date < $b->Date) ? -1 : 1;
+			    }
+			    break;
+		    }
+
+		    if ($order == $t::ORDER_DESC) {
+			// if it is revered order, then reverse it
+			$result *=-1;
+		    }
+		    return $result;
+		});
     }
 
 }

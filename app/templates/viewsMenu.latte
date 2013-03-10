@@ -8,7 +8,7 @@
 	    {foreach $directoryPresenters as $i => $presenter}
 	    {var $thisPresenter = $actualPresenter == $presenter['presenter']}
 	<li><a  n:class="tab, strtolower($presenter['presenter']), $thisPresenter ? active"
-		    {if !$thisPresenter}n:href="$presenter['presenter'].':default'"{/if}>{$presenter['name']}</a>
+		    {if !$thisPresenter}n:href="$presenter['presenter'].':default', orderBy=>NULL,orderReversed=>NULL"{/if}>{$presenter['name']}</a>
 	    {/foreach}
 
 	    {*<li><a class="tab gallery" href="{link Gallery:default}">Gallery</a>*}
