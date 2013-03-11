@@ -18,17 +18,28 @@ class SettingsPresenter extends BasePresenter {
     //put your code here
     
     /**
-     * Name of presenter from which user 
+     * Name of presenter from which user came
      * @persistent
      */
-    public $presenter;
+    public $view;
+    
+    /**
+     * URL from which user  came
+     * @persistent
+     */
+    public $req;
+    
     
     public function actionPassword(){
 	parent::actionDefault();
+	
+	//$this->saveState($save);
     }
     
     public function renderPassword(){
 	$this->template->node = $this->viewed;
+	$this->template->view = $this->view;
+	$this->template->back = $this->req;
     }
     
    /**
@@ -44,13 +55,16 @@ class SettingsPresenter extends BasePresenter {
 	    // try to find the clossest password
 	    $tested = $tested->Parent;
 	}
-       dump($tested->Password);
        
        
        // TODO detect logged password also in subdirs
        // TODO redirecting to the page where user was
 	 
         $form = new Nette\Application\UI\Form($this, $name);
+	
+	$form->addGroup('password is: '.$tested->Password);
+	
+	
 	$form->addPassword('accessPassword','Access password:')
 		->addRule(Nette\Application\UI\Form::FILLED,"Password can't be empty!");
 	$form->addCheckbox('remember','Remember access');
@@ -73,10 +87,11 @@ class SettingsPresenter extends BasePresenter {
 	
 	if($values->accessPassword == $tested->Password){
 	    Authenticator::confirmAccess($values->accessPassword , $tested->Path, $values->remember);
-	    $this->redirect('List:default');
+	    $this->redirectUrl($this->req);
 	}else{
-	    $form->accessPassword->addError('Invalid password!');
-	    $this->redirect('//this');
+	    //$this->flashMessage('Invalid password!', 'error');
+	    $form['accessPassword']->addError('Invalid password!');
+	    //$this->redirect('this');
 	}
         //$this->syntax = $values->syntax;
 	//

@@ -92,10 +92,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	    try{
 		$this->testAccess($this->viewed);
 		$this->selectCorrectPresenter($this->viewed);
-		
 	    }catch(Nette\Application\ForbiddenRequestException $e){
-		
-		$this->redirect('Settings:password');
+		$this->redirect('Settings:password',array('view'=>$this->name,'req'=>(string)$this->getHttpRequest()->getUrl()));
 	    }
 	}
     }
