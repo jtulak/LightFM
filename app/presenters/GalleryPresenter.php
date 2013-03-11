@@ -16,7 +16,7 @@
 class GalleryPresenter extends ADirectoryPresenter{
 
     
-    protected static  $displayName = 'Gallery';
+    protected static  $displayName = 'Only Images';
     protected static $order = 1;
 
     public function renderDefault() {
