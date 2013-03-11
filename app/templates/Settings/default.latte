@@ -5,16 +5,14 @@
 
 {block content}
 <div id="settings">
-    <h2 class="warning">Password is required for <i>{$node->Path}</i></h2>
+    <h2 >Settings</h2>
     <div class="buttons">
-	{if !empty($back)}
-	<a  class="button back"  href="{$back}">Back to previous page</a>
-	{else}
-	<a  class="button back"  n:href="{$view}:default, path=>NULL, view=>NULL">Go to root</a>
+	{if !empty($node->Parent)}
+	<a  class="button back"  n:href="List:default, path=>$node->Parent->Path">Back to previous directory</a>
 	{/if}
     </div>
     <div class="content">
-	{control accessPassword}
+	{control settingsForm}
     </div>
 </div>
 {/block}
