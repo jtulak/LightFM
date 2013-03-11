@@ -138,7 +138,7 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 	    $config = array(
 		'ownerUsername' => "",
 		'ownerPassword' => "",
-		'accessPassword' => $parentsConfig->accessPassword,
+//		'accessPassword' => $parentsConfig->accessPassword,
 		'allowZip' => $parentsConfig->allowZip,
 		'modes' => $parentsConfig->modes,
 		'blacklist' => $parentsConfig->blacklist,
@@ -151,8 +151,8 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 	}
 	// rest is common for both default and parent
 
-	if ($this->accessPassword == NULL)
-	    $this->accessPassword = $config['accessPassword'];
+//	if ($this->accessPassword == NULL)
+//	    $this->accessPassword = $config['accessPassword'];
 
 	if ($this->allowZip == NULL)
 	    $this->allowZip = $config['allowZip'];

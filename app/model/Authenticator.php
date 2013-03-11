@@ -40,6 +40,7 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 	 */
 	public static function hasAccess($password,$path){
 	    $httpRequest = $GLOBALS['container']->httpRequest;
+	    
 	    $hash = self::accessHash($password, $path);
 	    if($httpRequest->getCookie(sha1($path)) != $hash){
 		return FALSE;

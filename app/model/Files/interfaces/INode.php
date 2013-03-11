@@ -22,7 +22,12 @@ namespace LightFM;
      public function getDate();
      public function getPath();
      
-     
+    /**
+     * Remove trailing slash from the string
+     * @param string $path
+     * @return string
+     */
+     public static function rmSlash($path);
     
     public function move(Directory $newParent);
 

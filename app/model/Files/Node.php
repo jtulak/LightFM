@@ -50,11 +50,6 @@ abstract class Node extends \Nette\Object implements INode{
      */
     protected $hidden;
 
-    /** 
-     * Contain path to the node from the lighFM data root as a string 
-     * @var string     
-     */
-    protected $path;
 
     /** 
      * LightContain parent directory (object) 
@@ -93,10 +88,18 @@ abstract class Node extends \Nette\Object implements INode{
     protected $config;
 
     /** 
+     * Contain path to the node from the lighFM data root as a string
+     * Without trailing forwardslash
+     * @var string     
+     */
+    private $_path;
+    
+    /** 
      * Absolute path in filesystem 
+     * Without trailing forwardslash
      * @var string 
      */
-    protected $fullPath;
+    private $_fullPath;
     
     
     // presenter
@@ -154,11 +157,30 @@ abstract class Node extends \Nette\Object implements INode{
     public function getSize() {
 	return $this->size;
     }
+    
+    protected function setPath($path){
+	$this->_path = self::rmSlash(preg_replace('/\/\/?/','/',$path));
+    }
     public function getPath() {
-	return preg_replace('/\/\/?/','/',$this->path);
+	return $this->_path;
+    }
+    
+    protected function setFullPath($path){
+	$this->_fullPath = self::rmSlash(preg_replace('/\/\/?/','/',$path));
     }
     public function getFullPath() {
-	return preg_replace('/\/\/?/','/',$this->fullPath);
+	return $this->_fullPath;
+    }
+    
+    /**
+     * Remove trailing slash from the string
+     * @param string $path
+     * @return string
+     */
+    public static function rmSlash($path){
+	if(substr($path,-1,1) == "/")
+	    return substr($path,0,strlen($path)-1);
+	return $path;
     }
     
 
@@ -185,19 +207,19 @@ abstract class Node extends \Nette\Object implements INode{
 	}else if(\LightFM\IO::is_file($fullPath)){
 		$this->fullPath = dirname($fullPath);*/
 	if(\LightFM\IO::is_dir($fullPath)||\LightFM\IO::is_file($fullPath)){
-		$this->fullPath = $fullPath;
+		$this->setFullPath( $fullPath);
 	}else{
 	    throw new \Nette\FileNotFoundException;
 	}
 	
-	if (!is_readable($this->fullPath)) {
+	if (!is_readable($this->getFullPath())) {
 	    throw new \Nette\Application\ForbiddenRequestException;
 	}
 
 	// get node info
-	$this->size = filesize($this->fullPath);
-	$this->lastModified = filemtime($this->fullPath);
-	$this->path = $path;
+	$this->size = filesize($this->getFullPath());
+	$this->lastModified = filemtime($this->getFullPath());
+	$this->setPath($path);
 	$this->name = basename($fullPath);
 
 	// test for hidden file/dir

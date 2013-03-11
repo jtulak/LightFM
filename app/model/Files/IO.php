@@ -172,22 +172,22 @@ abstract class IO extends \Nette\Object {
      */
     private static function createPath_tryCreate_folder($fullPath, $fullDir, $restOfPath, \LightFM\DirConfig $config) {
 	$created = new \LightFM\Directory($fullDir);
-
+	
 	// recursively create rest of the path
 	$created->usedChild = self::createPath($fullPath, $restOfPath, $config);
 	$created->usedChild->Parent = $created;
 
 	// save a child config for case of emptying of $created
-	$childPass = $created->usedChild->Password;
-	$childHidden = $created->usedChild->Hidden;
+//	$childPass = $created->usedChild->Password;
+//	$childHidden = $created->usedChild->Hidden;
 	if ($created->usedChild->dummy) {
 	    // if the subdir is blacklisted, replace by empty node
 	    $created = new \LightFM\Directory(NULL);
 	}
 
 	// copy the needs password from the child
-	$created->Password = $childPass;
-	$created->Hidden = $childHidden;
+//	$created->Password = $childPass;
+//	$created->Hidden = $childHidden;
 
 	return $created;
     }
@@ -269,7 +269,6 @@ abstract class IO extends \Nette\Object {
 
 	// assign the config for this directory
 	$created->Config = $config;
-
 
 	return $created;
     }

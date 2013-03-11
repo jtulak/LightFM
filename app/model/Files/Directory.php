@@ -72,7 +72,7 @@ class Directory extends Node implements IDirectory {
 	if (count($this->listDirsObj) == 0 && count($this->listDirs) != 0) {
 	    // if this function wasn't called yet
 	    foreach ($this->listDirs as $dir) {
-		$subdir = IO::createPath($this->path . '/' . $dir, $dir, $this->Config);
+		$subdir = IO::createPath($this->getPath() . '/' . $dir, $dir, $this->Config);
 		$subdir->Parent = $this;
 		if (!$subdir->Dummy) {
 		    array_push($this->listDirsObj, $subdir);
@@ -86,7 +86,7 @@ class Directory extends Node implements IDirectory {
 	if (count($this->listFilesObj) == 0 && count($this->listFiles) != 0) {
 	    // if this function wasn't called yet
 	    foreach ($this->listFiles as $filepath) {
-		$file = IO::createPath($this->path . '/' . $filepath, $filepath, $this->Config);
+		$file = IO::createPath($this->getPath() . '/' . $filepath, $filepath, $this->Config);
 		$file->Parent = $this;
 		if (!$file->Dummy) {
 		    array_push($this->listFilesObj, $file);
@@ -117,11 +117,11 @@ class Directory extends Node implements IDirectory {
      * 
      */
     private function scanDir() {
-	if ($handle = opendir($this->fullPath)) {
+	if ($handle = opendir($this->getFullPath())) {
 	    while (false !== ($entry = readdir($handle))) {
 		if ($entry != "." && $entry != "..") {
 
-		    if (\LightFM\IO::is_dir($this->fullPath . '/' . $entry)) {
+		    if (\LightFM\IO::is_dir($this->getFullPath() . '/' . $entry)) {
 			$this->addSubdir($entry);
 		    } else {
 			$this->addSubfile($entry);

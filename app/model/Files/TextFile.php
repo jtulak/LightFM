@@ -192,14 +192,14 @@ namespace LightFM;
     public function getHighlightedContent($parser){
 	if($parser == 'geshi'){
 	    /** will we use GeSHi? */
-	    $g = new \GeSHi(implode(file($this->fullPath)), 'HTML');
+	    $g = new \GeSHi(implode(file($this->getFullPath())), 'HTML');
 	    return $g->parse_code();
 	    
 	}else if($parser == 'fshl'){
 	    /** Or FSHL? */
 	    $this->getFSHL()->setLexer($this->getFSHLSyntax());
 	    // the \n is there because the lexer needs \n at the end
-	    $text = $this->getFSHL()->highlight(implode(file($this->fullPath))."\n");
+	    $text = $this->getFSHL()->highlight(implode(file($this->getFullPath()))."\n");
 	    $this->parse($text);
 	    return explode("<ROWEND />",$this->parse($text));
 	}else{
@@ -212,7 +212,7 @@ namespace LightFM;
      * @return string
      */
     public function getContent(){
-	return implode(file($this->fullPath));
+	return implode(file($this->getFullPath()));
     }
  
     
