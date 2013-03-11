@@ -64,6 +64,62 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	$this->redirect($this->viewed->Presenter . ':default');
     }
 
+    
+    /**
+     * Fill $this->path, viewed and root with data
+     * @throws Nette\Application\BadRequestException
+     */
+    private function loadFiles (){
+	 // if path is empty, it means it is a root
+	if (strlen($this->path) == 0)
+	    $this->path = '/';
+	// test for forbidden "../" and similar
+	$this->path = $this->verifyPath($this->path);
+
+	// get path
+	$this->root = LightFM\IO::findPath($this->path);
+	// get the item
+	$this->viewed = $this->getLastNode($this->root);
+
+	// && $this->root->usedChild == NULL
+	if ($this->root->Dummy) {
+	    throw new Nette\Application\BadRequestException($this->path);
+	}
+
+	if(!($this instanceof SettingsPresenter)){
+	    // if we are in settings, we do not need to change presenter or check perms
+	    
+	    try{
+		$this->testAccess($this->viewed);
+		$this->selectCorrectPresenter($this->viewed);
+		
+	    }catch(Nette\Application\ForbiddenRequestException $e){
+		
+		$this->redirect('Settings:password');
+	    }
+	}
+    }
+    
+    /**
+     * Test for access rights for current user/guest.
+     * If the user can't has valid cookie, an exception will be thrown
+     * @param \LightFM\Node $node
+     * @throws Nette\Application\ForbiddenRequestException
+     */
+    protected function testAccess($node){
+	
+	
+	if(!empty($node->Password)){
+	    
+	   
+	    if(!Authenticator::hasAccess($node->Password, $node->Path)){
+		throw new Nette\Application\ForbiddenRequestException;
+	    }
+	}
+	
+    }
+
+
     /**
      * parse path, find the root and so..
      */
@@ -71,28 +127,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	// if we are in error presenter, do nothing
 	if ($this instanceof ErrorPresenter)
 	    return;
-
+	    
 
 	try {
-	    // if path is empty, it means it is a root
-	    if (strlen($this->path) == 0)
-		$this->path = '/';
-	    // test for forbidden "../" and similar
-	    $this->path = $this->verifyPath($this->path);
-
-	    // get path
-	    $this->root = LightFM\IO::findPath($this->path);
-	    // get the item
-	    $this->viewed = $this->getLastNode($this->root);
-
-	    // && $this->root->usedChild == NULL
-	    if ($this->root->Dummy) {
-		throw new Nette\Application\BadRequestException($this->path);
-	    }
-
-
-	    $this->selectCorrectPresenter($this->viewed);
-	    
+	   $this->loadFiles();
 	    
 	} catch (Nette\Application\ForbiddenRequestException $e) {
 	    $this->forward('Error:default', array('exception' => $e));
@@ -103,6 +141,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
     }
 
+    
     /**
      * Return the last child from the given node
      * @param LightFM\Node $node

@@ -22,7 +22,40 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 	/** @var Nette\Database\Connection */
 	private $database;
 
+	/**
+	 * 
+	 * @param string $password
+	 * @param string $path
+	 * @return string
+	 */
+	protected static function accessHash($password,$path){
+	    return sha1($password.$path);
+	}
 
+	
+	/**
+	 * Return TRUE if user has access
+	 * @param string $path
+	 * @return boolean
+	 */
+	public static function hasAccess($password,$path){
+	    $httpRequest = $GLOBALS['container']->httpRequest;
+	    $hash = self::accessHash($password, $path);
+	    if($httpRequest->getCookie(sha1($path)) != $hash){
+		return FALSE;
+	    }
+	    return TRUE;
+	}
+	
+	public static function confirmAccess($password,$path,$remember){
+	    $httpResponse = $GLOBALS['container']->httpResponse;
+	    $hash = self::accessHash($password, $path);
+	    if($remember){
+		$httpResponse->setCookie(sha1($path),$hash,'+ 1 hour');
+	    }else{
+		$httpResponse->setCookie(sha1($path),$hash,0);
+	    }
+	}
 
 	public function __construct(Nette\Database\Connection $database)
 	{
