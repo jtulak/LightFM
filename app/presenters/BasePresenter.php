@@ -107,15 +107,24 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      * @throws Nette\Application\ForbiddenRequestException
      */
     protected function testAccess($node){
-	
-	
-	if(!empty($node->Password)){
-	    
-	   
-	    if(!Authenticator::hasAccess($node->Password, $node->Path)){
-		throw new Nette\Application\ForbiddenRequestException;
-	    }
+	//\Nette\Diagnostics\Debugger::barDump($node);
+	$tested = $node;
+	while($tested !== NULL && empty($tested->Password)) {
+	    // try to find the clossest password
+	    $tested = $tested->Parent;
 	}
+	\Nette\Diagnostics\Debugger::barDump($tested);
+	if($tested === NULL){
+	    // if null, there is no password needed, so stop
+	    return; 
+	}
+	
+	// Here it gets only if some password is needed, but still the user can
+	// be owner, or can know the password.
+	if(!Authenticator::hasAccess($tested->Password, $tested->Path)){
+	    throw new Nette\Application\ForbiddenRequestException;
+	}
+	
 	
     }
 
@@ -133,7 +142,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	   $this->loadFiles();
 	    
 	} catch (Nette\Application\ForbiddenRequestException $e) {
-	    $this->forward('Error:default', array('exception' => $e));
+	    //$this->forward('Error:default', array('exception' => $e));
 	} catch (Nette\Application\BadRequestException $e) {
 	    dump($this->root);
 	    $this->forward('Error:default', array('exception' => $e));

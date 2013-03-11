@@ -38,7 +38,15 @@ class SettingsPresenter extends BasePresenter {
      */
      protected function createComponentAccessPassword($name)
     {
-       dump($this->viewed->Password);
+	// TODO only for dump! 
+	$tested = $this->viewed;
+	while($tested !== NULL && empty($tested->Password)) {
+	    // try to find the clossest password
+	    $tested = $tested->Parent;
+	}
+       dump($tested->Password);
+       
+       
        // TODO detect logged password also in subdirs
        // TODO redirecting to the page where user was
 	 
@@ -55,10 +63,16 @@ class SettingsPresenter extends BasePresenter {
     /** called after selection submit */
     public function accessPasswordSubmitted(Nette\Application\UI\Form $form)
     {
+	$tested = $this->viewed;
+	while($tested !== NULL && empty($tested->Password)) {
+	    // try to find the clossest password
+	    $tested = $tested->Parent;
+	}
+	
         $values = $form->getValues();
 	
-	if($values->accessPassword == $this->viewed->Password){
-	    Authenticator::confirmAccess($values->accessPassword , $this->viewed->Path, $values->remember);
+	if($values->accessPassword == $tested->Password){
+	    Authenticator::confirmAccess($values->accessPassword , $tested->Path, $values->remember);
 	    $this->redirect('List:default');
 	}else{
 	    $form->accessPassword->addError('Invalid password!');
