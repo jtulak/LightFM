@@ -14,7 +14,7 @@
 	{form dirSettingsForm}
 	<table>
 	    <tr>
-		<th >Options for folder <span class="dir-name">"{$node->Name}"<span></th>
+		<th ><h3>Options for folder <span class="dir-name">"{$node->Name}"<span></h3></th>
 	    </tr>
 	    <tr>
 		<td>
@@ -22,7 +22,7 @@
 			{label accessPassword /}
 		</td>
 	    </tr>
-	    {dump $withPassword}
+	    {dump $node}
 	    <tr n:if="$withPassword != NULL && $withPassword != $node">
 		<td>
 		    Note: This directory itself has no password set, 
@@ -39,6 +39,35 @@
 		    {/if}
 		</td>
 	    </tr>
+	    
+	    <tr>
+		<td>
+		    <h4>Select views:</h4>
+		    <table>
+			<tr>
+			    <td>Allowed</td>
+			    <td>Default</td>
+			</tr>
+			<tr>
+			    <td class="views-allowed">
+				<ul>
+				    {foreach $form->groups['checkboxes']->getControls() as $control}
+					<li>
+					    {= $control->getControl()}
+					</li>
+				    {/foreach}
+				</ul>
+			    </td>
+			    <td class="views-default">
+				{input defaultView}
+			    </td>
+			</tr>
+		    </table>
+		    
+		    
+		</td>
+	    </tr>
+	    
 	    <tr class="submit">
 		<td colspan="2">
 			{input submit}

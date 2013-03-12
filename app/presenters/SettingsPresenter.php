@@ -138,7 +138,27 @@ class SettingsPresenter extends BasePresenter {
 	
 	$form->addText('accessPassword', 'Access Password')
 		->setDefaultValue($this->viewed->Password);
+	
+	//$form->addGroup('Views');
+	$allViews = \LightFM\IO::getImplementingClasses('IDirectoryPresenter');
+	$accessible=array();
+	// remove uninstatiable classes and the rest put in an associative array
+	foreach($allViews as $key => $class){
+	    $rc = new ReflectionClass($class);
+	    if(!$rc->isInstantiable()){
+		unset($allViews[$key]);
+	    }else{
+		$accessible[$class]=$class::DISPLAY_NAME;
+	    }
+	}
+	$form->addRadioList('defaultView','Default view',$accessible)
+		->setDefaultValue($this->viewed->Presenter.'Presenter');
 	$form->addSubmit('submit','Save');
+	
+	$form->addGroup('checkboxes');
+	foreach($accessible as $key=>$name){
+	    $form->addCheckbox('view_'.$key,$name);
+	}
 	
         $form->onSuccess[] = callback($this, 'dirSettingsFormSubmitted');
         return $form;
