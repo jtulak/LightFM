@@ -155,9 +155,15 @@ class SettingsPresenter extends BasePresenter {
 		->setDefaultValue($this->viewed->Presenter.'Presenter');
 	$form->addSubmit('submit','Save');
 	
+	// create also checkboxes for enabling/disabling
 	$form->addGroup('checkboxes');
 	foreach($accessible as $key=>$name){
-	    $form->addCheckbox('view_'.$key,$name);
+	    $c = $form->addCheckbox('view_'.$key,$name);
+	    // and set default value
+	    if(in_array($key, $this->viewed->Config->Modes)){
+		$c->setDefaultValue(true);
+	    }
+	    
 	}
 	
         $form->onSuccess[] = callback($this, 'dirSettingsFormSubmitted');

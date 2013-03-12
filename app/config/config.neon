@@ -13,7 +13,8 @@ common:
 			ownerPassword: 'admin'
 			allowZip: false
 			modes:
-				guu
+				- ListPresenter
+				- GalleryPresenter
 			blacklist:
 			#	- "/filemanager"
 			#	- ".filemanager.ini"
