@@ -22,7 +22,7 @@ define('BAD_INI_SYNTAX', 1);
  * @property-read array $Blacklist 
  * @property-read string $AccessPassword
  */
-class DirConfig extends \Nette\Object implements IDirConfig{
+class DirConfig extends \Nette\Object implements IDirConfig {
 
     /** @var Array List of blacklisted names/paths */
     private $blacklist = array();
@@ -41,98 +41,91 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 
     /** @var int	last time of the config change */
     private $lastChanged = 0;
-    
+
     /** @var string	Absolute path to the connected dir */
     private $dir = NULL;
+    private $iniFile;
 
-    
-    
     public function isBlacklisted($file) {
-	if($file == "") return FALSE;
+	if ($file == "")
+	    return FALSE;
 	// remove slash at the end
-	if(substr($file,-1,1) == '/') $file = substr($file,0,-1);
-	if (in_array($file, $this->blacklist)){
+	if (substr($file, -1, 1) == '/')
+	    $file = substr($file, 0, -1);
+	if (in_array($file, $this->blacklist)) {
 	    return TRUE;
 	}
 	return FALSE;
     }
 
-    
-    public function getModes(){
+    public function getModes() {
 	return $this->modes;
     }
-    
-    public function getAllowZip(){
+
+    public function getAllowZip() {
 	return $this->allowZip;
     }
-    
-    public function getOwners(){
+
+    public function getOwners() {
 	return $this->owners;
     }
-    
-    public function getAccessPassword(){
+
+    public function getAccessPassword() {
 	return $this->accessPassword;
     }
-    
-    
-    
+
     /**
-     *	Parse the array with blacklist entries and set them to absolute
+     * 	Parse the array with blacklist entries and set them to absolute
      * path in filesystem.
      * 
      * @param array $new
      */
     private function addToBlacklist(array $new) {
-	
-	foreach($new as $item){
+
+	foreach ($new as $item) {
 	    // remove slash at the end
-	    if(substr($item,-1,1) == '/') $item = substr($item,0,-1);
-	    
-	    if(substr($item,0,1) == "/"){
+	    if (substr($item, -1, 1) == '/')
+		$item = substr($item, 0, -1);
+
+	    if (substr($item, 0, 1) == "/") {
 		// if it is path from the root
-		    $item=DATA_ROOT.$item;
-		}else{
-		    // or it can be in any dir
-		    $item=DATA_ROOT.$this->dir.'/'.$item;
-		}
-		$item = str_replace("//",'/',$item);
-		array_push($this->blacklist, $item);
+		$item = DATA_ROOT . $item;
+	    } else {
+		// or it can be in any dir
+		$item = DATA_ROOT . $this->dir . '/' . $item;
+	    }
+	    $item = str_replace("//", '/', $item);
+	    array_push($this->blacklist, $item);
 	}
-	$this->blacklist=array_unique($this->blacklist);
+	$this->blacklist = array_unique($this->blacklist);
     }
-    
-    
-    
+
     /**
      * Append an array with blacklist to this own blacklist
      * @param array $new
      */
-    private  function mergeBlacklists (array $new){
-	$this->blacklist=array_unique(array_merge($this->blacklist,$new));
-	
+    private function mergeBlacklists(array $new) {
+	$this->blacklist = array_unique(array_merge($this->blacklist, $new));
     }
-
-
 
     /**
      * Add new allowed modes.
      * @param array $new
      */
-    private function addToModes(array $new){
-	$this->modes = array_merge($this->modes,$new);
+    private function addToModes(array $new) {
+	$this->modes = array_merge($this->modes, $new);
     }
 
-    
     public function inherite(\LightFM\DirConfig $parentsConfig = NULL) {
 	if ($parentsConfig == NULL) {
 	    $config = \Nette\Environment::getConfig('defaults');
-	    $config['blacklist'] = (array)$config['blacklist'];
-	    $config['modes'] = (array)$config['modes'];
+	    $config['blacklist'] = (array) $config['blacklist'];
+	    $config['modes'] = (array) $config['modes'];
 	    // add new owner from default
-	    $this->addOwner($config['ownerUsername'], $config['ownerPassword'],$this->dir) ;
-	    
+	    $this->addOwner($config['ownerUsername'], $config['ownerPassword'], $this->dir);
+
 	    if ($config['blacklist'])
-		$this->addToBlacklist ( $config['blacklist']);
+		$this->addToBlacklist($config['blacklist']);
 	} else {
 	    // because we want to use same access for default settings and parent settings
 	    $config = array(
@@ -143,14 +136,13 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 		'modes' => $parentsConfig->modes,
 		'blacklist' => $parentsConfig->blacklist,
 	    );
-	    
+
 	    // copy ownership
 	    $this->addOwners($parentsConfig->getOwners());
-	    
+
 	    $this->mergeBlacklists($parentsConfig->blacklist);
 	}
 	// rest is common for both default and parent
-
 //	if ($this->accessPassword == NULL)
 //	    $this->accessPassword = $config['accessPassword'];
 
@@ -158,43 +150,43 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 	    $this->allowZip = $config['allowZip'];
 
 	if ($config['modes'])
-	    $this->addToModes ($config['modes']);
-
+	    $this->addToModes($config['modes']);
     }
 
-   
     public function __construct($dir) {
 	$this->dir = $dir;
-	
+
+	$this->iniFile = DATA_ROOT . $this->dir . '/' . \Nette\Environment::getConfig('dirConfig');
+
 	$defaults = \Nette\Environment::getConfig('defaults');
 	// if no file exists, simply use default settings and end
-	if(!@is_file(DATA_ROOT.$this->dir . '/' . \Nette\Environment::getConfig('dirConfig'))){
-		$this->inherite();
-		return $this;
+	if (!@is_file($this->iniFile)) {
+	    $this->inherite();
+	    return $this;
 	}
-	
-	$ini_array = parse_ini_file(DATA_ROOT.$this->dir . '/' . \Nette\Environment::getConfig('dirConfig'));
+
+	$ini_array = parse_ini_file($this->iniFile);
 
 	if (isset($ini_array['accessPassword']))
 	    $this->accessPassword = $ini_array['accessPassword'];
 
 	// set owner (at first test if something exist)
-	$ini_array['ownerUsername']=empty($ini_array['ownerUsername'])?"":$ini_array['ownerUsername'];
-	$ini_array['ownerPassword']=empty($ini_array['ownerPassword'])?"":$ini_array['ownerPassword'];
-	$this->addOwner($ini_array['ownerUsername'], $ini_array['ownerPassword'],$this->dir) ;
+	$ini_array['ownerUsername'] = empty($ini_array['ownerUsername']) ? "" : $ini_array['ownerUsername'];
+	$ini_array['ownerPassword'] = empty($ini_array['ownerPassword']) ? "" : $ini_array['ownerPassword'];
+	$this->addOwner($ini_array['ownerUsername'], $ini_array['ownerPassword'], $this->dir);
 
 	// set owner from default settings
-	$this->addOwner($defaults['ownerUsername'], $defaults['ownerPassword']) ;
-	
-	
+	$this->addOwner($defaults['ownerUsername'], $defaults['ownerPassword']);
+
+
 	if (isset($ini_array['allowZip']))
 	    $this->allowZip = $ini_array['allowZip'];
 
 	if (isset($ini_array['modes']))
-	    $this->addToModes ($ini_array['modes']);
+	    $this->addToModes($ini_array['modes']);
 
 	if (isset($ini_array['blacklist']))
-	    $this->addToBlacklist ( $ini_array['blacklist']);
+	    $this->addToBlacklist($ini_array['blacklist']);
 
 	if (isset($ini_array['lastChanged']))
 	    $this->lastChanged = $ini_array['lastChanged'];
@@ -203,18 +195,18 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 	return $this;
     }
 
-    public function addOwners(array $owners){
-	$this->owners = array_merge($this->owners,$owners);
+    public function addOwners(array $owners) {
+	$this->owners = array_merge($this->owners, $owners);
 	return $this;
     }
-    
+
     /**
      * Add owner into the list
      * 
      * @param string $username
      * @param string $password
      * @param string $dir - for showing warnings. If not set, a config.neon will be 
-     *			    pointed in case of error
+     * 			    pointed in case of error
      * @throws ErrorException - code BAD_INI_SYNTAX
      */
     protected function addOwner($username, $password, $dir = NULL) {
@@ -225,9 +217,9 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 		'password' => $password
 	    ));
 	} else if (!empty($username) || !empty($password)) {
-	    
+
 	    // todo catch it somewhere
-	    
+
 	    if ($dir == NULL) {
 		throw new ErrorException('BOTH_OWNER_USERNAME_AND_PASSWORD_HAS_TO_BE_FILLED_OR_EMPTY ' .
 		'Username: ', BAD_INI_SYNTAX);
@@ -235,11 +227,38 @@ class DirConfig extends \Nette\Object implements IDirConfig{
 		throw new ErrorException('BOTH_OWNER_USERNAME_AND_PASSWORD_HAS_TO_BE_FILLED_OR_EMPTY' .
 		$dir . '/' . \Nette\Environment::getConfig('dirConfig'), BAD_INI_SYNTAX);
 	    }
-
 	}
+    }
+
+    /**
+     * Will save changes in this config to a file
+     * @param array $changes 
+     */
+    public function save($changes) {
+	$ini_array = parse_ini_file($this->iniFile);
+	
     }
     
     
-   
+    /**
+     * Will write the array to ini file
+     * @param array $array
+     */
+    private function saveToFile($array) {
+
+	// $file
+	$res = array();
+	$res[] = "# Auto generated on " . date("Y-M-d");
+	foreach ($array as $key => $val) {
+	    if (is_array($val)) {
+		$res[] = "[$key]";
+		foreach ($val as $skey => $sval)
+		    $res[] = "$skey = " . (is_numeric($sval) ? $sval : '"' . $sval . '"');
+	    }
+	    else
+		$res[] = "$key = " . (is_numeric($val) ? $val : '"' . $val . '"');
+	}
+	file_put_contents('safe://' . $this->iniFile, implode("\n", $res));
+    }
 
 }

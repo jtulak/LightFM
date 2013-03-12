@@ -58,5 +58,10 @@ namespace LightFM;
      * @return \LightFM\DirConfig
      */
     public function addOwners(array $owners);
-    
+ 
+    /**
+     * Will save changes in this config to a file
+     * @param array changes
+     */
+    public function save($changes);
 }
