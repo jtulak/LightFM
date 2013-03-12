@@ -29,17 +29,54 @@ class SettingsPresenter extends BasePresenter {
      */
     public $req;
     
+    /**
+     *	Contain the directory with password which is applied to the viewed one
+     * @var \LightFM\Directory
+     */
+    private $withPassword;
     
+    public function startup() {
+	parent::startup();
+	
+	
+	
+    }
+
+    private function load(){
+	// find closest parent dir with password (and of course test yourself)
+	$this->withPassword = $this->viewed;
+	while($this->withPassword !== NULL && empty($this->withPassword->Password)) {
+	    // try to find the clossest password
+	    $this->withPassword = $this->withPassword->Parent;
+	}
+    }
+
+
     public function actionPassword(){
 	parent::actionDefault();
-	
+	$this->load();
 	//$this->saveState($save);
     }
     
+
+    public function actionDefault(){
+	parent::actionDefault();
+	$this->load();
+	//$this->saveState($save);
+    }
     public function renderPassword(){
 	$this->template->node = $this->viewed;
 	$this->template->view = $this->view;
 	$this->template->back = $this->req;
+	$this->template->withPassword=  $this->withPassword;
+    }
+    
+    
+    
+    
+    public function renderDefault(){
+	$this->template->node = $this->viewed;
+	$this->template->withPassword=  $this->withPassword;
     }
     
    /**
@@ -49,18 +86,13 @@ class SettingsPresenter extends BasePresenter {
      */
      protected function createComponentAccessPassword($name)
     {
-	// TODO only for dump of password! 
-	$tested = $this->viewed;
-	while($tested !== NULL && empty($tested->Password)) {
-	    // try to find the clossest password
-	    $tested = $tested->Parent;
-	}
+	
        
        
 	 
         $form = new Nette\Application\UI\Form($this, $name);
 	
-	$form->addGroup('password is: '.$tested->Password);
+	$form->addGroup('password is: '.$this->withPassword->Password);
 	
 	
 	$form->addPassword('accessPassword','Access password:')
@@ -95,19 +127,48 @@ class SettingsPresenter extends BasePresenter {
 	//
     }
     
+      /**
+     * Create form for language selection
+     * @param type $name
+     * @return \Nette\Application\UI\Form
+     */
+     protected function createComponentDirSettingsForm($name)
+    {
+        $form = new Nette\Application\UI\Form($this, $name);
+	
+	$form->addText('accessPassword', 'Access Password')
+		->setDefaultValue($this->viewed->Password);
+	$form->addSubmit('submit','Save');
+	
+        $form->onSuccess[] = callback($this, 'dirSettingsFormSubmitted');
+        return $form;
+	
+    }
+    /** called after selection submit */
+    public function dirSettingsFormSubmitted(Nette\Application\UI\Form $form)
+    {
+	throw new Nette\NotImplementedException;
+	
+        $values = $form->getValues();
+	
+	
+    }
+    
+    
+    
+    
+    
+    
+    
     /**
      * Create form for language selection
      * @param type $name
      * @return \Nette\Application\UI\Form
      */
-     protected function createComponentSettingsForm($name)
+     protected function createComponentGeneralSettingsForm($name)
     {
         $form = new Nette\Application\UI\Form($this, $name);
 	
-	$form->addGroup('Options for folder "'.'');//$this->viewed->Name.'"');
-	$form->addText('accessPassword', 'Access Password');
-	
-	$form->addGroup('General options');
 	$form->addCheckbox('hiddenFiles','Show hidden files');
 	
 	$form->addPassword('userPassword','Your new password:');
@@ -115,29 +176,23 @@ class SettingsPresenter extends BasePresenter {
 		->addConditionOn($form['userPassword'],Nette\Application\UI\Form::FILLED)
 		->addRule(Nette\Application\UI\Form::EQUAL, 'Password missmatch', $form['userPassword']);
 	
-	$form->addSubmit('submit','Submit');
 	
-        $form->onSuccess[] = callback($this, 'settingsFormSubmitted');
+	$form->addSubmit('submit','Save');
+	
+        $form->onSuccess[] = callback($this, 'generalSettingsFormSubmitted');
         return $form;
     }
 
     /** called after selection submit */
-    public function settingsFormSubmitted(Nette\Application\UI\Form $form)
+    public function generalSettingsFormSubmitted(Nette\Application\UI\Form $form)
     {
-	$tested = $this->viewed;
-	while($tested !== NULL && empty($tested->Password)) {
-	    // try to find the clossest password
-	    $tested = $tested->Parent;
-	}
+	
+	
+	throw new Nette\NotImplementedException;
 	
         $values = $form->getValues();
 	
-	if($values->accessPassword == $tested->Password){
-	    Authenticator::confirmAccess($values->accessPassword , $tested->Path, $values->remember);
-	    $this->redirectUrl($this->req);
-	}else{
-	    $form['accessPassword']->addError('Invalid password!');
-	}
+	
     }
 }
 

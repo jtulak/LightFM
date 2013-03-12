@@ -40,6 +40,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      */
     protected $showHidden = true;
 
+    public function startup() {
+	parent::startup();
+	// if path is empty, it means it is a root
+	if (strlen($this->path) == 0)
+	    $this->path = '/';
+	// test for forbidden "../" and similar
+	$this->path = $this->verifyPath($this->path);
+
+    }
+    
     /**
      * Will select presenter for the file.
      * If we are already in it, will do nothing,
@@ -70,12 +80,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      * @throws Nette\Application\BadRequestException
      */
     private function loadFiles (){
-	 // if path is empty, it means it is a root
-	if (strlen($this->path) == 0)
-	    $this->path = '/';
-	// test for forbidden "../" and similar
-	$this->path = $this->verifyPath($this->path);
-
+	 
 	// get path
 	$this->root = LightFM\IO::findPath($this->path);
 	// get the item

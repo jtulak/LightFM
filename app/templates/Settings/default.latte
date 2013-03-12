@@ -7,12 +7,84 @@
 <div id="settings">
     <h2 >Settings</h2>
     <div class="buttons">
-	{if !empty($node->Parent)}
-	<a  class="button back"  n:href="List:default, path=>$node->Parent->Path">Back to previous directory</a>
-	{/if}
+	<a  class="button back"  n:href="List:default, path=>$node->Path">Back to the directory</a>
     </div>
     <div class="content">
-	{control settingsForm}
+	
+	{form dirSettingsForm}
+	<table>
+	    <tr>
+		<th >Options for folder <span class="dir-name">"{$node->Name}"<span></th>
+	    </tr>
+	    <tr>
+		<td>
+			{input accessPassword}
+			{label accessPassword /}
+		</td>
+	    </tr>
+	    {dump $withPassword}
+	    <tr n:if="$withPassword != NULL && $withPassword != $node">
+		<td>
+		    Note: This directory itself has no password set, 
+		    but is protected by password from upper directory 
+		    <span class="dir-name">"{$withPassword->Name}"<span>.
+		</td>
+	    </tr>
+	    <tr class="small">
+		<td >
+		    {if $withPassword != NULL && $withPassword != $node}
+			If you left this password empty, the directory will be protected by the upper directory.
+		    {else}
+			If you left this password empty, the directory will be public accessible.
+		    {/if}
+		</td>
+	    </tr>
+	    <tr class="submit">
+		<td colspan="2">
+			{input submit}
+		</td>
+	    </tr>
+	    </table>
+	{/form}
+	{form generalSettingsForm}
+	<table>
+	    <tr>
+		<th colspan="2">General options for your account</th>
+	    </tr>
+	    <tr class="hiddenFiles">
+		<td colspan="2">
+			{input hiddenFiles}
+			{label hiddenFiles /}
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+			{input userPassword}
+		</td>
+		<td>
+			{label userPassword /}
+		</td>
+	    </tr>
+	    <tr>
+		<td>
+			{input userPasswordVerify}
+		</td>
+		<td>
+			{label userPasswordVerify /}
+		</td>
+	    </tr>
+	    <tr class="small">
+		<td colspan="2">
+		    If you left this password empty, it will not change.
+		</td>
+	    </tr>
+	    <tr class="submit">
+		<td colspan="2">
+			{input submit}
+		</td>
+	    </tr>
+	</table>
+	{/form}
     </div>
 </div>
 {/block}
