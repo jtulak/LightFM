@@ -15,8 +15,8 @@
  */
 class ListPresenter extends ADirectoryPresenter{
 
-    protected  static $displayName = 'All files';
-    protected static $order = 0;
+    const DISPLAY_NAME = 'All files';
+    const ORDER = 0;
     
     public function renderDefault() {
 	parent::renderDefault();

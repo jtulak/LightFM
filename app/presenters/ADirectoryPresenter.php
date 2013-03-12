@@ -48,21 +48,15 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
      * Displayed name of the presenter
      * @var String
      */
-    protected static $displayName;
+    const DISPLAY_NAME='N/a';
 
     /**
      * Order of the presenters in menu - 0 is the most left
      * @var int
      */
-    protected static $order = 999;
+    const ORDER = 999;
 
-    public static function getDisplayName() {
-	return static::$displayName;
-    }
-
-    public static function getOrder() {
-	return static::$order;
-    }
+    
 
     /**
      * 	Return list of all presenters that implements IDirectoryPresenter
@@ -77,8 +71,8 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	    }
 	    $this->allDirectoryPresenters = array();
 	    foreach ($presenters as $presenter) {
-		$this->allDirectoryPresenters[$presenter::getOrder()] = array(
-		    'name' => $presenter::getDisplayName(),
+		$this->allDirectoryPresenters[$presenter::ORDER] = array(
+		    'name' => $presenter::DISPLAY_NAME,
 		    'presenter' => preg_replace('/Presenter$/', '', $presenter)
 		);
 	    }

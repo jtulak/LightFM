@@ -16,8 +16,8 @@
 class GalleryPresenter extends ADirectoryPresenter{
 
     
-    protected static  $displayName = 'Only Images';
-    protected static $order = 1;
+    const DISPLAY_NAME = 'Only Images';
+    const ORDER = 1;
 
     public function renderDefault() {
 	parent::renderDefault();

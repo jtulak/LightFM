@@ -13,18 +13,7 @@
  */
 interface IDirectoryPresenter {
     
-     /**
-     * Displayed name of the presenter
-     * @return string
-     */
-    public static function getDisplayName();
-    
-    /**
-     * Order of the presenters in menu - 0 is the most left
-     * @return int
-     */
-    public static function getOrder() ;
-    
+     
     
     /**
      *	Return list of all presenters that implements IDirectoryPresenter
