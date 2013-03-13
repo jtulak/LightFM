@@ -18,6 +18,7 @@ define('BAD_INI_SYNTAX', 1);
  * 
  * @property-read array $Owners 
  * @property-read bool  $AllowZip
+ * @property-read bool  $AllowZipInherited
  * @property-read array $Modes 
  * @property-read array $Blacklist 
  * @property-read string $AccessPassword
@@ -62,7 +63,27 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	return $this->modes;
     }
 
+    
+    /**
+     * Return true if it is allowed to download zip.z
+     * @return boolean
+     */
     public function getAllowZip() {
+	switch($this->allowZip){
+	    case self::ZIP_FORBIDDEN:
+	    case self::ZIP_INHERITED_FORBIDDEN:
+		return FALSE;
+	    case self::ZIP_PERMITED:
+	    case self::ZIP_INHERITED_PERMITED:
+		return TRUE;
+	}
+	
+    }
+    /**
+     * Return constant number for zip permited/forbidden 
+     * @return int
+     */
+    public function getAllowZipInherited() {
 	return $this->allowZip;
     }
 
@@ -132,7 +153,7 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 		'ownerUsername' => "",
 		'ownerPassword' => "",
 //		'accessPassword' => $parentsConfig->accessPassword,
-		'allowZip' => $parentsConfig->allowZip,
+		'allowZip' => $parentsConfig->AllowZip ? self::ZIP_INHERITED_PERMITED : self::ZIP_INHERITED_FORBIDDEN,
 		'modes' => $parentsConfig->modes,
 		'blacklist' => $parentsConfig->blacklist,
 	    );
@@ -147,7 +168,7 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 //	    $this->accessPassword = $config['accessPassword'];
 
 	if ($this->allowZip == NULL)
-	    $this->allowZip = $config['allowZip'];
+	    $this->allowZip = $config['allowZip'] ? self::ZIP_PERMITED : self::ZIP_FORBIDDEN;
 
 	if ($config['modes'])
 	    $this->addToModes($config['modes']);

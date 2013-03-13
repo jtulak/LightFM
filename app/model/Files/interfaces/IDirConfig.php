@@ -16,6 +16,14 @@ namespace LightFM;
  * 
  */
  interface IDirConfig {
+     
+     
+    const ZIP_INHERITED = -1;
+    const ZIP_FORBIDDEN = 0;
+    const ZIP_PERMITED = 1;
+    const ZIP_INHERITED_FORBIDDEN = 2;
+    const ZIP_INHERITED_PERMITED = 3;
+     
      /**
      * Test if the path is blacklisted.
      * @param string $file - full path from system root
@@ -34,6 +42,9 @@ namespace LightFM;
      * @return string
      */
     public function getAccessPassword();
+    
+    public function getAllowZip();
+    public function getAllowZipInherited();
     
     /**
      * Inherite settings from parent, if weren't specified elseway. 

@@ -127,19 +127,7 @@ class SettingsPresenter extends BasePresenter {
 	//
     }
     
-      /**
-     * Create form for language selection
-     * @param type $name
-     * @return \Nette\Application\UI\Form
-     */
-     protected function createComponentDirSettingsForm($name)
-    {
-        $form = new Nette\Application\UI\Form($this, $name);
-	
-	$form->addText('accessPassword', 'Access Password')
-		->setDefaultValue($this->viewed->Password);
-	
-	//$form->addGroup('Views');
+    private function getViewsList(){
 	$allViews = \LightFM\IO::getImplementingClasses('IDirectoryPresenter');
 	$accessible=array();
 	// remove uninstatiable classes and the rest put in an associative array
@@ -151,11 +139,64 @@ class SettingsPresenter extends BasePresenter {
 		$accessible[$class]=$class::DISPLAY_NAME;
 	    }
 	}
+	return $accessible;
+    }
+    
+    const MULTIPLE_DOWNLOAD_INHERIT = 0;
+    const MULTIPLE_DOWNLOAD_ALLOW = 1;
+    const MULTIPLE_DOWNLOAD_FORBID = 2;
+      /**
+     * Create form for language selection
+     * @param type $name
+     * @return \Nette\Application\UI\Form
+     */
+     protected function createComponentDirSettingsForm($name)
+    {
+        $form = new Nette\Application\UI\Form($this, $name);
+	
+	/** Create access password */
+	$form->addText('accessPassword', 'Access Password')
+		->setDefaultValue($this->viewed->Password);
+	
+	/** Create select box for allowing ZIP downloading */
+	$viewed = $this->viewed;
+	$form->addSelect('allowZip', 'Download multiple files at once', array(
+	    LightFM\IDirConfig::ZIP_INHERITED=>'Inherit from parent',
+	    LightFM\IDirConfig::ZIP_PERMITED=>'Permit',
+	    LightFM\IDirConfig::ZIP_FORBIDDEN=>'Forbid',
+	    
+	))
+	->setDefaultValue(function() use ($viewed) {
+		    switch ($viewed->Config->AllowZipInherited){
+			case LightFM\IDirConfig::ZIP_INHERITED_FORBIDDEN:
+			case LightFM\IDirConfig::ZIP_INHERITED_PERMITED:
+			    return LightFM\IDirConfig::ZIP_INHERITED;
+			    
+			case LightFM\IDirConfig::ZIP_FORBIDDEN:
+			case LightFM\IDirConfig::ZIP_PERMITED:
+			    return $viewed->Config->AllowZipInherited;
+		    }
+	});
+	
+	
+	/** Create access password */
+	// TODO
+	$form->addText('ownerUsername', 'Owner Username')
+		->setDefaultValue('TODO');
+	$form->addText('ownerPassword', 'Owner Password')
+		->setDefaultValue('TODO');
+	
+	/** Create selection of default view */
+	$accessible = $this->getViewsList();
+	$form->addCheckbox('inheritViews','Inherit from parent.');
 	$form->addRadioList('defaultView','Default view',$accessible)
 		->setDefaultValue($this->viewed->Presenter.'Presenter');
-	$form->addSubmit('submit','Save');
 	
-	// create also checkboxes for enabling/disabling
+	/** submit buttons */
+	$form->addSubmit('save','Save');
+	$form->addSubmit('saveAll','Save and apply to subdirectories');
+	
+	/** create also checkboxes for enabling/disabling a view*/
 	$form->addGroup('checkboxes');
 	foreach($accessible as $key=>$name){
 	    $c = $form->addCheckbox('view_'.$key,$name);
@@ -166,6 +207,8 @@ class SettingsPresenter extends BasePresenter {
 	    
 	}
 	
+	
+	
         $form->onSuccess[] = callback($this, 'dirSettingsFormSubmitted');
         return $form;
 	
@@ -173,10 +216,44 @@ class SettingsPresenter extends BasePresenter {
     /** called after selection submit */
     public function dirSettingsFormSubmitted(Nette\Application\UI\Form $form)
     {
-	throw new Nette\NotImplementedException;
+	//throw new Nette\NotImplementedException;
+	$forSave=array();
 	
         $values = $form->getValues();
 	
+	try{
+	    // read views
+	    if(!$values['inheritViews']){
+		//if we want to save views
+		if(!$values['view_'.$values['defaultView']]){
+		    // test if default view is enabled
+		    $form->addError('You cannot set a disabled view as a default one!');
+		    throw new Exception;
+		}else{
+		    // else it is ok so set it
+		    $forSave['modes'][] = $values['defaultView'];
+		}
+
+
+		$accessible = $this->getViewsList();
+		// then set other enables
+		foreach($accessible as $key=>$name){
+		    if($key == $values['defaultView']){
+			// if it is the default view, it is already set
+			continue;
+		    }
+		    if($values['view_'.$key]){
+			$forSave['modes'][] = $key;
+		    }
+		}
+	    }
+	    // read password
+	    $forSave['accessPassword']=$values['accessPassword'];
+	    
+	}catch(Exception $e){
+	    
+	}
+	\Nette\Diagnostics\Debugger::barDump($forSave);
 	
     }
     

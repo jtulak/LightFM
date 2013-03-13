@@ -39,16 +39,28 @@
 		    {/if}
 		</td>
 	    </tr>
+	    <tr>
+		<td>
+			<h4>{label allowZip /}</h4>
+			{input allowZip}
+		</td>
+	    </tr>
 	    
 	    <tr>
 		<td>
 		    <h4>Select views:</h4>
 		    <table>
 			<tr>
+			    <td colspan="2">
+				{input inheritViews}
+				{label inheritViews /}
+			    </td>
+			</tr>
+			<tr>
 			    <td>Allowed</td>
 			    <td>Default</td>
 			</tr>
-			<tr>
+			<tr  id="viewsSetting">
 			    <td class="views-allowed">
 				<ul>
 				    {foreach $form->groups['checkboxes']->getControls() as $control}
@@ -68,17 +80,46 @@
 		</td>
 	    </tr>
 	    
+	    <tr>
+		<td>
+		    <h4>Owner settings</h4>
+		    <table>
+			<tr>
+			    <td>{input ownerUsername}</td>
+			    <td>{label ownerUsername /}</td>
+			</tr>
+			<tr>
+			    <td>{input ownerPassword}</td>
+			    <td>{label ownerPassword /}</td>
+			</tr>
+		    </table>
+		</td>
+	    </tr>
+	    
+	    <tr>
+		<td>
+		    <ul n:if="$form->hasErrors()">
+			<li class="error" n:foreach="$form->errors as $error">{$error}</li>
+		    </ul>
+		</td>
+	    </tr>
 	    <tr class="submit">
-		<td colspan="2">
-			{input submit}
+		<td >
+			{input save}
+			{input saveAll}
 		</td>
 	    </tr>
 	    </table>
 	{/form}
+	
+	TODO add owners settings
+	
 	{form generalSettingsForm}
 	<table>
 	    <tr>
-		<th colspan="2">General options for your account</th>
+		<th colspan="2">
+	    <h3>General options for your account</h3>
+		</th>
 	    </tr>
 	    <tr class="hiddenFiles">
 		<td colspan="2">
@@ -107,6 +148,13 @@
 		    If you left this password empty, it will not change.
 		</td>
 	    </tr>
+	    <tr>
+		<td colspan="2">
+		    <ul n:if="$form->hasErrors()">
+			<li class="error" n:foreach="$form->errors as $error">{$error}</li>
+		    </ul>
+		</td>
+	    </tr>
 	    <tr class="submit">
 		<td colspan="2">
 			{input submit}
@@ -121,7 +169,7 @@
 
 {block scripts}
 {include #parent}
-
+<script type="text/javascript" src="{$basePath}/filemanager/js/settings.js"></script>
 {/block}
 
 
