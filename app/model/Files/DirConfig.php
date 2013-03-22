@@ -226,8 +226,7 @@ class DirConfig extends \Nette\Object implements IDirConfig {
      * 
      * @param string $username
      * @param string $password
-     * @param string $dir - for showing warnings. If not set, a config.neon will be 
-     * 			    pointed in case of error
+     * @param string $dir - This dir. If not set, a config.neon will be pointed
      * @throws ErrorException - code BAD_INI_SYNTAX
      */
     protected function addOwner($username, $password, $dir = NULL) {
@@ -235,7 +234,8 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	if (!empty($username) && !empty($password)) {
 	    array_push($this->owners, array(
 		'username' => $username,
-		'password' => $password
+		'password' => $password,
+		'dir'=>$dir
 	    ));
 	} else if (!empty($username) || !empty($password)) {
 

@@ -19,8 +19,6 @@ CREATE TABLE users (
  */
 class Authenticator extends Nette\Object implements Security\IAuthenticator
 {
-	/** @var Nette\Database\Connection */
-	private $database;
 
 	/**
 	 * 
@@ -58,10 +56,6 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 	    }
 	}
 
-	public function __construct(Nette\Database\Connection $database)
-	{
-		$this->database = $database;
-	}
 
 
 
@@ -72,19 +66,21 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 	 */
 	public function authenticate(array $credentials)
 	{
-		list($username, $password) = $credentials;
-		$row = $this->database->table('users')->where('username', $username)->fetch();
-
-		if (!$row) {
+		list($username, $password, $node) = $credentials;
+		//dump($node);
+		//$row = $this->database->table('users')->where('username', $username)->fetch();
+		$owners = $node->Config->Owners;
+		if (!$owners) {
 			throw new Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
 		}
-
-		if ($row->password !== $this->calculateHash($password, $row->password)) {
-			throw new Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
+		dump($owners);
+		foreach($owners as $owner){
+		    if($owner['password'] == $password){
+			return new Security\Identity($owner['dir'], 1, $owner);
+		    }
 		}
-
-		unset($row->password);
-		return new Security\Identity($row->id, $row->role, $row->toArray());
+		// no password found
+		throw new Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
 	}
 
 

@@ -15,7 +15,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      */
     protected $knownInterfaces = array();
 
-
     /**
      * @persistent
      */
@@ -47,11 +46,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	    $this->path = '/';
 	// test for forbidden "../" and similar
 	$this->path = $this->verifyPath($this->path);
-	
-	$this->template->owner = NULL;
-	
+
+	$this->template->owner = $this->getUser();
+	//dump($this->getUser());
     }
-    
+
+    public function handleSignOut() {
+	$this->getUser()->logout();
+	$this->redirect('Sign:in');
+    }
+
     /**
      * Will select presenter for the file.
      * If we are already in it, will do nothing,
@@ -62,27 +66,25 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     protected function selectCorrectPresenter(\LightFM\Node $file) {
 	// test if this presenter knows the file
 	// and if knows, do nothing
-	foreach ($this->knownInterfaces as $interface){
-	    if($file instanceof $interface ){
+	foreach ($this->knownInterfaces as $interface) {
+	    if ($file instanceof $interface) {
 		return;
 	    }
-	    $interface = "\\LightFM\\".$interface;
-	    if($file instanceof $interface ){
+	    $interface = "\\LightFM\\" . $interface;
+	    if ($file instanceof $interface) {
 		return;
 	    }
-		
 	}
 	// else redirect to the default one
 	$this->redirect($this->viewed->Presenter . ':default');
     }
 
-    
     /**
      * Fill $this->path, viewed and root with data
      * @throws Nette\Application\BadRequestException
      */
-    private function loadFiles (){
-	 
+    protected function loadFiles() {
+
 	// get path
 	$this->root = LightFM\IO::findPath($this->path);
 	// get the item
@@ -94,46 +96,43 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	    throw new Nette\Application\BadRequestException($this->path);
 	}
 
-	if(!($this instanceof SettingsPresenter)){
+	if (!($this instanceof SettingsPresenter)) {
 	    // if we are in settings, we do not need to change presenter or check perms
-	    
-	    try{
+
+	    try {
 		$this->testAccess($this->viewed);
 		$this->selectCorrectPresenter($this->viewed);
-	    }catch(Nette\Application\ForbiddenRequestException $e){
-		$this->redirect('Settings:password',array('view'=>$this->name,'req'=>(string)$this->getHttpRequest()->getUrl()));
+	    } catch (Nette\Application\ForbiddenRequestException $e) {
+		$this->redirect('Settings:password', array('view' => $this->name, 'req' => (string) $this->getHttpRequest()->getUrl()));
 	    }
 	}
     }
-    
+
     /**
      * Test for access rights for current user/guest.
      * If the user can't has valid cookie, an exception will be thrown
      * @param \LightFM\Node $node
      * @throws Nette\Application\ForbiddenRequestException
      */
-    protected function testAccess($node){
+    protected function testAccess($node) {
 	//\Nette\Diagnostics\Debugger::barDump($node);
 	$tested = $node;
-	while($tested !== NULL && empty($tested->Password)) {
+	while ($tested !== NULL && empty($tested->Password)) {
 	    // try to find the clossest password
 	    $tested = $tested->Parent;
 	}
 	\Nette\Diagnostics\Debugger::barDump($tested);
-	if($tested === NULL){
+	if ($tested === NULL) {
 	    // if null, there is no password needed, so stop
-	    return; 
+	    return;
 	}
-	
+
 	// Here it gets only if some password is needed, but still the user can
 	// be owner, or can know the password.
-	if(!Authenticator::hasAccess($tested->Password, $tested->Path)){
+	if (!Authenticator::hasAccess($tested->Password, $tested->Path)) {
 	    throw new Nette\Application\ForbiddenRequestException;
 	}
-	
-	
     }
-
 
     /**
      * parse path, find the root and so..
@@ -142,11 +141,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	// if we are in error presenter, do nothing
 	if ($this instanceof ErrorPresenter)
 	    return;
-	    
+
 
 	try {
-	   $this->loadFiles();
-	    
+	    $this->loadFiles();
 	} catch (Nette\Application\ForbiddenRequestException $e) {
 	    //$this->forward('Error:default', array('exception' => $e));
 	} catch (Nette\Application\BadRequestException $e) {
@@ -156,7 +154,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	}
     }
 
-    
     /**
      * Return the last child from the given node
      * @param LightFM\Node $node

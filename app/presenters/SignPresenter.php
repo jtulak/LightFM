@@ -14,12 +14,13 @@ class SignPresenter extends BasePresenter
      */
     public $view;
     
-    /**
-     * URL from which user  came
-     * @persistent
-     */
-    public $req;
 
+    
+	public function startup(){
+	    parent::startup();
+	    $this->root = LightFM\IO::findPath($this->path);
+	    $this->viewed = $this->getLastNode($this->root);
+	}
 	/**
 	 * Sign-in form factory.
 	 * @return Nette\Application\UI\Form
@@ -55,13 +56,13 @@ class SignPresenter extends BasePresenter
 		}
 
 		try {
-			$this->getUser()->login($values->username, $values->password);
+			$this->getUser()->login($values->username, $values->password,$this->viewed);
 		} catch (Nette\Security\AuthenticationException $e) {
 			$form->addError($e->getMessage());
 			return;
 		}
 
-		$this->redirect('Homepage:');
+		$this->redirect('List:');
 	}
 
 

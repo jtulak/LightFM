@@ -51,11 +51,11 @@
 		<h1>LightFM file manager</h1>
 		<div class="options">
 		    <ul>
-			{if $owner === NULL}
+			{if !$owner->isLoggedIn()}
 			    <li><a n:href="Sign:in">Login</a></li>
 			{else}
-			    <li>Logged as Zopper (<a href="#">logout</a>)></
-			    <li><a n:href="Settings:default">Options</a>></
+			    <li>Logged as {$owner->getIdentity()->Data['username']} (<a n:href="signOut!">logout</a>)</li>
+			    <li><a n:href="Settings:default">Options</a></li>
 			{/if}
 		    </ul>
 		</div>
@@ -70,7 +70,7 @@
 	    <div id="inner-box">
 		<div id="sidebar">
 		    {*if $showSidebar*}
-		    {if $owner || (!empty($viewed) && $viewed->Config->AllowZip)}
+		    {if $owner->isLoggedIn() || (!empty($viewed) && $viewed->Config->AllowZip)}
 			{ifset #sidebar}
 			<div class="border">
 			    <div id="sidebar-control">&nbsp;</div>
