@@ -30,14 +30,9 @@ common:
 		application:
 			errorPresenter: Error
 
-		database:
-			dsn: 'mysql:host=localhost;dbname=test'
-			user:
-			password:
-
 		session:
 			expiration: 14 days
-
+		
 
 	services:
 		authenticator: Authenticator
