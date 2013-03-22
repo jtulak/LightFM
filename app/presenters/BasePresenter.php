@@ -85,7 +85,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	$this->root = LightFM\IO::findPath($this->path);
 	// get the item
 	$this->viewed = $this->getLastNode($this->root);
-
+	Nette\Diagnostics\Debugger::barDump($this->viewed, 'Viewed');
+	Nette\Diagnostics\Debugger::barDump($this->viewed->Config, 'Config');
 	// && $this->root->usedChild == NULL
 	if ($this->root->Dummy) {
 	    throw new Nette\Application\BadRequestException($this->path);
