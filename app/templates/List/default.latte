@@ -5,6 +5,7 @@
  * @param array $listFiles
  * @param array $listDirs
  * @param string $backpath - path to parent directory for links
+ * @param \LightFM\IDirectory $viewed - actual dir
  *}
 
 {block content}
@@ -119,13 +120,17 @@
 </ul>
 
 <ul>
-    <li><a id="filesDownload" class="filesManipulation disabled" n:href="downloadZip">Download</a>
-    <li><a id="filesMove"  class="filesManipulation disabled" href="#">Move</a>
-    <li><a id="filesRename"  class="filesManipulation disabled" href="#">Rename</a>
-    <li><a id="filesDelete"  class="filesManipulation disabled" href="#">Delete</a>
+    <li n:if="$viewed->Config->AllowZip"><a id="filesDownload" class="filesManipulation disabled" n:href="downloadZip">Download</a></li>
+    {if $owner}
+    <li><a id="filesMove"  class="filesManipulation disabled" href="#">Move</a></li>
+    <li><a id="filesRename"  class="filesManipulation disabled" href="#">Rename</a></li>
+    <li><a id="filesDelete"  class="filesManipulation disabled" href="#">Delete</a></li>
+    {/if}
 </ul>
 <ul>
+    {if $owner}
     <li><a  href="#">Upload</a>
+    {/if}
 </ul>
 {/block}
 

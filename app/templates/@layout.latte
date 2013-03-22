@@ -5,8 +5,9 @@
  * @param string   $robots   tell robots how to index the content of a page (optional)
  * @param array    $flashes  flash messages
  * @param string   $filename Name of actual file/folder
+ * @param \LightFM\IDirectory $viewed - actual dir
+ * @param	    $owner   Object with owner or NULL
  *}
-
 
 {var $debug_less = TRUE }
 
@@ -50,9 +51,12 @@
 		<h1>LightFM file manager</h1>
 		<div class="options">
 		    <ul>
-			<li><a n:href="Sign:in">Login</a>
-			{*<li>Logged as Zopper (<a href="#">logout</a>)*}
-			<li><a n:href="Settings:default">Options</a>
+			{if $owner === NULL}
+			    <li><a n:href="Sign:in">Login</a></li>
+			{else}
+			    <li>Logged as Zopper (<a href="#">logout</a>)></
+			    <li><a n:href="Settings:default">Options</a>></
+			{/if}
 		    </ul>
 		</div>
 	    </header>
@@ -66,14 +70,16 @@
 	    <div id="inner-box">
 		<div id="sidebar">
 		    {*if $showSidebar*}
-		    {ifset #sidebar}
-		    <div class="border">
-			<div id="sidebar-control">&nbsp;</div>
-			<div id="sidebar-content">
-			    <div class="for-fixed">{*block sidebar}{/block*}{include #sidebar}</div>
+		    {if $owner || $viewed->Config->AllowZip}
+			{ifset #sidebar}
+			<div class="border">
+			    <div id="sidebar-control">&nbsp;</div>
+			    <div id="sidebar-content">
+				<div class="for-fixed">{*block sidebar}{/block*}{include #sidebar}</div>
+			    </div>
 			</div>
-		    </div>
-		    {/ifset}
+			{/ifset}
+		    {/if}
 		</div>
 		<div id="outer-content">
 			{include #content}
