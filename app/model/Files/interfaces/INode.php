@@ -21,6 +21,8 @@ namespace LightFM;
      public function getSize();
      public function getDate();
      public function getPath();
+    public function getConfig();
+    public function setConfig($conf);
      
     /**
      * Remove trailing slash from the string
@@ -34,6 +36,7 @@ namespace LightFM;
     public function rename(Nette\Utils\Strings $newName);
 
     public function delete();
+    
     
     /**
      * 
