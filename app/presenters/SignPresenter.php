@@ -8,7 +8,17 @@ use Nette\Application\UI;
  */
 class SignPresenter extends BasePresenter
 {
-
+    /**
+     * Name of presenter from which user came
+     * @persistent
+     */
+    public $view;
+    
+    /**
+     * URL from which user  came
+     * @persistent
+     */
+    public $req;
 
 	/**
 	 * Sign-in form factory.
