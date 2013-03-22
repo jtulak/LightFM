@@ -130,8 +130,6 @@ abstract class IO extends \Nette\Object {
 	return new \LightFM\Directory($fullPath);
     }
 
-    
-    
     /**
      * Get correct class which represents the given path - already create an object.
      * Usage: 
@@ -143,7 +141,7 @@ abstract class IO extends \Nette\Object {
      */
     public static function createFileType($fullPath) {
 	$classes = array();
-	
+
 	//dump($fullPath);
 	foreach (self::getFileModules() as $class) {
 	    if ($class::knownFileType(DATA_ROOT . $fullPath)) {
@@ -153,15 +151,14 @@ abstract class IO extends \Nette\Object {
 	    }
 	}
 	krsort($classes);
-	
+
 	if (count($classes) == 0)
 	    throw new \Nette\FatalErrorException("No possible node typefound! Probably missing the default class LightFM\File.");
 
-	$top=array_shift($classes);
+	$top = array_shift($classes);
 	return new $top($fullPath);
     }
 
-    
     /**
      * 
      * @param string $fullPath
@@ -172,7 +169,7 @@ abstract class IO extends \Nette\Object {
      */
     private static function createPath_tryCreate_folder($fullPath, $fullDir, $restOfPath, \LightFM\DirConfig $config) {
 	$created = new \LightFM\Directory($fullDir);
-	
+
 	// recursively create rest of the path
 	$created->usedChild = self::createPath($fullPath, $restOfPath, $config);
 	$created->usedChild->Parent = $created;
@@ -231,12 +228,12 @@ abstract class IO extends \Nette\Object {
     public static function createPath($fullPath, $restOfPath, \LightFM\DirConfig $parentsConfig = NULL) {
 	// Remove slashes from begining and end (if any)
 	// and get top dir from the path
-	
+
 	list($dir, $restOfPath) = self::createPath_explodePath($restOfPath);
 
 	// create path to this dir - remove the rest from the full path to get 
 	// path to this dir
-	
+
 	$restLen = strlen($restOfPath);
 	if ($restLen) {
 	    $fullDir = substr($fullPath, 0, -($restLen ));
@@ -244,7 +241,7 @@ abstract class IO extends \Nette\Object {
 	    $fullDir = $fullPath;
 	}
 	$config = new \LightFM\DirConfig($fullDir);
-	
+
 	try {
 	    // load config
 	    // and inherite
@@ -259,18 +256,100 @@ abstract class IO extends \Nette\Object {
 	    // if subdirs do not needs a password, check this one and set if needed
 	    $created->Password = $config->getAccessPassword();
 	}
-	
-	if ($config->isBlacklisted($dir) ||$config->isBlacklisted(DATA_ROOT ."/$dir") ||
+
+	if ($config->isBlacklisted($dir) || $config->isBlacklisted(DATA_ROOT . "/$dir") ||
 		$config->isBlacklisted(DATA_ROOT . $fullDir)) {
 	    // if the file/dir is blacklisted, replace by empty node
 	    $created = new \LightFM\Directory(NULL);
 	}
-	
+
 
 	// assign the config for this directory
 	$created->Config = $config;
 
 	return $created;
+    }
+
+    /**
+     * This function creates ZIP for download.
+     * From these given files it will create hashes, connect them and hash
+     * the string. The result hash is used as a name for the zip archive.
+     * If the file exists, it simply sent it. If not, then a new archive is 
+     * created.
+     * 
+     * @param string $path Absolute path to the dir
+     * @param array $list List of files/directories
+     * @return string Relative path to the zip for download
+     */
+    public static function getZip($path, $list) {
+	chdir($path); // because we do not want full pathes in 
+	// TODO Max file limit
+	// TODO recursive
+	$fullList = array();
+	foreach ($list as $item) {
+	    if (is_dir($path . "/" . $item)) {
+		// if this item is a dir, then get recursively the content
+		$fullList=array_merge($fullList, self::getRecursivePath($path, $item));
+	    } else {
+		array_push($fullList, $item);
+	    }
+	}
+	// compute hashes
+	$filename = DATA_TEMP . '/' . self::computeZipHash($path, $fullList) . '.zip';
+
+	if (!file_exists(DATA_ROOT . '/' . $filename)) {
+	    // the zip file
+	    if (!\Zip::create_zip($fullList, DATA_ROOT . '/' . $filename)) {
+		throw new \Exception('Zip creation failed', \Zip::ZIP_ERROR);
+	    }
+	}
+	// create archive
+	return $filename;
+    }
+
+    private static function getRecursivePath($basePath, $dir, $exclusiveLength = -1) {
+	// TODO check for allowed download
+	
+	$handle = opendir($basePath.'/'.$dir);
+	// count the length of path for exclude
+	if($exclusiveLength == -1){
+	    $exclusiveLength =  strlen($basePath.'/');
+	}
+	$filePathes = array();
+	
+	while ($f = readdir($handle)) {
+	    if ($f != '.' && $f != '..') {
+		$filePath = "$basePath/$dir/$f";
+		// Remove prefix from file path before add to zip.
+		$localPath = substr($filePath, $exclusiveLength);
+		if (is_file($filePath)) {
+		    array_push($filePathes, $localPath);
+		} elseif (is_dir($filePath)) {
+		    // Add sub-directory.
+		    array_push($filePathes, $localPath);
+		    $filePathes=array_merge($filePathes,self::getRecursivePath($basePath, $localPath, $exclusiveLength));
+		}
+	    }
+	}
+	closedir($handle);
+	return $filePathes;
+    }
+
+    /**
+     *  compute hash from given files - create hashes for each file and than
+     * hash all the hashes.
+     * @param array $list Absolute pathes
+     * @return string
+     */
+    private static function computeZipHash($path, $list) {
+
+	$hashes = "";
+	// compute hashes for each file
+	foreach ($list as $item) {
+	    // recursive looking
+	    $hashes.=hash_file("md5", $path . '/' . $item);
+	}
+	return md5($hashes);
     }
 
 }

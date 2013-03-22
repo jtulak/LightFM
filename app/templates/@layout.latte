@@ -31,6 +31,7 @@
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/filemanager/css/reset.css">
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/filemanager/css/screen.css">
 	{/if}
+	<link rel="stylesheet" media="screen,projection,tv" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
 	{block head}{/block}
 
@@ -90,11 +91,13 @@
 	    <!-- some things for jquery... -->
 	    <div class="sidebar-content-width"></div>
 	</div>
+	{include uiDialogs.latte}
 	{block scripts}
 	<script src="{$basePath}/filemanager/js/jquery.js"></script>
 	<script src="{$basePath}/filemanager/js/jquery.hoverflow.min.js"></script>
 	<script src="{$basePath}/filemanager/js/netteForms.js"></script>
 	<script src="{$basePath}/filemanager/js/main.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 	{/block}
     </body>
 </html>

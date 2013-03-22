@@ -31,9 +31,18 @@ namespace LightFM;
     public function getSubdirs();
     
     /**
+     * Return array of subdirs names
+     */
+    public function getSubdirsNames();
+    
+    /**
      * Return array of files as instances of File - lazzy calling.
      * @return Array
      */
     public function getFiles();
+    /**
+     * Return array of files names
+     */
+    public function getFilesNames();
     
 }

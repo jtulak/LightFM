@@ -48,15 +48,14 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
      * Displayed name of the presenter
      * @var String
      */
-    const DISPLAY_NAME='N/a';
+
+    const DISPLAY_NAME = 'N/a';
 
     /**
      * Order of the presenters in menu - 0 is the most left
      * @var int
      */
     const ORDER = 999;
-
-    
 
     /**
      * 	Return list of all presenters that implements IDirectoryPresenter
@@ -122,7 +121,7 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 			    $result = strcmp($a->Name, $b->Name);
 			    break;
 			case $t::ORDER_SUFFIX:
-			    if($a instanceof \LightFM\IFile && $b instanceof \LightFM\IFile){
+			    if ($a instanceof \LightFM\IFile && $b instanceof \LightFM\IFile) {
 				$result = strcmp($a->Suffix, $b->Suffix);
 			    }
 			    break;
@@ -144,6 +143,60 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 		    }
 		    return $result;
 		});
+    }
+
+    /**
+     * This function manages ZIP download.
+     * It takes the actual dir from $this->viewed and list of filenames in
+     * POST "list". It will check if these files exists in viewed dir and
+     * then call zip creation.
+     * It will return an JSON response with url of the zip file,
+     * or an HTTP error.
+     * 
+     * @param array $files
+     */
+    public function actionDownloadZip() {
+	parent::actionDefault();
+
+	$response = array();
+
+	$httpRequest = $GLOBALS['container']->httpRequest;
+	$httpResponse = $GLOBALS['container']->httpResponse;
+	$list = $httpRequest->getPost('list');
+	// now we have list of items to package
+	
+	//$list = array('data1');
+	$content = array_merge($this->viewed->SubdirsNames, $this->viewed->FilesNames);
+	try {
+	    // test for all wanted files and dirs if they are here
+	    foreach ($list as $item) {
+		if (!in_array($item, $content)) {
+		    // item wasn't found - set error and break
+		    $response['error'] = "File >> " . $item . " << in >> " . $this->viewed->Path . " << wasn't found!";
+		    throw new Nette\FileNotFoundException;
+		}
+	    }
+	    
+	    $response['path'] = \LightFM\IO::getZip($this->viewed->FullPath,$list);
+	    
+	} catch (\Nette\FileNotFoundException $e) {
+	    //  files not found
+	    $httpResponse->setCode(\Nette\Http\Response::S404_NOT_FOUND);
+	    \Nette\Diagnostics\Debugger::log($response['error'] );
+	} catch (Exception $e){
+	    // exceptions from creating the archive
+	    if($e->getCode() !=  \Zip::ZIP_ERROR){
+		throw $e;
+	    }
+	    $httpResponse->setCode(Nette\Http\Response::S500_INTERNAL_SERVER_ERROR);
+	    $response['error']  = "An Error Occured In >> " . $this->viewed->Path . " << When Creating Archive.";
+	    \Nette\Diagnostics\Debugger::log($response['error'] );
+	}
+	
+	
+	// TODO Change file name
+
+	$this->sendResponse(new Nette\Application\Responses\JsonResponse($response));
     }
 
 }

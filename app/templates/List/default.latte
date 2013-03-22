@@ -76,7 +76,7 @@
 	    <a n:href="default, path => $dir->Path ">
 		<table>
 		    <tr>
-			<td class="checkbox"><input type="checkbox"></td>
+			<td class="checkbox"><input class="fileSelector" type="checkbox" data-name="{$dir->Name}"></td>
 			<td class="name"><span title="{$dir->Name}">{$dir->Name}</span></td>
 			<td class="suffix"></td>
 			<td class="size">{$dir->Size|Bytes}</td>
@@ -93,7 +93,7 @@
 	    <a n:href="{$file->Presenter}:default, path => $file->Path ">
 		<table>
 		    <tr>
-			<td class="checkbox"><input type="checkbox"></td>
+			<td class="checkbox"><input class="fileSelector" type="checkbox" data-name="{$file->Name}{if $file->Suffix}.{$file->Suffix}{/if}"></td>
 			<td class="name"  title="{$file->Name}">
 			    <span>{$file->Name}</span>
 			</td>
@@ -119,10 +119,10 @@
 </ul>
 
 <ul>
-    <li><a  href="#">Download</a>
-    <li><a  href="#">Move</a>
-    <li><a  href="#">Rename</a>
-    <li><a  href="#">Delete</a>
+    <li><a id="filesDownload" class="filesManipulation disabled" n:href="downloadZip">Download</a>
+    <li><a id="filesMove"  class="filesManipulation disabled" href="#">Move</a>
+    <li><a id="filesRename"  class="filesManipulation disabled" href="#">Rename</a>
+    <li><a id="filesDelete"  class="filesManipulation disabled" href="#">Delete</a>
 </ul>
 <ul>
     <li><a  href="#">Upload</a>
@@ -133,6 +133,7 @@
 {block scripts}
 {include #parent}
 <script src="{$basePath}/filemanager/js/listView.js"></script>
+<script src="{$basePath}/filemanager/js/filesOperations.js"></script>
 {/block}
 
 

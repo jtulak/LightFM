@@ -14,6 +14,10 @@ namespace LightFM;
 /**
  * 
  * @property \LightFM\Node $UsedChild
+ * @property arry $Files
+ * @property arry $FilesNames
+ * @property arry $Subdirs
+ * @property arry $SubdirsNames
  */
 class Directory extends Node implements IDirectory {
 
@@ -81,6 +85,10 @@ class Directory extends Node implements IDirectory {
 	}
 	return $this->listDirsObj;
     }
+    public function getSubdirsNames(){
+	return $this->listDirs;
+	
+    }
 
     public function getFiles() {
 	if (count($this->listFilesObj) == 0 && count($this->listFiles) != 0) {
@@ -96,6 +104,10 @@ class Directory extends Node implements IDirectory {
 	return $this->listFilesObj;
     }
 
+    public function getFilesNames(){
+	return $this->listFiles;
+	
+    }
     /**
      * add a subdir into the list
      * @param string $name - dir name

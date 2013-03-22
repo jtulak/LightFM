@@ -77,7 +77,10 @@ $(function(){
 	sidebarFixing();
     });*/
     
-    
+    // disable disabled links
+    $("a.disabled").click(function(event){
+	event.preventDefault();
+    });
     
 });
 
@@ -120,20 +123,6 @@ function sidebarFixing(){
 }
 
 
-
-/** functions for selecting checkboxes */
-function selectAll(){
-    $("#data").find("input").prop('checked', true);
-}
-function selectNone(){
-    $("#data").find("input").prop('checked', false);
-}
-function selectInvert(){
-    $("#data").find("input").each(function(){
-	if($(this).prop('checked')) $(this).prop('checked', false);
-	else $(this).prop('checked', true);
-    });
-}
 
 
 function forEachCallback(arr){

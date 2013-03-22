@@ -134,6 +134,14 @@ h1 {
 	    color: @color-light;
 	}
     }
+    a.disabled{
+	color: lighten(@color-text,50%);
+	cursor: default;
+	&:hover{
+	    background-color: inherit;
+	    color: lighten(@color-text,50%);
+	}
+    }
 }
 
 //the column for showing/hiding the sidebar
