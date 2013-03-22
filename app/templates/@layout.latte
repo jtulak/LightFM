@@ -70,7 +70,7 @@
 	    <div id="inner-box">
 		<div id="sidebar">
 		    {*if $showSidebar*}
-		    {if $owner || $viewed->Config->AllowZip}
+		    {if $owner || (!empty($viewed) && $viewed->Config->AllowZip)}
 			{ifset #sidebar}
 			<div class="border">
 			    <div id="sidebar-control">&nbsp;</div>
