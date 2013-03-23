@@ -37,14 +37,11 @@ This file has NOT to be accessible - system will not read it and it must be prot
 accessPassword="some secret"
 ; Users are needed for file management. Default: set via .neon
 ; New users can be set only in root directory.
-userName[]=usr1                ; this is an owner
-userPass[]=xxx                 ; this is a password for owner
 
-userName[]=usr2                ; this is another owner
-userPass[]=yyy                 ; this is a password for another owner
+users[username]=password                ; this is an user
 
 ; usernames of owners for this directory
-owners[]=usr1
+owners[]=username
 
 ; If is set to true, visitors can download all or selected files as a zip. Default: false
 allowZip=true

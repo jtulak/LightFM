@@ -166,8 +166,7 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	} else {
 	    // because we want to use same access for default settings and parent settings
 	    $config = array(
-		'ownerUsername' => "",
-		'ownerPassword' => "",
+		'users' => "",
 //		'accessPassword' => $parentsConfig->accessPassword,
 		'allowZip' => $parentsConfig->AllowZip ? self::ZIP_INHERITED_PERMITED : self::ZIP_INHERITED_FORBIDDEN,
 		'modes' => $parentsConfig->modes,
@@ -276,24 +275,18 @@ class DirConfig extends \Nette\Object implements IDirConfig {
      * @throws ErrorException
      */
     private function addUsersConfig($config) {
-	if (!isset($config['userName']) && !isset($config['userPass'])) {
+	if (!isset($config['users'])) {
 	    // if nothing to do, then do it
 	    return $this;
 	}
-	if (isset($config['userName']) && isset($config['userPass'])) {
-	    // if there is something to do, then do it
-	    if (count($config['userName']) != count($config['userPass'])) {
-		throw new \ErrorException('OWNERS_NAMES_AND_PASSWORDS_COUNT_NOT_MATCH_IN_' .
-		$dir, BAD_INI_SYNTAX);
-	    }
-	    for ($i = 0; $i < count($config['userPass']); $i++) {
-		$this->addUser($config['userName'][$i], $config['userPass'][$i], $this->dir);
-	    }
-	    return $this;
+	
+	// if there is something to do, then do it
+	foreach ($config['users'] as $username=>$password){
+	    $this->addUser($username, $password, $this->dir);
 	}
-	// else there is something bad
-	throw new \ErrorException('BOTH_USERNAME_AND_PASSWORD_HAS_TO_BE_FILLED_OR_EMPTY '
-		, BAD_INI_SYNTAX);
+	return $this;
+	
+	
     }
 
     /**
