@@ -41,7 +41,7 @@ class GalleryPresenter extends ADirectoryPresenter{
 	$this->template->basepath =$this->getHttpRequest()->url->basePath;
 	
 	
-	// TODO removing of old thumbnails - if no item in this dir has the hash, solve directory diferenciating.
+	
     }
     
     /**

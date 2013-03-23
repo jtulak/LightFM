@@ -235,7 +235,7 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	}
 	
 	
-	// TODO Change file name
+	// TODO Change archive name for downloading
 
 	$this->sendResponse(new Nette\Application\Responses\JsonResponse($response));
     }
