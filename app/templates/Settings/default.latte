@@ -5,122 +5,16 @@
 
 {block content}
 <div id="settings">
-    <h2 >Settings</h2>
+    <h2 >General options for your account</h2>
     <div class="buttons">
 	<a  class="button back"  n:href="List:default, path=>$node->Path">Back to the directory</a>
     </div>
     <div class="content">
 	
-	{form dirSettingsForm}
-	<table>
-	    <tr>
-		<th ><h3>Options for folder <span class="dir-name">"{$node->Name}"<span></h3></th>
-	    </tr>
-	    <tr>
-		<td>
-			{input accessPassword}
-			{label accessPassword /}
-		</td>
-	    </tr>
-	    {dump $node}
-	    <tr n:if="$withPassword != NULL && $withPassword != $node">
-		<td>
-		    Note: This directory itself has no password set, 
-		    but is protected by password from upper directory 
-		    <span class="dir-name">"{$withPassword->Name}"<span>.
-		</td>
-	    </tr>
-	    <tr class="small">
-		<td >
-		    {if $withPassword != NULL && $withPassword != $node}
-			If you left this password empty, the directory will be protected only by the upper directory.
-		    {else}
-			If you left this password empty, the directory will be public accessible.
-		    {/if}
-		</td>
-	    </tr>
-	    <tr>
-		<td>
-			<h4>{label allowZip /}</h4>
-			{input allowZip}
-		</td>
-	    </tr>
-	    
-	    <tr>
-		<td>
-		    <h4>Select views:</h4>
-		    <table>
-			<tr>
-			    <td colspan="2">
-				{input inheritViews}
-				{label inheritViews /}
-			    </td>
-			</tr>
-			<tr>
-			    <td>Allowed</td>
-			    <td>Default</td>
-			</tr>
-			<tr  id="viewsSetting">
-			    <td class="views-allowed">
-				<ul>
-				    {foreach $form->groups['checkboxes']->getControls() as $control}
-					<li>
-					    {= $control->getControl()}
-					</li>
-				    {/foreach}
-				</ul>
-			    </td>
-			    <td class="views-default">
-				{input defaultView}
-			    </td>
-			</tr>
-		    </table>
-		    
-		    
-		</td>
-	    </tr>
-	    
-	    <tr>
-		<td>
-		    <h4>Owner settings</h4>
-		    <table>
-			<tr>
-			    <td>{input ownerUsername}</td>
-			    <td>{label ownerUsername /}</td>
-			</tr>
-			<tr>
-			    <td>{input ownerPassword}</td>
-			    <td>{label ownerPassword /}</td>
-			</tr>
-		    </table>
-		</td>
-	    </tr>
-	    
-	    <tr>
-		<td>
-		    <ul n:if="$form->hasErrors()">
-			<li class="error" n:foreach="$form->errors as $error">{$error}</li>
-		    </ul>
-		</td>
-	    </tr>
-	    <tr class="submit">
-		<td >
-			{input save}
-			{input saveAll}
-		</td>
-	    </tr>
-	    </table>
-	{/form}
 	
-	TODO add owners settings
 	
 	{form generalSettingsForm}
 	<table>
-	    <tr>
-		<th colspan="2">
-	    <h3>General options for your account</h3>
-		</th>
-	    </tr>
 	    <tr class="hiddenFiles">
 		<td colspan="2">
 			{input hiddenFiles}

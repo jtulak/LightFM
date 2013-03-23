@@ -49,6 +49,8 @@ class SettingsPresenter extends BasePresenter {
 	    // try to find the clossest password
 	    $this->withPassword = $this->withPassword->Parent;
 	}
+	$this->template->node = $this->viewed;
+	$this->template->withPassword=  $this->withPassword;
     }
 
 
@@ -64,6 +66,16 @@ class SettingsPresenter extends BasePresenter {
 	$this->load();
 	//$this->saveState($save);
     }
+    public function actionDir(){
+	parent::actionDefault();
+	$this->load();
+	if(!$this->viewed->isOwner($this->getUser()->getId())){
+	    // if user is not an owner
+	    throw new Nette\Application\ForbiddenRequestException('',401);
+	}
+	//$this->saveState($save);
+    }
+    
     public function renderPassword(){
 	$this->template->node = $this->viewed;
 	$this->template->view = $this->view;
@@ -74,10 +86,6 @@ class SettingsPresenter extends BasePresenter {
     
     
     
-    public function renderDefault(){
-	$this->template->node = $this->viewed;
-	$this->template->withPassword=  $this->withPassword;
-    }
     
    /**
      * Create form for language selection
