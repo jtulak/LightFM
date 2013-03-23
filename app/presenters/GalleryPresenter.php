@@ -56,7 +56,7 @@ class GalleryPresenter extends ADirectoryPresenter{
 	$implements = \LightFM\IO::getImplementingClasses('LightFM\IImage');
 	foreach ($files as $key => $item) {
 	    // remove this object if not instance one of implementing classes
-	    if (!array_search(get_class($item), $implements) )
+	    if (array_search(get_class($item), $implements) === FALSE )
 		unset($files[$key]);
 	}
 	
