@@ -206,7 +206,9 @@ class SettingsPresenter extends BasePresenter {
 	/** submit buttons */
 	$form->addHidden('timestamp',$this->viewed->Config->Timestamp);
 	$form->addSubmit('save','Save');
-	$form->addSubmit('saveAll','Save and apply to subdirectories');
+	$form->addSubmit('saveAll','Save and apply to subdirectories')
+		->getControlPrototype()->data['confirm-settings'] ="true";
+	
 	
 	/** Create ownership */
 	$form->addGroup('ownership');

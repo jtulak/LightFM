@@ -18,6 +18,49 @@ $(function() {
 	formToggle(this);
 
     });
+    
+    /* Apply to subdirs confirm */
+    // bind event
+    $("[data-confirm-settings]").click(function(event){
+	if($(this).attr('data-confirmed')){
+	    console.log("confirmed");
+	    // if data confirmed is set, then remove the confirmation
+	    // and continue with uninterupted click
+	    $(this).removeAttr('data-confirmed');
+	}else{
+	    console.log("prevented");
+	    // if confirmation is not set, then set waiting and raise confirm dialog
+	    $(this).attr('data-confirm-settings-waiting','true');
+	    $( "#dialog-confirm-apply-settings" ).dialog('open');
+	    
+	    event.preventDefault();
+	}
+    });
+    // create dialog
+    $( "#dialog-confirm-apply-settings" ).dialog({
+      resizable: false,
+      modal: true,
+      autoOpen:false,
+      close: function(){
+	  // remove sign of waiting for confirm
+	  $('[data-confirm-settings-waiting]')
+		  .removeAttr('data-confirm-settings-waiting');
+      },
+      buttons: {
+        "Apply settings": function() {
+	  // set confirmation sign and make a click
+	  $('[data-confirm-settings-waiting]')
+		  .attr('data-confirmed','true').click();
+	  
+          $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      }
+    });
+    
+    
 
 });
 
