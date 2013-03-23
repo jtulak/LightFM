@@ -250,7 +250,7 @@ class SettingsPresenter extends BasePresenter {
     public function dirSettingsFormSubmitted(Nette\Application\UI\Form $form)
     {
 	// at first check permissions
-	if(!$this->viewed->isOwner($this->getUser()->getId()) && $this->getUser()->isLoggedIn()) {
+	if(!$this->viewed->isOwner($this->getUser()->getId()) || !$this->getUser()->isLoggedIn()) {
 	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER',401);
 	}
 	//throw new Nette\NotImplementedException;
@@ -364,6 +364,10 @@ class SettingsPresenter extends BasePresenter {
     /** called after user settings submit */
     public function generalSettingsFormSubmitted(Nette\Application\UI\Form $form)
     {
+	// at first check permissions
+	if(!$this->getUser()->isLoggedIn()) {
+	    throw new Nette\Application\ForbiddenRequestException('NOT_SIGNED_IN',401);
+	}
 	
         $values = $form->getValues();
 	if($values['hiddenFiles'] != $this->getHttpRequest()->getCookie('hiddenFiles')){

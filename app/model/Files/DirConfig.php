@@ -406,7 +406,14 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	    unlink($this->iniFile.'.part');
 	    throw new Nette\Application\ApplicationException('ANOTHER_EDIT_HAPPENS');
 	}
+	
+	// set users and last changed
 	$data['lastChanged'] = time();
+	if(isset($ini_array['users']))
+	    $data['users'] = $ini_array['users'];
+	
+	// write comment
+	fwrite($outHandler,"; Auto generated on " . date("Y-M-d H:m:s").PHP_EOL);
 	$this->saveIniToFile($data, $outHandler);
 	
 	
@@ -428,36 +435,25 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	// open safely file
 	$handle = fopen('safe://'.$this->iniFile, 'r'); 
 	$handleTmp = fopen('safe://'.$this->iniFile.'.part', 'w'); 
+	$ini_array = parse_ini_string(fread($handle,filesize($this->iniFile)));
+	rewind($handle);
+	fwrite($handleTmp, fgets($handle));
 	
-	
-	$replaced = false;
-	// read all file
-	while (!feof($handle)) {
-	    $buffer = fgets($handle);
-	    $matches;
-		//dump($buffer);
-	    if(!$replaced && preg_match('/^[ \t]*users[ \t]*\[([^\]]+)\]/', $buffer,$matches)){
-		// if the line is an user
-		if(isset($matches[1]) && $matches[1] == $username){
-		    // and the user is the searched one
-		    // then write the change
-		    fwrite($handleTmp, 'users['.$username.']="'.$password.'"'.PHP_EOL);
-		    $replaced = true;
-		    // and skip to rest of lines
-		    continue;
-		} 
-	    }  
-	    // else write the line as it is
-	    fwrite($handleTmp,$buffer);
-	    
-	    // save the pointer for next cycle
+	if(!isset($ini_array['users'])){
+	    throw new Exception('CANT_SET_PASSWORD_IN_FILE_WHERE_NO_USER_EXISTS');
 	}
+	if(!isset($ini_array['users'][$username])){
+	    throw new Exception('THE_USER_DO_NOT_EXISTS');
+	}
+	
+	$ini_array['users'][$username] = $password;
+	
+	$this->saveIniToFile($ini_array, $handleTmp);
+		
 	fclose($handle);
 	fclose($handleTmp);
 	
-	// delete old source file
 	unlink($this->iniFile);
-	// rename target file to source file
 	rename($this->iniFile.'.part', $this->iniFile);
     }
     
@@ -467,8 +463,6 @@ class DirConfig extends \Nette\Object implements IDirConfig {
      */
     private function saveIniToFile($array,$outputHandler) {
 
-	// write comment
-	fwrite($outputHandler,"; Auto generated on " . date("Y-M-d").PHP_EOL);
 	foreach ($array as $key => $val) {
 	    //if this item is an array
 	    if (is_array($val)) {
