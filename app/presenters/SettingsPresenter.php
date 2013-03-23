@@ -321,8 +321,13 @@ class SettingsPresenter extends BasePresenter {
 	// now the settings values are complete, we can save them
 	 
 	try{   
-	    $this->viewed->Config->save($forSave);
-	    $this->flashMessage('Changes were saved.', 'success');
+	    if($form->submitted->name == 'save'){
+		$this->viewed->Config->save($forSave);
+		$this->flashMessage('Changes were saved.', 'success');
+	    }else if($form->submitted->name == 'saveAll'){
+		$this->viewed->Config->saveToSub($forSave);
+		$this->flashMessage('Changes were saved and applied also to all subdirectories.', 'success');
+	    }
 		
 	}catch(Nette\Application\ApplicationException $e){
 	    $this->flashMessage('Someone else already edited this directory. Your changes weren\'t saved and the new values are shown!', 'error');

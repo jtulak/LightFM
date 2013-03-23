@@ -394,10 +394,15 @@ class DirConfig extends \Nette\Object implements IDirConfig {
      * @param array $data 
      */
     public function save($data) {
-	$inHandler = fopen('safe://'.$this->iniFile, 'r');
+	$inHandler=NULL;
+	$ini_array=array();
+	
+	if(file_exists($this->iniFile)){
+	    $inHandler = fopen('safe://'.$this->iniFile, 'r');
+	    $ini_array = parse_ini_string(fread($inHandler,filesize($this->iniFile)));
+	}
 	$outHandler = fopen('safe://'.$this->iniFile.'.part', 'w');
 	
-	$ini_array = parse_ini_string(fread($inHandler,filesize($this->iniFile)));
 	
 	if(isset($ini_array['lastChanged']) && $ini_array['lastChanged'] != $this->lastChanged){
 	    // test if timestamp is ok and if not, throw exception
@@ -417,10 +422,16 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	$this->saveIniToFile($data, $outHandler);
 	
 	
-	fclose($inHandler);
+	if($inHandler!==NULL){
+	    fclose($inHandler);
+	}
 	fclose($outHandler);
-	unlink($this->iniFile);
+	if($inHandler!==NULL){
+	    unlink($this->iniFile);
+	}
 	rename($this->iniFile.'.part', $this->iniFile);
+	
+	return $this;
     }
     
     /**
@@ -433,11 +444,19 @@ class DirConfig extends \Nette\Object implements IDirConfig {
      */
     public function savePassword($username,$password){
 	// open safely file
-	$handle = fopen('safe://'.$this->iniFile, 'r'); 
+	$handle=NULL;
+	$ini_array=array();
+	
+	if(file_exists($this->iniFile)){
+	    $handle = fopen('safe://'.$this->iniFile, 'r'); 
+	    $ini_array = parse_ini_string(fread($handle,filesize($this->iniFile)));
+	}
+	
 	$handleTmp = fopen('safe://'.$this->iniFile.'.part', 'w'); 
-	$ini_array = parse_ini_string(fread($handle,filesize($this->iniFile)));
-	rewind($handle);
-	fwrite($handleTmp, fgets($handle));
+	if($handle!==NULL){
+	    rewind($handle);
+	    fwrite($handleTmp, fgets($handle));
+	}
 	
 	if(!isset($ini_array['users'])){
 	    throw new Exception('CANT_SET_PASSWORD_IN_FILE_WHERE_NO_USER_EXISTS');
@@ -449,12 +468,16 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	$ini_array['users'][$username] = $password;
 	
 	$this->saveIniToFile($ini_array, $handleTmp);
-		
-	fclose($handle);
+	if($handle!==NULL){
+	    fclose($handle);
+	}
 	fclose($handleTmp);
-	
-	unlink($this->iniFile);
+	if($handle!==NULL){
+	    unlink($this->iniFile);
+	}
 	rename($this->iniFile.'.part', $this->iniFile);
+	
+	return $this;
     }
     
     /**
@@ -477,6 +500,7 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	    }
 	}
 	//file_put_contents('safe://' . $this->iniFile, implode("\n", $res));
+	return $this;
     }
     
 
@@ -493,5 +517,34 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	}
 	
 	return "$str";
+    }
+    
+    /**
+     * Save config and apply changes to inherite it to all subdirs.
+     * It will make subfolder's configs empty
+     * 
+     * @param array $data
+     */
+    public function saveToSub($data){
+	$this->save($data);
+	
+	$this->makeChildsEmpty(dirname($this->iniFile));
+    }
+    
+    public function makeChildsEmpty($path){
+	
+	$dir = opendir($path);
+	while(false !== ($entry = readdir($dir))) {
+	    $fullEntry = $path.'/'.$entry;
+	    // we want to do something only for subdirs..
+	    if($entry == '.'||$entry == '..') continue;
+	    if(!is_dir($fullEntry)) continue;
+	    
+	    if(file_exists($fullEntry.'/'.\Nette\Environment::getConfig('dirConfig'))){
+		unlink($fullEntry.'/'.\Nette\Environment::getConfig('dirConfig')); 
+	    }
+	    $this->makeChildsEmpty($fullEntry);
+	}
+	closedir($dir);
     }
 }
