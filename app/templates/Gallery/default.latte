@@ -61,26 +61,30 @@
 	
 	{foreach $listDirs as $dir}
 	<section class="folder">
-	    <a n:href="default, path => $dir->Path ">
+	    
 		<table>
 		    <tr>
 			<td class="checkbox"><input class="fileSelector" type="checkbox" data-name="{$dir->Name}"></td>
-			<td class="name"><span title="{$dir->Name}">{$dir->Name}</span></td>
+			<td class="name"><span title="{$dir->Name}"><a n:href="default, path => $dir->Path ">{$dir->Name}</a></span></td>
 			<td class="date">{$dir->Date|date:'%Y/%m/%d %H:%M:%S'}</td>
 		    </tr>
 		</table>
-		</a>
+		
 	</section>
 	{/foreach}
 	
 	
 	{foreach $listFiles as $file}
 	<section class="image ">
-	    <a  n:href="{$file->Presenter}:default, path => $file->Path" >
+	    
 		<table>
 		    <tr>
 			
-			<td colspan="3" class="thumb"><img alt="{$file->Name}" src="{link Image:thumbnail, path=>$file->Path,crop=>true,bigSide=>190}" width="190" height="190"/></td>
+			<td colspan="3" class="thumb">
+			    <a  n:href="{$file->Presenter}:default, path => $file->Path" >
+				<img alt="{$file->Name}" src="{link Image:thumbnail, path=>$file->Path,crop=>true,bigSide=>190}" width="190" height="190"/>
+			    </a>
+			</td>
 		    </tr>
 		    <tr>
 			<td colspan="3" class="name" >
@@ -93,7 +97,7 @@
 			<td class="date">{$file->Date|date:'%Y/%m/%d'}</td>
 		    </tr>
 		</table>
-	    </a>
+	    
 	</section>
 	{/foreach}
 	

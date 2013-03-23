@@ -157,10 +157,6 @@ ol,ul {
 	border-bottom: 1px solid lighten(@color-outerBorder,20%);
 	background: @list-light;
 	
-	a {
-	    color: @color-text;
-	    text-decoration: none;
-	}
 		    
 	input {
 	    margin: 0;
@@ -245,6 +241,13 @@ ol,ul {
     	     }
 	     
 	 }
+	a {
+	    color: @color-text;
+	    text-decoration: none;
+	    &:hover{
+		text-decoration: underline;
+	    }
+	}
 
 	&.header {
 	    a {

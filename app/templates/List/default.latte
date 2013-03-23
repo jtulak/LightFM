@@ -74,36 +74,35 @@
 	
 	{foreach $listDirs as $dir}
 	<section class="folder">
-	    <a n:href="default, path => $dir->Path ">
+	    
 		<table>
 		    <tr>
 			<td class="checkbox"><input class="fileSelector" type="checkbox" data-name="{$dir->Name}"></td>
-			<td class="name"><span title="{$dir->Name}">{$dir->Name}</span></td>
+			<td class="name"><span title="{$dir->Name}"><a n:href="default, path => $dir->Path ">{$dir->Name}</a><</span>/td>
 			<td class="suffix"></td>
 			<td class="size">{$dir->Size|Bytes}</td>
 			<td class="date">{$dir->Date|date:'%Y/%m/%d %H:%M:%S'}</td>
 		    </tr>
 		</table>
-		</a>
 	</section>
 	{/foreach}
 	
 	
 	{foreach $listFiles as $file}
 	<section class="file {$file->IconName}">
-	    <a n:href="{$file->Presenter}:default, path => $file->Path ">
+	    
 		<table>
 		    <tr>
 			<td class="checkbox"><input class="fileSelector" type="checkbox" data-name="{$file->Name}{if $file->Suffix}.{$file->Suffix}{/if}"></td>
 			<td class="name"  title="{$file->Name}">
-			    <span>{$file->Name}</span>
+			    <span><a n:href="{$file->Presenter}:default, path => $file->Path ">{$file->Name}</a></span>
 			</td>
 			<td class="suffix">{$file->Suffix}</td>
 			<td class="size">{$file->Size|Bytes}</td>
 			<td class="date">{$file->Date|date:'%Y/%m/%d %H:%M:%S'}</td>
 		    </tr>
 		</table>
-	    </a>
+	    
 	</section>
 	{/foreach}
 	
