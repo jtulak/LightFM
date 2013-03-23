@@ -11,6 +11,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     // TODO Ajaxify
     // TODO custom image view
     // TODO replace jqueryui
+    // TODO resizing and scrolling
+    // TODO change folder name in root settings
 
     /**
      * List of all know interfaces this presenter can show.
