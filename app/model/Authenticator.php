@@ -66,17 +66,19 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 	 */
 	public function authenticate(array $credentials)
 	{
+	    // TODO central user repository, only admin can add/remove users, username has to be unique
+	    
 		list($username, $password, $node) = $credentials;
 		//dump($node);
 		//$row = $this->database->table('users')->where('username', $username)->fetch();
-		$owners = $node->Config->Owners;
-		if (!$owners) {
+		$users = $node->Config->Users;
+		if (!$users) {
 			throw new Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
 		}
-		dump($owners);
-		foreach($owners as $owner){
-		    if($owner['password'] == $password){
-			return new Security\Identity($owner['dir'], 1, $owner);
+		dump($users);
+		foreach($users as $user){
+		    if($user['password'] == $password){
+			return new Security\Identity($username, 1, $user);
 		    }
 		}
 		// no password found

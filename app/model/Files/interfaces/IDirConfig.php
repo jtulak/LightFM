@@ -32,16 +32,30 @@ namespace LightFM;
     public function isBlacklisted($file);
     
     /**
-     * Tet array of owners.
+     * get array of owners.
      * @return array
      */
     public function getOwners();
+    
+    
+    /**
+     * Get array of users
+     * @return array
+     */
+    public function getUsers();
     
     /**
      * Get access password.
      * @return string
      */
     public function getAccessPassword();
+    
+    /**
+     * Get list of modes
+     * 
+     * @return array
+     */
+    public function getModes();
     
     public function getAllowZip();
     public function getAllowZipInherited();
@@ -64,12 +78,21 @@ namespace LightFM;
     public function __construct($dir);
     
     /**
+     * Add an array of owners - eg. from parent config
      * 
      * @param array $owners
      * @return \LightFM\DirConfig
      */
     public function addOwners(array $owners);
  
+    /**
+     * Add an array of users - eg. from parent config
+     * 
+     * @param array $users
+     * @return \LightFM\DirConfig
+     */
+    public function addUsers(array $users);
+    
     /**
      * Will save changes in this config to a file
      * @param array changes

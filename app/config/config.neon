@@ -9,8 +9,6 @@ common:
 		dirConfig: '.filemanager.ini'
 		defaults:
 			accessPassword: ''
-			ownerUsername: 'admin'
-			ownerPassword: 'admin'
 			allowZip: false
 			modes:
 				- ListPresenter

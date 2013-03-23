@@ -35,11 +35,16 @@ This file has NOT to be accessible - system will not read it and it must be prot
 ; This is access password - without it the folder will be public. Default: empty
 
 accessPassword="some secret"
-; Owner is needed for file management. Default: empty
+; Users are needed for file management. Default: set via .neon
+; New users can be set only in root directory.
+userName[]=usr1                ; this is an owner
+userPass[]=xxx                 ; this is a password for owner
 
-ownerUsername=usr1                ; this is an owner
+userName[]=usr2                ; this is another owner
+userPass[]=yyy                 ; this is a password for another owner
 
-ownerPassword=xxx                        ; this is an password for owner
+; usernames of owners for this directory
+owners[]=usr1
 
 ; If is set to true, visitors can download all or selected files as a zip. Default: false
 allowZip=true

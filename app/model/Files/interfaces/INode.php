@@ -37,6 +37,14 @@ namespace LightFM;
 
     public function delete();
     
+    /**
+     * Test for the username, if it is an owner.
+     * Return true if is.
+     * 
+     * @param string $username
+     * @return boolean
+     */
+    public function isOwner($username);
     
     /**
      * 

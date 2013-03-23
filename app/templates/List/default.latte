@@ -121,14 +121,14 @@
 
 <ul>
     <li n:if="$viewed->Config->AllowZip"><a id="filesDownload" class="filesManipulation disabled" n:href="downloadZip">Download</a></li>
-    {if $owner->isLoggedIn()}
+    {if $isOwner}
     <li><a id="filesMove"  class="filesManipulation disabled" href="#">Move</a></li>
     <li><a id="filesRename"  class="filesManipulation disabled" href="#">Rename</a></li>
     <li><a id="filesDelete"  class="filesManipulation disabled" href="#">Delete</a></li>
     {/if}
 </ul>
 <ul>
-    {if $owner->isLoggedIn()}
+    {if $isOwner}
     <li><a  href="#">Upload</a>
     {/if}
 </ul>

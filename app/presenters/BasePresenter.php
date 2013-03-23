@@ -47,7 +47,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	// test for forbidden "../" and similar
 	$this->path = $this->verifyPath($this->path);
 
-	$this->template->owner = $this->getUser();
+	$this->template->user = $this->getUser();
 	//dump($this->getUser());
     }
 
@@ -89,6 +89,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	$this->root = LightFM\IO::findPath($this->path);
 	// get the item
 	$this->viewed = $this->template->viewed = $this->getLastNode($this->root);
+	$this->template->isOwner = $this->viewed->isOwner($this->getUser()->id);
+	
 	Nette\Diagnostics\Debugger::barDump($this->viewed, 'Viewed');
 	Nette\Diagnostics\Debugger::barDump($this->viewed->Config, 'Config');
 	// && $this->root->usedChild == NULL

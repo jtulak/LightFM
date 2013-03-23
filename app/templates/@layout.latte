@@ -6,7 +6,8 @@
  * @param array    $flashes  flash messages
  * @param string   $filename Name of actual file/folder
  * @param \LightFM\IDirectory $viewed - actual dir
- * @param	    $owner   Object with owner or NULL
+ * @param	    $user   Object with nette user
+ * @param bool	    $isOwner
  *}
 
 {var $debug_less = TRUE }
@@ -51,11 +52,14 @@
 		<h1>LightFM file manager</h1>
 		<div class="options">
 		    <ul>
-			{if !$owner->isLoggedIn()}
+			{if !$user->isLoggedIn()}
 			    <li><a n:href="Sign:in">Login</a></li>
 			{else}
-			    <li>Logged as {$owner->getIdentity()->Data['username']} (<a n:href="signOut!">logout</a>)</li>
-			    <li><a n:href="Settings:default">Options</a></li>
+			    <li>Logged as {$user->getIdentity()->Data['username']} (<a n:href="signOut!">logout</a>)</li>
+			    <li><a n:href="Settings:default">Settings</a></li>
+			    {if $isOwner}
+			    <li><a n:href="Settings:dir">Dir Options</a></li>
+			    {/if}
 			{/if}
 		    </ul>
 		</div>
@@ -70,7 +74,7 @@
 	    <div id="inner-box">
 		<div id="sidebar">
 		    {*if $showSidebar*}
-		    {if $owner->isLoggedIn() || (!empty($viewed) && $viewed->Config->AllowZip)}
+		    {if $user->isLoggedIn() || (!empty($viewed) && $viewed->Config->AllowZip)}
 			{ifset #sidebar}
 			<div class="border">
 			    <div id="sidebar-control">&nbsp;</div>

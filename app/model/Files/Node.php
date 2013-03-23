@@ -233,4 +233,13 @@ abstract class Node extends \Nette\Object implements INode{
 	return $this;
     }
     
+    
+    public function isOwner($username){
+	foreach($this->config->Owners as $owner){
+	    if($owner['username'] === $username){
+		return true;
+	    }
+	}
+	return false;
+    }
 }
