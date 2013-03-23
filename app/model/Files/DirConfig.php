@@ -193,8 +193,19 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	    $this->mergeBlacklists($parentsConfig->blacklist);
 	}
 
-	if ($this->allowZip == NULL)
-	    $this->allowZip = $config['allowZip'];
+	if ($this->allowZip === NULL){
+	    switch($config['allowZip']){
+		case self::ZIP_INHERITED_PERMITED:
+		case self::ZIP_PERMITED:
+		    $this->allowZip = self::ZIP_INHERITED_PERMITED;
+		    break;
+		case self::ZIP_INHERITED_FORBIDDEN:
+		case self::ZIP_FORBIDDEN:
+		    $this->allowZip = self::ZIP_INHERITED_FORBIDDEN;
+		    break;
+	    }
+	}
+	    
 
 	if ($config['modes'] && $this->modes == NULL){
 	    // add modes only if wasn't set locally
@@ -250,8 +261,9 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 
 	// add owners
 	
-	if (isset($ini_array['allowZip']))
-	    $this->allowZip = $ini_array['allowZip'];
+	if (isset($ini_array['allowZip'])){
+	    $this->allowZip = $ini_array['allowZip']?self::ZIP_PERMITED:self::ZIP_FORBIDDEN;
+	}
 
 	if (isset($ini_array['modes'])){
 	    for($i=0; count($ini_array['modes']) > $i; $i++){

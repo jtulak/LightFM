@@ -179,12 +179,15 @@ class SettingsPresenter extends BasePresenter {
 	    case LightFM\IDirConfig::ZIP_INHERITED_FORBIDDEN:
 	    case LightFM\IDirConfig::ZIP_INHERITED_PERMITED:
 		$inheritZip->defaultValue = true;
-		$zip->disabled = true;
-		break;
-	    case LightFM\IDirConfig::ZIP_FORBIDDEN:
+		//$zip->disabled = true;
+	    break;
+    
+	}
+	switch($this->viewed->Config->AllowZip){
+	    case false:
 		$zip->defaultValue = LightFM\IDirConfig::ZIP_FORBIDDEN;
 		break;
-	    case LightFM\IDirConfig::ZIP_PERMITED:
+	    case true:
 		$zip->defaultValue = LightFM\IDirConfig::ZIP_PERMITED;
 		break;
 	    
@@ -286,8 +289,6 @@ class SettingsPresenter extends BasePresenter {
 	// read zip
 	if(!$values['inheritZip']){
 	    $forSave['allowZip'] = $values['allowZip'] == LightFM\IDirConfig::ZIP_PERMITED ? 'true':'false';
-	}else{
-	    $forSave['allowZip'] = NULL;
 	}
 
 	// read users
@@ -327,7 +328,7 @@ class SettingsPresenter extends BasePresenter {
 	}
 	$this->redirect('this');
 	
-	//\Nette\Diagnostics\Debugger::barDump($forSave,'Settings for save');
+	\Nette\Diagnostics\Debugger::barDump($forSave,'Settings for save');
 	
 	
     }
