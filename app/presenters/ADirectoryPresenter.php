@@ -63,27 +63,68 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
      */
     public function getAllDirectoryPresenters() {
 	if ($this->allDirectoryPresenters == NULL) {
+	    //at first find all presenters
 	    $presenters = \LightFM\IO::getImplementingClasses('IDirectoryPresenter');
 	    // remove this abstract class
 	    if (($key = array_search('ADirectoryPresenter', $presenters)) !== false) {
 		unset($presenters[$key]);
 	    }
-	    $this->allDirectoryPresenters = array();
+	    $presentersList = array();
 	    foreach ($presenters as $presenter) {
-		$this->allDirectoryPresenters[$presenter::ORDER] = array(
+		$presentersList[$presenter::ORDER] = array(
 		    'name' => $presenter::DISPLAY_NAME,
-		    'presenter' => preg_replace('/Presenter$/', '', $presenter)
+		    'presenter' =>preg_replace('/Presenter$/', '', $presenter)
 		);
 	    }
-	    ksort($this->allDirectoryPresenters);
+	    ksort($presentersList);
+	    
+	    
+	    //dump($this->viewed->Config->Modes);
+	    //dump($presentersList);
+	    
+	    // then forget all which are not allowed
+	    foreach($presentersList as $presenter){
+		if(in_array($presenter['presenter'], $this->viewed->Config->Modes)){
+		    $this->allDirectoryPresenters[]=$presenter;
+		}
+	    }
+	    if(count($this->allDirectoryPresenters) == 0){
+		throw new Nette\Application\ApplicationException('NO_PRESENTER_ALLOWED_FOR_>'.$this->viewed->Path.'<');
+	    }
+	    
 	}
 	return $this->allDirectoryPresenters;
     }
 
-    public function renderDefault() {
+    
+    public function actionDefault() {
+	parent::actionDefault();
 	// save the accessible presenters to a template variable
-	$this->template->directoryPresenters = $this->getAllDirectoryPresenters();
-	$this->template->actualPresenter = preg_replace('/Presenter$/', '', get_class($this));
+	$allPresenters = $this->getAllDirectoryPresenters();
+	$actualPresenter = preg_replace('/Presenter$/', '', get_class($this));
+	
+	// now test if we are in allowed presenter
+	$inAllowed = false;
+	foreach($this->getAllDirectoryPresenters() as $presenter){
+	    // for each allowed check the current
+	    if($presenter['presenter'] == $actualPresenter){
+		$inAllowed = true;
+		break;
+	    }
+	}
+	if(!$inAllowed){
+	    // if we are in a presenter which is not allowed
+	    $this->redirect($allPresenters[0]['presenter'] . ':default');
+	}
+	
+	// if all ok, save it
+	$this->template->actualPresenter = $actualPresenter;
+	$this->template->directoryPresenters = $allPresenters;
+	
+    }
+
+
+    public function renderDefault() {
 
 
 	// send to template ---------

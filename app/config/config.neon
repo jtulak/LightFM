@@ -11,8 +11,8 @@ common:
 			accessPassword: ''
 			allowZip: false
 			modes:
-				- ListPresenter
-				- GalleryPresenter
+				- List
+				- Gallery
 			blacklist:
 			#	- "/filemanager"
 			#	- ".filemanager.ini"

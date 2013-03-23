@@ -184,8 +184,10 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	if ($this->allowZip == NULL)
 	    $this->allowZip = $config['allowZip'];
 
-	if ($config['modes'])
+	if ($config['modes'] && $this->modes == NULL){
+	    // add modes only if wasn't set locally
 	    $this->addToModes($config['modes']);
+	}
     }
     /**
      * Move owner names to owners.
@@ -239,8 +241,12 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	if (isset($ini_array['allowZip']))
 	    $this->allowZip = $ini_array['allowZip'];
 
-	if (isset($ini_array['modes']))
+	if (isset($ini_array['modes'])){
+	    for($i=0; count($ini_array['modes']) > $i; $i++){
+		//$ini_array['modes'][$i] = $ini_array['modes'][$i].'Presenter';
+	    }
 	    $this->addToModes($ini_array['modes']);
+	}
 
 	if (isset($ini_array['blacklist']))
 	    $this->addToBlacklist($ini_array['blacklist']);
