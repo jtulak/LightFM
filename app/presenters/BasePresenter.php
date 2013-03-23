@@ -6,7 +6,6 @@
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
     
     // TODO settings applied to subdirs
-    // TODO owner do not need to fill access password
     // TODO Caching
     // TODO Ajaxify
     // TODO custom image view
@@ -97,7 +96,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	$this->root = LightFM\IO::findPath($this->path);
 	// get the item
 	$this->viewed = $this->template->viewed = $this->getLastNode($this->root);
-	$this->template->isOwner = $this->viewed->isOwner($this->getUser()->id);
+	$this->template->isOwner = $this->viewed->isOwner($this->getUser()->id) && $this->getUser()->isLoggedIn();
 	
 	Nette\Diagnostics\Debugger::barDump($this->viewed, 'Viewed');
 	Nette\Diagnostics\Debugger::barDump($this->viewed->Config, 'Config');
@@ -127,11 +126,16 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     protected function testAccess($node) {
 	//\Nette\Diagnostics\Debugger::barDump($node);
 	$tested = $node;
+	
+	if ($this->viewed->isOwner($this->getUser()->getId()) && $this->getUser()->isLoggedIn()) {
+	    // if owner, do nothing, owner has access
+	    return;
+	}
+	
 	while ($tested !== NULL && empty($tested->Password)) {
 	    // try to find the clossest password
 	    $tested = $tested->Parent;
 	}
-	\Nette\Diagnostics\Debugger::barDump($tested);
 	if ($tested === NULL) {
 	    // if null, there is no password needed, so stop
 	    return;

@@ -69,7 +69,7 @@ class SettingsPresenter extends BasePresenter {
     public function actionDir(){
 	parent::actionDefault();
 	$this->load();
-	if(!$this->viewed->isOwner($this->getUser()->getId())){
+	if(!($this->viewed->isOwner($this->getUser()->getId()) && $this->getUser()->isLoggedIn())){
 	    // if user is not an owner
 	    throw new Nette\Application\ForbiddenRequestException('',401);
 	}
@@ -213,11 +213,13 @@ class SettingsPresenter extends BasePresenter {
 	// for each user
 	foreach($this->root->Config->Users as $user){
 	    $item = $form->addCheckbox('user_'.$user['username'],$user['username']);
-	    if($this->viewed->isOwner($user['username'])){
+	    if($this->viewed->isOwner($user['username'])  && $this->getUser()->isLoggedIn()){
 		//if the user is actually owner
 		$item->defaultValue=true;
 		
-		$inherited = $this->viewed->Parent != NULL && $this->viewed->Parent->isOwner($user['username']);
+		$inherited = $this->viewed->Parent != NULL 
+			&& $this->viewed->Parent->isOwner($user['username'])  
+			&& $this->getUser()->isLoggedIn();
 		$self = $this->getUser()->getId() == $user['username'];
 		if($inherited || $self){
 		    // if the user is owner also in parent, then do not allow to change here
@@ -248,9 +250,7 @@ class SettingsPresenter extends BasePresenter {
     public function dirSettingsFormSubmitted(Nette\Application\UI\Form $form)
     {
 	// at first check permissions
-	if(!$this->viewed->isOwner(
-		$this->getUser()->getId()
-	)) {
+	if(!$this->viewed->isOwner($this->getUser()->getId()) && $this->getUser()->isLoggedIn()) {
 	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER',401);
 	}
 	//throw new Nette\NotImplementedException;
@@ -295,7 +295,9 @@ class SettingsPresenter extends BasePresenter {
 	foreach($this->root->Config->Users as $user){
 	    $itemName = 'user_'.$user['username'];
 
-	    $inherited = $this->viewed->Parent != NULL && $this->viewed->Parent->isOwner($user['username']);
+	    $inherited = $this->viewed->Parent != NULL 
+		    && $this->viewed->Parent->isOwner($user['username'])
+		    && $this->getUser()->isLoggedIn();
 	    $self = $this->getUser()->getId() == $user['username'];
 	    if($self && !$inherited){
 		// if it is the user himself and not inherited, be sure 
