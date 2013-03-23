@@ -73,7 +73,6 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 		if (!$users) {
 			throw new Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
 		}
-		dump($users);
 		foreach($users as $user){
 		    if($user['password'] == $password){
 			return new Security\Identity($username, null, $user);
