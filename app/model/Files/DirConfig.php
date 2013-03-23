@@ -371,7 +371,52 @@ class DirConfig extends \Nette\Object implements IDirConfig {
     public function save($changes) {
 	$ini_array = parse_ini_file($this->iniFile);
     }
-
+    
+    /**
+     * This is not changing the timestamp in the ini file
+     * as it is manipulating only with user password and there is no risk of
+     * concurent edits.
+     * 
+     * @param string $username
+     * @param string $password
+     */
+    public function savePassword($username,$password){
+	// open safely file
+	$handle = fopen('safe://'.$this->iniFile, 'r'); 
+	$handleTmp = fopen('safe://'.$this->iniFile.'.part', 'w'); 
+	
+	
+	$replaced = false;
+	// read all file
+	while (!feof($handle)) {
+	    $buffer = fgets($handle);
+	    $matches;
+		//dump($buffer);
+	    if(!$replaced && preg_match('/^[ \t]*users[ \t]*\[([^\]]+)\]/', $buffer,$matches)){
+		// if the line is an user
+		if(isset($matches[1]) && $matches[1] == $username){
+		    // and the user is the searched one
+		    // then write the change
+		    fwrite($handleTmp, 'users['.$username.']="'.$password.'"'.PHP_EOL);
+		    $replaced = true;
+		    // and skip to rest of lines
+		    continue;
+		} 
+	    }  
+	    // else write the line as it is
+	    fwrite($handleTmp,$buffer);
+	    
+	    // save the pointer for next cycle
+	}
+	fclose($handle);
+	fclose($handleTmp);
+	
+	// delete old source file
+	unlink($this->iniFile);
+	// rename target file to source file
+	rename($this->iniFile.'.part', $this->iniFile);
+    }
+    
     /**
      * Will write the array to ini file
      * @param array $array

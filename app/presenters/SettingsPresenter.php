@@ -276,7 +276,8 @@ class SettingsPresenter extends BasePresenter {
     {
         $form = new Nette\Application\UI\Form($this, $name);
 	
-	$form->addCheckbox('hiddenFiles','Show hidden files');
+	$form->addCheckbox('hiddenFiles','Show hidden files')
+		->setDefaultValue($this->getHttpRequest()->getCookie('hiddenFiles'));
 	
 	$form->addPassword('userPassword','Your new password:');
 	$form->addPassword('userPasswordVerify','Your new password again:')
@@ -295,16 +296,26 @@ class SettingsPresenter extends BasePresenter {
     {
 	
         $values = $form->getValues();
-	if($values['hiddenFiles']){
-	    $this->getHttpResponse()->setCookie('hiddenFiles', true, '+ 100 days'); 
-	}else{
-	    $this->getHttpResponse()->deleteCookie('hiddenFiles');
+	if($values['hiddenFiles'] != $this->getHttpRequest()->getCookie('hiddenFiles')){
+	    if($values['hiddenFiles']){
+		$this->getHttpResponse()->setCookie('hiddenFiles', true, '+ 100 days'); 
+		$this->flashMessage('You will see hidden files.', 'success');
+	    }else{
+		$this->getHttpResponse()->deleteCookie('hiddenFiles');
+		$this->flashMessage('You will not see hidden files.', 'success');
+	    }
 	}
 	
-	// TODO password change save
+	if(!empty($values['userPassword'])){
+	    $this->root->Config->savePassword($this->getUser()->getId(), $values['userPassword']);
+	    $this->flashMessage('New password was saved.', 'success');
+	}
 	
-        $this->flashMessage('Changes were saved.', 'success');
+	// TODO test for safe chars!
+	
 	$this->redirect('this');
+	
+	
     }
 }
 
