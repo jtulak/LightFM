@@ -166,61 +166,74 @@ class SettingsPresenter extends BasePresenter {
 	$form->addText('accessPassword', 'Access Password')
 		->setDefaultValue($this->viewed->Password);
 	
-	/** Create select box for allowing ZIP downloading */
+	/** Create box for allowing ZIP downloading */
 	$viewed = $this->viewed;
-	$form->addCheckbox('inheritZip','Inherit from parent.');
-	$form->addRadioList('allowZip','Allow zip download',array(
+	$inheritZip = $form->addCheckbox('inheritZip','Inherit from parent.');
+	$zip = $form->addRadioList('allowZip','Allow zip download',array(
 	    LightFM\IDirConfig::ZIP_PERMITED=>'Permit',
 	    LightFM\IDirConfig::ZIP_FORBIDDEN=>'Forbid'
 		))
 	    ->setAttribute('class', 'form-toggler');
-	/*$form->addSelect('allowZip', 'Download multiple files at once', array(
-	    LightFM\IDirConfig::ZIP_INHERITED=>'Inherit from parent',
-	    LightFM\IDirConfig::ZIP_PERMITED=>'Permit',
-	    LightFM\IDirConfig::ZIP_FORBIDDEN=>'Forbid',
+	
+	switch($this->viewed->Config->AllowZipInherited){
+	    case LightFM\IDirConfig::ZIP_INHERITED_FORBIDDEN:
+	    case LightFM\IDirConfig::ZIP_INHERITED_PERMITED:
+		$inheritZip->defaultValue = true;
+		$zip->disabled = true;
+		break;
+	    case LightFM\IDirConfig::ZIP_FORBIDDEN:
+		$zip->defaultValue = LightFM\IDirConfig::ZIP_FORBIDDEN;
+		break;
+	    case LightFM\IDirConfig::ZIP_PERMITED:
+		$zip->defaultValue = LightFM\IDirConfig::ZIP_PERMITED;
+		break;
 	    
-	))
-	->setDefaultValue(function() use ($viewed) {
-		    switch ($viewed->Config->AllowZipInherited){
-			case LightFM\IDirConfig::ZIP_INHERITED_FORBIDDEN:
-			case LightFM\IDirConfig::ZIP_INHERITED_PERMITED:
-			    return LightFM\IDirConfig::ZIP_INHERITED;
-			    
-			case LightFM\IDirConfig::ZIP_FORBIDDEN:
-			case LightFM\IDirConfig::ZIP_PERMITED:
-			    return $viewed->Config->AllowZipInherited;
-		    }
-	});*/
+	}
 	
-	
-	/** Create access password */
-	// TODO settings saving
-	$form->addText('ownerUsername', 'Owner Username')
-		->setDefaultValue('TODO');
-	$form->addText('ownerPassword', 'Owner Password')
-		->setDefaultValue('TODO');
 	
 	/** Create selection of default view */
-	$accessible = $this->getViewsList();
-	$form->addCheckbox('inheritViews','Inherit from parent.')
+	/*$accessible = $this->getViewsList();
+	$inheritView = $form->addCheckbox('inheritViews','Inherit from parent.')
 	    ->setAttribute('class', 'form-toggler');
-	$form->addRadioList('defaultView','Default view',$accessible)
+	$viewSelect = $form->addRadioList('defaultView','Default view',$accessible)
 		->setDefaultValue($this->viewed->Presenter.'Presenter');
 	
+	*/
+	
 	/** submit buttons */
+	$form->addHidden('timestamp',$this->viewed->Config->Timestamp);
 	$form->addSubmit('save','Save');
 	$form->addSubmit('saveAll','Save and apply to subdirectories');
 	
+	/** Create ownership */
+	$form->addGroup('ownership');
+	// for each user
+	foreach($this->root->Config->Users as $user){
+	    $item = $form->addCheckbox('user_'.$user['username'],$user['username']);
+	    if($this->viewed->isOwner($user['username'])){
+		//if the user is actually owner
+		$item->defaultValue=true;
+		
+		$inherited = $this->viewed->Parent != NULL && $this->viewed->Parent->isOwner($user['username']);
+		$self = $this->getUser()->getId() == $user['username'];
+		if($inherited || $self){
+		    // if the user is owner also in parent, then do not allow to change here
+		    $item->disabled = true;
+		}
+	    }
+	}
+	
 	/** create also checkboxes for enabling/disabling a view*/
+	/*
 	$form->addGroup('checkboxes');
 	foreach($accessible as $key=>$name){
-	    $c = $form->addCheckbox('view_'.$key,$name);
+	    $viewCheckbox = $form->addCheckbox('view_'.$key,$name);
 	    // and set default value
 	    if(in_array($key, $this->viewed->Config->Modes)){
-		$c->setDefaultValue(true);
+		$viewCheckbox->setDefaultValue(true);
 	    }
 	    
-	}
+	}*/
 	
 	
 	
@@ -231,44 +244,91 @@ class SettingsPresenter extends BasePresenter {
     /** called after selection submit */
     public function dirSettingsFormSubmitted(Nette\Application\UI\Form $form)
     {
+	// at first check permissions
+	if(!$this->viewed->isOwner(
+		$this->getUser()->getId()
+	)) {
+	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER',401);
+	}
 	//throw new Nette\NotImplementedException;
 	$forSave=array();
 	
         $values = $form->getValues();
 	
-	try{
-	    // read views
-	    if(!$values['inheritViews']){
-		//if we want to save views
-		if(!$values['view_'.$values['defaultView']]){
-		    // test if default view is enabled
-		    $form->addError('You cannot set a disabled view as a default one!');
-		    throw new Exception;
-		}else{
-		    // else it is ok so set it
-		    $forSave['modes'][] = $values['defaultView'];
+	// read views
+       /* if(!$values['inheritViews']){
+	    //if we want to save views
+	    if(!$values['view_'.$values['defaultView']]){
+		// test if default view is enabled
+		$form->addError('You cannot set a disabled view as a default one!');
+		throw new Exception;
+	    }else{
+		// else it is ok so set it
+		$forSave['modes'][] = $values['defaultView'];
+	    }
+
+
+	    $accessible = $this->getViewsList();
+	    // then set other enables
+	    foreach($accessible as $key=>$name){
+		if($key == $values['defaultView']){
+		    // if it is the default view, it is already set
+		    continue;
 		}
-
-
-		$accessible = $this->getViewsList();
-		// then set other enables
-		foreach($accessible as $key=>$name){
-		    if($key == $values['defaultView']){
-			// if it is the default view, it is already set
-			continue;
-		    }
-		    if($values['view_'.$key]){
-			$forSave['modes'][] = $key;
-		    }
+		if($values['view_'.$key]){
+		    $forSave['modes'][] = $key;
 		}
 	    }
-	    // read password
-	    $forSave['accessPassword']=$values['accessPassword'];
-	    
-	}catch(Exception $e){
-	    
+	}*/
+	// read password
+	$forSave['accessPassword']=$values['accessPassword'];
+
+	// read zip
+	if(!$values['inheritZip']){
+	    $forSave['allowZip'] = $values['allowZip'] == LightFM\IDirConfig::ZIP_PERMITED ? 'true':'false';
+	}else{
+	    $forSave['allowZip'] = NULL;
 	}
-	\Nette\Diagnostics\Debugger::barDump($forSave);
+
+	// read users
+	foreach($this->root->Config->Users as $user){
+	    $itemName = 'user_'.$user['username'];
+
+	    $inherited = $this->viewed->Parent != NULL && $this->viewed->Parent->isOwner($user['username']);
+	    $self = $this->getUser()->getId() == $user['username'];
+	    if($self && !$inherited){
+		// if it is the user himself and not inherited, be sure 
+		// he is included
+		if(!isset($forSave['owners'])){
+		    $forSave['owners'] = array();
+		}
+		$forSave['owners'][]=$user['username'];
+
+	    }else if( !$inherited && $values[$itemName]){
+		// if this is not an inherited item and it is selected,
+		// then save it
+		if(!isset($forSave['owners'])){
+		    $forSave['owners'] = array();
+		}
+		$forSave['owners'][]=$user['username'];
+	    }
+
+	}
+	    
+	// now the settings values are complete, we can save them
+	 
+	try{   
+	    $this->viewed->Config->save($forSave);
+	    $this->flashMessage('Changes were saved.', 'success');
+		
+	}catch(Nette\Application\ApplicationException $e){
+	    $this->flashMessage('Someone else already edited this directory. Your changes weren\'t saved and the new values are shown!', 'error');
+	    //throw $e;
+	}
+	$this->redirect('this');
+	
+	//\Nette\Diagnostics\Debugger::barDump($forSave,'Settings for save');
+	
 	
     }
     

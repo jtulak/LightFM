@@ -23,6 +23,7 @@ define('BAD_INI_SYNTAX', 1);
  * @property-read array $Modes 
  * @property-read array $Blacklist 
  * @property-read string $AccessPassword
+ * @property-read int	$Timestamp 
  */
 class DirConfig extends \Nette\Object implements IDirConfig {
 
@@ -47,11 +48,19 @@ class DirConfig extends \Nette\Object implements IDirConfig {
     /** @var boolean	Is allowed downloading of mutiple files inarchived? */
     private $allowZip = NULL;
 
-    /** @var int	last time of the config change */
+    /**
+     * timestamp with the last config editation
+     * @var int
+     */
     private $lastChanged = 0;
 
     /** @var string	Absolute path to the connected dir */
     private $dir = NULL;
+    
+    /**
+     *	Absolute path to this ini file
+     * @var string
+     */
     private $iniFile;
 
     public function isBlacklisted($file) {
@@ -106,6 +115,10 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 
     public function getAccessPassword() {
 	return $this->accessPassword;
+    }
+    
+    public function getTimestamp(){
+	return $this->lastChanged;
     }
 
     /**
@@ -366,10 +379,29 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 
     /**
      * Will save changes in this config to a file
-     * @param array $changes 
+     * @param array $data 
      */
-    public function save($changes) {
-	$ini_array = parse_ini_file($this->iniFile);
+    public function save($data) {
+	$inHandler = fopen('safe://'.$this->iniFile, 'r');
+	$outHandler = fopen('safe://'.$this->iniFile.'.part', 'w');
+	
+	$ini_array = parse_ini_string(fread($inHandler,filesize($this->iniFile)));
+	
+	if(isset($ini_array['lastChanged']) && $ini_array['lastChanged'] != $this->lastChanged){
+	    // test if timestamp is ok and if not, throw exception
+	    fclose($inHandler);
+	    fclose($outHandler);
+	    unlink($this->iniFile.'.part');
+	    throw new Nette\Application\ApplicationException('ANOTHER_EDIT_HAPPENS');
+	}
+	$data['lastChanged'] = time();
+	$this->saveIniToFile($data, $outHandler);
+	
+	
+	fclose($inHandler);
+	fclose($outHandler);
+	unlink($this->iniFile);
+	rename($this->iniFile.'.part', $this->iniFile);
     }
     
     /**
@@ -421,21 +453,39 @@ class DirConfig extends \Nette\Object implements IDirConfig {
      * Will write the array to ini file
      * @param array $array
      */
-    private function saveToFile($array) {
+    private function saveIniToFile($array,$outputHandler) {
 
-	// $file
-	$res = array();
-	$res[] = "# Auto generated on " . date("Y-M-d");
+	// write comment
+	fwrite($outputHandler,"; Auto generated on " . date("Y-M-d").PHP_EOL);
 	foreach ($array as $key => $val) {
+	    //if this item is an array
 	    if (is_array($val)) {
-		$res[] = "[$key]";
-		foreach ($val as $skey => $sval)
-		    $res[] = "$skey = " . (is_numeric($sval) ? $sval : '"' . $sval . '"');
+		foreach ($val as $skey => $sval){
+		    // then write all items
+		    fwrite($outputHandler,$key."[$skey]=" . $this->parseIniVal($sval).PHP_EOL);
+		}
 	    }
-	    else
-		$res[] = "$key = " . (is_numeric($val) ? $val : '"' . $val . '"');
+	    else{
+		// else write it as it is
+		fwrite($outputHandler,"$key=" .  $this->parseIniVal($val).PHP_EOL);
+	    }
 	}
-	file_put_contents('safe://' . $this->iniFile, implode("\n", $res));
+	//file_put_contents('safe://' . $this->iniFile, implode("\n", $res));
     }
+    
 
+    /**
+     * Escape values for ini files
+     * @param string $str
+     * @return string
+     */
+    private function parseIniVal($str){
+	if(is_numeric($str)){
+	    return $str;
+	}else if(is_bool($str)){
+	    return $str;
+	}
+	
+	return "$str";
+    }
 }

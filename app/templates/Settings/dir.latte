@@ -15,11 +15,11 @@
 	<table>
 	    <tr>
 		<td>
+		    <h4>Access password</h4>
 			{input accessPassword}
 			{label accessPassword /}
 		</td>
 	    </tr>
-	    {dump $node}
 	    <tr n:if="$withPassword != NULL && $withPassword != $node">
 		<td>
 		    Note: This directory itself has no password set, 
@@ -55,7 +55,7 @@
 		</td>
 	    </tr>
 	    
-	    <tr>
+	   {* <tr>
 		<td>
 		    <h4>Select views:</h4>
 		    <table class="form-toggled">
@@ -87,21 +87,20 @@
 		    
 		    
 		</td>
-	    </tr>
+	    </tr>*}
 	    
 	    <tr>
 		<td>
 		    <h4>Owner settings</h4>
 		    <table>
-			<tr>
-			    <td>{input ownerUsername}</td>
-			    <td>{label ownerUsername /}</td>
-			</tr>
-			<tr>
-			    <td>{input ownerPassword}</td>
-			    <td>{label ownerPassword /}</td>
-			</tr>
+			{foreach $form->groups['ownership']->getControls() as $control}
+				<tr>
+				    <td>{input $control}</td>
+				    <td>{label $control /}</td>
+				</tr>
+			{/foreach}
 		    </table>
+		    You can't change your and inherited ownership.
 		</td>
 	    </tr>
 	    
@@ -120,8 +119,6 @@
 	    </tr>
 	    </table>
 	{/form}
-	
-	TODO add owners settings
 	
 	
     </div>

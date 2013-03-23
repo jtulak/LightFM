@@ -61,6 +61,13 @@ namespace LightFM;
     public function getAllowZipInherited();
     
     /**
+     * Will return timestamp with the last editation of the file
+     * 
+     * @return int
+     */
+    public function getTimestamp();
+    
+    /**
      * Inherite settings from parent, if weren't specified elseway. 
      * If null given, use default as a parent.
      * 
@@ -95,7 +102,7 @@ namespace LightFM;
     
     /**
      * Will save changes in this config to a file
-     * @param array changes
+     * @param array $data
      */
-    public function save($changes);
+    public function save($data);
 }
