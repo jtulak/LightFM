@@ -6,6 +6,8 @@
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
     
     // TODO Caching
+    // TODO Add nette roles to users and use it for ownership detection
+    // TODO saving of hidden files to user
     // TODO Ajaxify
     // TODO custom image view
     // TODO replace jqueryui
@@ -38,10 +40,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     /**
      * If show hidden files/foldes
-     * TODO - switching
      * @var bool
      */
-    protected $showHidden = true;
+    protected $showHidden = false;
 
     public function startup() {
 	parent::startup();
@@ -52,11 +53,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	$this->path = $this->verifyPath($this->path);
 
 	$this->template->user = $this->getUser();
+	
+	$this->showHidden = $this->getHttpRequest()->getCookie('hiddenFiles');
 	//dump($this->getUser());
     }
 
     public function handleSignOut() {
 	$this->getUser()->logout();
+	$this->getHttpResponse()->deleteCookie('hiddenFiles');
 	$this->redirect('Sign:in');
     }
 

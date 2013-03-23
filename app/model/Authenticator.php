@@ -76,7 +76,7 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 		dump($users);
 		foreach($users as $user){
 		    if($user['password'] == $password){
-			return new Security\Identity($username, 1, $user);
+			return new Security\Identity($username, null, $user);
 		    }
 		}
 		// no password found

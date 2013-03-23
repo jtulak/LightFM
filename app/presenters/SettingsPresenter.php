@@ -267,10 +267,6 @@ class SettingsPresenter extends BasePresenter {
     
     
     
-    
-    
-    
-    
     /**
      * Create form for language selection
      * @param type $name
@@ -298,12 +294,17 @@ class SettingsPresenter extends BasePresenter {
     public function generalSettingsFormSubmitted(Nette\Application\UI\Form $form)
     {
 	
-	
-	throw new Nette\NotImplementedException;
-	
         $values = $form->getValues();
+	if($values['hiddenFiles']){
+	    $this->getHttpResponse()->setCookie('hiddenFiles', true, '+ 100 days'); 
+	}else{
+	    $this->getHttpResponse()->deleteCookie('hiddenFiles');
+	}
 	
+	// TODO password change save
 	
+        $this->flashMessage('Changes were saved.', 'success');
+	$this->redirect('this');
     }
 }
 
