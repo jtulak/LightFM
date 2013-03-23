@@ -4,7 +4,11 @@
  * Base presenter for all application presenters.
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
-    // TODO move comments to INode
+    
+    // TODO Caching
+    // TODO Ajaxify
+    // TODO custom image view
+    // TODO replace jqueryui
 
     /**
      * List of all know interfaces this presenter can show.

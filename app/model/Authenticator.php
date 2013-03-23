@@ -65,9 +65,7 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator
 	 * @throws Nette\Security\AuthenticationException
 	 */
 	public function authenticate(array $credentials)
-	{
-	    // TODO central user repository, only admin can add/remove users, username has to be unique
-	    
+	{	    
 		list($username, $password, $node) = $credentials;
 		//dump($node);
 		//$row = $this->database->table('users')->where('username', $username)->fetch();

@@ -188,7 +188,7 @@ class SettingsPresenter extends BasePresenter {
 	
 	
 	/** Create access password */
-	// TODO
+	// TODO settings saving
 	$form->addText('ownerUsername', 'Owner Username')
 		->setDefaultValue('TODO');
 	$form->addText('ownerPassword', 'Owner Password')
