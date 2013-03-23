@@ -38,17 +38,29 @@
 	    </tr>
 	    <tr>
 		<td>
-			<h4>{label allowZip /}</h4>
-			{input allowZip}
+			<h4>Allow zip download</h4>
+			<table class="form-toggled">
+			    <tr>
+				<td class="form-toggler">
+				    {input inheritZip}
+				    {label inheritZip /}
+				</td>
+			    </tr>
+			    <tr>
+				<td>
+				{input allowZip}
+				</td>
+			    </tr>
+			</table>
 		</td>
 	    </tr>
 	    
 	    <tr>
 		<td>
 		    <h4>Select views:</h4>
-		    <table>
+		    <table class="form-toggled">
 			<tr>
-			    <td colspan="2">
+			    <td colspan="2" class="form-toggler">
 				{input inheritViews}
 				{label inheritViews /}
 			    </td>

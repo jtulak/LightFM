@@ -168,7 +168,13 @@ class SettingsPresenter extends BasePresenter {
 	
 	/** Create select box for allowing ZIP downloading */
 	$viewed = $this->viewed;
-	$form->addSelect('allowZip', 'Download multiple files at once', array(
+	$form->addCheckbox('inheritZip','Inherit from parent.');
+	$form->addRadioList('allowZip','Allow zip download',array(
+	    LightFM\IDirConfig::ZIP_PERMITED=>'Permit',
+	    LightFM\IDirConfig::ZIP_FORBIDDEN=>'Forbid'
+		))
+	    ->setAttribute('class', 'form-toggler');
+	/*$form->addSelect('allowZip', 'Download multiple files at once', array(
 	    LightFM\IDirConfig::ZIP_INHERITED=>'Inherit from parent',
 	    LightFM\IDirConfig::ZIP_PERMITED=>'Permit',
 	    LightFM\IDirConfig::ZIP_FORBIDDEN=>'Forbid',
@@ -184,7 +190,7 @@ class SettingsPresenter extends BasePresenter {
 			case LightFM\IDirConfig::ZIP_PERMITED:
 			    return $viewed->Config->AllowZipInherited;
 		    }
-	});
+	});*/
 	
 	
 	/** Create access password */
@@ -196,7 +202,8 @@ class SettingsPresenter extends BasePresenter {
 	
 	/** Create selection of default view */
 	$accessible = $this->getViewsList();
-	$form->addCheckbox('inheritViews','Inherit from parent.');
+	$form->addCheckbox('inheritViews','Inherit from parent.')
+	    ->setAttribute('class', 'form-toggler');
 	$form->addRadioList('defaultView','Default view',$accessible)
 		->setDefaultValue($this->viewed->Presenter.'Presenter');
 	
@@ -268,7 +275,7 @@ class SettingsPresenter extends BasePresenter {
     
     
     /**
-     * Create form for language selection
+     * Create form for user settings - password + hidden files
      * @param type $name
      * @return \Nette\Application\UI\Form
      */
@@ -291,7 +298,7 @@ class SettingsPresenter extends BasePresenter {
         return $form;
     }
 
-    /** called after selection submit */
+    /** called after user settings submit */
     public function generalSettingsFormSubmitted(Nette\Application\UI\Form $form)
     {
 	
