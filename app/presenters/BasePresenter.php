@@ -5,8 +5,9 @@
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
     
+    // TODO settings applied to subdirs
+    // TODO owner do not need to fill access password
     // TODO Caching
-    // TODO Add nette roles to users and use it for ownership detection
     // TODO Ajaxify
     // TODO custom image view
     // TODO replace jqueryui
