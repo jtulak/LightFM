@@ -8,6 +8,7 @@
  * @param \LightFM\IDirectory $viewed - actual dir
  * @param	    $user   Object with nette user
  * @param bool	    $isOwner
+ * @param bool	    $showSidebar
  *}
 
 {var $debug_less = TRUE }
@@ -78,7 +79,7 @@
 	    <div id="inner-box">
 		<div id="sidebar">
 		    {*if $showSidebar*}
-		    {if $user->isLoggedIn() || (!empty($viewed) && $viewed->Config->AllowZip)}
+		    {if $showSidebar}
 			{ifset #sidebar}
 			<div class="border">
 			    <div id="sidebar-control">&nbsp;</div>
