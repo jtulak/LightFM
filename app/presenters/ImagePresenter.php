@@ -74,7 +74,8 @@ class ImagePresenter extends FilePresenter{
     
     public function actionDefault() {
 	parent::actionDefault();
-	$this->actionDownload($this->path);
+	$this->template->viewed = $this->viewed;
+	
     }
   
 }

@@ -3,9 +3,12 @@
  * @param array $highlightLines
  *}
 
+{block subtitle}{$file->Name}.{$file->Suffix}{/block}
+{block subtitleClass}{$file->IconName}{/block}
+
 {block content}
 <div id="text-view">
-    <h2 class="{$file->IconName}">{$file->Name}.{$file->Suffix}</h2>
+    
     <div class="buttons">
 	<a  class="button back"  n:href="List:default, path=>$file->Parent->Path">Back to the directory</a>
 	<a  class="button raw"  n:href="File:download, path=>$file->Path">Raw</a>

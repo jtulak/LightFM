@@ -1,0 +1,46 @@
+{** 
+ * @param \LightFM\IImage $viewed - actual file
+ *}
+{block subtitle}{$viewed->Name}.{$viewed->Suffix}{/block}
+{block subtitleClass}{$viewed->IconName}{/block}
+
+
+{block content}
+<div id="image-view">
+    <div>
+	<div class="buttons">
+	    <a  class="button back"  n:href="List:default, path=>$viewed->Parent->Path">Back to the directory</a>
+	    <a  class="button raw"  n:href="File:download, path=>$viewed->Path">Raw</a>
+	    <div class="cleaner"></div>
+	</div>
+
+
+	<div style="clear:both"></div>
+	<div class="content">
+	    asd
+
+	</div>
+    </div>
+</div>
+{/block}
+
+{block sidebar}
+<p>Created, and so...</p>
+{/block}
+
+
+{block scripts}
+{include #parent}
+<script src="{$basePath}/filemanager/js/imageFile.js"></script>
+{/block}
+
+
+{block head}
+{if $debug_less}
+<link rel="stylesheet/less" type="text/css" href="{$basePath}/filemanager/css/imageFile.less" />
+{else}
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/filemanager/css/imageFile.css">
+{/if}
+<style>
+</style>
+{/block}

@@ -64,13 +64,17 @@
 		    </ul>
 		</div>
 	    </header>
-	    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 	    
 	    <noscript>
 	    <div class="flash error">This site needs Javascript for enhancing 
 	    of your experience.</div>
 	    </noscript>
-
+	    {ifset #subtitle}
+		<h2 class='subtitle {include #subtitleClass}'>{include #subtitle}</h2>
+	    {/ifset}
+		
+	    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+		
 	    <div id="inner-box">
 		<div id="sidebar">
 		    {*if $showSidebar*}

@@ -25,7 +25,44 @@ h1 {
     font-weight: bold;
     display: inline;
 }
-
+ h2.subtitle{
+	font-size: 150%;
+	padding-left: 2em;
+	margin-bottom: 0em;
+	margin-left: 0.5em;
+	margin-top: 0.2em;
+	&.css{
+	    .filetype-icon ('file-text-css', @offset:center left)
+	}
+	&.js{
+	    //padding-left: 55pt;
+	    .filetype-icon('file-text-js', @offset:center left);
+	}
+	&.ini{
+	    //padding-left: 55pt;
+	    .filetype-icon('file-text-ini', @offset:center left);
+	}
+	&.xml{
+	    //padding-left: 55pt;
+	    .filetype-icon('file-text-xml', @offset:center left);
+	}
+	&.php{
+	    //padding-left: 55pt;
+	    .filetype-icon('file-text-php', @offset:center left);
+	}
+	&.html{
+	    //padding-left: 55pt;
+	    .filetype-icon('file-text-html', @offset:center left);
+	}
+	&.settings{
+	    //padding-left: 55pt;
+	    .filetype-icon('settings', @offset:center left);
+	}
+	&.image{
+	    //padding-left: 55pt;
+	    .filetype-icon('file-image', @offset:center left);
+	}
+    }
 
 .button{.button()}
 
