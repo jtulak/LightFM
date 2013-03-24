@@ -12,3 +12,9 @@ Note:
 Highlight library is only under GPLv2 so it shouldn't be included under the BSD 
 license, but during the initial heavy development I'm keeping it included, once 
 things settle little, I will change it.
+
+
+Changelog:
+---------
+v0.1 alpha - 24. Mar. 2013
+- Basic functions for browsing are working, but still many missing things
