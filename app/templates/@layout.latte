@@ -104,11 +104,13 @@
 	<div style="position:absolute; top:-100000;left:-100000;">
 	    <!-- some things for jquery... -->
 	    <div class="sidebar-content-width"></div>
+	    <div id='one-em' style='width:1em;height:1em;'></div>
 	</div>
 	{include uiDialogs.latte}
 	{block scripts}
 	<script src="{$basePath}/filemanager/js/jquery.js"></script>
 	<script src="{$basePath}/filemanager/js/jquery.hoverflow.min.js"></script>
+	<script src="{$basePath}/filemanager/js/jquery.throttle.min.js"></script>
 	<script src="{$basePath}/filemanager/js/netteForms.js"></script>
 	<script src="{$basePath}/filemanager/js/main.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
