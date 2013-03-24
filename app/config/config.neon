@@ -30,12 +30,22 @@ common:
 
 		session:
 			expiration: 14 days
+		debugger:
+			strictMode: true
+			bar:
+				- @stopwatch
 		
 
 	services:
 		authenticator: Authenticator
 		routerFactory: RouterFactory
-		router: @routerFactory::createRouter
+		#router: @routerFactory::createRouter
+		stopwatch:
+			class: Stopwatch
+			arguments:
+				- @application
+
+
 
 
 	factories:
@@ -44,3 +54,4 @@ common:
 production < common:
 
 development < common:
+		

@@ -47,6 +47,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     public function startup() {
 	parent::startup();
+	\Stopwatch::start('BasePresenter');
+	
 	// if path is empty, it means it is a root
 	if (strlen($this->path) == 0)
 	    $this->path = '/';
@@ -61,6 +63,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	//dump($this->getUser());
     }
 
+    public function beforeRender() {
+	parent::beforeRender();
+	\Stopwatch::stop('BasePresenter');
+    }
+    
     public function handleSignOut() {
 	$this->getUser()->logout();
 	$this->getHttpResponse()->deleteCookie('hiddenFiles');
@@ -95,6 +102,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      * @throws Nette\Application\BadRequestException
      */
     protected function loadFiles() {
+	Stopwatch::start('LoadFiles');
 
 	// get path
 	$this->root = LightFM\IO::findPath($this->path);
@@ -119,6 +127,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$this->redirect('Settings:password', array('view' => $this->name, 'req' => (string) $this->getHttpRequest()->getUrl()));
 	    }
 	}
+	Stopwatch::stop('LoadFiles');
     }
 
     /**

@@ -1,0 +1,24 @@
+{**
+ * Layout for panel of Stopwatches debugger
+ *
+ * @author Pavel Železný <pavel.zelezny@socialbakers.com>
+ *
+ * @param string $basePath Path to directory where compnent is situated
+ *}
+
+<h1>
+	<img n:src="{$basePath}/templates/stopwatch.png"  style="vertical-align: middle; position: relative; top: -4px; left: -2px;"/>
+	Stopwatch
+</h1>
+<div>
+	<table>
+		<tr n:foreach="$timers as $name => $value">
+			<th title="{if $description[$name] !== NULL}{$description[$name]}{else}{$name}{/if}">{$name|truncate:100}</th>
+			<td style='text-align: right;'>{$value} ms</td>
+		</tr>
+		<tr>
+			<th style='color: green;'>&sum;</th>
+			<td style='color: green; text-align: right; border-top: 3px double #888;'>{$sum} ms</td>
+		</tr>
+	</table>
+</div>
