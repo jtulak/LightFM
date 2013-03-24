@@ -18,12 +18,6 @@ namespace LightFM;
  */
  interface IImage {
     
-     /**
-     * Return hash (or compute it if wasn't computed yet).
-     * The hash is sha1(path-from-DATA_ROOT . date-of-modification . size-of-the-file)
-     * @return string
-     */
-    public function getHash();
      
      /**
       * 

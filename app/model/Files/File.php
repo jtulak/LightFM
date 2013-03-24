@@ -15,6 +15,7 @@ namespace LightFM;
  * @property-read  string $IconName Name for icon file
  * @property-read  string $Suffix   File suffix
  * @property string $MimeType
+ * @property-read string $Hash Hash of the file
  * 
  */
 class File extends Node implements IFile {
@@ -52,6 +53,13 @@ class File extends Node implements IFile {
      * @var string
      */
     protected $suffix;
+
+    /**
+     *	Hash of the file
+     * @var string 
+     */
+    protected $hash;
+
 
     public function getMimeType(){
 	if($this->mimetype == NULL){
@@ -107,4 +115,10 @@ class File extends Node implements IFile {
 	return $this;
     }
 
+    public function getHash(){
+	if($this->hash == NULL){
+	    $this->hash = sha1_file($this->getFullPath());
+	}
+	return $this->hash;
+    }
 }

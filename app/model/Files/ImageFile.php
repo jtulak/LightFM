@@ -113,12 +113,6 @@ namespace LightFM;
     }
     
     
-    public function getHash(){
-	if($this->_hash == NULL){
-	    $this->_hash = sha1($this->getPath().$this->getDate().$this->getSize());
-	}
-	return $this->_hash;
-    }
     
     /**
      * Return nette image, or null if file is an unknown image

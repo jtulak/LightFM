@@ -45,5 +45,10 @@ namespace LightFM;
       */
      public static function knownFileType($file);
     
+     /**
+     * Return hash (or compute it if wasn't computed yet).
+     * @return string
+     */
+    public function getHash();
      
 }
