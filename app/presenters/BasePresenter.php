@@ -9,7 +9,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     //	    and for big files do not cache anything (it is faster to create object
     //	    than compute hash)
     // TODO Ajaxify
-    // TODO custom image view
     // TODO replace jqueryui
     // TODO resizing and scrolling
     // TODO change folder name in root settings
