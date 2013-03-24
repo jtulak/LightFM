@@ -170,7 +170,16 @@ abstract class IO extends \Nette\Object {
 	}
 	return $created;
     }
-    private static function createFileTypeCompute($fullPath){
+    
+    /**
+     * This is public only because in getImplementingClasses() it is called by callback.
+     * Do not use directly.
+     * 
+     * @param type $fullPath
+     * @return \LightFM\top
+     * @throws \Nette\FatalErrorException
+     */
+    public static function createFileTypeCompute($fullPath){
 	$classes = array();
 
 	$modules = self::getFileModules();
