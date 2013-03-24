@@ -147,7 +147,7 @@ class Neon extends Nette\Object
 		self::$tokenizer->tokenize($input);
 
 		$parser = new static;
-		$res = $parser->parse(0);
+		$res = $parser->_parse(0);
 
 		while (isset(self::$tokenizer->tokens[$parser->n])) {
 			if (self::$tokenizer->tokens[$parser->n][0] === "\n") {
@@ -166,7 +166,7 @@ class Neon extends Nette\Object
 	 * @param  mixed
 	 * @return array
 	 */
-	private function parse($indent = NULL, $result = NULL)
+	private function _parse($indent = NULL, $result = NULL)
 	{
 		$inlineParser = $indent === NULL;
 		$value = $key = $object = NULL;
@@ -211,11 +211,11 @@ class Neon extends Nette\Object
 					$n++;
 					$entity = new NeonEntity;
 					$entity->value = $value;
-					$entity->attributes = $this->parse(NULL, array());
+					$entity->attributes = $this->_parse(NULL, array());
 					$value = $entity;
 				} else {
 					$n++;
-					$value = $this->parse(NULL, array());
+					$value = $this->_parse(NULL, array());
 				}
 				$hasValue = TRUE;
 				if (!isset($tokens[$n]) || $tokens[$n] !== self::$brackets[$t]) { // unexpected type of bracket or block-parser
@@ -260,7 +260,7 @@ class Neon extends Nette\Object
 							$n++;
 							$this->error('Unexpected indentation.');
 						} else {
-							$this->addValue($result, $key !== NULL, $key, $this->parse($newIndent));
+							$this->addValue($result, $key !== NULL, $key, $this->_parse($newIndent));
 						}
 						$newIndent = isset($tokens[$n]) ? strlen($tokens[$n]) - 1 : 0;
 						$hasKey = FALSE;

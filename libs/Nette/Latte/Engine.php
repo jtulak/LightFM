@@ -51,7 +51,7 @@ class Engine extends Nette\Object
 	 */
 	public function __invoke($s)
 	{
-		return $this->compiler->compile($this->parser->parse($s));
+		return $this->compiler->compile($this->parser->_parse($s));
 	}
 
 

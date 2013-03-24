@@ -80,7 +80,7 @@ class Parser extends Nette\Object
 	 * @param  string
 	 * @return array
 	 */
-	public function parse($input)
+	public function _parse($input)
 	{
 		if (substr($input, 0, 3) === "\xEF\xBB\xBF") { // BOM
 	    	$input = substr($input, 3);

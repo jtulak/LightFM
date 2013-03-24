@@ -112,7 +112,11 @@ namespace LightFM;
 	$this->syntax = $syntax;
     }
     
-    protected function getFSHL(){
+    /**
+     * This is public only because in getHighlightedContent() it is called by callback.
+     * Do not use directly.
+     */
+    public function _getFSHL(){
 	if($this->fshl == NULL){
 	    $this->fshl =  new \FSHL\Highlighter(new \FSHL\Output\Html(),\FSHL\Highlighter::OPTION_LINE_COUNTER);
 	}
@@ -202,11 +206,11 @@ namespace LightFM;
 	    /** Or FSHL? */
 		$t = $this;
 		$parsed = $cache->save($this->Path, function() use ($t){ 
-		    $t->getFSHL()->setLexer($t->getFSHLSyntax());
+		    $t->_getFSHL()->setLexer($t->getFSHLSyntax());
 		    // the \n is there because the lexer needs \n at the end
-		    $text = $t->getFSHL()->highlight(implode(file($t->getFullPath()))."\n");
-		    $t->parse($text);
-		    return explode("<ROWEND />",$t->parse($text));
+		    $text = $t->_getFSHL()->highlight(implode(file($t->getFullPath()))."\n");
+		    $t->_parse($text);
+		    return explode("<ROWEND />",$t->_parse($text));
 		},array(
 		    \Nette\Caching\Cache::FILES => $this->FullPath
 		));
@@ -228,7 +232,11 @@ namespace LightFM;
     }
  
     
-    private function parse($text){
+    /**
+     * This is public only because in getHighlightedContent() it is called by callback.
+     * Do not use directly.
+     */
+    public function _parse($text){
 	//$array = explode("\n", $text);
 	$array = preg_split("/(<[^>]+class=.line.[^>]*>[^<]+<\/span>)/", $text);
 	$len = count($array);
