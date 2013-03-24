@@ -71,7 +71,7 @@ abstract class IO extends \Nette\Object {
 	$implements = $cache->load($interfaceName);
 	if($implements === NULL){
 	    $implements = $cache->save($interfaceName, function() use ($interfaceName){ 
-		return self::getImplementingClassesCompute($interfaceName);
+		return \LightFM\IO::getImplementingClassesCompute($interfaceName);
 	    });
 	}
 	return $implements;
