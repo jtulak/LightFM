@@ -22,7 +22,7 @@
 	<meta name="viewport" content="width=device-width" >
 	<meta http-equiv="Content-Language" Content="en">
 
-	<title>{block title|striptags|upper}LightFM{/block}</title>
+	<title n:inner-snippet="title">{block title|striptags|upper}LightFM{/block}</title>
 
 	<!--<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/filemanager/css/screen.css">
 	<link rel="stylesheet" media="print" href="{$basePath}/filemanager/css/print.css">-->
@@ -53,15 +53,17 @@
 		<a n:href="List:default path=>null"><h1>LightFM file manager</h1></a>
 		<div class="options">
 		    <ul>
+		    {snippet header}
 			{if !$user->isLoggedIn()}
-			    <li><a n:href="Sign:in">Login</a></li>
+			    <li><a class="ajax" n:href="Sign:in">Login</a></li>
 			{else}
-			    <li>Logged as {$user->getIdentity()->Data['username']} (<a n:href="signOut!">logout</a>)</li>
-			    <li><a n:href="Settings:default">Settings</a></li>
+			    <li>Logged as {$user->getIdentity()->Data['username']} (<a class="ajax" n:href="signOut!">logout</a>)</li>
+			    <li><a class="ajax" n:href="Settings:default">Settings</a></li>
 			    {if $isOwner}
-			    <li><a n:href="Settings:dir">Dir Options</a></li>
+			    <li><a class="ajax" n:href="Settings:dir">Dir Options</a></li>
 			    {/if}
 			{/if}
+		    {/snippet}
 		    </ul>
 		</div>
 	    </header>
@@ -70,28 +72,35 @@
 	    <div class="flash error">This site needs Javascript for enhancing 
 	    of your experience.</div>
 	    </noscript>
-	    {ifset #subtitle}
-		<h2 class='subtitle {include #subtitleClass}'>{include #subtitle}</h2>
-	    {/ifset}
+	    {snippet subtitle}
+		{ifset #subtitle}
+		    <h2 class='subtitle {include #subtitleClass}'>{include #subtitle}</h2>
+		{/ifset}
+	    {/snippet}
 		
+	    {snippet flashes}
 	    <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-		
+	    {/snippet}
+	    
 	    <div id="inner-box">
 		<div id="sidebar">
-		    {*if $showSidebar*}
-		    {if $showSidebar}
-			{ifset #sidebar}
-			<div class="border">
-			    <div id="sidebar-control">&nbsp;</div>
-			    <div id="sidebar-content">
-				<div class="for-fixed">{*block sidebar}{/block*}{include #sidebar}</div>
+		    {snippet sidebar}
+			{if $showSidebar}
+			    {ifset #sidebar}
+			    <div class="border">
+				<div id="sidebar-control">&nbsp;</div>
+				<div id="sidebar-content">
+				    <div class="for-fixed">{*block sidebar}{/block*}{include #sidebar}</div>
+				</div>
 			    </div>
-			</div>
-			{/ifset}
-		    {/if}
+			    {/ifset}
+			{/if}
+		    {/snippet}
 		</div>
 		<div id="outer-content">
+		    {snippet content}
 			{include #content}
+		    {/snippet}
 		</div>
 	    </div>
 	    <footer id="footer">
@@ -110,11 +119,13 @@
 	{include uiDialogs.latte}
 	{block scripts}
 	<script src="{$basePath}/filemanager/js/jquery.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 	<script src="{$basePath}/filemanager/js/jquery.hoverflow.min.js"></script>
 	<script src="{$basePath}/filemanager/js/jquery.throttle.min.js"></script>
-	<script src="{$basePath}/filemanager/js/netteForms.js"></script>
+	<script src="{$basePath}/filemanager/js/nette.ajax.js"></script>
+	<script src="{$basePath}/filemanager/js/history/history.ajax.js"></script>
+	{*<script src="{$basePath}/filemanager/js/netteForms.js"></script>*}
 	<script src="{$basePath}/filemanager/js/main.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 	{/block}
     </body>
 </html>

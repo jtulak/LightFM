@@ -20,6 +20,14 @@ class SignPresenter extends BasePresenter
 	    parent::startup();
 	    $this->root = LightFM\IO::findPath($this->path);
 	    $this->viewed = $this->getLastNode($this->root);
+	    
+	    if ($this->presenter->isAjax()) {
+		$this->invalidateControl('header');
+		$this->invalidateControl('subtitle');
+		$this->invalidateControl('flashes');
+		$this->invalidateControl('content');
+	    }
+	    
 	}
 	/**
 	 * Sign-in form factory.

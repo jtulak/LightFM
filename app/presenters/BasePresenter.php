@@ -62,10 +62,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     public function beforeRender() {
 	parent::beforeRender();
+	if ($this->isAjax()) {
+	    $this->invalidateControl('title');
+	}
+	
 	\Stopwatch::stop('BasePresenter');
     }
     
-    public function handleSignOut() {
+        public function handleSignOut() {
 	$this->getUser()->logout();
 	$this->getHttpResponse()->deleteCookie('hiddenFiles');
 	$this->redirect('Sign:in');

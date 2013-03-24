@@ -16,6 +16,7 @@ var sidebarOnChangeBefore = new Array();
 var sidebarOnChangeDuring = new Array();
 var sidebarOnChangeDuringTimer;
 $(function(){
+    $.nette.init();
     /** 
      * showing/hiding the sidebar
      */
