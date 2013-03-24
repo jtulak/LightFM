@@ -16,7 +16,13 @@
 class ImagePresenter extends FilePresenter{
 
     const placeholderImage = '/resources/missing-image.png';
-    /**
+    
+    public function startup() {
+	parent::startup();
+	$this->template->showSidebar = true;
+    }
+
+        /**
      * Get thumbnail from the cache - or create it if not exists
      * and if it is not possible, then use a placeholder
      * @param type $bigSide
