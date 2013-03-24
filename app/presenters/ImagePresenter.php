@@ -38,6 +38,10 @@ class ImagePresenter extends FilePresenter{
 	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'thumbnails');
 	
 	if($imagePath == ''){ 
+	    
+	    $this->redirectUrl($this->getHttpRequest()->url->basePath.'/'.$this->viewed->Path);
+	    $this->terminate();
+	   /* 
 	    // we can't create an thumbnail
 	    // so at first get the placeholder path
 	    $placeholderPath = $GLOBALS['container']->getParameters();
@@ -60,7 +64,7 @@ class ImagePresenter extends FilePresenter{
 		));
 	    }
 	    $image = \Nette\Image::fromString($cache->load($placeholderName));
-
+	    */
 	
 	}else{
 	    // we have an thumbnail
