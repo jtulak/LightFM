@@ -200,12 +200,13 @@ namespace LightFM;
 	
 	    if($parser == 'fshl'){
 	    /** Or FSHL? */
-		$parsed = $cache->save($this->Path, function() { 
-		    $this->getFSHL()->setLexer($this->getFSHLSyntax());
+		$t = $this;
+		$parsed = $cache->save($this->Path, function() use ($t){ 
+		    $t->getFSHL()->setLexer($t->getFSHLSyntax());
 		    // the \n is there because the lexer needs \n at the end
-		    $text = $this->getFSHL()->highlight(implode(file($this->getFullPath()))."\n");
-		    $this->parse($text);
-		    return explode("<ROWEND />",$this->parse($text));
+		    $text = $t->getFSHL()->highlight(implode(file($t->getFullPath()))."\n");
+		    $t->parse($text);
+		    return explode("<ROWEND />",$t->parse($text));
 		},array(
 		    \Nette\Caching\Cache::FILES => $this->FullPath
 		));

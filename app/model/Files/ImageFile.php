@@ -156,12 +156,12 @@ namespace LightFM;
 	
 	
 	if($cache->load($relativePath) == NULL){
-	    
-	    $cache->save($relativePath, function() use ($bigSide,$crop){
+	    $t = $this;
+	    $cache->save($relativePath, function() use ($t,$bigSide,$crop){
 		// it is as a callback, because this way it prevets concurent generating
-		    \Nette\Diagnostics\Debugger::log('Generating thumbnail for '.$this->getPath()); 
+		    \Nette\Diagnostics\Debugger::log('Generating thumbnail for '.$t->getPath()); 
 		    // create thumbnail
-		    $image = \Nette\Image::fromFile($this->FullPath);
+		    $image = \Nette\Image::fromFile($t->FullPath);
 		    if($crop){
 			$image->resize($bigSide,$bigSide,$image::EXACT);
 		    }else{
