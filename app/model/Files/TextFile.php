@@ -190,21 +190,30 @@ namespace LightFM;
      * @return string
      */
     public function getHighlightedContent($parser){
-	if($parser == 'geshi'){
-	    /** will we use GeSHi? */
-	    $g = new \GeSHi(implode(file($this->getFullPath())), 'HTML');
-	    return $g->parse_code();
-	    
-	}else if($parser == 'fshl'){
+	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'textFiles');
+	// if cache entry exists
+	// load it
+	$parsed = $cache->load($this->Path);
+	if($parsed === NULL){
+	
+	    if($parser == 'fshl'){
 	    /** Or FSHL? */
-	    $this->getFSHL()->setLexer($this->getFSHLSyntax());
-	    // the \n is there because the lexer needs \n at the end
-	    $text = $this->getFSHL()->highlight(implode(file($this->getFullPath()))."\n");
-	    $this->parse($text);
-	    return explode("<ROWEND />",$this->parse($text));
-	}else{
-	    return "No highlighter selected.";
+		$parsed = $cache->save($this->Path, function() { 
+		    $this->getFSHL()->setLexer($this->getFSHLSyntax());
+		    // the \n is there because the lexer needs \n at the end
+		    $text = $this->getFSHL()->highlight(implode(file($this->getFullPath()))."\n");
+		    $this->parse($text);
+		    return explode("<ROWEND />",$this->parse($text));
+		},array(
+		    \Nette\Caching\Cache::FILES => $this->FullPath
+		));
+		//else create data and save
+		
+	    }else{
+		return "No highlighter selected.";
+	    }
 	}
+	return $parsed;
     }
     
     /**
