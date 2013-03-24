@@ -67,6 +67,17 @@ abstract class IO extends \Nette\Object {
      * @return array
      */
     public static function getImplementingClasses($interfaceName) {
+	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'interfaces');
+	$implements = $cache->load($interfaceName);
+	if($implements === NULL){
+	    $implements = $cache->save($interfaceName, function() use ($interfaceName){ 
+		return self::getImplementingClassesCompute($interfaceName);
+	    });
+	}
+	return $implements;
+    }
+    
+    private static function getImplementingClassesCompute($interfaceName){
 	$classes = NULL;
 	// At first find instance of robotLoader and get classes.
 	foreach (\Nette\Loaders\RobotLoader::getLoaders() as $i => $loader) {
@@ -79,11 +90,12 @@ abstract class IO extends \Nette\Object {
 
 	// And then get all classes that implements the interface.
 	// http://stackoverflow.com/questions/3993759/php-how-to-get-a-list-of-classes-that-implement-certain-interface
-	return array_filter(
+	$array = array_filter(
 		array_keys($classes), function( $className ) use ( $interfaceName ) {
 		    return in_array($interfaceName, class_implements($className));
 		}
 	);
+	return $array;
     }
 
     /**
@@ -142,8 +154,8 @@ abstract class IO extends \Nette\Object {
     public static function createFileType($fullPath) {
 	$classes = array();
 
-	//dump($fullPath);
-	foreach (self::getFileModules() as $class) {
+	$modules = self::getFileModules();
+	foreach ($modules as $class) {
 	    if ($class::knownFileType(DATA_ROOT . $fullPath)) {
 		// if the class know this filetype
 		//dump($class::getPriority() . ' # '.$class);
@@ -228,9 +240,9 @@ abstract class IO extends \Nette\Object {
     public static function createPath($fullPath, $restOfPath, \LightFM\DirConfig $parentsConfig = NULL) {
 	// Remove slashes from begining and end (if any)
 	// and get top dir from the path
-
+	
 	list($dir, $restOfPath) = self::createPath_explodePath($restOfPath);
-
+	
 	// create path to this dir - remove the rest from the full path to get 
 	// path to this dir
 
@@ -241,7 +253,7 @@ abstract class IO extends \Nette\Object {
 	    $fullDir = $fullPath;
 	}
 	$config = new \LightFM\DirConfig($fullDir);
-
+	
 	try {
 	    // load config
 	    // and inherite
