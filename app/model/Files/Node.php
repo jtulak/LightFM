@@ -23,6 +23,8 @@ namespace LightFM;
  * @property bool $Hidden 
  * @property-read string $Presenter
  * 
+ * @serializationVersion 1
+ * 
  */
 abstract class Node extends \Nette\Object implements INode{
 

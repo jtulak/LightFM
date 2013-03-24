@@ -105,9 +105,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	Stopwatch::start('LoadFiles');
 
 	// get path
+	\Stopwatch::start('get path');
 	$this->root = LightFM\IO::findPath($this->path);
+	\Stopwatch::stop('get path');
+	
 	// get the item
+	\Stopwatch::start('get item');
 	$this->viewed = $this->template->viewed = $this->getLastNode($this->root);
+	\Stopwatch::stop('get item');
+	
 	$this->template->isOwner = $this->viewed->isOwner($this->getUser()->id) && $this->getUser()->isLoggedIn();
 	
 	Nette\Diagnostics\Debugger::barDump($this->viewed, 'Viewed');

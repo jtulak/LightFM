@@ -24,6 +24,9 @@ define('BAD_INI_SYNTAX', 1);
  * @property-read array $Blacklist 
  * @property-read string $AccessPassword
  * @property-read int	$Timestamp 
+ * 
+ * 
+ * @serializationVersion 1
  */
 class DirConfig extends \Nette\Object implements IDirConfig {
 

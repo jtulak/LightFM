@@ -17,6 +17,7 @@ namespace LightFM;
  * @property string $MimeType
  * @property-read string $Hash Hash of the file
  * 
+ * @serializationVersion 1
  */
 class File extends Node implements IFile {
 

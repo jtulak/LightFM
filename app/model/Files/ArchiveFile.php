@@ -13,6 +13,7 @@ namespace LightFM;
 
 /**
  * 
+ * @serializationVersion 1
  */
  class ArchiveFile extends File {
      

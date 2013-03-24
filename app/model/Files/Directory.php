@@ -18,6 +18,8 @@ namespace LightFM;
  * @property arry $FilesNames
  * @property arry $Subdirs
  * @property arry $SubdirsNames
+ * 
+ * @serializationVersion 1
  */
 class Directory extends Node implements IDirectory {
 

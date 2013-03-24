@@ -16,6 +16,7 @@ namespace LightFM;
  * @property-read string $Thumbnail Path to the thumbnail
  * @property-read mixed  $Exif
  * 
+ * @serializationVersion 1
  */
  class ImageFile extends File implements IImage{
      

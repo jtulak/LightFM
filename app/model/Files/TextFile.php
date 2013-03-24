@@ -14,6 +14,8 @@ namespace LightFM;
 /**
  * @property string $Syntax
  * @property-read object $Highlighter Syntax highlighter
+ * 
+ * @serializationVersion 1
  */
  class TextFile extends File implements IText{
      

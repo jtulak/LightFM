@@ -152,6 +152,18 @@ abstract class IO extends \Nette\Object {
      * @throws \Nette\FatalErrorException
      */
     public static function createFileType($fullPath) {
+	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'files');
+	$created = $cache->load($fullPath);
+	if($created === NULL){
+	    $created = $cache->save($fullPath, function() use ($fullPath) { 
+		return \LightFM\IO::createFileTypeCompute($fullPath);
+	    },array(
+		    \Nette\Caching\Cache::FILES => DATA_ROOT.'/'.$fullPath
+	    ));
+	}
+	return $created;
+    }
+    private static function createFileTypeCompute($fullPath){
 	$classes = array();
 
 	$modules = self::getFileModules();
@@ -180,23 +192,26 @@ abstract class IO extends \Nette\Object {
      * @return \LightFM\Directory
      */
     private static function createPath_tryCreate_folder($fullPath, $fullDir, $restOfPath, \LightFM\DirConfig $config) {
-	$created = new \LightFM\Directory($fullDir);
-
+	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'dirs');
+	$created = $cache->load($fullDir);
+	if($created === NULL){
+	    $created = $cache->save($fullDir, function() use ($fullDir) { 
+		return new \LightFM\Directory($fullDir);
+	    },array(
+		    \Nette\Caching\Cache::FILES => scandir(DATA_ROOT.'/'.$fullDir)
+	    ));
+	}
+	// $created = new \LightFM\Directory($fullDir);
 	// recursively create rest of the path
 	$created->usedChild = self::createPath($fullPath, $restOfPath, $config);
 	$created->usedChild->Parent = $created;
 
 	// save a child config for case of emptying of $created
-//	$childPass = $created->usedChild->Password;
-//	$childHidden = $created->usedChild->Hidden;
 	if ($created->usedChild->dummy) {
 	    // if the subdir is blacklisted, replace by empty node
 	    $created = new \LightFM\Directory(NULL);
 	}
 
-	// copy the needs password from the child
-//	$created->Password = $childPass;
-//	$created->Hidden = $childHidden;
 
 	return $created;
     }
@@ -252,7 +267,7 @@ abstract class IO extends \Nette\Object {
 	} else {
 	    $fullDir = $fullPath;
 	}
-	$config = new \LightFM\DirConfig($fullDir);
+	 $config = new \LightFM\DirConfig($fullDir);
 	
 	try {
 	    // load config
