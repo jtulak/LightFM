@@ -58,7 +58,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	
 	$this->showHidden = $this->getHttpRequest()->getCookie('hiddenFiles');
 	// set sidebar showing
-	$this->template->showSidebar = $user->isLoggedIn() || (!empty($viewed) && $viewed->Config->AllowZip);
+	$this->template->showSidebar = $this->getUser()->isLoggedIn() || (!empty($this->viewed) && $this->viewed->Config->AllowZip);
 	//dump($this->getUser());
     }
 
