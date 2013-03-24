@@ -76,8 +76,15 @@ abstract class IO extends \Nette\Object {
 	}
 	return $implements;
     }
-    
-    private static function getImplementingClassesCompute($interfaceName){
+
+    /**
+     * This is public only because in getImplementingClasses() it is called by callback.
+     * Do not use directly.
+     * 
+     * @param type $interfaceName
+     * @return type
+     */
+    public static function getImplementingClassesCompute($interfaceName){
 	$classes = NULL;
 	// At first find instance of robotLoader and get classes.
 	foreach (\Nette\Loaders\RobotLoader::getLoaders() as $i => $loader) {
