@@ -86,6 +86,18 @@ class ImagePresenter extends FilePresenter{
 	parent::actionDefault();
 	$this->template->viewed = $this->viewed;
 	
+	
+	    $this->template->nextImage = $this->getNext();
+	    $this->template->prevImage = $this->getPrev();
+	
+    }
+    
+    
+    private function getNext(){
+	return $this->viewed->Parent->getNextItem($this->viewed, '\LightFM\IImage');
     }
   
+    private function getPrev(){
+	return $this->viewed->Parent->getPrevItem($this->viewed, '\LightFM\IImage');
+    }
 }

@@ -157,6 +157,73 @@ class Directory extends Node implements IDirectory {
 	$this->scanDir();
     }
     
+    
+    
+    public function getNextItem($actual,$type){
+	$this->sortBy(self::ORDER_FILENAME, self::ORDER_ASC);
+	// at first merge childs
+	$items = array_merge($this->Subdirs,  $this->Files);
+	// then get the length
+	$len = count ($items);
+	// and iterate
+	$after=FALSE;
+	for($i=0;$i < $len;$i++){
+	    // at first try to find actual item
+	    if($items[$i] == $actual){
+		$after = TRUE;
+	    } else if($after && $items[$i] instanceof $type){
+		// once we are behind, we can look for nearest item of correct
+		// type and return it
+		return $items[$i];
+	    }
+	}
+	// nothing found, then find the first item
+	foreach($items as $item){
+	    if($item instanceof $type){
+		return $item;
+	    }
+	}
+    }
+
+    
+    public function getPrevItem($actual,$type){
+	$this->sortBy(self::ORDER_FILENAME, self::ORDER_ASC);
+	// at first merge childs
+	$items = array_merge($this->Subdirs,  $this->Files);
+	// then get the length
+	$len = count ($items);
+	// and iterate
+	$pos=NULL;
+	for($i=0;$i < $len;$i++){
+	    // at first try to find actual item
+	    if($items[$i] == $actual){
+		// if we have found it, then save the index and stop the cycle
+		$pos = $i;
+		break;
+	    }
+	}
+	// and try to find previous one
+	if($pos > 0){
+	    // but only if we are not at the very begining
+	    for($i=$pos-1;$i >=0;$i--){
+		if($items[$i] instanceof $type){
+		    // once we are behind, we can look for nearest item of correct
+		    // type and return it
+		    return $items[$i];
+		}
+	    }
+	}
+	
+	// nothing found, then find the last item
+	$items = array_reverse ( $items);
+	foreach($items as $item){
+	    if($item instanceof $type){
+		return $item;
+	    }
+	}
+	
+    }
+    
     /**
      * sort the items in this dir acording of given parameters
      * @param string $orderBy

@@ -1,5 +1,7 @@
 {** 
  * @param \LightFM\IImage $viewed - actual file
+ * @param \LightFM\IImage $nextImage - next file
+ * @param \LightFM\IImage $prevImage - previous file
  *}
 {block subtitle}{$viewed->Name}.{$viewed->Suffix}{/block}
 {block subtitleClass}{$viewed->IconName}{/block}
@@ -17,9 +19,10 @@
 
 	<div style="clear:both"></div>
 	<div class="content" id='image-content'>
+	    {dump $nextImage}
 	   <img id='image' alt="{$viewed->Name}" src="{link Image:thumbnail, path=>$viewed->Path,crop=>true,bigSide=>880}" />
-	   <a href='#image-left' title='Previous' class='pager prev'><i></i></a>
-	   <a href='#image-right' title='Next' class='pager next'><i></i></a>
+	   <a n:if="$prevImage !== NULL" n:href='this, path=>$prevImage->Path' title='Previous' class='pager prev'><i></i></a>
+	   <a n:if="$nextImage !== NULL" n:href='this, path=>$nextImage->Path' title='Next' class='pager next'><i></i></a>
 	</div>
     </div>
 </div>
