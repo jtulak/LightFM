@@ -22,10 +22,12 @@ class GalleryPresenter extends ADirectoryPresenter{
     public function renderDefault() {
 	parent::renderDefault();
 	
+	$this->viewed->sortBy($this->orderBy, $this->orderReversed);
+	
 	// push subdirs and files
 	$subdirs = $this->viewed->Subdirs;
 	if(!$this->showHidden) $this->removeHidden ($subdirs);
-	$this->sortList($subdirs, $this->orderBy, $this->orderReversed);
+	//$this->sortList($subdirs, $this->orderBy, $this->orderReversed);
 	
 	$this->template->listDirs = $subdirs;
 	//dump($subdirs);
@@ -33,7 +35,8 @@ class GalleryPresenter extends ADirectoryPresenter{
 	$files = $this->viewed->Files;
 	if(!$this->showHidden) $this->removeHidden ($files);
 	$this->removeNonImages($files);
-	$this->sortList($files, $this->orderBy, $this->orderReversed);
+	//$this->sortList($files, $this->orderBy, $this->orderReversed);
+	//$files->sortBy($this->orderBy, $this->orderReversed);
 	
 	$this->template->listFiles = $files;
 

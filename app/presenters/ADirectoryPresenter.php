@@ -16,26 +16,20 @@
  */
 abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPresenter {
 
-    const ORDER_FILENAME = 'filename';
-    const ORDER_SUFFIX = 'suffix';
-    const ORDER_SIZE = 'size';
-    const ORDER_DATE = 'date';
-    const ORDER_ASC = FALSE;
-    const ORDER_DESC = TRUE;
 
     /**
      * Column for sorting
      * @persistent
      * @var string
      */
-    public $orderBy = self::ORDER_FILENAME;
+    public $orderBy = \LightFM\IDirectory::ORDER_FILENAME;
 
     /**
      * Way of sorting - asc/desc
      * @persistent
      * @var boolean
      */
-    public $orderReversed = self::ORDER_ASC;
+    public $orderReversed = \LightFM\IDirectory::ORDER_ASC;
 
     /**
      * 	List of known interfaces for displaying files

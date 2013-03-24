@@ -74,6 +74,7 @@ class Directory extends Node implements IDirectory {
 
     public function getSubdirs() {
 	if (count($this->listDirsObj) == 0 && count($this->listDirs) != 0) {
+	    $this->listDirsObj = array();
 	    // if this function wasn't called yet
 	    foreach ($this->listDirs as $dir) {
 		$subdir = IO::createPath($this->getPath() . '/' . $dir, $dir, $this->Config);
@@ -92,6 +93,7 @@ class Directory extends Node implements IDirectory {
 
     public function getFiles() {
 	if (count($this->listFilesObj) == 0 && count($this->listFiles) != 0) {
+	    $this->listFilesObj = array();
 	    // if this function wasn't called yet
 	    foreach ($this->listFiles as $filepath) {
 		$file = IO::createPath($this->getPath() . '/' . $filepath, $filepath, $this->Config);
@@ -154,5 +156,56 @@ class Directory extends Node implements IDirectory {
 // create list of dirs and files
 	$this->scanDir();
     }
+    
+    /**
+     * sort the items in this dir acording of given parameters
+     * @param string $orderBy
+     * @param booolean $order
+     * @return \LightFM\IDirectory - provides fluid interface 
+     */
+    public function sortBy($orderBy,$order){
+	$this->listDirsObj = $this->sortList($this->getSubdirs(), $orderBy, $order);
+	$this->listFilesObj = $this->sortList($this->getFiles(), $orderBy, $order);
+	return $this;
+    }
+    /**
+     * sort the array acording of given parameters
+     * @param array $list
+     * @param string $orderBy
+     * @param booolean $order
+     * @return array 
+     */
+    private function sortList(array $list, $orderBy, $order) {
+	$t = $this;
+	usort($list, function(\LightFM\Node $a, \LightFM\Node $b) use($orderBy, $order, $t) {
+	    $result = 0;
+	    switch ($orderBy) {
+		case $t::ORDER_FILENAME:
+		    $result = strcmp($a->Name, $b->Name);
+		    break;
+		case $t::ORDER_SUFFIX:
+		    if ($a instanceof \LightFM\IFile && $b instanceof \LightFM\IFile) {
+			$result = strcmp($a->Suffix, $b->Suffix);
+		    }
+		    break;
+		case $t::ORDER_SIZE:
+		    if ($a->Size != $b->Size) {
+			$result = ($a->Size < $b->Size) ? -1 : 1;
+		    }
+		    break;
+		case $t::ORDER_DATE:
+		    if ($a->Date != $b->Date) {
+			$result = ($a->Date < $b->Date) ? -1 : 1;
+		    }
+		    break;
+	    }
 
+	    if ($order == $t::ORDER_DESC) {
+		// if it is revered order, then reverse it
+		$result *=-1;
+	    }
+	    return $result;
+	});
+	return $list;
+    }
 }

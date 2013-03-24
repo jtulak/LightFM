@@ -16,6 +16,14 @@ namespace LightFM;
  * 
  */
  interface IDirectory {
+     
+    const ORDER_FILENAME = 'filename';
+    const ORDER_SUFFIX = 'suffix';
+    const ORDER_SIZE = 'size';
+    const ORDER_DATE = 'date';
+    const ORDER_ASC = FALSE;
+    const ORDER_DESC = TRUE;
+    
     /**
      * 
      * @param string $path
@@ -45,4 +53,12 @@ namespace LightFM;
      */
     public function getFilesNames();
     
+    
+    /**
+     * sort the items in this dir acording of given parameters
+     * @param string $orderBy
+     * @param booolean $order
+     * @return \LightFM\IDirectory - provides fluid interface 
+     */
+    public function sortBy($orderBy,$order);
 }
