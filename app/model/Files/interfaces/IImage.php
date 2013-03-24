@@ -19,6 +19,13 @@ namespace LightFM;
  interface IImage {
     
      /**
+     * Return hash (or compute it if wasn't computed yet).
+     * The hash is sha1(path-from-DATA_ROOT . date-of-modification . size-of-the-file)
+     * @return string
+     */
+    public function getHash();
+     
+     /**
       * 
       * @param type $bigSide	Size of the bigger side of image
       * @param bool $crop   If the image should be cropped to fit into a rectangle
@@ -39,4 +46,13 @@ namespace LightFM;
      * @return string 
      */
     public function getResolution();
+    
+    /**
+     * Try to return an Exif data from the image.
+     * If succeed, then return array with data.
+     * If fails, return false.
+     * 
+     * @return mixed
+     */
+    public function getExif();
 }

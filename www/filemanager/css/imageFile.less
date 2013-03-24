@@ -29,42 +29,37 @@
     .content
     {
 
-	font-size: 90%;
-	background-color: lighten(@color-medium,5%);
-	border: 1px solid  @color-innerBorder;
-	padding:0;
+	padding: 0;
 	margin: 0;
-	counter-reset: listing; 
-	word-wrap: break-word;
-	white-space: pre-wrap;
-	overflow: hidden;
-
 	//width: 100%;
-	min-height: 10pt;
 	display: block;
-
-	code {
+	position: relative;
+	img{
+	    width:100%;
+	    min-height: 1em;
+	    cursor: pointer;
+	    margin:0;
+	    background-color: lighten(@color-medium,5%);
+	    border: 1px solid  @color-innerBorder;
+	}
+	.pager{
+	    position: absolute;
+	    top:50%;
+	    height:8em;
+	    width: 4em; // also used in imageFile.js!!
+	    margin-top: -4em;
 	    display: block;
-	    background-color: lighten(@color-medium,15%);
-	    margin-left: 33pt;
+	    .opacity(0);
 	}
-
-	i:before { content: attr(data-line)". "; color: #777; padding-left: 3pt; }
-	 i { float: left; clear: both; min-width: 33pt; }
-
-	.highlighted{ 
-	    display: block;
-	    background-color: #BBEDED;
-	    code{
-		background-color: #BBEDED;
-	    }
-	    i:before { font-weight: bold;}
+	.pager.prev{
+	    left: 1em;
+	    .filetype-icon('previous', @offset:center left);
 	}
-
-	code:hover{
-	    background-color: #EAEBBA ;
+	.pager.next{
+	    right: 1em;
+	    .filetype-icon('next', @offset:center left);
 	}
-
+	
 	
     }
 
@@ -74,4 +69,18 @@
 	i{font-style: italic;}
     }
 
+}
+
+#sidebar .image-info{
+    h3{
+	margin-top: 1em;
+	color: #000;
+	font-weight: bold;
+    }
+    h4{
+    }
+    .data{
+	font-size: 80%;
+	color: lighten(@color-text,30%);
+    }
 }

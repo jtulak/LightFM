@@ -10,22 +10,48 @@
     <div>
 	<div class="buttons">
 	    <a  class="button back"  n:href="List:default, path=>$viewed->Parent->Path">Back to the directory</a>
-	    <a  class="button raw"  n:href="File:download, path=>$viewed->Path">Raw</a>
+	    <a  class="button raw"  n:href="File:download, path=>$viewed->Path">View full resolution</a>
 	    <div class="cleaner"></div>
 	</div>
 
 
 	<div style="clear:both"></div>
-	<div class="content">
-	    asd
-
+	<div class="content" id='image-content'>
+	   <img id='image' alt="{$viewed->Name}" src="{link Image:thumbnail, path=>$viewed->Path,crop=>true,bigSide=>880}" />
+	   <a href='#image-left' title='Previous' class='pager prev'><i></i></a>
+	   <a href='#image-right' title='Next' class='pager next'><i></i></a>
 	</div>
     </div>
 </div>
 {/block}
 
 {block sidebar}
-<p>Created, and so...</p>
+<div class='image-info'>
+    <h3>Created</h3>
+    {if isset($viewed->Exif['FileDateTime'])}
+    <span class="data">{$viewed->Exif['FileDateTime']|date:'%Y/%m/%d %H:%M:%S'}</span>
+    {else}
+	<span class="data">{$viewed->Date|date:'%Y/%m/%d %H:%M:%S'}
+    {/if}
+    <h3>Resolution</h3>
+    <span class="data">{$viewed->Resolution}</span>
+	
+    <h3>Exif info</h3>
+    {if function_exists ( 'exif_read_data') && $viewed->Exif != FALSE}
+	
+	{dump $viewed->Exif}
+	<ul class="exif">
+	    <li n:if="isset($viewed->Exif['Make']) && isset($viewed->Exif['Model'])">
+		<h4>Camera:</h4> <span class="data">{$viewed->Exif['Make']} {$viewed->Exif['Model']}</span>
+	    </li>
+	    <li n:if="isset($viewed->Exif['CUSTOM_GPS_LON'])">
+		<h4>GPS:</h4> <span class="data">{$viewed->Exif['CUSTOM_GPS_LON']}&deg; Lon, {$viewed->Exif['CUSTOM_GPS_LAT']}&deg; Lat</span>
+	    </li>
+	</ul>
+    {else}
+	<span class="data">No data available</span>
+    {/if}
+</div>
 {/block}
 
 

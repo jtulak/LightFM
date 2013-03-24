@@ -14,6 +14,7 @@ namespace LightFM;
 /**
  * @property-read string $Resolution Image resolution
  * @property-read string $Thumbnail Path to the thumbnail
+ * @property-read mixed  $Exif
  * 
  */
  class ImageFile extends File implements IImage{
@@ -73,7 +74,12 @@ namespace LightFM;
      */
     private $image;
         
-    
+    /**
+     * Array with exif informations.
+     * 
+     * @var array
+     */
+    private $exif;
     
     public function __construct($path) {
 	parent::__construct($path);
@@ -106,11 +112,7 @@ namespace LightFM;
 	return $this->_thumbnailPath;
     }
     
-    /**
-     * Return hash (or compute it if wasn't computed yet).
-     * The hash is sha1(path-from-DATA_ROOT . date-of-modification . size-of-the-file)
-     * @return string
-     */
+    
     public function getHash(){
 	if($this->_hash == NULL){
 	    $this->_hash = sha1($this->getPath().$this->getDate().$this->getSize());
@@ -199,4 +201,57 @@ namespace LightFM;
 	return $w.'x'.$h;
     }
     
+    public function getExif(){
+	if(!function_exists ( 'exif_read_data')){
+	    return FALSE;
+	}
+	if($this->exif == NULL){
+	    $this->exif = @exif_read_data($this->FullPath);
+	    if(isset($this->exif["GPSLongitude"])){
+		$this->exif['CUSTOM_GPS_LON'] = $this->getGps($this->exif["GPSLongitude"], $this->exif['GPSLongitudeRef']);
+		$this->exif['CUSTOM_GPS_LAT'] = $this->getGps($this->exif["GPSLatitude"], $this->exif['GPSLatitudeRef']);
+	    }else if(isset($this->exif["GPS"])){
+		$this->exif['CUSTOM_GPS_LON'] = $this->getGps($this->exif["GPS"]["GPSLongitude"], $this->exif["GPS"]['GPSLongitudeRef']);
+		$this->exif['CUSTOM_GPS_LAT'] = $this->getGps($this->exif["GPS"]["GPSLatitude"], $this->exif["GPS"]['GPSLatitudeRef']);
+	    }
+	    
+	}
+	return $this->exif;
+    }
+    
+    /**
+     *  http://stackoverflow.com/questions/2526304/php-extract-gps-exif-data
+     * @param type $exifCoord
+     * @param type $hemi
+     * @return type
+     */
+    private function getGps($exifCoord, $hemi) {
+
+	$degrees = count($exifCoord) > 0 ? gps2Num($exifCoord[0]) : 0;
+	$minutes = count($exifCoord) > 1 ? gps2Num($exifCoord[1]) : 0;
+	$seconds = count($exifCoord) > 2 ? gps2Num($exifCoord[2]) : 0;
+
+	$flip = ($hemi == 'W' or $hemi == 'S') ? -1 : 1;
+
+	return $flip * ($degrees + $minutes / 60 + $seconds / 3600);
+
+    }
+
+    /**
+     * http://stackoverflow.com/questions/2526304/php-extract-gps-exif-data
+     * @param type $coordPart
+     * @return int
+     */
+    private function gps2Num($coordPart) {
+
+	$parts = explode('/', $coordPart);
+
+	if (count($parts) <= 0)
+	    return 0;
+
+	if (count($parts) == 1)
+	    return $parts[0];
+
+	return floatval($parts[0]) / floatval($parts[1]);
+    }
 }
