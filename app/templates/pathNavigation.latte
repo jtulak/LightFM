@@ -7,7 +7,7 @@
 	<ol>
 	    {foreach $path as $uri => $item}
 		
-		<li><a n:href="default, path => $uri " class="button {last}inactive{/last}" {last}title="You are here"{/last}>
+		<li><a n:href="default, path => $uri " class="ajax button {last}inactive{/last}" {last}title="You are here"{/last}>
 			{if $iterator->first}
 			    /
 			{else}

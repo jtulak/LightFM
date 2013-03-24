@@ -19,10 +19,11 @@
 
 	<div style="clear:both"></div>
 	<div class="content" id='image-content'>
-	    {dump $nextImage}
-	   <img id='image' alt="{$viewed->Name}" src="{link Image:thumbnail, path=>$viewed->Path,crop=>true,bigSide=>880}" />
-	   <a n:if="$prevImage !== NULL" n:href='this, path=>$prevImage->Path' title='Previous' class='pager prev'><i></i></a>
-	   <a n:if="$nextImage !== NULL" n:href='this, path=>$nextImage->Path' title='Next' class='pager next'><i></i></a>
+	    {snippet image}
+		<img id='image' alt="{$viewed->Name}" src="{link Image:thumbnail, path=>$viewed->Path,crop=>true,bigSide=>880}" />
+		<a n:if="$prevImage !== NULL" n:href='this, path=>$prevImage->Path' title='Previous' class='ajax pager prev'><i></i></a>
+		<a n:if="$nextImage !== NULL" n:href='this, path=>$nextImage->Path' title='Next' class='ajax pager next'><i></i></a>
+	   {/snippet}
 	</div>
     </div>
 </div>

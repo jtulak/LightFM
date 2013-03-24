@@ -64,6 +64,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	parent::beforeRender();
 	if ($this->isAjax()) {
 	    $this->invalidateControl('title');
+	    $this->invalidateControl('sidebar');
+	    
 	}
 	
 	\Stopwatch::stop('BasePresenter');
@@ -72,7 +74,17 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
         public function handleSignOut() {
 	$this->getUser()->logout();
 	$this->getHttpResponse()->deleteCookie('hiddenFiles');
-	$this->redirect('Sign:in');
+	$this->flashMessage('You have been signed out.');
+	
+	if ($this->isAjax()) {
+	    $this->invalidateControl('header');
+	    $this->invalidateControl('title');
+	    $this->invalidateControl('flashes');
+	    $this->invalidateControl('sidebar');
+	    $this->invalidateControl('content');
+	}else{
+	    $this->redirect('List:');
+	}
     }
 
     /**

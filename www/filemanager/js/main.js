@@ -16,11 +16,15 @@ var sidebarOnChangeBefore = new Array();
 var sidebarOnChangeDuring = new Array();
 var sidebarOnChangeDuringTimer;
 $(function(){
+    unsetAjaxOnBadBrowsers();
     $.nette.init();
+    $('.no-ajax').off('click.nette');
+    
     /** 
      * showing/hiding the sidebar
      */
-    $("#sidebar-control ").click(function(){
+    $(document).on("click","#sidebar-control ",function(){
+    //$("#sidebar-control ").click(function(){
 	// test if it is hidden or not
 	var width = $(".sidebar-content-width").width();
 	var sidebar = $("#sidebar-content");
@@ -79,13 +83,19 @@ $(function(){
     });*/
     
     // disable disabled links
-    $("a.disabled").click(function(event){
+    $(document).on("click","a.disabled ",function(){
+    //$("a.disabled").click(function(event){
 	event.preventDefault();
     });
     
 });
 
-
+ function unsetAjaxOnBadBrowsers(){
+    if (!(window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))){
+	$('.ajax').removeClass('ajax');
+    }
+}
+	    
 /**
  * scrolling sidebar
  * 

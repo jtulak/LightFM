@@ -51,6 +51,17 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
      */
     const ORDER = 999;
 
+    public function beforeRender() {
+	parent::beforeRender();
+	
+	if ($this->isAjax()) {
+		$this->invalidateControl('header');
+		$this->invalidateControl('subtitle');
+		$this->invalidateControl('flashes');
+		$this->invalidateControl('content');
+	}
+    }
+    
     /**
      * 	Return list of all presenters that implements IDirectoryPresenter
      * @return array

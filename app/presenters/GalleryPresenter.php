@@ -19,6 +19,17 @@ class GalleryPresenter extends ADirectoryPresenter{
     const DISPLAY_NAME = 'Only Images';
     const ORDER = 1;
 
+    public function beforeRender() {
+	parent::beforeRender();
+	
+	if ($this->isAjax()) {
+		$this->invalidateControl('header');
+		$this->invalidateControl('subtitle');
+		$this->invalidateControl('flashes');
+		$this->invalidateControl('content');
+	}
+    }
+    
     public function renderDefault() {
 	parent::renderDefault();
 	

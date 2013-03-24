@@ -10,6 +10,17 @@ use Nette\Diagnostics\Debugger;
 class ErrorPresenter extends BasePresenter
 {
 
+    public function beforeRender() {
+	parent::beforeRender();
+	
+	if ($this->isAjax()) {
+		$this->invalidateControl('header');
+		$this->invalidateControl('subtitle');
+		$this->invalidateControl('flashes');
+		$this->invalidateControl('content');
+	}
+    }
+    
 	/**
 	 * @param  Exception
 	 * @return void

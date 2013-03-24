@@ -58,9 +58,9 @@
 			    <li><a class="ajax" n:href="Sign:in">Login</a></li>
 			{else}
 			    <li>Logged as {$user->getIdentity()->Data['username']} (<a class="ajax" n:href="signOut!">logout</a>)</li>
-			    <li><a class="ajax" n:href="Settings:default">Settings</a></li>
+			    <li><a n:href="Settings:default">Settings</a></li>
 			    {if $isOwner}
-			    <li><a class="ajax" n:href="Settings:dir">Dir Options</a></li>
+			    <li><a n:href="Settings:dir">Dir Options</a></li>
 			    {/if}
 			{/if}
 		    {/snippet}
@@ -124,7 +124,7 @@
 	<script src="{$basePath}/filemanager/js/jquery.throttle.min.js"></script>
 	<script src="{$basePath}/filemanager/js/nette.ajax.js"></script>
 	<script src="{$basePath}/filemanager/js/history/history.ajax.js"></script>
-	{*<script src="{$basePath}/filemanager/js/netteForms.js"></script>*}
+	<script src="{$basePath}/filemanager/js/netteForms.js"></script>
 	<script src="{$basePath}/filemanager/js/main.js"></script>
 	{/block}
     </body>

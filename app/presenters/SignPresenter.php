@@ -47,6 +47,7 @@ class SignPresenter extends BasePresenter
 		$form->addSubmit('send', 'Sign in');
 
 		// call method signInFormSucceeded() on success
+		$form->getElementPrototype()->class[] = "ajax";
 		$form->onSuccess[] = $this->signInFormSucceeded;
 		return $form;
 	}
@@ -65,21 +66,25 @@ class SignPresenter extends BasePresenter
 
 		try {
 			$this->getUser()->login($values->username, $values->password,$this->viewed);
+			$this->flashMessage('You have been signed in.');
 		} catch (Nette\Security\AuthenticationException $e) {
 			$form->addError($e->getMessage());
 			return;
 		}
 
-		$this->redirect('List:');
+		
+		if ($this->isAjax()) {
+		    $this->invalidateControl('header');
+		    $this->invalidateControl('title');
+		    $this->invalidateControl('flashes');
+		    $this->invalidateControl('sidebar');
+		    $this->invalidateControl('content');
+		}else{
+		    $this->redirect('List:');
+		}
 	}
 
 
 
-	public function actionOut()
-	{
-		$this->getUser()->logout();
-		$this->flashMessage('You have been signed out.');
-		$this->redirect('in');
-	}
 
 }

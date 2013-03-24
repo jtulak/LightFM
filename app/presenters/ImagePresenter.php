@@ -22,6 +22,17 @@ class ImagePresenter extends FilePresenter{
 	$this->template->showSidebar = true;
     }
 
+    public function beforeRender() {
+	parent::beforeRender();
+	
+	if ($this->isAjax()) {
+		$this->invalidateControl('header');
+		$this->invalidateControl('subtitle');
+		$this->invalidateControl('flashes');
+		$this->invalidateControl('image');
+	}
+    }
+    
         /**
      * Get thumbnail from the cache - or create it if not exists
      * and if it is not possible, then use a placeholder
