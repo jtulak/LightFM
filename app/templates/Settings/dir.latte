@@ -3,7 +3,12 @@
  * @param array $highlightLines
  *}
 
-{block subtitle}Options for folder <span class="dir-name">"{$node->Name}"<span>{/block}
+{block subtitle}
+    Options for folder <span class="dir-name">
+	{dump $node->Path}
+    "{if $node->Path === ''}/{else}{$node->Name}/{/if}"
+    <span>
+{/block}
 {block subtitleClass}settings{/block}
 
 {block content}
