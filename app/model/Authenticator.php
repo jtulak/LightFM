@@ -51,7 +51,7 @@ class Authenticator extends Nette\Object implements Security\IAuthenticator {
 	$httpResponse = $GLOBALS['container']->httpResponse;
 	$hash = self::accessHash($password, $path);
 	if ($remember) {
-	    $httpResponse->setCookie(sha1($path), $hash, '+ 1 hour');
+	    $httpResponse->setCookie(sha1($path), $hash, '+ 1 week');
 	} else {
 	    $httpResponse->setCookie(sha1($path), $hash, 0);
 	}
