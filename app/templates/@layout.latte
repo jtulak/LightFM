@@ -30,6 +30,8 @@
 	    {* Compile less to css with 'lessc file.less > file.css *}
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/reset.css">
 	<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/screen.less" />
+	<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/listView.less" />
+	<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/galleryView.less" />
 	{else}
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/reset.css">
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/screen.css">
@@ -44,7 +46,7 @@
 	{/if}
     </head>
 
-    <body>
+    <body {if $noAjax}data-no-ajax="true"{/if}>
 	<script> document.body.className+=' js' </script>
 
 
@@ -118,15 +120,19 @@
 	</div>
 	{include uiDialogs.latte}
 	{block scripts}
-	<script src="{$basePath}/filemanager/js/jquery.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-	<script src="{$basePath}/filemanager/js/jquery.hoverflow.min.js"></script>
-	<script src="{$basePath}/filemanager/js/jquery.throttle.min.js"></script>
-	<script src="{$basePath}/filemanager/js/nette.ajax.js"></script>
-	<script src="{$basePath}/filemanager/js/history/history.ajax.js"></script>
-	<script src="{$basePath}/filemanager/js/extensions/spinner.ajax.js"></script>
-	<script src="{$basePath}/filemanager/js/netteForms.js"></script>
-	<script src="{$basePath}/filemanager/js/main.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.hoverflow.min.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.throttle.min.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/nette.ajax.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/history/history.ajax.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/extensions/spinner.ajax.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/netteForms.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/main.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/listView.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/filesOperations.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/galleryView.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/filesOperations.js"></script>
 	{/block}
     </body>
 </html>

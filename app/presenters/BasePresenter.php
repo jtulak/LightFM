@@ -56,12 +56,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	\Stopwatch::start('BasePresenter');
 
 	$this->template->isAjax = $this->isAjax();
+	$this->template->noAjax = false;
 
 	// if path is empty, it means it is a root
 	if (strlen($this->path) == 0)
 	    $this->path = '/';
 	// test for forbidden "../" and similar
 	$this->path = $this->verifyPath($this->path);
+	// fill viewed
+	$this->loadFiles();
 
 	$this->template->user = $this->getUser();
 
@@ -154,6 +157,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	if ($this->root->Dummy) {
 	    throw new Nette\Application\BadRequestException($this->path);
 	}
+    }
+    
+    /**
+     * Test if this is a presenter that can display the viewed item
+     */
+    protected function testPresenter(){
 
 	if (!($this instanceof SettingsPresenter)) {
 	    // if we are in settings, we do not need to change presenter or check perms
@@ -162,7 +171,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 		$this->testAccess($this->viewed);
 		$this->selectCorrectPresenter($this->viewed);
 	    } catch (Nette\Application\ForbiddenRequestException $e) {
-		$this->redirect('Settings:password', array('view' => $this->name, 'req' => (string) $this->getHttpRequest()->getUrl()));
+		//$this->redirect('Settings:password', array('view' => $this->name, 'req' => (string) $this->getHttpRequest()->getUrl()));
+		$this->redirect('Settings:password');
 	    }
 	}
     }
@@ -214,7 +224,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 
 	try {
-	    $this->loadFiles();
+	    $this->testPresenter();
 	} catch (Nette\Application\ForbiddenRequestException $e) {
 	    //$this->forward('Error:default', array('exception' => $e));
 	} catch (Nette\Application\BadRequestException $e) {

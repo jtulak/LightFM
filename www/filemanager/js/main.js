@@ -16,9 +16,25 @@ var sidebarOnChangeBefore = new Array();
 var sidebarOnChangeDuring = new Array();
 var sidebarOnChangeDuringTimer;
 $(function() {
-    unsetAjaxOnBadBrowsers();
-    $.nette.init();
-    $('.no-ajax').off('click.nette');
+    
+    if($('body').attr('data-no-ajax')){
+	console.log('no ajax');
+    }else{
+	console.log('ajax');
+	unsetAjaxOnBadBrowsers();
+	$.nette.init();
+	$.nette.ext('history').cache = false;
+	$('.no-ajax').off('click.nette');
+
+	 $.nette.ext('customRedirect', {
+	    success: function(payload) {
+		if(payload.redirect){
+		    window.location = payload.redirect;
+		}
+
+	    }
+	});
+    }
 
     /** 
      * showing/hiding the sidebar

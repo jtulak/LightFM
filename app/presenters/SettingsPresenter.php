@@ -62,7 +62,15 @@ class SettingsPresenter extends BasePresenter {
      */
     public function actionPassword() {
 	parent::actionDefault();
+	//$this->template->noAjax = true;
 	$this->load();
+	$this->template->noAjax = true;
+	if ($this->isAjax()) {
+	    $this->invalidateControl('header');
+	    $this->invalidateControl('subtitle');
+	    $this->invalidateControl('flashes');
+	    $this->invalidateControl('content');
+	}
     }
 
     /**
@@ -92,6 +100,7 @@ class SettingsPresenter extends BasePresenter {
 	}
     }
 
+
     /**
      * Save vars (from where user came..) to the template 
      * when access password is required.
@@ -101,8 +110,10 @@ class SettingsPresenter extends BasePresenter {
      */
     public function renderPassword() {
 	$this->template->node = $this->viewed;
-	$this->template->view = $this->view;
-	$this->template->back = $this->req;
+	//$this->template->view = $this->view;
+	$this->template->view = $this->viewed->Presenter;
+	//$this->template->back = $this->req;
+	$this->template->back = $this->viewed->Parent->Path;
 	$this->template->withPassword = $this->withPassword;
     }
 
@@ -151,9 +162,11 @@ class SettingsPresenter extends BasePresenter {
 
 	if ($values->accessPassword == $tested->Password) {
 	    Authenticator::confirmAccess($values->accessPassword, $tested->Path, $values->remember);
-	    $this->redirectUrl($this->req);
+	    // $this->redirectUrl($this->req);
+	    $this->redirect($this->viewed->Presenter.':default');
 	} else {
 	    $form['accessPassword']->addError('Invalid password!');
+	    $this->flashMessage('Invalid password!', 'error');
 	}
     }
 
