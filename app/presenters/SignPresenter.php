@@ -47,7 +47,7 @@ class SignPresenter extends BasePresenter
 		$form->addSubmit('send', 'Sign in');
 
 		// call method signInFormSucceeded() on success
-		$form->getElementPrototype()->class[] = "ajax";
+		//$form->getElementPrototype()->class[] = "ajax";
 		$form->onSuccess[] = $this->signInFormSucceeded;
 		return $form;
 	}
