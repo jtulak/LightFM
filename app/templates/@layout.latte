@@ -57,7 +57,7 @@
 			{if !$user->isLoggedIn()}
 			    <li><a class="ajax" n:href="Sign:in">Login</a></li>
 			{else}
-			    <li>Logged as {$user->getIdentity()->Data['username']} (<a class="ajax" n:href="signOut!">logout</a>)</li>
+			    <li>Logged as {$user->getIdentity()->Data['username']} (<a n:href="signOut!">logout</a>)</li>
 			    <li><a n:href="Settings:default">Settings</a></li>
 			    {if $isOwner}
 			    <li><a n:href="Settings:dir">Dir Options</a></li>
