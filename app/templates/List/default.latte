@@ -136,16 +136,16 @@
 
 {block scripts}
 {include #parent}
-<script src="{$basePath}/filemanager/js/listView.js"></script>
-<script src="{$basePath}/filemanager/js/filesOperations.js"></script>
+<script src="{$basePath}/{= FM_DATA_DIR}/js/listView.js"></script>
+<script src="{$basePath}/{= FM_DATA_DIR}/js/filesOperations.js"></script>
 {/block}
 
 
 {block head}
 {if $debug_less}
-<link rel="stylesheet/less" type="text/css" href="{$basePath}/filemanager/css/listView.less" />
+<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/listView.less" />
 {else}
-<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/filemanager/css/listView.css">
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/listView.css">
 {/if}
 <style>
 </style>

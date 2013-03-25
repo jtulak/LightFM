@@ -25,27 +25,15 @@
 
 {block scripts}
 {include #parent}
-{* 
-<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shCore.js"></script>
-<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shBrushJScript.js"></script>
-<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shBrushBash.js"></script>
-<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shBrushCpp.js"></script>
-<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shBrushPlain.js"></script>
-<script type="text/javascript" src="{$basePath}/filemanager/js/syntaxhighlighter/scripts/shBrushPhp.js"></script>
-<script type="text/javascript">
-    SyntaxHighlighter.all()
-</script> {* *}
 {/block}
 
 
 {block head}
 {if $debug_less}
-<link rel="stylesheet/less" type="text/css" href="{$basePath}/filemanager/css/textFile.less" />
+<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/textFile.less" />
 {else}
-<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/filemanager/css/textFile.css">
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/textFile.css">
 {/if}
 <style>
 </style>
-<link href="{$basePath}/filemanager/js/syntaxhighlighter/styles/shCore.css" rel="stylesheet" type="text/css" />
-<link href="{$basePath}/filemanager/js/syntaxhighlighter/styles/shThemeDefault.css" rel="stylesheet" type="text/css" />
 {/block}
