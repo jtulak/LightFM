@@ -4,6 +4,7 @@
 // require '.maintenance.php';
 
 define('DATA_ROOT',__DIR__);
+define('FM_DATA_DIR','filemanager');
 define('DATA_TEMP','temp');
 
 // Let bootstrap create Dependency Injection container.
