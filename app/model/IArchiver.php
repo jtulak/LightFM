@@ -26,6 +26,6 @@ interface IArchiver {
      * 
      * @return string	    Path to the archive, relatively to DATA_ROOT
      */
-    public static function createZip($root,$files);
+    public static function zipCreate($root,$files);
     
 }

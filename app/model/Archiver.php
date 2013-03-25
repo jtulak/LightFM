@@ -19,7 +19,7 @@ namespace LightFM;
 class Archiver implements IArchiver {
 
     
-    public static function createZip($root, $files) {
+    public static function zipCreate($root, $files) {
 	$content = array_merge($root->SubdirsNames, $root->FilesNames);
 	// test for all wanted files and dirs if they are here
 	foreach ($files as $item) {
@@ -29,7 +29,7 @@ class Archiver implements IArchiver {
 	    }
 	}
 
-	return self::mkZip($root->FullPath, $files);
+	return self::zipMake($root->FullPath, $files);
     }
 
     /**
@@ -43,7 +43,7 @@ class Archiver implements IArchiver {
      * 
      * @return array
      */
-    private static function getRecursivePath($basePath, $dir, $exclusiveLength = -1) {
+    private static function zipGetRecursivePath($basePath, $dir, $exclusiveLength = -1) {
 	// TODO check for allowed download
 
 	$handle = opendir($basePath . '/' . $dir);
@@ -63,7 +63,7 @@ class Archiver implements IArchiver {
 		} elseif (is_dir($filePath)) {
 		    // Add sub-directory.
 		    array_push($filePathes, $localPath);
-		    $filePathes = array_merge($filePathes, self::getRecursivePath($basePath, $localPath, $exclusiveLength));
+		    $filePathes = array_merge($filePathes, self::zipGetRecursivePath($basePath, $localPath, $exclusiveLength));
 		}
 	    }
 	}
@@ -82,7 +82,7 @@ class Archiver implements IArchiver {
      * @return string
      * @throws \Exception
      */
-    private static function mkZip($root, $files) {
+    private static function zipMake($root, $files) {
 	// As the zip is created with pathes from the current dir
 	chdir($root);
 	// TODO Max file limit
@@ -91,13 +91,13 @@ class Archiver implements IArchiver {
 	foreach ($files as $item) {
 	    if (is_dir($root . "/" . $item)) {
 		// if this item is a dir, then get recursively the content
-		$fullList = array_merge($fullList, self::getRecursivePath($root, $item));
+		$fullList = array_merge($fullList, self::zipGetRecursivePath($root, $item));
 	    } else {
 		array_push($fullList, $item);
 	    }
 	}
 	// compute hashes
-	$filename = DATA_TEMP . '/' . self::computeZipHash($root, $fullList) . '.zip';
+	$filename = DATA_TEMP . '/' . self::zipHashCompute($root, $fullList) . '.zip';
 
 	if (!file_exists(DATA_ROOT . '/' . $filename)) {
 	    // the zip file
@@ -119,7 +119,7 @@ class Archiver implements IArchiver {
      * @param array $list Relaive pathes
      * @return string
      */
-    private static function computeZipHash($path, $list) {
+    private static function zipHashCompute($path, $list) {
 
 	$hashes = "";
 	// compute hashes for each file

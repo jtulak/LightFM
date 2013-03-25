@@ -230,7 +230,7 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	$list = $httpRequest->getPost('list');
 	// now we have list of items to package
 	try {
-	    $response['path'] = \LightFM\Archiver::createZip($this->viewed, $list);
+	    $response['path'] = \LightFM\Archiver::zipCreate($this->viewed, $list);
 	} catch (\Nette\FileNotFoundException $e) {
 	    //  files not found
 	    $httpResponse->setCode(\Nette\Http\Response::S404_NOT_FOUND);

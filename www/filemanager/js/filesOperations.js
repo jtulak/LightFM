@@ -42,7 +42,7 @@ $(function() {
 	modal: true,
 	autoOpen: false,
 	buttons: {
-	    Ok: function() {
+	    Close: function() {
 		$(this).dialog("close");
 	    }
 	}
