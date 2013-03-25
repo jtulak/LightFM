@@ -210,33 +210,22 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	$httpResponse = $GLOBALS['container']->httpResponse;
 	$list = $httpRequest->getPost('list');
 	// now we have list of items to package
-	
-	//$list = array('data1');
-	$content = array_merge($this->viewed->SubdirsNames, $this->viewed->FilesNames);
 	try {
-	    // test for all wanted files and dirs if they are here
-	    foreach ($list as $item) {
-		if (!in_array($item, $content)) {
-		    // item wasn't found - set error and break
-		    $response['error'] = "File >> " . $item . " << in >> " . $this->viewed->Path . " << wasn't found!";
-		    throw new Nette\FileNotFoundException;
-		}
-	    }
-	    
-	    $response['path'] = \LightFM\IO::getZip($this->viewed->FullPath,$list);
+	    $response['path'] = \LightFM\Archiver::createZip($this->viewed,$list);
 	    
 	} catch (\Nette\FileNotFoundException $e) {
 	    //  files not found
 	    $httpResponse->setCode(\Nette\Http\Response::S404_NOT_FOUND);
-	    \Nette\Diagnostics\Debugger::log($response['error'] );
+	    \Nette\Diagnostics\Debugger::log($e->getMessage());
+	    $response['error'] = $e->getMessage();
 	} catch (Exception $e){
 	    // exceptions from creating the archive
 	    if($e->getCode() !=  \Zip::ZIP_ERROR){
 		throw $e;
 	    }
 	    $httpResponse->setCode(Nette\Http\Response::S500_INTERNAL_SERVER_ERROR);
-	    $response['error']  = "An Error Occured In >> " . $this->viewed->Path . " << When Creating Archive.";
-	    \Nette\Diagnostics\Debugger::log($response['error'] );
+	    $response['error'] = "An_Error_Occured_In_>>" . $this->viewed->Path . "<<_When_Creating_Archive." ;
+	    \Nette\Diagnostics\Debugger::log($response['error']);
 	}
 	
 	
