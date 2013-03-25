@@ -41,8 +41,9 @@ $(function() {
 		window.location = $(".pager.next").attr('href');
 	    }
 	}
-    })
+    });
     
+    changeImageSize();
     /* changer - it will keep the previous image until the new one is loaded 
      * and then make a transition
      * 
@@ -61,20 +62,37 @@ $(function() {
 	    imageFile.placeholder.appendTo($("#image-content"));
 	},
 	complete: function() {
+	    changeImageSize();
 	    //formToggle();
 	    highlightPagerSide(imageFile.mouse, imageFile.left);
-	    $("#image-content")
-		    .animate({
-		width:$('#image').width(), 
-		height:$('#image').height()
-	    },100);
-	    imageFile.placeholder.animate({
-		width:$('#image').width(),
-		height:$('#image').height()
-	    },100).fadeOut(100,function(){this.remove()})
+	    
 	}
     });
 });
+
+
+/**
+ * This function change the sizes of #image-content and the old image
+ * according the size of the new image AFTER it is loaded.
+ */
+function changeImageSize(){
+    var img=$("#image");
+    img.load(function() {
+	$("#image-content").animate({
+	    width:img.width(), 
+	    height:img.height()
+	},100);
+	if(imageFile.placeholder !== null){
+	    imageFile.placeholder.animate({
+		width:img.width(),
+		height:img.height()
+	    },100).fadeOut(100,function(){this.remove()})
+	}
+    });
+    
+    
+    
+}
 
 /**
  * Do the highlighting
