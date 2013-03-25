@@ -46,6 +46,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	parent::startup();
 	\Stopwatch::start('BasePresenter');
 	
+	$this->template->isAjax = $this->isAjax();
+	
 	// if path is empty, it means it is a root
 	if (strlen($this->path) == 0)
 	    $this->path = '/';
