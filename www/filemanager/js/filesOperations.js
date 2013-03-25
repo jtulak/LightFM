@@ -92,8 +92,7 @@ function filesDownload(link) {
     }, 'json')
 	    .fail(function(data) {
 	$("#dialog-message-zip-preparing").dialog("close");
-	alert("An error occured. You can try it later, or download files one-by-one.");
-	console.log(data.error);
+	alert("An error occured. You can try it later, or download files one-by-one.\n\n"+jQuery.parseJSON(data.responseText).error);
     });
 
 }

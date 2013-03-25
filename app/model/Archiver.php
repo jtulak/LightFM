@@ -17,19 +17,82 @@ namespace LightFM;
  * @author Jan Ťulák<jan@tulak.me>
  */
 class Archiver implements IArchiver {
-
     
     public static function zipCreate($root, $files) {
 	$content = array_merge($root->SubdirsNames, $root->FilesNames);
 	// test for all wanted files and dirs if they are here
+	
+	//$files = array('gallery','file');
+	
 	foreach ($files as $item) {
 	    if (!in_array($item, $content)) {
 		// item wasn't found - set error and break
-		throw new \Nette\FileNotFoundException("Fil_>>" . $item . "<<_in_>>" . $root->Path . "<<_wasn't_found!");
+		throw new \Nette\FileNotFoundException("File >>" . $item . "<< in >>" . $root->Path . "<< wasn't found!");
 	    }
 	}
-
+	$files = self::zipCheckConditions($root->FullPath,$files);
+	
 	return self::zipMake($root->FullPath, $files);
+    }
+    
+    /**
+     * Will check the given files if they fullfill all needed conditions.
+     * Their number, sizes, if zipping is allowed...
+     * 
+     * Remove folders where zip is not allowed
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param string $root
+     * @param array $files
+     * 
+     * @return array
+     */
+    private static function zipCheckConditions($root,$files){
+	if(count($files) > self::ZIP_MAX_FILES){
+	    throw new \Exception('ZIP_MAX_FILES_EXCEPTION', self::ZIP_MAX_FILES_EXCEPTION);
+	}
+	// sum of sizes of all files
+	$sizeSum = 0;
+	// config for all dirs
+	$config = array();
+	$count  = count($files);
+	foreach($files as $i=>$file){
+	    
+	    $filePath = $root.'/'.$file;
+	    if(is_dir($filePath)){
+		// if the item is a dir, then load its config{
+		$config[$filePath] = new \LightFM\DirConfig($filePath);
+		if(!$config[$filePath]->AllowZip){
+		    // if zip is not allowed in this dir
+		    // remove itself
+		    unset($files[$i]);
+		}
+		
+	    }else{
+		if(dirname($filePath) !== $root && !$config[dirname($filePath)]->AllowZip){
+		    // if zip is not allowed in this dir
+		    // remove itself and skip rest conditions
+		    unset($files[$i]);
+		    continue;
+		}
+		
+		
+		// else it is a file so check size
+		$size = filesize($filePath);
+		
+		if($size > self::ZIP_MAX_FILE_SIZE){
+		    throw new \Exception('ZIP_MAX_FILE_SIZE_EXCEPTION', self::ZIP_MAX_FILE_SIZE_EXCEPTION);
+		}
+		
+		$sizeSum +=$size;
+		
+		if($sizeSum > self::ZIP_MAX_SUM_SIZE){
+		    throw new \Exception('ZIP_MAX_SUM_SIZE_EXCEPTION', self::ZIP_MAX_SUM_SIZE_EXCEPTION);
+		}
+	    }
+	}
+	return $files;
     }
 
     /**

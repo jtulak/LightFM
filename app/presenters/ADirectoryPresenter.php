@@ -231,19 +231,52 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	// now we have list of items to package
 	try {
 	    $response['path'] = \LightFM\Archiver::zipCreate($this->viewed, $list);
+	    
+	    
 	} catch (\Nette\FileNotFoundException $e) {
 	    //  files not found
 	    $httpResponse->setCode(\Nette\Http\Response::S404_NOT_FOUND);
-	    \Nette\Diagnostics\Debugger::log($e->getMessage());
+	    \Nette\Diagnostics\Debugger::log($e->getMessage().' in '.$this->viewed->Path);
 	    $response['error'] = $e->getMessage();
+	    
+	    
 	} catch (Exception $e) {
-	    // exceptions from creating the archive
-	    if ($e->getCode() != \Zip::ZIP_ERROR) {
-		throw $e;
-	    }
+	    //log every exception
+	    \Nette\Diagnostics\Debugger::log($e->getMessage().' in '.$this->viewed->Path);
+	    
+	    // set an http code for most of errors
 	    $httpResponse->setCode(Nette\Http\Response::S500_INTERNAL_SERVER_ERROR);
-	    $response['error'] = "An_Error_Occured_In_>>" . $this->viewed->Path . "<<_When_Creating_Archive.";
-	    \Nette\Diagnostics\Debugger::log($response['error']);
+	    
+	    // exceptions from creating the archive
+	    switch($e->getCode()){
+		// decide what to do
+		
+		case \LightFM\IArchiver::ZIP_MAX_SUM_SIZE_EXCEPTION:
+		    $response['error'] = "Maximum allowed sum of sizes of all files for the "
+			."archive is ".\Nette\Templating\Helpers::bytes(\LightFM\IArchiver::ZIP_MAX_SUM_SIZE_EXCEPTION).".";
+		    break;
+		
+		case \LightFM\IArchiver::ZIP_MAX_FILE_SIZE_EXCEPTION:
+		    $response['error'] = "Maximum allowed size of each file for the "
+			."archive is ".\Nette\Templating\Helpers::bytes(\LightFM\IArchiver::ZIP_MAX_FILE_SIZE).".";
+		    break;
+		
+		
+		case \LightFM\IArchiver::ZIP_MAX_FILES_EXCEPTION:
+		    $response['error'] = "There is too much files to be added. "
+			."You can't create a zip with more than "
+			.\LightFM\IArchiver::ZIP_MAX_FILES." files.";
+		    break;
+		
+		
+		case \Zip::ZIP_ERROR:
+		    $response['error'] = "An error occured in >>" . $this->viewed->Path . "<< when creating archive.";
+		    \Nette\Diagnostics\Debugger::log($response['error']);
+		    break;
+		
+		default:
+		    throw $e;
+	    }
 	}
 
 

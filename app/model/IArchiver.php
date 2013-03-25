@@ -16,6 +16,29 @@ namespace LightFM;
  */
 interface IArchiver {
     
+
+    /**
+     * Maximum number of files which can be putted in a zip
+     */
+    const ZIP_MAX_FILES=2000;
+    const ZIP_MAX_FILES_EXCEPTION=777;
+    
+    /**
+     * Max size of one file to be added to a zip.
+     * Default is cca 200 MB = 200000000
+     */
+    const ZIP_MAX_FILE_SIZE=200000000;
+    const ZIP_MAX_FILE_SIZE_EXCEPTION=778;
+    
+    /**
+     * Max summary of sizes of all files to be added to the zip.
+     * Default is cca 1000 MB = 1000000000
+     */
+    const ZIP_MAX_SUM_SIZE=1000000000;
+    const ZIP_MAX_SUM_SIZE_EXCEPTION=779;
+    
+    
+    
     /**
      * Return path to archive file with given files to be downloaded by user.
      * 
