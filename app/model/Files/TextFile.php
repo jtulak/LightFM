@@ -199,13 +199,13 @@ namespace LightFM;
 	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'textFiles');
 	// if cache entry exists
 	// load it
-	$parsed = $cache->load($this->Path);
+	$parsed = $cache->load($this->Path.$this->Syntax);
 	if($parsed === NULL){
 	
 	    if($parser == 'fshl'){
 	    /** Or FSHL? */
 		$t = $this;
-		$parsed = $cache->save($this->Path, function() use ($t){ 
+		$parsed = $cache->save($this->Path.$this->Syntax, function() use ($t){ 
 		    $t->_getFSHL()->setLexer($t->getFSHLSyntax());
 		    // the \n is there because the lexer needs \n at the end
 		    $text = $t->_getFSHL()->highlight(implode(file($t->getFullPath()))."\n");
