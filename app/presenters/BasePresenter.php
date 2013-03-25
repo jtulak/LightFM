@@ -5,6 +5,7 @@
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
     
+    // TODO file manipulation
     // TODO replace jqueryui
     // TODO resizing and scrolling
     // TODO ZIP - limit files size and files count
