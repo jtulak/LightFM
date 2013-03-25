@@ -16,5 +16,10 @@ things settle little, I will change it.
 
 Changelog:
 ---------
+v0.2 alpha
+- Added ajax
+- Various smaller enahncements
+- Various bugs correct
+
 v0.1 alpha - 24. Mar. 2013
 - Basic functions for browsing are working, but still many missing things
