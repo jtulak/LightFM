@@ -1,6 +1,8 @@
 $(function() {
     // disable/enable file manipulations on change state of select boxes
-    $(".fileSelector").change(function(){
+    //$(".fileSelector").change(function(){
+    
+    $(document).on("change", ".fileSelector", function(event) {
 	if($(".fileSelector:checked").length){
 	    // if at least one select box is checked
 	    $(".filesManipulation").removeClass('disabled');
@@ -9,7 +11,7 @@ $(function() {
 	    $(".filesManipulation").addClass('disabled');
 	}
     });
-    // and also check initial state
+    // and also check initial state on loading (back button and so)
     if($(".fileSelector:checked").length){
 	// if at least one select box is checked
 	$(".filesManipulation").removeClass('disabled');
@@ -21,7 +23,8 @@ $(function() {
     
 
     /* prepare for download */
-    $("#filesDownload").click(function(event) {
+    $(document).on("click", "#filesDownload", function(event) {
+    //$("#filesDownload").click(function(event) {
 	event.preventDefault();
 	filesDownload(this);
     });
@@ -47,17 +50,20 @@ $(function() {
     });
 
 
-    $("#filesMove").click(function(event) {
+    //$("#filesMove").click(function(event) {
+    $(document).on("click", "#filesMove", function(event) {
 	event.preventDefault();
 	filesMove(this);
     });
 
-    $("#filesRename").click(function(event) {
+   // $("#filesRename").click(function(event) {
+    $(document).on("click", "#filesRename", function(event) {
 	event.preventDefault();
 	filesRename(this);
     });
 
-    $("#filesDelete").click(function(event) {
+    //$("#filesDelete").click(function(event) {
+    $(document).on("click", "#filesDelete", function(event) {
 	event.preventDefault();
 	filesDelete(this);
     });
