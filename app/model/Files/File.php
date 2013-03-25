@@ -12,6 +12,9 @@
 namespace LightFM;
 
 /**
+ * 
+ * @author Jan Ťulák<jan@tulak.me>
+ * 
  * @property-read  string $IconName Name for icon file
  * @property-read  string $Suffix   File suffix
  * @property string $MimeType
@@ -21,24 +24,22 @@ namespace LightFM;
  */
 class File extends Node implements IFile {
 
-    
     /**
-     *	The DEFAULT presenter called for this file
-     *	Note: If the given presenter will not know any interface which this
+     * 	The DEFAULT presenter called for this file
+     * 	Note: If the given presenter will not know any interface which this
      * class is implementing, it will lead to a infinite redirecting!
      * @var string
      */
-    protected $presenter =  'File';
-    
+    protected $presenter = 'File';
+
     /**
-     *	css class for the node
+     * 	css class for the node
      * @var string 
      */
     protected $iconName = '';
 
-    
     /**
-     *	Contain mimetype of this file
+     * 	Contain mimetype of this file
      * @var string
      */
     protected $mimetype = '';
@@ -48,78 +49,75 @@ class File extends Node implements IFile {
      * @var int 
      */
     protected static $priority = -1000;
-    
+
     /**
-     *	Suffix of this file
+     * 	Suffix of this file
      * @var string
      */
     protected $suffix;
 
     /**
-     *	Hash of the file
+     * 	Hash of the file
      * @var string 
      */
     protected $hash;
 
+    public function __construct($path) {
+	parent::__construct($path);
+	$fileparts = pathinfo($path);
+	// split to suffix and name
+	$this->suffix = !empty($fileparts['extension']) ? $fileparts['extension'] : '';
+	$this->name = $fileparts['filename'];
+	if (strlen($this->name) == 0) {
+	    // files like .htaccess
+	    $this->name = '.' . $this->suffix;
+	    $this->suffix = "";
+	}
+	return $this;
+    }
 
-    public function getMimeType(){
-	if($this->mimetype == NULL){
-	    $this->mimetype=\LightFM\Filetypes::getMimeType($this->FullPath);
+    public function getMimeType() {
+	if ($this->mimetype == NULL) {
+	    $this->mimetype = \LightFM\Filetypes::getMimeType($this->FullPath);
 	}
 	return $this->mimetype;
     }
-    public function setMimeType($mimetype){
+
+    public function setMimeType($mimetype) {
 	$this->mimetype = $mimetype;
 	return $this;
     }
-    
-    
-    public function getIconName(){
+
+    public function getIconName() {
 	return $this->iconName;
     }
-    
+
     public function getSuffix() {
 	return $this->suffix;
     }
-    
+
     public function getTemplateName() {
 	return "";
     }
-
 
     public function delete() {
 	throw new \Nette\NotImplementedException;
     }
 
-    
-    public static function getPriority(){
+    public static function getPriority() {
 	return static::$priority;
     }
-    
-    
+
     public static function knownFileType($file) {
 	// generic file - know everything
 	return TRUE;
     }
-    
-    public function __construct($path) {
-	parent::__construct($path);
-	$fileparts = pathinfo($path);
-// split to suffix and name
-	$this->suffix = !empty($fileparts['extension'])?$fileparts['extension']:'';
-	$this->name = $fileparts['filename'];
-	if(strlen($this->name) == 0 ){
-	    // files like .htaccess
-	    $this->name = '.'.$this->suffix;
-	    $this->suffix = "";
-	}	
-	return $this;
-    }
 
-    public function getHash(){
-	if($this->hash == NULL){
+    public function getHash() {
+	if ($this->hash == NULL) {
 	    $this->hash = sha1_file($this->getFullPath());
 	}
 	return $this->hash;
     }
+
 }

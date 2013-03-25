@@ -10,15 +10,34 @@
  */
 //use LightFM;
 
-
+/**
+ * 
+ * 
+ * @author Jan Ťulák<jan@tulak.me>
+ */
 class FilePresenter extends BasePresenter {
 
+    // overriding from basePresenter
     protected $knownInterfaces = array('IFile');
 
+    /**
+     * Solve downloading of a file
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param string $path
+     */
     public function actionDownload($path) {
-	$this->redirectUrl($this->getHttpRequest()->url->basePath .$this->path);
+	$this->redirectUrl($this->getHttpRequest()->url->basePath . $this->path);
     }
-    
+
+    /**
+     * Select correct presenter
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @throws Nette\Application\BadRequestException
+     */
     public function actionDefault() {
 	parent::actionDefault();
 
@@ -37,12 +56,18 @@ class FilePresenter extends BasePresenter {
 	}
     }
 
+    /**
+     * Select correct template
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
     public function renderDefault() {
 
 	$this->template->file = $this->viewed;
-	
+
 	// set the view 
-	$this->setView($this->viewed->getTemplateName() );
+	$this->setView($this->viewed->getTemplateName());
     }
 
 }

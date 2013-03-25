@@ -14,11 +14,16 @@ namespace LightFM;
 /**
  * 
  * 
+ * @author Jan Ťulák<jan@tulak.me>
+ * 
  */
 abstract class IO extends \Nette\Object {
 
     /**
      * 	Smarter replacement of php is_file - go through symlinks
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $path
      * @return boolean
      */
@@ -35,6 +40,9 @@ abstract class IO extends \Nette\Object {
 
     /**
      * 	Smarter replacement of php is_dir - go through symlinks
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $path
      * @return boolean
      */
@@ -52,6 +60,9 @@ abstract class IO extends \Nette\Object {
     /**
      * Create hierarchical path from root to the given path 
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * 
      * @param string $path
      * @return \LightFM\Node
      */
@@ -62,6 +73,7 @@ abstract class IO extends \Nette\Object {
     /**
      * Return an array of classes which implements an interface
      * 
+     * @author Jan Ťulák<jan@tulak.me>
      * 
      * @param string $interfaceName
      * @return array
@@ -69,10 +81,10 @@ abstract class IO extends \Nette\Object {
     public static function getImplementingClasses($interfaceName) {
 	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'interfaces');
 	$implements = $cache->load($interfaceName);
-	if($implements === NULL){
-	    $implements = $cache->save($interfaceName, function() use ($interfaceName){ 
-		return \LightFM\IO::getImplementingClassesCompute($interfaceName);
-	    });
+	if ($implements === NULL) {
+	    $implements = $cache->save($interfaceName, function() use ($interfaceName) {
+			return \LightFM\IO::getImplementingClassesCompute($interfaceName);
+		    });
 	}
 	return $implements;
     }
@@ -81,10 +93,13 @@ abstract class IO extends \Nette\Object {
      * This is public only because in getImplementingClasses() it is called by callback.
      * Do not use directly.
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * 
      * @param type $interfaceName
      * @return type
      */
-    public static function getImplementingClassesCompute($interfaceName){
+    public static function getImplementingClassesCompute($interfaceName) {
 	$classes = NULL;
 	// At first find instance of robotLoader and get classes.
 	foreach (\Nette\Loaders\RobotLoader::getLoaders() as $i => $loader) {
@@ -107,6 +122,9 @@ abstract class IO extends \Nette\Object {
 
     /**
      * Return an array of classes which provides an file view
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @return type
      */
     public static function getFileModules() {
@@ -114,6 +132,8 @@ abstract class IO extends \Nette\Object {
     }
 
     /**
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
      * 
      * @param string $restOfPath
      * @return type
@@ -142,6 +162,8 @@ abstract class IO extends \Nette\Object {
 
     /**
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $fullPath
      * @return \LightFM\Directory
      */
@@ -154,6 +176,9 @@ abstract class IO extends \Nette\Object {
      * Usage: 
      * $node = IO::getNodeType($file); // path from this system's root
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * 
      * @param string $fullPath
      * @return \LightFM\classes
      * @throws \Nette\FatalErrorException
@@ -161,32 +186,34 @@ abstract class IO extends \Nette\Object {
     public static function createFileType($fullPath) {
 	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'files');
 	$created = $cache->load($fullPath);
-	if($created === NULL){
-	    $created = $cache->save($fullPath, function() use ($fullPath) { 
-		return \LightFM\IO::createFileTypeCompute($fullPath);
-	    },array(
-		    \Nette\Caching\Cache::FILES => DATA_ROOT.'/'.$fullPath
+	if ($created === NULL) {
+	    $created = $cache->save($fullPath, function() use ($fullPath) {
+			return \LightFM\IO::createFileTypeCompute($fullPath);
+		    }, array(
+		\Nette\Caching\Cache::FILES => DATA_ROOT . '/' . $fullPath
 	    ));
 	}
 	return $created;
     }
-    
+
     /**
      * This is public only because in getImplementingClasses() it is called by callback.
      * Do not use directly.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * 
      * @param type $fullPath
      * @return \LightFM\top
      * @throws \Nette\FatalErrorException
      */
-    public static function createFileTypeCompute($fullPath){
+    public static function createFileTypeCompute($fullPath) {
 	$classes = array();
 
 	$modules = self::getFileModules();
 	foreach ($modules as $class) {
 	    if ($class::knownFileType(DATA_ROOT . $fullPath)) {
 		// if the class know this filetype
-		//dump($class::getPriority() . ' # '.$class);
 		$classes[$class::getPriority()] = $class;
 	    }
 	}
@@ -201,6 +228,8 @@ abstract class IO extends \Nette\Object {
 
     /**
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $fullPath
      * @param string $fullDir
      * @param string $restOfPath
@@ -210,14 +239,13 @@ abstract class IO extends \Nette\Object {
     private static function createPath_tryCreate_folder($fullPath, $fullDir, $restOfPath, \LightFM\DirConfig $config) {
 	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'dirs');
 	$created = $cache->load($fullDir);
-	if($created === NULL){
-	    $created = $cache->save($fullDir, function() use ($fullDir) { 
-		return new \LightFM\Directory($fullDir);
-	    },array(
-		    \Nette\Caching\Cache::FILES => scandir(DATA_ROOT.'/'.$fullDir)
+	if ($created === NULL) {
+	    $created = $cache->save($fullDir, function() use ($fullDir) {
+			return new \LightFM\Directory($fullDir);
+		    }, array(
+		\Nette\Caching\Cache::FILES => scandir(DATA_ROOT . '/' . $fullDir)
 	    ));
 	}
-	// $created = new \LightFM\Directory($fullDir);
 	// recursively create rest of the path
 	$created->usedChild = self::createPath($fullPath, $restOfPath, $config);
 	$created->usedChild->Parent = $created;
@@ -233,6 +261,8 @@ abstract class IO extends \Nette\Object {
     }
 
     /**
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
      * 
      * @param string $fullPath
      * @param string $fullDir
@@ -263,6 +293,8 @@ abstract class IO extends \Nette\Object {
 
     /**
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $fullPath	    full path relatively to the data root
      * @param string $restOfPath    rest of patch from this node
      * @param \LightFM\DirConfig $parentsConfig	    config of parent node, or null if none parent
@@ -271,9 +303,9 @@ abstract class IO extends \Nette\Object {
     public static function createPath($fullPath, $restOfPath, \LightFM\DirConfig $parentsConfig = NULL) {
 	// Remove slashes from begining and end (if any)
 	// and get top dir from the path
-	
+
 	list($dir, $restOfPath) = self::createPath_explodePath($restOfPath);
-	
+
 	// create path to this dir - remove the rest from the full path to get 
 	// path to this dir
 
@@ -283,8 +315,8 @@ abstract class IO extends \Nette\Object {
 	} else {
 	    $fullDir = $fullPath;
 	}
-	 $config = new \LightFM\DirConfig($fullDir);
-	
+	$config = new \LightFM\DirConfig($fullDir);
+
 	try {
 	    // load config
 	    // and inherite
@@ -312,7 +344,5 @@ abstract class IO extends \Nette\Object {
 
 	return $created;
     }
-
-    
 
 }

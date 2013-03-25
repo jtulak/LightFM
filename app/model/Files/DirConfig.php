@@ -16,6 +16,9 @@ define('BAD_INI_SYNTAX', 1);
 
 /**
  * 
+ * @author Jan Ťulák<jan@tulak.me>
+ * 
+ * 
  * @property-read array $Owners 
  * @property-read array $Users 
  * @property-read bool  $AllowZip
@@ -30,25 +33,46 @@ define('BAD_INI_SYNTAX', 1);
  */
 class DirConfig extends \Nette\Object implements IDirConfig {
 
-    /** @var Array List of blacklisted names/paths */
+    /**
+     * List of blacklisted names/paths
+     * @var Array 
+     */
     private $blacklist = array();
 
-    /** @var Array  List of allowed modes */
+    /**
+     * List of allowed modes 
+     * @var Array  
+     */
     private $modes = array();
 
-    /** @var string	Access password */
+    /** 
+     * Access password 
+     * @var string	
+     */
     private $accessPassword = NULL;
 
-    /** @var Array  List of users */
+    /** 
+     * List of users 
+     * @var Array  
+     */
     private $users = array();
 
-    /** @var Array  List of owners names */
+    /** 
+     * List of owners names
+     * @var Array  
+     */
     private $ownersNames = array();
-    
-    /** @var Array  List of owners */
+
+    /** 
+     * List of owners 
+     * @var Array  
+     */
     private $owners = array();
 
-    /** @var boolean	Is allowed downloading of mutiple files inarchived? */
+    /** 
+     * Is allowed downloading of mutiple files inarchived? 
+     * @var boolean	
+     */
     private $allowZip = NULL;
 
     /**
@@ -57,14 +81,72 @@ class DirConfig extends \Nette\Object implements IDirConfig {
      */
     private $lastChanged = 0;
 
-    /** @var string	Absolute path to the connected dir */
+    /** 
+     * Absolute path to the connected dir 
+     * @var string	
+     */
     private $dir = NULL;
-    
+
     /**
-     *	Absolute path to this ini file
+     * 	Absolute path to this ini file
      * @var string
      */
     private $iniFile;
+
+    /**
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param string $dir
+     * @return \LightFM\DirConfig
+     * @throws ErrorException
+     */
+    public function __construct($dir) {
+	$this->dir = $dir;
+
+	$this->iniFile = DATA_ROOT . $this->dir . '/' . \Nette\Environment::getConfig('dirConfig');
+
+	// if no file exists, simply use default settings and end
+	if (!@is_file($this->iniFile)) {
+	    return $this;
+	}
+
+	$ini_array = parse_ini_file($this->iniFile);
+
+	if (isset($ini_array['accessPassword']))
+	    $this->accessPassword = $ini_array['accessPassword'];
+
+	// set users on root
+	if ($dir == '/') {
+	    $this->addUsersConfig($ini_array);
+	    $this->addOwnersConfig($ini_array);
+	    // set owner from default settings
+	} else if (isset($ini_array['owners'])) {
+	    $this->ownersNames = $ini_array['owners'];
+	}
+
+	// add owners
+
+	if (isset($ini_array['allowZip'])) {
+	    $this->allowZip = $ini_array['allowZip'] ? self::ZIP_PERMITED : self::ZIP_FORBIDDEN;
+	}
+
+	if (isset($ini_array['modes'])) {
+	    for ($i = 0; count($ini_array['modes']) > $i; $i++) {
+		
+	    }
+	    $this->addToModes($ini_array['modes']);
+	}
+
+	if (isset($ini_array['blacklist']))
+	    $this->addToBlacklist($ini_array['blacklist']);
+
+	if (isset($ini_array['lastChanged']))
+	    $this->lastChanged = $ini_array['lastChanged'];
+
+
+	return $this;
+    }
 
     public function isBlacklisted($file) {
 	if ($file == "")
@@ -83,7 +165,10 @@ class DirConfig extends \Nette\Object implements IDirConfig {
     }
 
     /**
-     * Return true if it is allowed to download zip.z
+     * Return true if it is allowed to download zip.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @return boolean
      */
     public function getAllowZip() {
@@ -99,6 +184,9 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 
     /**
      * Return constant number for zip permited/forbidden 
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @return int
      */
     public function getAllowZipInherited() {
@@ -106,7 +194,7 @@ class DirConfig extends \Nette\Object implements IDirConfig {
     }
 
     public function getOwners() {
-	if($this->ownersNames!==NULL){
+	if ($this->ownersNames !== NULL) {
 	    $this->ownerNamesToOwners();
 	}
 	return $this->owners;
@@ -119,14 +207,17 @@ class DirConfig extends \Nette\Object implements IDirConfig {
     public function getAccessPassword() {
 	return $this->accessPassword;
     }
-    
-    public function getTimestamp(){
+
+    public function getTimestamp() {
 	return $this->lastChanged;
     }
 
     /**
      * 	Parse the array with blacklist entries and set them to absolute
      * path in filesystem.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * 
      * @param array $new
      */
@@ -152,6 +243,9 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 
     /**
      * Append an array with blacklist to this own blacklist
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param array $new
      */
     private function mergeBlacklists(array $new) {
@@ -160,6 +254,9 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 
     /**
      * Add new allowed modes.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param array $new
      */
     private function addToModes(array $new) {
@@ -173,7 +270,7 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	    $config = \Nette\Environment::getConfig('defaults');
 	    $config['blacklist'] = (array) $config['blacklist'];
 	    $config['modes'] = (array) $config['modes'];
-	    
+
 	    // add new owner from  neon
 	    $this->addUsersConfig($config)->addOwnersConfig($config);
 
@@ -183,7 +280,6 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	    // because we want to use same access for default settings and parent settings
 	    $config = array(
 		'users' => "",
-//		'accessPassword' => $parentsConfig->accessPassword,
 		'allowZip' => $parentsConfig->AllowZip ? self::ZIP_INHERITED_PERMITED : self::ZIP_INHERITED_FORBIDDEN,
 		'modes' => $parentsConfig->modes,
 		'blacklist' => $parentsConfig->blacklist,
@@ -192,12 +288,12 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	    $this->addUsers($parentsConfig->getUsers())->addOwners($parentsConfig->getOwners());
 
 	    $this->ownerNamesToOwners();
-	    
+
 	    $this->mergeBlacklists($parentsConfig->blacklist);
 	}
 
-	if ($this->allowZip === NULL){
-	    switch($config['allowZip']){
+	if ($this->allowZip === NULL) {
+	    switch ($config['allowZip']) {
 		case self::ZIP_INHERITED_PERMITED:
 		case self::ZIP_PERMITED:
 		    $this->allowZip = self::ZIP_INHERITED_PERMITED;
@@ -208,81 +304,27 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 		    break;
 	    }
 	}
-	    
 
-	if ($config['modes'] && $this->modes == NULL){
+
+	if ($config['modes'] && $this->modes == NULL) {
 	    // add modes only if wasn't set locally
 	    $this->addToModes($config['modes']);
 	}
     }
+
     /**
      * Move owner names to owners.
      * This is here because when loading an ini, the config
      * doesn't know users (if it is not the root)
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      */
-    private function ownerNamesToOwners(){
-	foreach($this->ownersNames as $name){
+    private function ownerNamesToOwners() {
+	foreach ($this->ownersNames as $name) {
 	    $this->addOwner($name);
 	}
 	$this->ownersNames = NULL;
-    }
-    
-    /**
-     * 
-     * @param string $dir
-     * @return \LightFM\DirConfig
-     * @throws ErrorException
-     */
-    public function __construct($dir) {
-	$this->dir = $dir;
-
-	$this->iniFile = DATA_ROOT . $this->dir . '/' . \Nette\Environment::getConfig('dirConfig');
-
-	//$defaults = \Nette\Environment::getConfig('defaults');
-	// if no file exists, simply use default settings and end
-	if (!@is_file($this->iniFile)) {
-	    //dump($this->dir);
-	    //$this->inherite();
-	    return $this;
-	}
-
-	$ini_array = parse_ini_file($this->iniFile);
-
-	if (isset($ini_array['accessPassword']))
-	    $this->accessPassword = $ini_array['accessPassword'];
-
-	// set users on root
-	if ($dir == '/') {
-	    $this->addUsersConfig($ini_array);
-	    $this->addOwnersConfig($ini_array);
-	    // set owner from default settings
-	    // $this->addUser($defaults['ownerUsername'], $defaults['ownerPassword']);
-	}
-	else if(isset($ini_array['owners'])){
-	    $this->ownersNames =  $ini_array['owners'];
-	}
-
-	// add owners
-	
-	if (isset($ini_array['allowZip'])){
-	    $this->allowZip = $ini_array['allowZip']?self::ZIP_PERMITED:self::ZIP_FORBIDDEN;
-	}
-
-	if (isset($ini_array['modes'])){
-	    for($i=0; count($ini_array['modes']) > $i; $i++){
-		//$ini_array['modes'][$i] = $ini_array['modes'][$i].'Presenter';
-	    }
-	    $this->addToModes($ini_array['modes']);
-	}
-
-	if (isset($ini_array['blacklist']))
-	    $this->addToBlacklist($ini_array['blacklist']);
-
-	if (isset($ini_array['lastChanged']))
-	    $this->lastChanged = $ini_array['lastChanged'];
-
-
-	return $this;
     }
 
     public function addUsers(array $users) {
@@ -298,6 +340,9 @@ class DirConfig extends \Nette\Object implements IDirConfig {
     /**
      * Add users from a config to the list
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * 
      * @param type $config
      * @return \LightFM\DirConfig
      * @throws ErrorException
@@ -307,36 +352,38 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	    // if nothing to do, then do it
 	    return $this;
 	}
-	
+
 	// if there is something to do, then do it
-	foreach ($config['users'] as $username=>$password){
+	foreach ($config['users'] as $username => $password) {
 	    $this->addUser($username, $password, $this->dir);
 	}
 	return $this;
-	
-	
     }
 
     /**
      * Add owners from a config to the list.
      * Requires users to be already set.
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * 
      * @param array $config
      * @return \LightFM\DirConfig
      */
-    private function addOwnersConfig($config){
-	if(isset($config['owners'])){
-	    foreach($config['owners'] as $owner){
+    private function addOwnersConfig($config) {
+	if (isset($config['owners'])) {
+	    foreach ($config['owners'] as $owner) {
 		$this->addOwner($owner);
 	    }
 	}
 	return $this;
     }
-    
-
 
     /**
      * Add user into the list
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * 
      * @param string $username
      * @param string $password
@@ -371,21 +418,24 @@ class DirConfig extends \Nette\Object implements IDirConfig {
      * Add owner to the list.
      * Requires users to be already set.
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * 
      * @param string $user
      * @return \LightFM\DirConfig   - provides fluid interface
      * @throws ErrorException
      */
     private function addOwner($userName) {
 	$user = NULL;
-	foreach($this->users as $u){
-	    if($u['username'] == $userName){
+	foreach ($this->users as $u) {
+	    if ($u['username'] == $userName) {
 		$user = $u;
 		break;
 	    }
 	}
 	if (!is_array($user))
-	    throw new \ErrorException('USER_WASNT_FOUND_>'.$userName.'<_IN_>'.
-		    $this->dir.'<'
+	    throw new \ErrorException('USER_WASNT_FOUND_>' . $userName . '<_IN_>' .
+	    $this->dir . '<'
 	    , BAD_INI_SYNTAX);
 
 	array_push($this->owners, $user);
@@ -394,160 +444,174 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 
     /**
      * Will save changes in this config to a file
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param array $data 
      */
     public function save($data) {
-	$inHandler=NULL;
-	$ini_array=array();
-	
-	if(file_exists($this->iniFile)){
-	    $inHandler = fopen('safe://'.$this->iniFile, 'r');
-	    $ini_array = parse_ini_string(fread($inHandler,filesize($this->iniFile)));
+	$inHandler = NULL;
+	$ini_array = array();
+
+	if (file_exists($this->iniFile)) {
+	    $inHandler = fopen('safe://' . $this->iniFile, 'r');
+	    $ini_array = parse_ini_string(fread($inHandler, filesize($this->iniFile)));
 	}
-	$outHandler = fopen('safe://'.$this->iniFile.'.part', 'w');
-	
-	
-	if(isset($ini_array['lastChanged']) && $ini_array['lastChanged'] != $this->lastChanged){
+	$outHandler = fopen('safe://' . $this->iniFile . '.part', 'w');
+
+
+	if (isset($ini_array['lastChanged']) && $ini_array['lastChanged'] != $this->lastChanged) {
 	    // test if timestamp is ok and if not, throw exception
 	    fclose($inHandler);
 	    fclose($outHandler);
-	    unlink($this->iniFile.'.part');
+	    unlink($this->iniFile . '.part');
 	    throw new Nette\Application\ApplicationException('ANOTHER_EDIT_HAPPENS');
 	}
-	
+
 	// set users and last changed
 	$data['lastChanged'] = time();
-	if(isset($ini_array['users']))
+	if (isset($ini_array['users']))
 	    $data['users'] = $ini_array['users'];
-	
+
 	// write comment
-	fwrite($outHandler,"; Auto generated on " . date("Y-M-d H:m:s").PHP_EOL);
+	fwrite($outHandler, "; Auto generated on " . date("Y-M-d H:m:s") . PHP_EOL);
 	$this->saveIniToFile($data, $outHandler);
-	
-	
-	if($inHandler!==NULL){
+
+
+	if ($inHandler !== NULL) {
 	    fclose($inHandler);
 	}
 	fclose($outHandler);
-	if($inHandler!==NULL){
+	if ($inHandler !== NULL) {
 	    unlink($this->iniFile);
 	}
-	rename($this->iniFile.'.part', $this->iniFile);
-	
+	rename($this->iniFile . '.part', $this->iniFile);
+
 	return $this;
     }
-    
+
     /**
      * This is not changing the timestamp in the ini file
      * as it is manipulating only with user password and there is no risk of
      * concurent edits.
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $username
      * @param string $password
      */
-    public function savePassword($username,$password){
+    public function savePassword($username, $password) {
 	// open safely file
-	$handle=NULL;
-	$ini_array=array();
-	
-	if(file_exists($this->iniFile)){
-	    $handle = fopen('safe://'.$this->iniFile, 'r'); 
-	    $ini_array = parse_ini_string(fread($handle,filesize($this->iniFile)));
+	$handle = NULL;
+	$ini_array = array();
+
+	if (file_exists($this->iniFile)) {
+	    $handle = fopen('safe://' . $this->iniFile, 'r');
+	    $ini_array = parse_ini_string(fread($handle, filesize($this->iniFile)));
 	}
-	
-	$handleTmp = fopen('safe://'.$this->iniFile.'.part', 'w'); 
-	if($handle!==NULL){
+
+	$handleTmp = fopen('safe://' . $this->iniFile . '.part', 'w');
+	if ($handle !== NULL) {
 	    rewind($handle);
 	    fwrite($handleTmp, fgets($handle));
 	}
-	
-	if(!isset($ini_array['users'])){
+
+	if (!isset($ini_array['users'])) {
 	    throw new Exception('CANT_SET_PASSWORD_IN_FILE_WHERE_NO_USER_EXISTS');
 	}
-	if(!isset($ini_array['users'][$username])){
+	if (!isset($ini_array['users'][$username])) {
 	    throw new Exception('THE_USER_DO_NOT_EXISTS');
 	}
-	
+
 	$ini_array['users'][$username] = $password;
-	
+
 	$this->saveIniToFile($ini_array, $handleTmp);
-	if($handle!==NULL){
+	if ($handle !== NULL) {
 	    fclose($handle);
 	}
 	fclose($handleTmp);
-	if($handle!==NULL){
+	if ($handle !== NULL) {
 	    unlink($this->iniFile);
 	}
-	rename($this->iniFile.'.part', $this->iniFile);
-	
+	rename($this->iniFile . '.part', $this->iniFile);
+
 	return $this;
     }
-    
+
     /**
      * Will write the array to ini file
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param array $array
      */
-    private function saveIniToFile($array,$outputHandler) {
+    private function saveIniToFile($array, $outputHandler) {
 
 	foreach ($array as $key => $val) {
 	    //if this item is an array
 	    if (is_array($val)) {
-		foreach ($val as $skey => $sval){
+		foreach ($val as $skey => $sval) {
 		    // then write all items
-		    fwrite($outputHandler,$key."[$skey]=" . $this->parseIniVal($sval).PHP_EOL);
+		    fwrite($outputHandler, $key . "[$skey]=" . $this->parseIniVal($sval) . PHP_EOL);
 		}
-	    }
-	    else{
+	    } else {
 		// else write it as it is
-		fwrite($outputHandler,"$key=" .  $this->parseIniVal($val).PHP_EOL);
+		fwrite($outputHandler, "$key=" . $this->parseIniVal($val) . PHP_EOL);
 	    }
 	}
-	//file_put_contents('safe://' . $this->iniFile, implode("\n", $res));
 	return $this;
     }
-    
 
     /**
      * Escape values for ini files
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $str
      * @return string
      */
-    private function parseIniVal($str){
-	if(is_numeric($str)){
+    private function parseIniVal($str) {
+	if (is_numeric($str)) {
 	    return $str;
-	}else if(is_bool($str)){
+	} else if (is_bool($str)) {
 	    return $str;
 	}
-	
+
 	return "$str";
     }
-    
+
     /**
      * Save config and apply changes to inherite it to all subdirs.
      * It will make subfolder's configs empty
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * 
      * @param array $data
      */
-    public function saveToSub($data){
+    public function saveToSub($data) {
 	$this->save($data);
-	
+
 	$this->makeChildsEmpty(dirname($this->iniFile));
     }
-    
-    public function makeChildsEmpty($path){
-	
+
+    public function makeChildsEmpty($path) {
+
 	$dir = opendir($path);
-	while(false !== ($entry = readdir($dir))) {
-	    $fullEntry = $path.'/'.$entry;
+	while (false !== ($entry = readdir($dir))) {
+	    $fullEntry = $path . '/' . $entry;
 	    // we want to do something only for subdirs..
-	    if($entry == '.'||$entry == '..') continue;
-	    if(!is_dir($fullEntry)) continue;
-	    
-	    if(file_exists($fullEntry.'/'.\Nette\Environment::getConfig('dirConfig'))){
-		unlink($fullEntry.'/'.\Nette\Environment::getConfig('dirConfig')); 
+	    if ($entry == '.' || $entry == '..')
+		continue;
+	    if (!is_dir($fullEntry))
+		continue;
+
+	    if (file_exists($fullEntry . '/' . \Nette\Environment::getConfig('dirConfig'))) {
+		unlink($fullEntry . '/' . \Nette\Environment::getConfig('dirConfig'));
 	    }
 	    $this->makeChildsEmpty($fullEntry);
 	}
 	closedir($dir);
     }
+
 }

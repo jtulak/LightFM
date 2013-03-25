@@ -2,9 +2,11 @@
 
 /**
  * Base presenter for all application presenters.
+ * 
+ * @author Jan Ťulák<jan@tulak.me>
+ * 
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter {
-    
     // TODO file manipulation
     // TODO replace jqueryui
     // TODO resizing and scrolling
@@ -42,12 +44,19 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      */
     protected $showHidden = false;
 
+    /**
+     * Verify the given path and test user related things (hidden files,
+     * sidebar...)
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
     public function startup() {
 	parent::startup();
 	\Stopwatch::start('BasePresenter');
-	
+
 	$this->template->isAjax = $this->isAjax();
-	
+
 	// if path is empty, it means it is a root
 	if (strlen($this->path) == 0)
 	    $this->path = '/';
@@ -55,36 +64,46 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	$this->path = $this->verifyPath($this->path);
 
 	$this->template->user = $this->getUser();
-	
+
 	$this->showHidden = $this->getHttpRequest()->getCookie('hiddenFiles');
 	// set sidebar showing
 	$this->template->showSidebar = $this->getUser()->isLoggedIn() || (!empty($this->viewed) && $this->viewed->Config->AllowZip);
 	//dump($this->getUser());
     }
 
+    /**
+     * Only for ajax 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
     public function beforeRender() {
 	parent::beforeRender();
 	if ($this->isAjax()) {
 	    $this->invalidateControl('title');
 	    $this->invalidateControl('sidebar');
-	    
 	}
-	
+
 	\Stopwatch::stop('BasePresenter');
     }
-    
-        public function handleSignOut() {
+
+    /**
+     * Sign out the user and delete hiddenFiles cookie
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
+    public function handleSignOut() {
 	$this->getUser()->logout();
 	$this->getHttpResponse()->deleteCookie('hiddenFiles');
 	$this->flashMessage('You have been signed out.');
-	
+
 	if ($this->isAjax()) {
 	    $this->invalidateControl('header');
 	    $this->invalidateControl('title');
 	    $this->invalidateControl('flashes');
 	    $this->invalidateControl('sidebar');
 	    $this->invalidateControl('content');
-	}else{
+	} else {
 	    $this->redirect('List:');
 	}
     }
@@ -93,6 +112,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
      * Will select presenter for the file.
      * If we are already in it, will do nothing,
      * else it will do a redirect.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * 
      * @param \LightFM\Node $file
      */
@@ -114,21 +136,21 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     /**
      * Fill $this->path, viewed and root with data
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @throws Nette\Application\BadRequestException
      */
     protected function loadFiles() {
 
 	// get path
 	$this->root = LightFM\IO::findPath($this->path);
-	
+
 	// get the item
 	$this->viewed = $this->template->viewed = $this->getLastNode($this->root);
-	
+
 	$this->template->isOwner = $this->viewed->isOwner($this->getUser()->id) && $this->getUser()->isLoggedIn();
 	
-	//Nette\Diagnostics\Debugger::barDump($this->viewed, 'Viewed');
-	//Nette\Diagnostics\Debugger::barDump($this->viewed->Config, 'Config');
-	// && $this->root->usedChild == NULL
 	if ($this->root->Dummy) {
 	    throw new Nette\Application\BadRequestException($this->path);
 	}
@@ -148,18 +170,21 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     /**
      * Test for access rights for current user/guest.
      * If the user can't has valid cookie, an exception will be thrown
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param \LightFM\Node $node
      * @throws Nette\Application\ForbiddenRequestException
      */
     protected function testAccess($node) {
 	//\Nette\Diagnostics\Debugger::barDump($node);
 	$tested = $node;
-	
+
 	if ($this->viewed->isOwner($this->getUser()->getId()) && $this->getUser()->isLoggedIn()) {
 	    // if owner, do nothing, owner has access
 	    return;
 	}
-	
+
 	while ($tested !== NULL && empty($tested->Password)) {
 	    // try to find the clossest password
 	    $tested = $tested->Parent;
@@ -178,6 +203,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     /**
      * parse path, find the root and so..
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      */
     public function actionDefault() {
 	// if we are in error presenter, do nothing
@@ -198,6 +226,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     /**
      * Return the last child from the given node
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param LightFM\Node $node
      * @return LightFM\Node 
      */
@@ -213,6 +244,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     /**
      * Return verified and corrected patch (removed "//" and so)
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $path
      * @throw Nette\Application\ForbiddenRequestException
      * @return string
@@ -227,6 +261,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
     /**
      * Will remove hidden items from the array
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param type $arr
      */
     protected function removeHidden(&$arr) {
@@ -239,6 +276,9 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     /**
      * Return path in given node in array where URI is as a key and dir name
      * is as a value. The root is on first place.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param LightFM\Node $node
      * @return array
      */

@@ -11,11 +11,13 @@
 
 /**
  * Description of ADirectoryPresenter
+ * 
+ * @author Jan Ťulák<jan@tulak.me>
+ * 
  * @property-read string $DisplayName Displayed name of the presenter
  * @property-read array $AllDirectoryPresenters list of all presenters implementing IDirectoryPresenter
  */
 abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPresenter {
-
 
     /**
      * Column for sorting
@@ -53,17 +55,20 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 
     public function beforeRender() {
 	parent::beforeRender();
-	
+
 	if ($this->isAjax()) {
-		$this->invalidateControl('header');
-		$this->invalidateControl('subtitle');
-		$this->invalidateControl('flashes');
-		$this->invalidateControl('content');
+	    $this->invalidateControl('header');
+	    $this->invalidateControl('subtitle');
+	    $this->invalidateControl('flashes');
+	    $this->invalidateControl('content');
 	}
     }
-    
+
     /**
      * 	Return list of all presenters that implements IDirectoryPresenter
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @return array
      */
     public function getAllDirectoryPresenters() {
@@ -78,57 +83,65 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	    foreach ($presenters as $presenter) {
 		$presentersList[$presenter::ORDER] = array(
 		    'name' => $presenter::DISPLAY_NAME,
-		    'presenter' =>preg_replace('/Presenter$/', '', $presenter)
+		    'presenter' => preg_replace('/Presenter$/', '', $presenter)
 		);
 	    }
 	    ksort($presentersList);
-	    
-	    
+
+
 	    //dump($this->viewed->Config->Modes);
 	    //dump($presentersList);
-	    
 	    // then forget all which are not allowed
-	    foreach($presentersList as $presenter){
-		if(in_array($presenter['presenter'], $this->viewed->Config->Modes)){
-		    $this->allDirectoryPresenters[]=$presenter;
+	    foreach ($presentersList as $presenter) {
+		if (in_array($presenter['presenter'], $this->viewed->Config->Modes)) {
+		    $this->allDirectoryPresenters[] = $presenter;
 		}
 	    }
-	    if(count($this->allDirectoryPresenters) == 0){
-		throw new Nette\Application\ApplicationException('NO_PRESENTER_ALLOWED_FOR_>'.$this->viewed->Path.'<');
+	    if (count($this->allDirectoryPresenters) == 0) {
+		throw new Nette\Application\ApplicationException('NO_PRESENTER_ALLOWED_FOR_>' . $this->viewed->Path . '<');
 	    }
-	    
 	}
 	return $this->allDirectoryPresenters;
     }
 
-    
+    /**
+     * Test if the user is in an allowed presenter (eg. is not trying to view
+     * an image in list view)
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
     public function actionDefault() {
 	parent::actionDefault();
 	// save the accessible presenters to a template variable
 	$allPresenters = $this->getAllDirectoryPresenters();
 	$actualPresenter = preg_replace('/Presenter$/', '', get_class($this));
-	
+
 	// now test if we are in allowed presenter
 	$inAllowed = false;
-	foreach($this->getAllDirectoryPresenters() as $presenter){
+	foreach ($this->getAllDirectoryPresenters() as $presenter) {
 	    // for each allowed check the current
-	    if($presenter['presenter'] == $actualPresenter){
+	    if ($presenter['presenter'] == $actualPresenter) {
 		$inAllowed = true;
 		break;
 	    }
 	}
-	if(!$inAllowed){
+	if (!$inAllowed) {
 	    // if we are in a presenter which is not allowed
 	    $this->redirect($allPresenters[0]['presenter'] . ':default');
 	}
-	
+
 	// if all ok, save it
 	$this->template->actualPresenter = $actualPresenter;
 	$this->template->directoryPresenters = $allPresenters;
-	
     }
 
-
+    /**
+     * Create backpath and save ordering in template 
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
     public function renderDefault() {
 
 
@@ -153,6 +166,9 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 
     /**
      * sort the array acording of given parameters
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param array $list
      * @param string $orderBy
      * @param booolean $order
@@ -199,6 +215,9 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
      * It will return an JSON response with url of the zip file,
      * or an HTTP error.
      * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * 
      * @param array $files
      */
     public function actionDownloadZip() {
@@ -211,24 +230,23 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	$list = $httpRequest->getPost('list');
 	// now we have list of items to package
 	try {
-	    $response['path'] = \LightFM\Archiver::createZip($this->viewed,$list);
-	    
+	    $response['path'] = \LightFM\Archiver::createZip($this->viewed, $list);
 	} catch (\Nette\FileNotFoundException $e) {
 	    //  files not found
 	    $httpResponse->setCode(\Nette\Http\Response::S404_NOT_FOUND);
 	    \Nette\Diagnostics\Debugger::log($e->getMessage());
 	    $response['error'] = $e->getMessage();
-	} catch (Exception $e){
+	} catch (Exception $e) {
 	    // exceptions from creating the archive
-	    if($e->getCode() !=  \Zip::ZIP_ERROR){
+	    if ($e->getCode() != \Zip::ZIP_ERROR) {
 		throw $e;
 	    }
 	    $httpResponse->setCode(Nette\Http\Response::S500_INTERNAL_SERVER_ERROR);
-	    $response['error'] = "An_Error_Occured_In_>>" . $this->viewed->Path . "<<_When_Creating_Archive." ;
+	    $response['error'] = "An_Error_Occured_In_>>" . $this->viewed->Path . "<<_When_Creating_Archive.";
 	    \Nette\Diagnostics\Debugger::log($response['error']);
 	}
-	
-	
+
+
 	// TODO Change archive name for downloading
 
 	$this->sendResponse(new Nette\Application\Responses\JsonResponse($response));

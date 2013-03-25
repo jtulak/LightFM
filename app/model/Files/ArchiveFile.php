@@ -13,6 +13,9 @@ namespace LightFM;
 
 /**
  * 
+ * @author Jan Ťulák<jan@tulak.me>
+ * 
+ * 
  * @serializationVersion 1
  */
  class ArchiveFile extends File {
@@ -20,9 +23,6 @@ namespace LightFM;
      
      // overwriting parent's value
     protected $iconName = 'file-archive';
-     
-
-
      
     // overwrite from parent
     protected static $priority = 0;

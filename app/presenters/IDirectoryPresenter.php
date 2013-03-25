@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of LightFM web file manager.
  * 
@@ -7,21 +8,23 @@
  * For the full copyright and license information, please view
  * the file license.txt that was distributed with this source code.
  */
+
 /**
  *
- * @author Jan Tulak
+ * 
+ * @author Jan Ťulák<jan@tulak.me>
  */
 interface IDirectoryPresenter {
-    
-     
-    
+
     /**
-     *	Return list of all presenters that implements IDirectoryPresenter
+     * 	Return list of all presenters that implements IDirectoryPresenter
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @return array
      */
-    public function getAllDirectoryPresenters() ;
-    
+    public function getAllDirectoryPresenters();
+
     public function renderDefault();
 }
-
 

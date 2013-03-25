@@ -13,6 +13,9 @@ namespace LightFM;
 
 /**
  * 
+ * @author Jan Ťulák<jan@tulak.me>
+ * 
+ * 
  * @property \LightFM\Node $UsedChild
  * @property arry $Files
  * @property arry $FilesNames
@@ -23,15 +26,14 @@ namespace LightFM;
  */
 class Directory extends Node implements IDirectory {
 
-    
     /**
-     *	The DEFAULT presenter called for this file
-     *	Note: If the given presenter will not know any interface which this
+     * 	The DEFAULT presenter called for this file
+     * 	Note: If the given presenter will not know any interface which this
      * class is implementing, it will lead to a infinite redirecting!
      * @var string
      */
-    protected $presenter =  'List';
-    
+    protected $presenter = 'List';
+
     /**
      * child in the line of the path 
      * @var \LightFM\Node	
@@ -62,12 +64,24 @@ class Directory extends Node implements IDirectory {
      */
     protected $listFilesObj = array();
 
+    public function __construct($path) {
+	parent::__construct($path);
+
+	// skip the rest if it is only dummy
+	if ($this->Dummy)
+	    return $this;
+
+	// create list of dirs and files
+	$this->scanDir();
+    }
+
     public function getUsedChild() {
 	return $this->usedChild;
     }
+
     public function setUsedChild($child) {
-	$this->usedChild=$child;
-	return  $this;
+	$this->usedChild = $child;
+	return $this;
     }
 
     public function delete() {
@@ -88,9 +102,9 @@ class Directory extends Node implements IDirectory {
 	}
 	return $this->listDirsObj;
     }
-    public function getSubdirsNames(){
+
+    public function getSubdirsNames() {
 	return $this->listDirs;
-	
     }
 
     public function getFiles() {
@@ -108,12 +122,15 @@ class Directory extends Node implements IDirectory {
 	return $this->listFilesObj;
     }
 
-    public function getFilesNames(){
+    public function getFilesNames() {
 	return $this->listFiles;
-	
     }
+
     /**
      * add a subdir into the list
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $name - dir name
      */
     private function addSubdir($name) {
@@ -122,6 +139,9 @@ class Directory extends Node implements IDirectory {
 
     /**
      * Add a subfile into the list
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $name - file name
      */
     private function addSubfile($name) {
@@ -130,6 +150,8 @@ class Directory extends Node implements IDirectory {
 
     /**
      * Scan this directory and get files and dirs inside
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
      * 
      */
     private function scanDir() {
@@ -148,97 +170,89 @@ class Directory extends Node implements IDirectory {
 	}
     }
 
-    public function __construct($path) {
-	parent::__construct($path);
-
-// skip the rest if it is only dummy
-	if ($this->Dummy)
-	    return $this;
-
-// create list of dirs and files
-	$this->scanDir();
-    }
-    
-    
-    
-    public function getNextItem($actual,$type){
+    public function getNextItem($actual, $type) {
 	$this->sortBy(self::ORDER_FILENAME, self::ORDER_ASC);
 	// at first merge childs
-	$items = array_merge($this->Subdirs,  $this->Files);
+	$items = array_merge($this->Subdirs, $this->Files);
 	// then get the length
-	$len = count ($items);
+	$len = count($items);
 	// and iterate
-	$after=FALSE;
-	for($i=0;$i < $len;$i++){
+	$after = FALSE;
+	for ($i = 0; $i < $len; $i++) {
 	    // at first try to find actual item
-	    if($items[$i] == $actual){
+	    if ($items[$i] == $actual) {
 		$after = TRUE;
-	    } else if($after && $items[$i] instanceof $type){
+	    } else if ($after && $items[$i] instanceof $type) {
 		// once we are behind, we can look for nearest item of correct
 		// type and return it
 		return $items[$i];
 	    }
 	}
 	// nothing found, then find the first item
-	foreach($items as $item){
-	    if($item instanceof $type){
+	foreach ($items as $item) {
+	    if ($item instanceof $type) {
 		return $item;
 	    }
 	}
     }
 
-    
-    public function getPrevItem($actual,$type){
+    public function getPrevItem($actual, $type) {
 	$this->sortBy(self::ORDER_FILENAME, self::ORDER_ASC);
 	// at first merge childs
-	$items = array_merge($this->Subdirs,  $this->Files);
+	$items = array_merge($this->Subdirs, $this->Files);
 	// then get the length
-	$len = count ($items);
+	$len = count($items);
 	// and iterate
-	$pos=NULL;
-	for($i=0;$i < $len;$i++){
+	$pos = NULL;
+	for ($i = 0; $i < $len; $i++) {
 	    // at first try to find actual item
-	    if($items[$i] == $actual){
+	    if ($items[$i] == $actual) {
 		// if we have found it, then save the index and stop the cycle
 		$pos = $i;
 		break;
 	    }
 	}
 	// and try to find previous one
-	if($pos > 0){
+	if ($pos > 0) {
 	    // but only if we are not at the very begining
-	    for($i=$pos-1;$i >=0;$i--){
-		if($items[$i] instanceof $type){
+	    for ($i = $pos - 1; $i >= 0; $i--) {
+		if ($items[$i] instanceof $type) {
 		    // once we are behind, we can look for nearest item of correct
 		    // type and return it
 		    return $items[$i];
 		}
 	    }
 	}
-	
+
 	// nothing found, then find the last item
-	$items = array_reverse ( $items);
-	foreach($items as $item){
-	    if($item instanceof $type){
+	$items = array_reverse($items);
+	foreach ($items as $item) {
+	    if ($item instanceof $type) {
 		return $item;
 	    }
 	}
-	
     }
-    
+
     /**
      * sort the items in this dir acording of given parameters
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $orderBy
      * @param booolean $order
      * @return \LightFM\IDirectory - provides fluid interface 
      */
-    public function sortBy($orderBy,$order){
+    public function sortBy($orderBy, $order) {
 	$this->listDirsObj = $this->sortList($this->getSubdirs(), $orderBy, $order);
 	$this->listFilesObj = $this->sortList($this->getFiles(), $orderBy, $order);
 	return $this;
     }
+
     /**
      * sort the array acording of given parameters
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param array $list
      * @param string $orderBy
      * @param booolean $order
@@ -247,34 +261,35 @@ class Directory extends Node implements IDirectory {
     private function sortList(array $list, $orderBy, $order) {
 	$t = $this;
 	usort($list, function(\LightFM\Node $a, \LightFM\Node $b) use($orderBy, $order, $t) {
-	    $result = 0;
-	    switch ($orderBy) {
-		case $t::ORDER_FILENAME:
-		    $result = strcmp($a->Name, $b->Name);
-		    break;
-		case $t::ORDER_SUFFIX:
-		    if ($a instanceof \LightFM\IFile && $b instanceof \LightFM\IFile) {
-			$result = strcmp($a->Suffix, $b->Suffix);
+		    $result = 0;
+		    switch ($orderBy) {
+			case $t::ORDER_FILENAME:
+			    $result = strcmp($a->Name, $b->Name);
+			    break;
+			case $t::ORDER_SUFFIX:
+			    if ($a instanceof \LightFM\IFile && $b instanceof \LightFM\IFile) {
+				$result = strcmp($a->Suffix, $b->Suffix);
+			    }
+			    break;
+			case $t::ORDER_SIZE:
+			    if ($a->Size != $b->Size) {
+				$result = ($a->Size < $b->Size) ? -1 : 1;
+			    }
+			    break;
+			case $t::ORDER_DATE:
+			    if ($a->Date != $b->Date) {
+				$result = ($a->Date < $b->Date) ? -1 : 1;
+			    }
+			    break;
 		    }
-		    break;
-		case $t::ORDER_SIZE:
-		    if ($a->Size != $b->Size) {
-			$result = ($a->Size < $b->Size) ? -1 : 1;
-		    }
-		    break;
-		case $t::ORDER_DATE:
-		    if ($a->Date != $b->Date) {
-			$result = ($a->Date < $b->Date) ? -1 : 1;
-		    }
-		    break;
-	    }
 
-	    if ($order == $t::ORDER_DESC) {
-		// if it is revered order, then reverse it
-		$result *=-1;
-	    }
-	    return $result;
-	});
+		    if ($order == $t::ORDER_DESC) {
+			// if it is revered order, then reverse it
+			$result *=-1;
+		    }
+		    return $result;
+		});
 	return $list;
     }
+
 }

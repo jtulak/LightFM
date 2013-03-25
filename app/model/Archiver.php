@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of LightFM web file manager.
  * 
@@ -8,18 +9,17 @@
  * the file license.txt that was distributed with this source code.
  */
 
-
 namespace LightFM;
 
 /**
- * Description of Archiver
+ * Contain functions to manipulate with archives - packing, unpacking...
  *
  * @author Jan Ťulák<jan@tulak.me>
  */
-class Archiver implements IArchiver{
+class Archiver implements IArchiver {
+
     
-    
-    public static function createZip($root,$files){
+    public static function createZip($root, $files) {
 	$content = array_merge($root->SubdirsNames, $root->FilesNames);
 	// test for all wanted files and dirs if they are here
 	foreach ($files as $item) {
@@ -31,9 +31,11 @@ class Archiver implements IArchiver{
 
 	return self::mkZip($root->FullPath, $files);
     }
-    
+
     /**
      * Return an array of all files and subdirs, recursively.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
      * 
      * @param string $basePath	Dir used as a root for returned pathes
      * @param string $dir	Path relatively from the $basePath to a searched dir
@@ -43,14 +45,14 @@ class Archiver implements IArchiver{
      */
     private static function getRecursivePath($basePath, $dir, $exclusiveLength = -1) {
 	// TODO check for allowed download
-	
-	$handle = opendir($basePath.'/'.$dir);
+
+	$handle = opendir($basePath . '/' . $dir);
 	// count the length of path for exclude
-	if($exclusiveLength == -1){
-	    $exclusiveLength =  strlen($basePath.'/');
+	if ($exclusiveLength == -1) {
+	    $exclusiveLength = strlen($basePath . '/');
 	}
 	$filePathes = array();
-	
+
 	while ($f = readdir($handle)) {
 	    if ($f != '.' && $f != '..') {
 		$filePath = "$basePath/$dir/$f";
@@ -61,14 +63,14 @@ class Archiver implements IArchiver{
 		} elseif (is_dir($filePath)) {
 		    // Add sub-directory.
 		    array_push($filePathes, $localPath);
-		    $filePathes=array_merge($filePathes,self::getRecursivePath($basePath, $localPath, $exclusiveLength));
+		    $filePathes = array_merge($filePathes, self::getRecursivePath($basePath, $localPath, $exclusiveLength));
 		}
 	    }
 	}
 	closedir($handle);
 	return $filePathes;
     }
-    
+
     /**
      * Create an archive from given files.
      * 
@@ -80,16 +82,16 @@ class Archiver implements IArchiver{
      * @return string
      * @throws \Exception
      */
-    private static function mkZip($root,$files){
+    private static function mkZip($root, $files) {
 	// As the zip is created with pathes from the current dir
-	chdir($root); 
+	chdir($root);
 	// TODO Max file limit
 	// TODO recursive
 	$fullList = array();
 	foreach ($files as $item) {
 	    if (is_dir($root . "/" . $item)) {
 		// if this item is a dir, then get recursively the content
-		$fullList=array_merge($fullList, self::getRecursivePath($root, $item));
+		$fullList = array_merge($fullList, self::getRecursivePath($root, $item));
 	    } else {
 		array_push($fullList, $item);
 	    }
@@ -106,9 +108,13 @@ class Archiver implements IArchiver{
 	// create archive
 	return $filename;
     }
+
     /**
      *  compute hash from given files - create hashes for each file and than
      * hash all the hashes.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param string $path Absolute path to the root
      * @param array $list Relaive pathes
      * @return string
@@ -123,5 +129,6 @@ class Archiver implements IArchiver{
 	}
 	return md5($hashes);
     }
+
 }
 

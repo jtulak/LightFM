@@ -12,136 +12,113 @@
 /**
  * 
  * 
+ * @author Jan Ťulák<jan@tulak.me>
  */
-class ImagePresenter extends FilePresenter{
+class ImagePresenter extends FilePresenter {
+    /**
+     * Image used when no known filetype.
+     * Path is from the App directory.
+     */
 
     const placeholderImage = '/resources/missing-image.png';
-    
+
+    /**
+     * In image view, always show sidebar
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
     public function startup() {
 	parent::startup();
 	$this->template->showSidebar = true;
     }
 
+    /**
+     * Only ajax
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
     public function beforeRender() {
 	parent::beforeRender();
-	
+
 	if ($this->isAjax()) {
-		$this->invalidateControl('header');
-		$this->invalidateControl('subtitle');
-		$this->invalidateControl('flashes');
-		$this->invalidateControl('image');
+	    $this->invalidateControl('header');
+	    $this->invalidateControl('subtitle');
+	    $this->invalidateControl('flashes');
+	    $this->invalidateControl('image');
 	}
     }
-    
-        /**
+
+    /**
      * Get thumbnail from the cache - or create it if not exists
-     * and if it is not possible, then use a placeholder
+     * and if it is not possible, then use a the image as it is.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
      * @param type $bigSide
      * @param type $crop
      */
-    public function actionThumbnail($bigSide,$crop){
+    public function actionThumbnail($bigSide, $crop) {
 	parent::actionDefault();
-	/*$this->redirectUrl($this->getHttpRequest()->url->basePath .
-		$this->viewed->createThumbnail($bigSide,$crop)
-	);*/
-	$imagePath = $this->viewed->createThumbnail($bigSide,$crop);
-	$image=NULL;
+	$imagePath = $this->viewed->createThumbnail($bigSide, $crop);
+	$image = NULL;
 	$cache = new \Nette\Caching\Cache($GLOBALS['container']->cacheStorage, 'thumbnails');
-	
-	if($imagePath == ''){ 
-	    
-	    $this->redirectUrl($this->getHttpRequest()->url->basePath.'/'.$this->viewed->Path);
+
+	if ($imagePath == '') {
+
+	    $this->redirectUrl($this->getHttpRequest()->url->basePath . '/' . $this->viewed->Path);
 	    $this->terminate();
-	   /* 
-	    // we can't create an thumbnail
-	    // so at first get the placeholder path
-	    $placeholderPath = $GLOBALS['container']->getParameters();
-	    $placeholderPath = $placeholderPath['appDir'].self::placeholderImage;
-	    $placeholderName='_placeholder_'.$bigSide.'_'.$crop;
-	    
-	    
-	    if($cache->load($placeholderName) == NULL){
-		// create the thumb
-		$placeholder = \Nette\Image::fromFile($placeholderPath);
-		if($crop){
-		    $placeholder->resize($bigSide,$bigSide,\Nette\Image::EXACT);
-		}else{
-		    $placeholder->resize($bigSide,$bigSide);
-		}
-		$placeholder->sharpen();
-		$cache->save($placeholderName, (string) $placeholder, array(
-		    \Nette\Caching\Cache::EXPIRE => '+ 2 weeks',
-		    \Nette\Caching\Cache::SLIDING => TRUE,
-		));
-	    }
-	    $image = \Nette\Image::fromString($cache->load($placeholderName));
-	    */
-	
-	}else{
+	} else {
 	    // we have an thumbnail
 	    $image = \Nette\Image::fromString($cache->load($imagePath));
 	}
-	
+
 	// prepare for sending - enable browser cache 
 	$httpResponse = $this->getHttpResponse();
 	$httpResponse->setExpiration('+ 1 hour');
 	$httpResponse->setHeader('Pragma', 'cache');
-	
+
 	// send
 	$image->send();
 	$this->terminate();
     }
-    
-    
+
+    /**
+     * Save the viewed item and prev and next one into the template
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
     public function actionDefault() {
 	parent::actionDefault();
 	$this->template->viewed = $this->viewed;
-	
-	
-	    $this->template->nextImage = $this->getNext();
-	    $this->template->prevImage = $this->getPrev();
-	
+
+
+	$this->template->nextImage = $this->getNext();
+	$this->template->prevImage = $this->getPrev();
     }
-    
-    
-    private function getNext(){
+
+    /**
+     * Get next image in this dir
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @return \LightFM\IImage
+     */
+    private function getNext() {
 	return $this->viewed->Parent->getNextItem($this->viewed, '\LightFM\IImage');
     }
-  
-    private function getPrev(){
+
+    /**
+     * Get previous image in this dir
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @return \LightFM\IImage
+     */
+    private function getPrev() {
 	return $this->viewed->Parent->getPrevItem($this->viewed, '\LightFM\IImage');
     }
-    
-    public function handleNext(){
-	$this->path = $this->getNext()->Path;
-	if ($this->isAjax()) {
-	    $this->viewed = $this->getNext();
-	    $this->template->viewed = $this->viewed;
-	    $this->invalidateControl('header');
-	    $this->invalidateControl('title');
-	    $this->invalidateControl('flashes');
-	    $this->invalidateControl('sidebar');
-	    $this->invalidateControl('subtitle');
-	    $this->invalidateControl('image');
-	}else{
-	    $this->redirect('Image:default');
-	}
-	   // $this->redirect('Image:default, path=>'.$this->getPrev()->Path);
-	//$this->redirect('this');
-    }
-    public function handlePrev(){
-	$this->path = $this->getPrev()->Path;
-	if ($this->isAjax()) {
-	    $this->viewed = $this->getPrev();
-	    $this->template->viewed = $this->viewed;
-	    $this->invalidateControl('header');
-	    $this->invalidateControl('title');
-	    $this->invalidateControl('flashes');
-	    $this->invalidateControl('sidebar');
-	    $this->invalidateControl('subtitle');
-	    $this->invalidateControl('image');
-	}else{
-	    $this->redirect('Image:default');
-	}
-    }
+
 }

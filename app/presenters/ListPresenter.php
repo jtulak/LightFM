@@ -12,36 +12,37 @@
 /**
  * 
  * List presenter.
+ * 
+ * @author Jan Ťulák<jan@tulak.me>
  */
-class ListPresenter extends ADirectoryPresenter{
+class ListPresenter extends ADirectoryPresenter {
 
     const DISPLAY_NAME = 'All files';
     const ORDER = 0;
-    
+
+    /**
+     * Sort files and subdirs, hide hidden (if wanted).
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
     public function renderDefault() {
 	parent::renderDefault();
-	
+
 	$this->viewed->sortBy($this->orderBy, $this->orderReversed);
-	
+
 	// push subdirs and files
 	$subdirs = $this->viewed->Subdirs;
-	if(!$this->showHidden) $this->removeHidden ($subdirs);
-	//$this->sortList($subdirs, $this->orderBy, $this->orderReversed);
-	
-	$this->template->listDirs = $subdirs;
-	//dump($subdirs);
-	
-	$files = $this->viewed->Files;
-	if(!$this->showHidden) $this->removeHidden ($files);
-	//$this->sortList($files, $this->orderBy, $this->orderReversed);
-	//$files->sortBy($this->orderBy, $this->orderReversed);
-	
-	$this->template->listFiles = $files;
-	
-	//dump($last->Files);
+	if (!$this->showHidden)
+	    $this->removeHidden($subdirs);
 
-	//$find = \LightFM\IO::findPath("/data1/gallery/gallery");
-	//dump();
+	$this->template->listDirs = $subdirs;
+
+	$files = $this->viewed->Files;
+	if (!$this->showHidden)
+	    $this->removeHidden($files);
+
+	$this->template->listFiles = $files;
     }
 
 }
