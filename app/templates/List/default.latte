@@ -95,7 +95,7 @@
 		    <tr>
 			<td class="checkbox"><input class="fileSelector" type="checkbox" data-name="{$file->Name}{if $file->Suffix}.{$file->Suffix}{/if}"></td>
 			<td class="name"  title="{$file->Name}">
-			    <span><a n:href="{$file->Presenter}:default, path => $file->Path ">{$file->Name}</a></span>
+			    <span><a n:href="{$file->Presenter}:default, path => $file->Path, dirView=>'List' ">{$file->Name}</a></span>
 			</td>
 			<td class="suffix">{$file->Suffix}</td>
 			<td class="size">{$file->Size|Bytes}</td>

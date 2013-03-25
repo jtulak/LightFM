@@ -23,6 +23,13 @@ class ImagePresenter extends FilePresenter {
     const placeholderImage = '/resources/missing-image.png';
 
     /**
+     * Name of the presenter from which user came to this image
+     * @var string
+     * @persistent
+     */
+    public $dirView;
+    
+    /**
      * In image view, always show sidebar
      * 
      * @author Jan Ťulák<jan@tulak.me>
@@ -31,6 +38,7 @@ class ImagePresenter extends FilePresenter {
     public function startup() {
 	parent::startup();
 	$this->template->showSidebar = true;
+	$this->template->dirView = $this->dirView;
     }
 
     /**

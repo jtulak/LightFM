@@ -11,7 +11,8 @@
 <div id="image-view">
     <div>
 	<div class="buttons">
-	    <a  class="button back"  n:href="List:default, path=>$viewed->Parent->Path">Back to the directory</a>
+	    {? if($dirView == NULL) $dirView = 'List' ?}
+	    <a  class="button back"  n:href="{$dirView}:default, path=>$viewed->Parent->Path">Back to the directory</a>
 	    <a  class="button raw"  n:href="File:download, path=>$viewed->Path">View full resolution</a>
 	    <div class="cleaner"></div>
 	</div>
