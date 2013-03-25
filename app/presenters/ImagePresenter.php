@@ -111,4 +111,37 @@ class ImagePresenter extends FilePresenter{
     private function getPrev(){
 	return $this->viewed->Parent->getPrevItem($this->viewed, '\LightFM\IImage');
     }
+    
+    public function handleNext(){
+	$this->path = $this->getNext()->Path;
+	if ($this->isAjax()) {
+	    $this->viewed = $this->getNext();
+	    $this->template->viewed = $this->viewed;
+	    $this->invalidateControl('header');
+	    $this->invalidateControl('title');
+	    $this->invalidateControl('flashes');
+	    $this->invalidateControl('sidebar');
+	    $this->invalidateControl('subtitle');
+	    $this->invalidateControl('image');
+	}else{
+	    $this->redirect('Image:default');
+	}
+	   // $this->redirect('Image:default, path=>'.$this->getPrev()->Path);
+	//$this->redirect('this');
+    }
+    public function handlePrev(){
+	$this->path = $this->getPrev()->Path;
+	if ($this->isAjax()) {
+	    $this->viewed = $this->getPrev();
+	    $this->template->viewed = $this->viewed;
+	    $this->invalidateControl('header');
+	    $this->invalidateControl('title');
+	    $this->invalidateControl('flashes');
+	    $this->invalidateControl('sidebar');
+	    $this->invalidateControl('subtitle');
+	    $this->invalidateControl('image');
+	}else{
+	    $this->redirect('Image:default');
+	}
+    }
 }

@@ -1,3 +1,9 @@
+var imageFile = {
+    size : {x:0,y:0},
+    mouse : 0,
+    left : 0,
+    placeholder:null // wil hold previous image
+}
 $(function() {
     // previous/next buttons highlight by mouse move
 
@@ -11,17 +17,17 @@ $(function() {
     $(document).on("mousemove", "#image-content ", $.throttle(100, function(event) {
 	if ($("#image-content").hasClass('showPager')) {
 	    // get mouse position
-	    var mouse = event.pageX - $(this).offset().left;
-	    var left = $(".pager.prev").width() * 2;
-	    highlightPagerSide(mouse, left);
+	    imageFile.mouse = event.pageX - $(this).offset().left;
+	    imageFile.left = $(".pager.prev").width() * 2;
+	    highlightPagerSide(imageFile.mouse, imageFile.left);
 	}
     }));
 
     $(document).on("click", "#image", function() {
 	//$("#image").click(function(){
-	var mouse = event.pageX - $(this).offset().left;
-	var left = $(".pager.prev").width() * 2;
-	if (mouse < left) {
+	imageFile.mouse = event.pageX - $(this).offset().left;
+	imageFile.left = $(".pager.prev").width() * 2;
+	if (imageFile.mouse < imageFile.left) {
 	    if ($(".pager.prev").hasClass('ajax')) {
 		$(".pager.prev").click();
 	    } else {
@@ -36,6 +42,38 @@ $(function() {
 	    }
 	}
     })
+    
+    /* changer - it will keep the previous image until the new one is loaded 
+     * and then make a transition
+     * 
+     */
+     $.nette.ext('imageChange', {
+	before: function() {
+	    imageFile.size.x = $("#image").width();
+	    imageFile.size.y = $("#image").height();
+	    $("#image-content").css({width:imageFile.size.x, height:imageFile.size.y});
+	    imageFile.placeholder = $("#image").clone();
+	    imageFile.placeholder.css({
+		position:'absolute',
+		'zIndex':1,
+		top:0
+	    }).removeAttr('id');
+	    imageFile.placeholder.appendTo($("#image-content"));
+	},
+	complete: function() {
+	    //formToggle();
+	    highlightPagerSide(imageFile.mouse, imageFile.left);
+	    $("#image-content")
+		    .animate({
+		width:$('#image').width(), 
+		height:$('#image').height()
+	    },100);
+	    imageFile.placeholder.animate({
+		width:$('#image').width(),
+		height:$('#image').height()
+	    },100).fadeOut(100,function(){this.remove()})
+	}
+    });
 });
 
 /**
