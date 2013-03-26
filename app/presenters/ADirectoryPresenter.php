@@ -56,6 +56,8 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
     public function beforeRender() {
 	parent::beforeRender();
 
+	$this->template->showFileOpsForm = true;
+
 	if ($this->isAjax()) {
 	    $this->invalidateControl('header');
 	    $this->invalidateControl('subtitle');
@@ -207,82 +209,71 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 		});
     }
 
+
     /**
-     * This function manages ZIP download.
-     * It takes the actual dir from $this->viewed and list of filenames in
-     * POST "list". It will check if these files exists in viewed dir and
-     * then call zip creation.
-     * It will return an JSON response with url of the zip file,
-     * or an HTTP error.
+     * File operations form factory.
      * 
      * @author Jan Ťulák<jan@tulak.me>
      * 
-     * 
-     * @param array $files
+     * @return Nette\Application\UI\Form
      */
-    public function actionDownloadZip() {
-	parent::actionDefault();
-
-	$response = array();
-
-	$httpRequest = $GLOBALS['container']->httpRequest;
-	$httpResponse = $GLOBALS['container']->httpResponse;
-	$list = $httpRequest->getPost('list');
-	// now we have list of items to package
-	try {
-	    $response['path'] = \LightFM\Archiver::zipCreate($this->viewed, $list);
-	    
-	    
-	} catch (\Nette\FileNotFoundException $e) {
-	    //  files not found
-	    $httpResponse->setCode(\Nette\Http\Response::S404_NOT_FOUND);
-	    \Nette\Diagnostics\Debugger::log($e->getMessage().' in '.$this->viewed->Path);
-	    $response['error'] = $e->getMessage();
-	    
-	    
-	} catch (Exception $e) {
-	    //log every exception
-	    \Nette\Diagnostics\Debugger::log($e->getMessage().' in '.$this->viewed->Path);
-	    
-	    // set an http code for most of errors
-	    $httpResponse->setCode(Nette\Http\Response::S500_INTERNAL_SERVER_ERROR);
-	    
-	    // exceptions from creating the archive
-	    switch($e->getCode()){
-		// decide what to do
-		
-		case \LightFM\IArchiver::ZIP_MAX_SUM_SIZE_EXCEPTION:
-		    $response['error'] = "Maximum allowed sum of sizes of all files for the "
-			."archive is ".\Nette\Templating\Helpers::bytes(\LightFM\IArchiver::ZIP_MAX_SUM_SIZE_EXCEPTION).".";
-		    break;
-		
-		case \LightFM\IArchiver::ZIP_MAX_FILE_SIZE_EXCEPTION:
-		    $response['error'] = "Maximum allowed size of each file for the "
-			."archive is ".\Nette\Templating\Helpers::bytes(\LightFM\IArchiver::ZIP_MAX_FILE_SIZE).".";
-		    break;
-		
-		
-		case \LightFM\IArchiver::ZIP_MAX_FILES_EXCEPTION:
-		    $response['error'] = "There is too much files to be added. "
-			."You can't create a zip with more than "
-			.\LightFM\IArchiver::ZIP_MAX_FILES." files.";
-		    break;
-		
-		
-		case \Zip::ZIP_ERROR:
-		    $response['error'] = "An error occured in >>" . $this->viewed->Path . "<< when creating archive.";
-		    \Nette\Diagnostics\Debugger::log($response['error']);
-		    break;
-		
-		default:
-		    throw $e;
-	    }
+    protected function createComponentFileOpsForm() {
+	$form = new \Nette\Application\UI\Form;
+	
+	$form->addHidden('items')
+		    ->setHtmlId('itemsList');
+	
+	$form->addGroup('fileOps');
+	if ($this->viewed->Config->AllowZip) {
+	    $form->addSubmit('download', 'Download')
+		    ->setHtmlId('filesDownload')
+		    ->setAttribute('class', 'filesManipulation disabled');
 	}
+	
+	if ($this->viewed->isOwner($this->getUser()->getId())) {
+	    $form->addSubmit('move', 'Move')->setHtmlId('filesMove')
+			->setAttribute('class', 'filesManipulation ');
+	    $form->addSubmit('rename', 'Rename')->setHtmlId('filesRename')
+			->setAttribute('class', 'filesManipulation ');
+	    $form->addSubmit('delete', 'Delete')->setHtmlId('filesDelete')
+			->setAttribute('class', 'filesManipulation ');
+	}
+	
+	
+	$form->addGroup('uploads');
+	if ($this->viewed->isOwner($this->getUser()->getId())) {
+	    $form->addSubmit('upload', 'Upload');
+	}
+	$form->onSuccess[] = $this->fileOpsFormSubmitted;
+	return $form;
+    }
 
-
-	// TODO Change archive name for downloading
-
-	$this->sendResponse(new Nette\Application\Responses\JsonResponse($response));
+    /**
+     * Called after sign form is submitted.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param type $form
+     * @return type
+     */
+    public function fileOpsFormSubmitted($form) {
+	$values = $form->getValues();
+	dump($values);
+	dump($form->submitted->name);
+	
+	if ($form->submitted->name == 'delete') {
+	    $this->redirect('fileOps:delete',array(
+		'items'=>$values['items']));
+	}else if ($form->submitted->name == 'move') {
+	    $this->redirect('fileOps:move',array('items'=>$values['items']));
+	}else if ($form->submitted->name == 'rename') {
+	    $this->redirect('fileOps:rename',array('items'=>$values['items']));
+	}else if ($form->submitted->name == 'upload') {
+	    $this->redirect('fileOps:upload',array('items'=>$values['items']));
+	}if ($form->submitted->name == 'download') {
+	    $this->redirect('fileOps:download',array('items'=>$values['items']));
+	}
+	//throw new \Nette\NotImplementedException;
     }
 
 }

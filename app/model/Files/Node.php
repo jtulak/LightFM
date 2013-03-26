@@ -230,13 +230,6 @@ abstract class Node extends \Nette\Object implements INode {
 	return $path;
     }
 
-    public function move(Directory $newParent) {
-	throw new \Nette\NotImplementedException;
-    }
-
-    public function rename(Nette\Utils\Strings $newName) {
-	throw new \Nette\NotImplementedException;
-    }
 
     public function isOwner($username) {
 	foreach ($this->config->Owners as $owner) {

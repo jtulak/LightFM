@@ -58,6 +58,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 
 	$this->template->isAjax = $this->isAjax();
 	$this->template->noAjax = false;
+	$this->template->showFileOpsForm = false;
 
 	// if path is empty, it means it is a root
 	if (strlen($this->path) == 0)

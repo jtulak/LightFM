@@ -1,0 +1,72 @@
+@import "./params.less";
+
+@import "./highlighter.css";
+
+
+#fileOps-view{
+    width:100%;
+    form {
+	display: inline-block;
+	float: right;
+	select {
+	    .button();
+	}
+    }
+    .buttons{
+	margin-bottom: 0.5em;
+    }
+
+	.back{
+	    .filetype-icon('up', 0.3em 50%);
+	    padding-left: 2em;
+	}
+	.raw {
+	    .filetype-icon('icon-save', 0.3em 50%);
+	    padding-left: 2em;
+	}
+
+    .content
+    {
+
+	font-size: 90%;
+	background-color: lighten(@color-medium,5%);
+	border: 1px solid  @color-innerBorder;
+	padding:0;
+	margin: 0;
+
+	//width: 100%;
+	min-height: 5em;
+	display: block;
+
+	code {
+	    display: block;
+	    background-color: lighten(@color-medium,15%);
+	    margin-left: 33pt;
+	}
+
+	i:before { content: attr(data-line)". "; color: #777; padding-left: 3pt; }
+	 i { float: left; clear: both; min-width: 33pt; }
+
+	.highlighted{ 
+	    display: block;
+	    background-color: #BBEDED;
+	    code{
+		background-color: #BBEDED;
+	    }
+	    i:before { font-weight: bold;}
+	}
+
+	code:hover{
+	    background-color: #EAEBBA ;
+	}
+
+	
+    }
+
+    small {
+	font-size: 80%;
+	b{font-weight: bold;}
+	i{font-style: italic;}
+    }
+
+}

@@ -67,25 +67,6 @@ interface IDirectory {
      */
     public function getFilesNames();
 
-    /**
-     * 
-     * @author Jan Ťulák<jan@tulak.me>
-     * 
-     * @param \LightFM\INode $actual - actual item
-     * @param string	$type - Interface which the next file needs to have
-     * @return \LightFM\INode - if NULL, nothing was found
-     */
-    public function getNextItem($actual, $type);
-
-    /**
-     * 
-     * @author Jan Ťulák<jan@tulak.me>
-     * 
-     * @param \LightFM\INode $actual - actual item
-     * @param string	$type - Interface which the prev. file needs to have
-     * @return \LightFM\INode - if NULL, nothing was found
-     */
-    public function getPrevItem($actual, $type);
 
     /**
      * sort the items in this dir acording of given parameters

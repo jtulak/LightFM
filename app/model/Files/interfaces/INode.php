@@ -51,12 +51,6 @@ interface INode {
      */
     public static function rmSlash($path);
 
-    public function move(Directory $newParent);
-
-    public function rename(Nette\Utils\Strings $newName);
-
-    public function delete();
-
     /**
      * Test for the username, if it is an owner.
      * Return true if is.

@@ -15,6 +15,13 @@ body {
     height:100%;
 }
 
+input {
+    font-size: @font-size;
+    line-height: 1.6;
+    color: @color-text;
+    font-family: @general-fonts;
+}
+
 .cleaner {
     clear: both;
 }
@@ -156,13 +163,15 @@ h1 {
     li {
 	list-style: none;
     }
-    a {
+    a,input[type=submit] {
 	display: block;
 	padding: 0.3em 0.4em;
 	color: @color-text;
 	text-decoration: none;
 	font-size: 110%;
 	line-height: 100%;
+	border: 0;
+	background-color: inherit;
 	@media only screen and (max-width: @screen-small){
 	    line-height: 150%;
 	}
@@ -173,7 +182,7 @@ h1 {
 	    color: @color-light;
 	}
     }
-    a.disabled{
+    a.disabled,input[type=submit].disabled{
 	color: lighten(@color-text,50%);
 	cursor: default;
 	&:hover{

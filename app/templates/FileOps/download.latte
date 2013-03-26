@@ -1,0 +1,55 @@
+{** 
+ * @param LightFM\File $viewed
+ * @param string $list - json string
+ *}
+
+{block subtitle}Download{/block}
+{block subtitleClass}{/block}
+
+{block content}
+<div id="fileOps-view">
+    
+    <div class="buttons">
+	<a  class="button back"  n:href="List:default, path=>$viewed->Path">Back to the directory</a>
+	
+	<div class="cleaner"></div>
+    </div>
+    <div class="content ">
+	
+	<div id="download-preparing">
+	    Please wait, your download is now preparing... 
+	    <a id="download-link" n:href="downloadZip, path=>$viewed->Path" style="display:none;" data-list="{$list}"></a>
+	</div>
+	
+	<div id="download-ready" style="display:none;">
+	    Your download is ready. If your browser will not redirect you in few seconds, use <a id="download-link-ready" href="">this link</a>.
+	</div>
+	
+	<div id="download-error" class="flash error" style="display:none;">
+	    <p>
+		An error occured. You can try it later, or download files one-by-one.
+	    </p>
+	    <p id="download-error-message"></p>
+	</div>
+	
+    </div>
+    
+</div>
+{/block}
+
+
+{block scripts}
+{include #parent}
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/filesOpsDownload.js"></script>
+{/block}
+
+
+{block head}
+{if $debug_less}
+<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.less" />
+{else}
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.css">
+{/if}
+<style>
+</style>
+{/block}

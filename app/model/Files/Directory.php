@@ -22,9 +22,9 @@ namespace LightFM;
  * @property arry $Subdirs
  * @property arry $SubdirsNames
  * 
- * @serializationVersion 1
+ * @serializationVersion 2
  */
-class Directory extends Node implements IDirectory {
+class Directory extends Node implements IDirectory, IIterable,  IMovable, IRenameable, IDeletable {
 
     /**
      * 	The DEFAULT presenter called for this file
@@ -82,10 +82,6 @@ class Directory extends Node implements IDirectory {
     public function setUsedChild($child) {
 	$this->usedChild = $child;
 	return $this;
-    }
-
-    public function delete() {
-	throw new \Nette\NotImplementedException;
     }
 
     public function getSubdirs() {
@@ -292,4 +288,29 @@ class Directory extends Node implements IDirectory {
 	return $list;
     }
 
+    
+    /* ********************************************************************** */
+    /*                         IMovable                                       */
+    /* ********************************************************************** */
+    
+    public function move($targetDir) {
+	throw new \Nette\NotImplementedException;
+    }
+    
+    /* ********************************************************************** */
+    /*                         IDeletable                                     */
+    /* ********************************************************************** */
+    
+    public function delete() {
+	throw new \Nette\NotImplementedException;
+    }
+    
+    /* ********************************************************************** */
+    /*                         IRenameable                                    */
+    /* ********************************************************************** */
+    
+    public function rename($newName) {
+	throw new \Nette\NotImplementedException;
+    }
+    
 }

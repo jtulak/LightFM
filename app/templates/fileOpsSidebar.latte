@@ -1,0 +1,44 @@
+{block #fileOpsSidebar}
+
+<h3>Select:</h3>
+<ul>
+    <li><a href="javascript:selectAll()">All</a>
+    <li><a  href="javascript:selectNone()">None</a>
+    <li><a  href="javascript:selectInvert()">Invert</a>
+</ul>
+
+
+{form fileOpsForm}
+    <ul class=error n:if="$form->errors">
+	    <li n:foreach="$form->errors as $error">{$error}</li>
+    </ul>
+<ul>
+   {input items}
+    {foreach $form->groups['fileOps']->getControls() as $control}
+    <li>
+	{input $control}
+    </li>
+    {/foreach}
+    
+    {*<li n:if="$viewed->Config->AllowZip"><a id="filesDownload" class="filesManipulation disabled" n:href="downloadZip">Download</a></li>*}
+    {*if $isOwner}
+    <li><a id="filesMove"  class="filesManipulation disabled" href="#">Move</a></li>
+    <li><a id="filesRename"  class="filesManipulation disabled" href="#">Rename</a></li>
+    <li><a id="filesDelete"  class="filesManipulation disabled" href="#">Delete</a></li>
+    {/if*}
+</ul>
+<ul>
+    {foreach $form->groups['uploads']->getControls() as $control}
+    <li>
+	{input $control}
+    </li>
+    {/foreach}
+    
+    
+    {*if $isOwner}
+    <li><a  href="#">Upload</a>
+    {/if*}
+</ul>
+{/form}
+
+{/block}

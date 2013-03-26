@@ -20,9 +20,9 @@ namespace LightFM;
  * @property string $MimeType
  * @property-read string $Hash Hash of the file
  * 
- * @serializationVersion 1
+ * @serializationVersion 2
  */
-class File extends Node implements IFile {
+class File extends Node implements IFile,  IMovable, IRenameable, IDeletable {
 
     /**
      * 	The DEFAULT presenter called for this file
@@ -100,10 +100,6 @@ class File extends Node implements IFile {
 	return "";
     }
 
-    public function delete() {
-	throw new \Nette\NotImplementedException;
-    }
-
     public static function getPriority() {
 	return static::$priority;
     }
@@ -119,5 +115,33 @@ class File extends Node implements IFile {
 	}
 	return $this->hash;
     }
+    
+    
+    
+    /* ********************************************************************** */
+    /*                         IMovable                                       */
+    /* ********************************************************************** */
+    
+    public function move($targetDir) {
+	throw new \Nette\NotImplementedException;
+    }
+    
+    /* ********************************************************************** */
+    /*                         IDeletable                                     */
+    /* ********************************************************************** */
+    
+    public function delete() {
+	throw new \Nette\NotImplementedException;
+    }
+    
+    /* ********************************************************************** */
+    /*                         IRenameable                                    */
+    /* ********************************************************************** */
+    
+    public function rename($newName) {
+	throw new \Nette\NotImplementedException;
+    }
+    
+    
 
 }
