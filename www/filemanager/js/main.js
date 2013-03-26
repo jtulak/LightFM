@@ -22,7 +22,7 @@ $(function() {
     }else{
 	console.log('ajax');
 	unsetAjaxOnBadBrowsers();
-	$.nette.init();
+	//$.nette.init();
 	$.nette.ext('history').cache = false;
 	$('.no-ajax').off('click.nette');
 
