@@ -14,10 +14,11 @@ common:
 				- List
 				- Gallery
 			blacklist:
-			#	- "/filemanager"
+				- "/filemanager"
+				- "/temp"
 				- ".filemanager.ini"
-			#	- ".htaccess"
-			#	- ".htpasswd"
+				- ".htaccess"
+				- ".htpasswd"
 			#	- "blacklisted"
 
 	php:
