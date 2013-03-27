@@ -176,10 +176,11 @@ ol,ul {
 	    td {  
 	    }
 	    .checkbox {
-		 width:4.8em;
+		 width:4.0em;
 		 text-align: left;
 	     }
 	    .name {
+		padding-left: 0.3em;
 		span {
 		    display: block;
 		   
@@ -261,7 +262,9 @@ ol,ul {
 		white-space:nowrap; 
 		width:10em;
     	     }
-	    .filetype-icon('folder');
+	    .checkbox{
+		.filetype-icon('folder');
+	    }
 	    &:hover,&:active{
 		background-color: @list-hover;
 	    }
@@ -278,11 +281,9 @@ ol,ul {
 		white-space:nowrap; 
 		width:10em;
     	     }
-	    .checkbox {
-		 width:4.8em;
-		 text-align: left;
-	     }
-	    .filetype-icon('up');
+	    .checkbox{
+		.filetype-icon('up', right center);
+	    }
 	    &:hover,&:active{
 		background-color: @list-hover;
 	    }
@@ -292,43 +293,49 @@ ol,ul {
 	}
 	&.file{
 	    
-	    .filetype-icon('file');
 	    &:hover,&:active{
 		background-color: @list-hover;
 	    }
-	
-	    &.file-text{
-		
-		.filetype-icon('file-text');
+	    .checkbox{
+		.filetype-icon('file', right center);
+		&.file-archive{
 
-		&.css{
-		    
-		    .filetype-icon('file-text-css');
+		    .filetype-icon('file-archive', right center);
 		}
-		&.js{
-		    
-		    .filetype-icon('file-text-js');
+		&.file-text{
+
+		    .filetype-icon('file-text', right center);
+
+
+		    &.css{
+
+			.filetype-icon('file-text-css', right center);
+		    }
+		    &.js{
+
+			.filetype-icon('file-text-js', right center);
+		    }
+		    &.ini{
+
+			.filetype-icon('file-text-ini', right center);
+		    }
+		    &.xml{
+
+			.filetype-icon('file-text-xml', right center);
+		    }
+		    &.php{
+
+			.filetype-icon('file-text-php', right center);
+		    }
+		    &.html{
+
+			.filetype-icon('file-text-html', right center);
+		    }
 		}
-		&.ini{
-		    
-		    .filetype-icon('file-text-ini');
+		&.file-image{
+
+		    .filetype-icon('file-image', right center);
 		}
-		&.xml{
-		    
-		    .filetype-icon('file-text-xml');
-		}
-		&.php{
-		    
-		    .filetype-icon('file-text-php');
-		}
-		&.html{
-		    
-		    .filetype-icon('file-text-html');
-		}
-	    }
-	    &.file-image{
-		
-		.filetype-icon('file-image');
 	    }
 	}
 
@@ -347,8 +354,10 @@ ol,ul {
 	}
    }
 
+    &.no-checkbox .checkbox {
+	width:2.6em ;
+    } 
 }
-
 
 } // end of list-view
 .js{#list-view{

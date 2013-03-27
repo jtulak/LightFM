@@ -16,7 +16,7 @@
     
     
     <div style="clear:both"></div>
-    <div id="data">
+    <div id="data" n:class='!$isOwner && !$viewed->Config->AllowZip?no-checkbox'>
 	<section class="header">
 	    <table n:class="($orderReversed)?desc:asc">
 		<tr>
@@ -56,12 +56,12 @@
 	 * Up dir -only if we are in a subdir
 	 *}
 	{if count($path) > 1}
-	<section class="folder-up">
+	<section  class='folder-up'>
 	    <a class="ajax"  n:href="default, path => $backpath ">
 		<table>
 		    <tr>
-			<td class="checkbox"></td>
-			<td class="name"><span>[..] Go to upper directory</span></td>
+			<td class="checkbox folder-up"></td>
+			<td class="name" ><span>[..] Go to upper directory</span></td>
 			<td class="suffix"></td>
 			<td class="size"></td>
 			<td class="date"></td>
@@ -77,7 +77,11 @@
 	    
 		<table>
 		    <tr>
-			<td class="checkbox"><input class="fileSelector" type="checkbox" data-name="{$dir->Name}"></td>
+			<td class="checkbox folder">
+			    {if $isOwner || $viewed->Config->AllowZip}
+				<input class="fileSelector" type="checkbox" data-name="{$dir->Name}">
+			    {/if}
+			</td>
 			<td class="name"><span title="{$dir->Name}"><a class="ajax" n:href="default, path => $dir->Path ">{$dir->Name}</a></span></td>
 			<td class="suffix"></td>
 			<td class="size">{$dir->Size|Bytes}</td>
@@ -93,7 +97,11 @@
 	    
 		<table>
 		    <tr>
-			<td class="checkbox"><input class="fileSelector" type="checkbox" data-name="{$file->Name}{if $file->Suffix}.{$file->Suffix}{/if}"></td>
+			<td class="checkbox file {$file->IconName}">
+			    {if $isOwner || $viewed->Config->AllowZip}
+				<input class="fileSelector" type="checkbox" data-name="{$file->Name}{if $file->Suffix}.{$file->Suffix}{/if}">
+			    {/if}
+			</td>
 			<td class="name"  title="{$file->Name}">
 			    <span><a n:href="{$file->Presenter}:default, path => $file->Path, dirView=>'List' ">{$file->Name}</a></span>
 			</td>
