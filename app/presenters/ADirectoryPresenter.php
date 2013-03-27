@@ -241,8 +241,9 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	
 	
 	$form->addGroup('uploads');
-	if ($this->viewed->isOwner($this->User->Id)) {
+	if ($this->viewed->isOwner($this->User->Id)&& $this->User->LoggedIn) {
 	    $form->addSubmit('upload', 'Upload');
+	    $form->addSubmit('mkdir', 'New Dir');
 	}
 	$form->onSuccess[] = $this->fileOpsFormSubmitted;
 	return $form;
