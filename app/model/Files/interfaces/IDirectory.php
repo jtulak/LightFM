@@ -69,6 +69,23 @@ interface IDirectory {
 
 
     /**
+     * Return array of files and subdirs as objects.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @return Array
+     */
+    public function getChildren();
+    
+    /**
+     * Return array of files and subdirs names
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     */
+    public function getChildrenNames();
+    
+    /**
      * sort the items in this dir acording of given parameters
      * 
      * @author Jan Ťulák<jan@tulak.me>
@@ -78,4 +95,14 @@ interface IDirectory {
      * @return \LightFM\IDirectory - provides fluid interface 
      */
     public function sortBy($orderBy, $order);
+    
+    
+    /**
+     * Will call delete() on all childrens which names are in the list
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param array $list
+     */
+    public function deleteList($list);
 }

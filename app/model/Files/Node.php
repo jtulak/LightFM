@@ -188,7 +188,7 @@ abstract class Node extends \Nette\Object implements INode {
 	return $this->dummy;
     }
 
-    public function getName() {
+    public function getName($full = FALSE) {
 	return $this->name;
     }
 

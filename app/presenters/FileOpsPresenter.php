@@ -17,36 +17,86 @@
  */
 class FileOpsPresenter extends BasePresenter {
     
+    /**
+     * @persistent
+     */
+    public $items;
+    
+    protected $itemsArray;
+    
     public function startup() {
 	parent::startup();
+	$this->itemsArray = \Nette\Utils\Json::decode($this->items);
 	$this->template->viewed = $this->viewed;
     }
     
-    public function actionDelete($items){
+    public function actionDelete(){
+	
+	$this->template->list = $this->itemsArray;
 	
     }
     
-    public function actionRename($items){
+    /**
+     * Create form for deletion confirmation
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param type $name
+     * @return \Nette\Application\UI\Form
+     */
+    protected function createComponentDelete($name) {
+
+	$form = new Nette\Application\UI\Form($this, $name);
+
+	$form->addSubmit('delete', 'Delete it');
+	$form->addSubmit('storno', 'Storno');
+	
+	
+	$form->addProtection('Time limit runs out. Please, try it again.');
+	$form->onSuccess[] = callback($this, 'deleteSubmitted');
+	return $form;
+    }
+    /**
+     * Called after delete confirmation form submit
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param Nette\Application\UI\Form $form
+     */
+    public function deleteSubmitted(Nette\Application\UI\Form $form) {
+	
+	if (!$this->viewed->isOwner($this->User->Id) || !$this->User->LoggedIn) {
+	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
+	}
+	
+	if ($form->submitted->name == 'delete'){
+	    $this->viewed->deleteList($this->itemsArray);
+	    $this->flashMessage('Files were removed.');
+	    
+	}
+	//$this->redirect($this->viewed->Presenter. ':default');
+    }
+    
+    
+    
+    
+    public function actionRename(){
 	
     }
     
-    public function actionMove($items){
+    public function actionMove(){
 	
     }
     
-    public function actionUpload($items){
+    public function actionUpload(){
 	
     }
     
-    public function actionDownload($items){
+    public function actionDownload(){
 	//dump(\Nette\Utils\Json::decode($items));
-	$this->template->list = $items;
+	$this->template->list = $this->items;
     }
 
-
-    
-    
-    
     /**
      * This function manages ZIP download.
      * It takes the actual dir from $this->viewed and list of filenames in

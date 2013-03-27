@@ -245,25 +245,6 @@ class Archiver implements IArchiver {
 	return md5($hashes);
     }
 
-    /**
-     * Will check if the wanted archive file is already existing. If yes, return
-     * TRUE, else return FALSE.
-     * Also will make a bump for keeping the file in the cache for another time.
-     * 
-     * @author Jan Ťulák<jan@tulak.me>
-     * 
-     * @param string $hash
-     * @return boolean
-     */
-    private function zipCache($hash){
-	
-	return FALSE;
-    }
-    
-    private function zipBump($hash){
-	
-    }
-    
     
 }
 

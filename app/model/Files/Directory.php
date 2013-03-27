@@ -24,7 +24,7 @@ namespace LightFM;
  * 
  * @serializationVersion 2
  */
-class Directory extends Node implements IDirectory, IIterable,  IMovable, IRenameable, IDeletable {
+class Directory extends Node implements IDirectory, IIterable, IMovable, IRenameable, IDeletable {
 
     /**
      * 	The DEFAULT presenter called for this file
@@ -120,6 +120,14 @@ class Directory extends Node implements IDirectory, IIterable,  IMovable, IRenam
 
     public function getFilesNames() {
 	return $this->listFiles;
+    }
+
+    public function getChildren() {
+	return array_merge($this->getSubdirs(), $this->getFiles());
+    }
+
+    public function getChildrenNames() {
+	return array_merge($this->getSubdirsNames(), $this->getFilesNames());
     }
 
     /**
@@ -288,29 +296,61 @@ class Directory extends Node implements IDirectory, IIterable,  IMovable, IRenam
 	return $list;
     }
 
-    
+    public function deleteList($list) {
+	foreach ($this->getChildren() as $item) {
+	    if(in_array($item->getName(TRUE), $list)){
+		$item->delete();
+	    }
+	}
+    }
+
     /* ********************************************************************** */
     /*                         IMovable                                       */
     /* ********************************************************************** */
-    
+
     public function move($targetDir) {
 	throw new \Nette\NotImplementedException;
     }
-    
+
     /* ********************************************************************** */
     /*                         IDeletable                                     */
     /* ********************************************************************** */
-    
+
     public function delete() {
 	throw new \Nette\NotImplementedException;
     }
-    
+
+    /**
+     * Will call itself on every subdirectory and before exiting it will
+     * delete also the *itself* (given dir).
+     * 
+     * @author asn at asn24 dot dk (http://php.net/manual/en/function.rmdir.php)
+     * 
+     * @param string $dir
+     */
+    private function deleteDirectory($dir) {
+	if (!file_exists($dir))
+	    return true;
+	if (!is_dir($dir) || is_link($dir))
+	    return unlink($dir);
+	foreach (scandir($dir) as $item) {
+	    if ($item == '.' || $item == '..')
+		continue;
+	    if (!deleteDirectory($dir . "/" . $item)) {
+		chmod($dir . "/" . $item, 0777);
+		if (!deleteDirectory($dir . "/" . $item))
+		    return false;
+	    };
+	}
+	return rmdir($dir);
+    }
+
     /* ********************************************************************** */
     /*                         IRenameable                                    */
     /* ********************************************************************** */
-    
+
     public function rename($newName) {
 	throw new \Nette\NotImplementedException;
     }
-    
+
 }

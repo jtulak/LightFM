@@ -29,7 +29,16 @@ interface INode {
      */
     public function __construct($path);
 
-    public function getName();
+    /**
+     * Will return node name. If the given parameter is true and the implementing
+     * class is e.g. file, it can return also suffix.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * 
+     * @param bool $full
+     */
+    public function getName($full = FALSE);
 
     public function getSize();
 

@@ -116,8 +116,22 @@ class File extends Node implements IFile,  IMovable, IRenameable, IDeletable {
 	return $this->hash;
     }
     
-    
-    
+    /**
+     * 
+     * @param type $full
+     * @return string
+     */
+    public function getName($full = FALSE) {
+	if($full && $this->getSuffix()){
+	    return parent::getName($full).'.'.$this->getSuffix();
+	}else{
+	    return parent::getName($full);
+	}
+    }
+
+
+
+
     /* ********************************************************************** */
     /*                         IMovable                                       */
     /* ********************************************************************** */
@@ -131,7 +145,9 @@ class File extends Node implements IFile,  IMovable, IRenameable, IDeletable {
     /* ********************************************************************** */
     
     public function delete() {
-	throw new \Nette\NotImplementedException;
+	//throw new \Nette\NotImplementedException;
+	chmod($this->getFullPath(), 0777);
+	unlink($this->getFullPath());
     }
     
     /* ********************************************************************** */
