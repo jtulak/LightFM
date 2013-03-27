@@ -100,7 +100,6 @@ class SettingsPresenter extends BasePresenter {
 	}
     }
 
-
     /**
      * Save vars (from where user came..) to the template 
      * when access password is required.
@@ -163,7 +162,7 @@ class SettingsPresenter extends BasePresenter {
 	if ($values->accessPassword == $tested->Password) {
 	    Authenticator::confirmAccess($values->accessPassword, $tested->Path, $values->remember);
 	    // $this->redirectUrl($this->req);
-	    $this->redirect($this->viewed->Presenter.':default');
+	    $this->redirect($this->viewed->Presenter . ':default');
 	} else {
 	    $form['accessPassword']->addError('Invalid password!');
 	    $this->flashMessage('Invalid password!', 'error');
@@ -303,7 +302,7 @@ class SettingsPresenter extends BasePresenter {
      */
     public function dirSettingsFormSubmitted(Nette\Application\UI\Form $form) {
 	// at first check permissions
-	if (!$this->viewed->isOwner($this->getUser()->getId()) || !$this->getUser()->isLoggedIn()) {
+	if (!$this->viewed->isOwner($this->User->Id) || !$this->User->LoggedIn) {
 	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
 	}
 	$forSave = array();
