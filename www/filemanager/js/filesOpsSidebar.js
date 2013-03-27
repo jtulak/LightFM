@@ -80,18 +80,24 @@ function delFromList(data){
 
 /** functions for selecting checkboxes */
 function selectAll() {
-    $("#data").find("input").prop('checked', true);
+    //$("#data").find("input").prop('checked', true);
+    $("#data").find("input").each(function(){
+	if(!this.checked){ 
+	    $(this).click();
+	}
+    });
 }
 function selectNone() {
-    $("#data").find("input").prop('checked', false);
+    //$("#data").find("input").prop('checked', false);
+    $("#data").find("input").each(function(){
+	if(this.checked){ 
+	    $(this).click();
+	}
+    });
 }
 function selectInvert() {
-    $("#data").find("input").each(function() {
-	if ($(this).prop('checked'))
-	    $(this).prop('checked', false);
-	else
-	    $(this).prop('checked', true);
-    });
+    //$("#data").find("input").prop('checked', false);
+    $("#data").find("input").click();
 }
 
 /** IE8 and below */
