@@ -230,7 +230,7 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 		    ->setAttribute('class', 'filesManipulation disabled');
 	}
 	
-	if ($this->viewed->isOwner($this->getUser()->getId())) {
+	if ($this->viewed->isOwner($this->User->Id && $this->User->LoggedIn)) {
 	    $form->addSubmit('move', 'Move')->setHtmlId('filesMove')
 			->setAttribute('class', 'filesManipulation ');
 	    $form->addSubmit('rename', 'Rename')->setHtmlId('filesRename')
@@ -241,7 +241,7 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	
 	
 	$form->addGroup('uploads');
-	if ($this->viewed->isOwner($this->getUser()->getId())) {
+	if ($this->viewed->isOwner($this->User->Id)) {
 	    $form->addSubmit('upload', 'Upload');
 	}
 	$form->onSuccess[] = $this->fileOpsFormSubmitted;
@@ -257,7 +257,7 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
      * @return type
      */
     public function fileOpsFormSubmitted($form) {
-	$values = $form->getValues();
+	$values = $form->Values;
 	dump($values);
 	dump($form->submitted->name);
 	
