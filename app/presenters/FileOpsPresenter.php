@@ -69,7 +69,7 @@ class FileOpsPresenter extends BasePresenter {
 	$httpResponse = $GLOBALS['container']->httpResponse;
 	$list = $httpRequest->getPost('list');
 	
-	//$list = array('data2');
+	//$list = array('data1');
 	
 	// now we have list of items to package
 	try {

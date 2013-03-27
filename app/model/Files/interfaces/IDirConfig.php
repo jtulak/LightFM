@@ -101,13 +101,17 @@ interface IDirConfig {
      * Inherite settings from parent, if weren't specified elseway. 
      * If null given, use default as a parent.
      * 
+     * $onlyBlacklist is used for special occasions, where it is neccesary to
+     * inherit blacklist from parent/neon config, but not the other items.
+     * 
      * @author Jan Ťulák<jan@tulak.me>
      * 
      * 
      * @param \LightFM\DirConfig $parentsConfig
+     * @param bool $onlyBlacklist
      * 
      */
-    public function inherite(\LightFM\DirConfig $parentsConfig = NULL);
+    public function inherite(\LightFM\DirConfig $parentsConfig = NULL, $onlyBlacklist = TRUE);
 
     /**
      * Add an array of owners - eg. from parent config

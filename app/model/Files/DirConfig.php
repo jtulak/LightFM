@@ -149,6 +149,7 @@ class DirConfig extends \Nette\Object implements IDirConfig {
     }
 
     public function isBlacklisted($file) {
+		    //var_dump($this->blacklist);
 	if ($file == "")
 	    return FALSE;
 	// remove slash at the end
@@ -266,15 +267,17 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	$this->modes = array_merge($this->modes, $new);
     }
 
-    public function inherite(\LightFM\DirConfig $parentsConfig = NULL) {
+    public function inherite(\LightFM\DirConfig $parentsConfig = NULL, $onlyBlacklist = FALSE) {
 	if ($parentsConfig == NULL) {
 	    // if no parent set, then the root is currently initializing - load
 	    // from system config
 	    $config = \Nette\Environment::getConfig('defaults');
+	    
 	    $config['blacklist'] = (array) $config['blacklist'];
 	    $config['modes'] = (array) $config['modes'];
 
 	    // add new owner from  neon
+	    if(!$onlyBlacklist)
 	    $this->addUsersConfig($config)->addOwnersConfig($config);
 
 	    if ($config['blacklist'])
@@ -288,13 +291,16 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 		'blacklist' => $parentsConfig->blacklist,
 	    );
 	    // copy ownership
-	    $this->addUsers($parentsConfig->getUsers())->addOwners($parentsConfig->getOwners());
+	    if(!$onlyBlacklist)
+		$this->addUsers($parentsConfig->getUsers())->addOwners($parentsConfig->getOwners());
 
-	    $this->ownerNamesToOwners();
+	    if(!$onlyBlacklist)
+		$this->ownerNamesToOwners();
 
 	    $this->mergeBlacklists($parentsConfig->blacklist);
 	}
 
+	if(!$onlyBlacklist)
 	if ($this->allowZip === NULL) {
 	    switch ($config['allowZip']) {
 		case self::ZIP_INHERITED_PERMITED:
@@ -309,6 +315,7 @@ class DirConfig extends \Nette\Object implements IDirConfig {
 	}
 
 
+	if(!$onlyBlacklist)
 	if ($config['modes'] && $this->modes == NULL) {
 	    // add modes only if wasn't set locally
 	    $this->addToModes($config['modes']);

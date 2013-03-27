@@ -33,8 +33,8 @@ class Archiver implements IArchiver {
 		throw new \Nette\FileNotFoundException("File >>" . $item . "<< in >>" . $root->Path . "<< wasn't found!");
 	    }
 	}
-	$files = self::zipCheckConditions($root->FullPath,$files);
-	//var_dump($files);
+	//$files = self::zipCheckConditions($root->FullPath,$files);
+	//dump($files);
 	return self::zipMake($root->FullPath, $files);
     }
     
@@ -52,39 +52,72 @@ class Archiver implements IArchiver {
      * @return array
      */
     private static function zipCheckConditions($root,$files){
-	if(count($files) > self::ZIP_MAX_FILES){
+	$count  = count($files);
+	if($count > self::ZIP_MAX_FILES){
 	    throw new \Exception('ZIP_MAX_FILES_EXCEPTION', self::ZIP_MAX_FILES_EXCEPTION);
 	}
+	
 	// sum of sizes of all files
 	$sizeSum = 0;
-	// config for all dirs
+	
+	$allFiles = array();
+	$forbidden = array();
+	
+	// create inidial config array
 	$config = array();
-	$count  = count($files);
+	
+	//var_dump($root);
 	foreach($files as $i=>$file){
 	    
+	    
 	    $filePath = $root.'/'.$file;
-	    if(is_dir($filePath)){
-		// if the item is a dir, then load its config{
-		$config[$filePath] = new \LightFM\DirConfig(substr($filePath,strlen(DATA_ROOT),strlen($filePath)));
-		//var_dump($config[$filePath]->AllowZip);
-		if($config[$filePath]->AllowZip === FALSE){
-		   // var_dump('unset');
-		    // if zip is not allowed in this dir
-		    // remove itself
-		    unset($files[$i]);
-		}
-		
-	    }else{
-		// else the item is a file
-		if(dirname($filePath) !== $root && !$config[dirname($filePath)]->AllowZip){
-		    // if zip is not allowed in this dir
-		    // remove itself and skip rest conditions
-		    unset($files[$i]);
+	    
+	    //dump($filePath);
+	    
+	    //at first check if it is not in forbidden
+	    foreach($forbidden as $n=>$badDir){
+		if($badDir == substr($file, 0,strlen($badDir))){
 		    continue;
 		}
+	    }
+	    
+	    if(is_dir($filePath)){
+		//dump($filePath);
+		//dump(substr($filePath,strlen(DATA_ROOT),strlen($filePath)));
+		// if the item is a dir, then load its config
+		$config[$filePath] = new \LightFM\DirConfig(substr($filePath,strlen(DATA_ROOT),strlen($filePath)));
+		$config[$filePath]->inherite(NULL,TRUE);
 		
+		if($config[$filePath]->AllowZip === FALSE){
+		    // if zip is not allowed in this dir
+		    // remove itself
+		    //unset($files[$i]);
+		    $forbidden[]=$file;
+		    continue;
+		}
+		//dump($config);
+		// if we can package the dir..-
+		//$allFiles[] = $file;
+	    }else{
+	    
+		// else the item is a file
+		if(dirname($filePath) !== $root){
+		    if($config[dirname($filePath)]->AllowZip  === FALSE){
+			// if zip is not allowed in this dir
+			// remove itself and skip rest conditions
+			//var_dump('unset '.$file);
+			//unset($files[$i]);
+			continue;
+		    }else if($config[dirname($filePath)]->isBlacklisted($filePath)){
+			//var_dump('blacklist '.$file);
+			continue;
+		    }
+			//dump($config[dirname($filePath)]);
+		}
+		// we can package it
+		$allFiles[] = $file;
+		//var_dump($allFiles);
 		
-		// else it is a file so check size
 		$size = filesize($filePath);
 		
 		if($size > self::ZIP_MAX_FILE_SIZE){
@@ -98,7 +131,8 @@ class Archiver implements IArchiver {
 		}
 	    }
 	}
-	return $files;
+	//dump($allFiles);
+	return $allFiles;
     }
 
     /**
@@ -153,20 +187,26 @@ class Archiver implements IArchiver {
     private static function zipMake($root, $files) {
 	// As the zip is created with pathes from the current dir
 	chdir($root);
+	$fullList = $files;
 	$fullList = array();
 	foreach ($files as $item) {
 	    if (is_dir($root . "/" . $item)) {
 		// if this item is a dir, then get recursively the content
+		$fullList[] = $item;
 		$fullList = array_merge($fullList, self::zipGetRecursivePath($root, $item));
 	    } else {
 		array_push($fullList, $item);
 	    }
 	}
+	
+	$fullList = self::zipCheckConditions($root,$fullList);
+	
 	if(count($fullList) == 0){
 	    // if the list is empty 
 	    throw new \Exception('ZIP_LIST_EMPTY', self::ZIP_LIST_EMPTY);
 	}
 	
+	//var_dump($fullList);
 	// compute hashes
 	$filename =  self::zipHashCompute($root, $fullList) . '.zip';
 
