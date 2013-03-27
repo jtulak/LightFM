@@ -68,6 +68,9 @@ class FileOpsPresenter extends BasePresenter {
 	$httpRequest = $GLOBALS['container']->httpRequest;
 	$httpResponse = $GLOBALS['container']->httpResponse;
 	$list = $httpRequest->getPost('list');
+	
+	//$list = array('data2');
+	
 	// now we have list of items to package
 	try {
 	    $response['path'] = $this->getHttpRequest()->url->hostUrl.$this->getHttpRequest()->url->basePath.\LightFM\Archiver::zipCreate($this->viewed, $list);
@@ -108,6 +111,18 @@ class FileOpsPresenter extends BasePresenter {
 		    $response['error'] = "There is too much files to be added. "
 			    . "You can't create a zip with more than "
 			    . \LightFM\IArchiver::ZIP_MAX_FILES . " files.";
+		    break;
+
+
+		case \LightFM\IArchiver::ZIP_LIST_EMPTY:
+		    $response['error'] = "There are no files to create an archive. "
+			    ."Maybe you have tried to download a directory with "
+			    ."forbidden batch downloads?";
+		    break;
+
+
+		case \LightFM\IArchiver::ZIP_NOTHING_PROVIDED:
+		    $response['error'] = "Nothing provided in the request.";
 		    break;
 
 

@@ -74,8 +74,17 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	// set sidebar showing
 	$this->template->showSidebar = $this->getUser()->isLoggedIn() || (!empty($this->viewed) && $this->viewed->Config->AllowZip);
 	//dump($this->getUser());
+	
+	
     }
 
+    public function afterRender() {
+	parent::afterRender();
+	
+	//  take care about the archive cache
+	\LightFM\ArchiveCache::trasher();
+    }
+    
     /**
      * Only for ajax 
      * @author Jan Ťulák<jan@tulak.me>

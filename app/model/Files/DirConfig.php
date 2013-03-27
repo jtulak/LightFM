@@ -172,6 +172,9 @@ class DirConfig extends \Nette\Object implements IDirConfig {
      * @return boolean
      */
     public function getAllowZip() {
+	if($this->allowZip === NULL){
+	    return NULL;
+	}
 	switch ($this->allowZip) {
 	    case self::ZIP_FORBIDDEN:
 	    case self::ZIP_INHERITED_FORBIDDEN:

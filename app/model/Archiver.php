@@ -23,6 +23,9 @@ class Archiver implements IArchiver {
 	// test for all wanted files and dirs if they are here
 	
 	//$files = array('gallery','file');
+	if(count($files) == 0){
+	    throw new \Exception('ZIP_NOTHING_PROVIDED', self::ZIP_NOTHING_PROVIDED);
+	}
 	
 	foreach ($files as $item) {
 	    if (!in_array($item, $content)) {
@@ -31,7 +34,7 @@ class Archiver implements IArchiver {
 	    }
 	}
 	$files = self::zipCheckConditions($root->FullPath,$files);
-	
+	//var_dump($files);
 	return self::zipMake($root->FullPath, $files);
     }
     
@@ -62,14 +65,17 @@ class Archiver implements IArchiver {
 	    $filePath = $root.'/'.$file;
 	    if(is_dir($filePath)){
 		// if the item is a dir, then load its config{
-		$config[$filePath] = new \LightFM\DirConfig($filePath);
-		if(!$config[$filePath]->AllowZip){
+		$config[$filePath] = new \LightFM\DirConfig(substr($filePath,strlen(DATA_ROOT),strlen($filePath)));
+		//var_dump($config[$filePath]->AllowZip);
+		if($config[$filePath]->AllowZip === FALSE){
+		   // var_dump('unset');
 		    // if zip is not allowed in this dir
 		    // remove itself
 		    unset($files[$i]);
 		}
 		
 	    }else{
+		// else the item is a file
 		if(dirname($filePath) !== $root && !$config[dirname($filePath)]->AllowZip){
 		    // if zip is not allowed in this dir
 		    // remove itself and skip rest conditions
@@ -107,7 +113,6 @@ class Archiver implements IArchiver {
      * @return array
      */
     private static function zipGetRecursivePath($basePath, $dir, $exclusiveLength = -1) {
-	// TODO check for allowed download
 
 	$handle = opendir($basePath . '/' . $dir);
 	// count the length of path for exclude
@@ -148,8 +153,6 @@ class Archiver implements IArchiver {
     private static function zipMake($root, $files) {
 	// As the zip is created with pathes from the current dir
 	chdir($root);
-	// TODO Max file limit
-	// TODO recursive
 	$fullList = array();
 	foreach ($files as $item) {
 	    if (is_dir($root . "/" . $item)) {
@@ -159,17 +162,26 @@ class Archiver implements IArchiver {
 		array_push($fullList, $item);
 	    }
 	}
+	if(count($fullList) == 0){
+	    // if the list is empty 
+	    throw new \Exception('ZIP_LIST_EMPTY', self::ZIP_LIST_EMPTY);
+	}
+	
 	// compute hashes
-	$filename = DATA_TEMP . '/' . self::zipHashCompute($root, $fullList) . '.zip';
+	$filename =  self::zipHashCompute($root, $fullList) . '.zip';
 
-	if (!file_exists(DATA_ROOT . '/' . $filename)) {
-	    // the zip file
-	    if (!\Zip::create_zip($fullList, DATA_ROOT . '/' . $filename)) {
+	
+	if (!ArchiveCache::exists( $filename)) {
+	    // create the zip file
+	
+	    if (!\Zip::create_zip($fullList, ArchiveCache::CACHE_DIR_FULL . '/' . $filename)) {
 		throw new \Exception('Zip creation failed', \Zip::ZIP_ERROR);
 	    }
 	}
+	// if the file was created, then add it, elseway it will be bumped
+	ArchiveCache::add( $filename);
 	// create archive
-	return $filename;
+	return ArchiveCache::CACHE_DIR .'/'. $filename;
     }
 
     /**
@@ -188,10 +200,30 @@ class Archiver implements IArchiver {
 	// compute hashes for each file
 	foreach ($list as $item) {
 	    // recursive looking
-	    $hashes.=hash_file("md5", $path . '/' . $item);
+	    $hashes.=hash_file("md5", $path . '/' . $item).$path . '/' . $item;
 	}
 	return md5($hashes);
     }
 
+    /**
+     * Will check if the wanted archive file is already existing. If yes, return
+     * TRUE, else return FALSE.
+     * Also will make a bump for keeping the file in the cache for another time.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param string $hash
+     * @return boolean
+     */
+    private function zipCache($hash){
+	
+	return FALSE;
+    }
+    
+    private function zipBump($hash){
+	
+    }
+    
+    
 }
 

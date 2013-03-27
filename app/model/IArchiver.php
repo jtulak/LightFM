@@ -38,6 +38,9 @@ interface IArchiver {
     const ZIP_MAX_SUM_SIZE_EXCEPTION=779;
     
     
+    const ZIP_LIST_EMPTY=780;
+    const ZIP_NOTHING_PROVIDED=781;
+    
     
     /**
      * Return path to archive file with given files to be downloaded by user.
@@ -50,5 +53,6 @@ interface IArchiver {
      * @return string	    Path to the archive, relatively to DATA_ROOT
      */
     public static function zipCreate($root,$files);
+    
     
 }
