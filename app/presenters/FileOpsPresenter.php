@@ -27,12 +27,21 @@ class FileOpsPresenter extends BasePresenter {
     public function startup() {
 	parent::startup();
 	$this->itemsArray = \Nette\Utils\Json::decode($this->items);
+	sort($this->itemsArray);
 	$this->template->viewed = $this->viewed;
     }
     
     public function actionDelete(){
+	$this->template->list = array();
 	
-	$this->template->list = $this->itemsArray;
+	foreach($this->itemsArray as $item){
+	    if(is_dir($this->viewed->FullPath.'/'.$item)){
+		$this->template->list [] = $item.'/';
+	    }else{
+		$this->template->list [] = $item;
+	    }
+	}
+	
 	
     }
     
@@ -69,12 +78,16 @@ class FileOpsPresenter extends BasePresenter {
 	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
 	}
 	
-	if ($form->submitted->name == 'delete'){
-	    $this->viewed->deleteList($this->itemsArray);
-	    $this->flashMessage('Files were removed.');
-	    
+	try{
+	    if ($form->submitted->name == 'delete'){
+		$this->viewed->deleteList($this->itemsArray);
+		$this->flashMessage('Files were removed.');
+
+	    }
+	    $this->redirect($this->viewed->Presenter. ':default');
+	}catch(\Nette\Application\ForbiddenRequestException $e){
+		$this->flashMessage('Can\'t delete some files. Probably the files are not owned by the webserver.','error');
 	}
-	//$this->redirect($this->viewed->Presenter. ':default');
     }
     
     

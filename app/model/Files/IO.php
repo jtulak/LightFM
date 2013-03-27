@@ -344,5 +344,8 @@ abstract class IO extends \Nette\Object {
 
 	return $created;
     }
+    
+    
+   
 
 }

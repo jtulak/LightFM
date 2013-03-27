@@ -317,7 +317,13 @@ class Directory extends Node implements IDirectory, IIterable, IMovable, IRename
     /* ********************************************************************** */
 
     public function delete() {
-	throw new \Nette\NotImplementedException;
+	//throw new \Nette\NotImplementedException;
+	if(!$this->deleteDirectory($this->getFullPath())){
+	    @chmod($this->getFullPath(), 0777);
+	    if(!$this->deleteDirectory($this->getFullPath())){
+		throw new \Nette\Application\ForbiddenRequestException;
+	    }
+	}
     }
 
     /**
@@ -331,18 +337,20 @@ class Directory extends Node implements IDirectory, IIterable, IMovable, IRename
     private function deleteDirectory($dir) {
 	if (!file_exists($dir))
 	    return true;
-	if (!is_dir($dir) || is_link($dir))
-	    return unlink($dir);
+	if (!is_dir($dir) || is_link($dir)){
+	    @chmod($dir, 0777);
+	    return @unlink($dir);
+	}
 	foreach (scandir($dir) as $item) {
 	    if ($item == '.' || $item == '..')
 		continue;
-	    if (!deleteDirectory($dir . "/" . $item)) {
-		chmod($dir . "/" . $item, 0777);
-		if (!deleteDirectory($dir . "/" . $item))
+	    if (!$this->deleteDirectory($dir . "/" . $item)) {
+		@chmod($dir . "/" . $item, 0777);
+		if (!$this->deleteDirectory($dir . "/" . $item))
 		    return false;
 	    };
 	}
-	return rmdir($dir);
+	return @rmdir($dir);
     }
 
     /* ********************************************************************** */

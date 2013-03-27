@@ -146,8 +146,10 @@ class File extends Node implements IFile,  IMovable, IRenameable, IDeletable {
     
     public function delete() {
 	//throw new \Nette\NotImplementedException;
-	chmod($this->getFullPath(), 0777);
-	unlink($this->getFullPath());
+	@chmod($this->getFullPath(), 0777);
+	if(!@unlink($this->getFullPath())){
+	    throw new \Nette\Application\ForbiddenRequestException;
+	}
     }
     
     /* ********************************************************************** */
