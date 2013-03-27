@@ -230,7 +230,7 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 		    ->setAttribute('class', 'filesManipulation disabled');
 	}
 	
-	if ($this->viewed->isOwner($this->User->Id && $this->User->LoggedIn)) {
+	if ($this->viewed->isOwner($this->User->Id)&& $this->User->LoggedIn) {
 	    $form->addSubmit('move', 'Move')->setHtmlId('filesMove')
 			->setAttribute('class', 'filesManipulation ');
 	    $form->addSubmit('rename', 'Rename')->setHtmlId('filesRename')
