@@ -17,7 +17,7 @@ Limits for creating Zip files (number of files and so...) can be changed in app/
 
 Changelog:
 ---------
-v0.3 alpha
+v0.3 alpha - 28. Mar. 2013
 - Added file operations (delete, move, ...)
 - Ajax is temporary disabled for development
 - Various smaller enahncements
