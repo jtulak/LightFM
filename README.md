@@ -13,9 +13,17 @@ Highlight library is only under GPLv2 so it shouldn't be included under the BSD
 license, but during the initial heavy development I'm keeping it included, once 
 things settle little, I will change it.
 
+Limits for creating Zip files (number of files and so...) can be changed in app/model/IArchiver.
 
 Changelog:
 ---------
+v0.3 alpha
+- Added file operations (delete, move, ...)
+- Ajax is temporary disabled for development
+- Various smaller enahncements
+- Various bugs correct
+
+
 v0.2 alpha
 - Added ajax
 - Various smaller enahncements
