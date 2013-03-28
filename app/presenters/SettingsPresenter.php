@@ -251,7 +251,7 @@ class SettingsPresenter extends BasePresenter {
 	$form->addHidden('timestamp', $this->viewed->Config->Timestamp);
 	$form->addSubmit('save', 'Save');
 	$form->addSubmit('saveAll', 'Save and apply to subdirectories')
-			->getControlPrototype()->data['confirm-settings'] = "true";
+			->getControlPrototype()->data['confirm'] = "This will remove any settings applied in subdirectories, everything will be set to inherite from this directory. Do you want proceed?";
 
 
 	/** Create ownership */
