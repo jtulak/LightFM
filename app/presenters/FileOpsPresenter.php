@@ -296,7 +296,15 @@ class FileOpsPresenter extends BasePresenter {
 	$this->viewed->sortBy();
 	foreach($subdirs as $child){
 	    //for each subdirectory
-	     $tree[$this->viewed->Path."/$child->Name"] = "$child->Name/";
+	    $index=$this->viewed->Path."/$child->Name";
+	    $tree[$index] = 
+		     Nette\Utils\Html::el('option')
+		     ->value($this->viewed->Path."/$child->Name")
+		     ->setHtml("$child->Name/");
+	    
+	    if(in_array($child->Name, $this->itemsArray)){
+	     $tree[$index]->disabled(TRUE);
+	    }
 	}
 	return $tree;
     }
