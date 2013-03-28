@@ -5,7 +5,7 @@ LightFM
 A light file manager and browser written in PHP with Nette framework. 
 Directories can be protected by password from public access and directory owners can upload, move or delete their files. Does not needs any database.
 
-Licensed under New BSD license and also GNU GPLv2 - use what do you need (see LICENSE.txt file)
+Licensed under New BSD license and also GNU GPLv2 - use your preffered one (see LICENSE.txt file)
 
 Note: 
 -----
