@@ -178,8 +178,9 @@ class FileOpsPresenter extends BasePresenter {
     public function actionRename() {
 	
     }
-/**
-     * Create form for creating a new dir
+
+    /**
+     * Create form for renaming 
      * 
      * @author Jan Ťulák<jan@tulak.me>
      * 
@@ -190,12 +191,12 @@ class FileOpsPresenter extends BasePresenter {
 
 	$form = new Nette\Application\UI\Form($this, $name);
 
-	foreach($this->itemsArray as $i=>$item){
+	foreach ($this->itemsArray as $i => $item) {
 	    $form->addText("name_$i", "$item")
-		->setDefaultValue($item)
-		->addRule($form::FILLED, 'You can\'t have empty name')
-		->addRule($form::REGEXP, 'You can\'t name a file as "." or ".."!', '/^([^.]+|\.[^.].*|...+)$/')
-		->addRule($form::REGEXP, 'Symbols \\ and / are forbidden!', '/^[^\/\\\\]+$/');
+		    ->setDefaultValue($item)
+		    ->addRule($form::FILLED, 'You can\'t have empty name')
+		    ->addRule($form::REGEXP, 'You can\'t name a file as "." or ".."!', '/^([^.]+|\.[^.].*|...+)$/')
+		    ->addRule($form::REGEXP, 'Symbols \\ and / are forbidden!', '/^[^\/\\\\]+$/');
 	}
 	$form->addSubmit('submit', 'Rename');
 	$form->addSubmit('storno', 'Storno')
@@ -207,7 +208,7 @@ class FileOpsPresenter extends BasePresenter {
     }
 
     /**
-     * Called after new dir form submit
+     * Called after renaming submit
      * 
      * @author Jan Ťulák<jan@tulak.me>
      * 
@@ -221,25 +222,21 @@ class FileOpsPresenter extends BasePresenter {
 
 	try {
 	    $values = $form->getValues();
-	    
+
 	    if ($form->submitted->name == 'submit') {
-		
-		foreach($this->itemsArray as $i=>$item){
+
+		foreach ($this->itemsArray as $i => $item) {
 		    // skip names without a change
-		    if($values["name_$i"] == $item) continue;
+		    if ($values["name_$i"] == $item)
+			continue;
 		    // and rename
 		    $this->viewed->getChildByName($item)->rename($values["name_$i"]);
 		}
 		$this->flashMessage('Files were renamed.');
 	    }
 	    $this->redirect($this->viewed->Presenter . ':default');
-	    
-	    
-	    
 	} catch (\Nette\Application\ForbiddenRequestException $e) {
 	    $this->flashMessage('Can\'t rename a file. Probably the webserver has no write permissions there.', 'error');
-	    
-	    
 	} catch (\Exception $e) {
 	    if ($e->getCode() === \LightFM\INode::NAME_ALREADY_EXISTS) {
 		$this->flashMessage('A directory or a file with this name already exists!', 'error');
@@ -248,6 +245,7 @@ class FileOpsPresenter extends BasePresenter {
 	    }
 	}
     }
+
     /*     * *************************************************************************
      * 		ACTION MOVE
      * ************************************************************************ */
@@ -300,28 +298,26 @@ class FileOpsPresenter extends BasePresenter {
 	return $uploader->getComponent();
     }
 
-    public  function pluploadSubmitted(Nette\Http\FileUpload $file) {
+    public function pluploadSubmitted(Nette\Http\FileUpload $file) {
 	if (!$this->viewed->isOwner($this->User->Id) || !$this->User->LoggedIn) {
 	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
 	}
-	
-	if($file->isOK()){
+
+	if ($file->isOK()) {
 	    $info = pathinfo($file->name);
-	    
+
 	    // find unused name
-	    for($i=0; 
-		file_exists($this->viewed->FullPath.'/'
-		    .$info['filename'].($i>0?"_$i.":".").$info['extension']);
-		$i++);
-		    
+	    for ($i = 0; file_exists($this->viewed->FullPath . '/'
+			    . $info['filename'] . ($i > 0 ? "_$i." : ".") . $info['extension']); $i++)
+		;
+
 	    // move
-	    $file->move($this->viewed->FullPath.'/'
-		    .$info['filename'].($i>0?"_$i.":".").$info['extension']);
-	}else{
+	    $file->move($this->viewed->FullPath . '/'
+		    . $info['filename'] . ($i > 0 ? "_$i." : ".") . $info['extension']);
+	} else {
 	    throw new Exception('AN_ERROR_OCCURED_ON_FILE_UPLOAD');
 	}
     }
-
 
     /*     * *************************************************************************
      * 		ACTION DOWNLOAD
