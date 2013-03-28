@@ -38,6 +38,13 @@
 	{/if}
 	<link rel="stylesheet" media="screen,projection,tv" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
+	
+	
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.hoverflow.min.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.throttle.min.js"></script>
+	
 	{block head}{/block}
 
 	{if $debug_less}
@@ -138,10 +145,6 @@
 	</div>
 	{include uiDialogs.latte}
 	{block scripts}
-	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.hoverflow.min.js"></script>
-	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.throttle.min.js"></script>
 	<script src="{$basePath}/{= FM_DATA_DIR}/js/nette.ajax.js"></script>
 	<script src="{$basePath}/{= FM_DATA_DIR}/js/history/history.ajax.js"></script>
 	<script src="{$basePath}/{= FM_DATA_DIR}/js/extensions/spinner.ajax.js"></script>

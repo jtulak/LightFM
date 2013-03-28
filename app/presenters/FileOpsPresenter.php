@@ -16,49 +16,46 @@
  * @author Jan Ťulák<jan@tulak.me>
  */
 class FileOpsPresenter extends BasePresenter {
-    
+
     /**
      * @persistent
      */
     public $items;
-    
     protected $itemsArray;
-    
+
     /**
      * @author Jan Ťulák<jan@tulak.me>
      */
     public function startup() {
 	parent::startup();
 	$this->template->viewed = $this->viewed;
-	
+
 	$this->itemsArray = \Nette\Utils\Json::decode($this->items);
-	
-	if($this->itemsArray !== NULL){
+
+	if ($this->itemsArray !== NULL) {
 	    sort($this->itemsArray);
 	}
     }
-    
-    
-    /***************************************************************************
-     *		ACTION DELETE
-     **************************************************************************/
+
+    /*     * *************************************************************************
+     * 		ACTION DELETE
+     * ************************************************************************ */
+
     /**
      * @author Jan Ťulák<jan@tulak.me>
      */
-    public function actionDelete(){
+    public function actionDelete() {
 	$this->template->list = array();
-	
-	foreach($this->itemsArray as $item){
-	    if(is_dir($this->viewed->FullPath.'/'.$item)){
-		$this->template->list [] = $item.'/';
-	    }else{
+
+	foreach ($this->itemsArray as $item) {
+	    if (is_dir($this->viewed->FullPath . '/' . $item)) {
+		$this->template->list [] = $item . '/';
+	    } else {
 		$this->template->list [] = $item;
 	    }
 	}
-	
-	
     }
-    
+
     /**
      * Create form for deletion confirmation
      * 
@@ -73,12 +70,13 @@ class FileOpsPresenter extends BasePresenter {
 
 	$form->addSubmit('delete', 'Delete it');
 	$form->addSubmit('storno', 'Storno');
-	
-	
+
+
 	$form->addProtection('Time limit runs out. Please, try it again.');
 	$form->onSuccess[] = callback($this, 'deleteSubmitted');
 	return $form;
     }
+
     /**
      * Called after delete confirmation form submit
      * 
@@ -87,35 +85,33 @@ class FileOpsPresenter extends BasePresenter {
      * @param Nette\Application\UI\Form $form
      */
     public function deleteSubmitted(Nette\Application\UI\Form $form) {
-	
+
 	if (!$this->viewed->isOwner($this->User->Id) || !$this->User->LoggedIn) {
 	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
 	}
-	
-	try{
-	    if ($form->submitted->name == 'delete'){
+
+	try {
+	    if ($form->submitted->name == 'delete') {
 		$this->viewed->deleteList($this->itemsArray);
 		$this->flashMessage('Files were removed.');
-
 	    }
-	    $this->redirect($this->viewed->Presenter. ':default');
-	}catch(\Nette\Application\ForbiddenRequestException $e){
-		$this->flashMessage('Can\'t delete some files. Probably the files are not owned by the webserver.','error');
+	    $this->redirect($this->viewed->Presenter . ':default');
+	} catch (\Nette\Application\ForbiddenRequestException $e) {
+	    $this->flashMessage('Can\'t delete some files. Probably the files are not owned by the webserver.', 'error');
 	}
     }
-    
-    
-    
-    /***************************************************************************
-     *		ACTION MKDIR
-     **************************************************************************/
+
+    /*     * *************************************************************************
+     * 		ACTION MKDIR
+     * ************************************************************************ */
+
     /**
      * @author Jan Ťulák<jan@tulak.me>
      */
-    public function actionMkdir(){
+    public function actionMkdir() {
 	
     }
-    
+
     /**
      * Create form for creating a new dir
      * 
@@ -128,18 +124,19 @@ class FileOpsPresenter extends BasePresenter {
 
 	$form = new Nette\Application\UI\Form($this, $name);
 
-	$form->addText('name','Dir name')
-	    ->addRule($form::FILLED, 'You can\'t create an empty directory')
-	    ->addRule($form::REGEXP, 'You can\'t name a directory as "." or ".."!','/^([^.]+|\.[^.].*|...+)$/')
-	    ->addRule($form::REGEXP, 'Symbols \\ and / are forbidden!','/^[^\/\\\\]+$/');
+	$form->addText('name', 'Dir name')
+		->addRule($form::FILLED, 'You can\'t create an empty directory')
+		->addRule($form::REGEXP, 'You can\'t name a directory as "." or ".."!', '/^([^.]+|\.[^.].*|...+)$/')
+		->addRule($form::REGEXP, 'Symbols \\ and / are forbidden!', '/^[^\/\\\\]+$/');
 	$form->addSubmit('create', 'Create');
 	$form->addSubmit('storno', 'Storno')
-	    ->setValidationScope(FALSE);
-	
+		->setValidationScope(FALSE);
+
 	$form->addProtection('Time limit runs out. Please, try it again.');
 	$form->onSuccess[] = callback($this, 'mkdirSubmitted');
 	return $form;
     }
+
     /**
      * Called after new dir form submit
      * 
@@ -148,68 +145,123 @@ class FileOpsPresenter extends BasePresenter {
      * @param Nette\Application\UI\Form $form
      */
     public function mkdirSubmitted(Nette\Application\UI\Form $form) {
+
+	if (!$this->viewed->isOwner($this->User->Id) || !$this->User->LoggedIn) {
+	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
+	}
+
+	try {
+	    $values = $form->getValues();
+	    if ($form->submitted->name == 'create') {
+		$this->viewed->mkdir($values['name']);
+		$this->flashMessage('The dir was created.');
+	    }
+	    $this->redirect($this->viewed->Presenter . ':default');
+	} catch (\Nette\Application\ForbiddenRequestException $e) {
+	    $this->flashMessage('Can\'t create the directory. Probably the webserver has no write permissions there.', 'error');
+	} catch (\Exception $e) {
+	    if ($e->getCode() === \LightFM\IDirectory::DIR_ALREADY_EXISTS) {
+		$this->flashMessage('A directory or a file with this name already exists!', 'error');
+	    } else {
+		throw $e;
+	    }
+	}
+    }
+
+    /*     * *************************************************************************
+     * 		ACTION RENAME
+     * ************************************************************************ */
+
+    /**
+     * @author Jan Ťulák<jan@tulak.me>
+     */
+    public function actionRename() {
 	
+    }
+
+    /*     * *************************************************************************
+     * 		ACTION MOVE
+     * ************************************************************************ */
+
+    /**
+     * @author Jan Ťulák<jan@tulak.me>
+     */
+    public function actionMove() {
+	
+    }
+
+    /*     * *************************************************************************
+     * 		ACTION UPLOAD
+     * ************************************************************************ */
+
+    /**
+     * @author Jan Ťulák<jan@tulak.me>
+     */
+    public function actionUpload() {
+	
+    }
+
+    public function createComponentPlupload() {
+	if (!$this->viewed->isOwner($this->User->Id) || !$this->User->LoggedIn) {
+	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
+	}
+
+	// Main object
+	$uploader = new \Echo511\Plupload\Rooftop();
+
+	// Use magic for loading Js and Css?
+	// $uploader->disableMagic();
+	// Configuring paths
+	$uploader->setWwwDir(DATA_ROOT) // Full path to your frontend directory
+		->setBasePath($this->template->basePath) // BasePath provided by Nette
+		->setTempLibsDir(DATA_ROOT . '/' . FM_DATA_DIR . '/plupload/auto'); // Full path to the location of plupload libs (js, css)
+	// Configuring plupload
+	$uploader->createSettings()
+		->setRuntimes(array('html5', 'flash')) // Available: gears, flash, silverlight, browserplus, html5
+		->setMaxFileSize('1000mb')
+		->setMaxChunkSize('1mb'); // What is chunk you can find here: http://www.plupload.com/documentation.php
+	// Configuring uploader
+	$uploader->createUploader()
+		->setTempUploadsDir(DATA_TEMP_FULL) // Where should be placed temporaly files
+		->setToken("_dup") // Resolves file names collisions in temp directory
+		//->setOnSuccess(array($this, 'pluploadSubmitted')); // Callback when upload is successful: returns Nette\Http\FileUpload
+		//->setOnSuccess(callback($this, 'pluploadSubmitted')); // Callback when upload is successful: returns Nette\Http\FileUpload
+		->setOnSuccess($this->pluploadSubmitted); // Callback when upload is successful: returns Nette\Http\FileUpload
+
+	return $uploader->getComponent();
+    }
+
+    public  function pluploadSubmitted(Nette\Http\FileUpload $file) {
 	if (!$this->viewed->isOwner($this->User->Id) || !$this->User->LoggedIn) {
 	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
 	}
 	
-	try{
-	    $values = $form->getValues();
-	    if ($form->submitted->name == 'create'){
-		$this->viewed->mkdir($values['name']);
-		$this->flashMessage('The dir was created.');
-
-	    }
-	    $this->redirect($this->viewed->Presenter. ':default');
-	}catch(\Nette\Application\ForbiddenRequestException $e){
-		$this->flashMessage('Can\'t create the directory. Probably the webserver has no write permissions there.','error');
-	}catch(\Exception $e){
-	    if($e->getCode() === \LightFM\IDirectory::DIR_ALREADY_EXISTS){
-		$this->flashMessage('A directory or a file with this name already exists!','error');
-	    }else{
-		throw $e;
-	    }
-		
+	if($file->isOK()){
+	    $info = pathinfo($file->name);
+	    
+	    // find unused name
+	    for($i=0; 
+		file_exists($this->viewed->FullPath.'/'
+		    .$info['filename'].($i>0?"_$i.":".").$info['extension']);
+		$i++);
+		    
+	    // move
+	    $file->move($this->viewed->FullPath.'/'
+		    .$info['filename'].($i>0?"_$i.":".").$info['extension']);
+	}else{
+	    throw new Exception('AN_ERROR_OCCURED_ON_FILE_UPLOAD');
 	}
     }
-    
-    /***************************************************************************
-     *		ACTION RENAME
-     **************************************************************************/
+
+
+    /*     * *************************************************************************
+     * 		ACTION DOWNLOAD
+     * ************************************************************************ */
+
     /**
      * @author Jan Ťulák<jan@tulak.me>
      */
-    public function actionRename(){
-	
-    }
-    
-    /***************************************************************************
-     *		ACTION MOVE
-     **************************************************************************/
-    /**
-     * @author Jan Ťulák<jan@tulak.me>
-     */
-    public function actionMove(){
-	
-    }
-    
-    /***************************************************************************
-     *		ACTION UPLOAD
-     **************************************************************************/
-    /**
-     * @author Jan Ťulák<jan@tulak.me>
-     */
-    public function actionUpload(){
-	
-    }
-    
-    /***************************************************************************
-     *		ACTION DOWNLOAD
-     **************************************************************************/
-    /**
-     * @author Jan Ťulák<jan@tulak.me>
-     */
-    public function actionDownload(){
+    public function actionDownload() {
 	//dump(\Nette\Utils\Json::decode($items));
 	$this->template->list = $this->items;
     }
@@ -235,23 +287,16 @@ class FileOpsPresenter extends BasePresenter {
 	$httpRequest = $GLOBALS['container']->httpRequest;
 	$httpResponse = $GLOBALS['container']->httpResponse;
 	$list = $httpRequest->getPost('list');
-	
+
 	//$list = array('data1');
-	
 	// now we have list of items to package
 	try {
-	    $response['path'] = $this->getHttpRequest()->url->hostUrl.$this->getHttpRequest()->url->basePath.\LightFM\Archiver::zipCreate($this->viewed, $list);
-	    
-	    
-	    
+	    $response['path'] = $this->getHttpRequest()->url->hostUrl . $this->getHttpRequest()->url->basePath . \LightFM\Archiver::zipCreate($this->viewed, $list);
 	} catch (\Nette\FileNotFoundException $e) {
 	    //  files not found
 	    $httpResponse->setCode(\Nette\Http\Response::S404_NOT_FOUND);
 	    \Nette\Diagnostics\Debugger::log($e->getMessage() . ' in ' . $this->viewed->Path);
 	    $response['error'] = $e->getMessage();
-	    
-	    
-	    
 	} catch (Exception $e) {
 	    //log every exception
 	    \Nette\Diagnostics\Debugger::log($e->getMessage() . ' in ' . $this->viewed->Path);
@@ -283,8 +328,8 @@ class FileOpsPresenter extends BasePresenter {
 
 		case \LightFM\IArchiver::ZIP_LIST_EMPTY:
 		    $response['error'] = "There are no files to create an archive. "
-			    ."Maybe you have tried to download a directory with "
-			    ."forbidden batch downloads?";
+			    . "Maybe you have tried to download a directory with "
+			    . "forbidden batch downloads?";
 		    break;
 
 
@@ -308,4 +353,5 @@ class FileOpsPresenter extends BasePresenter {
 
 	$this->sendResponse(new Nette\Application\Responses\JsonResponse($response));
     }
+
 }
