@@ -307,7 +307,7 @@ class Directory extends Node implements IDirectory, IIterable, IMovable, IRename
     
     public function mkdir($name, $mode = 0777){
 	if(file_exists($this->getFullPath()."/$name")){
-		throw new \Exception('DIR_ALREADY_EXISTS',self::DIR_ALREADY_EXISTS);
+		throw new \Exception('DIR_ALREADY_EXISTS',self::NAME_ALREADY_EXISTS);
 	}
 	
 	if(!mkdir($this->getFullPath()."/$name", $mode)){
@@ -316,6 +316,17 @@ class Directory extends Node implements IDirectory, IIterable, IMovable, IRename
 		throw new \Nette\Application\ForbiddenRequestException;
 	    }
 	}
+    }
+    
+    
+    public function getChildByName($name){
+	$all = $this->getChildren();
+	foreach($all as $child){
+	    if($child->getName(TRUE) === $name){
+		return $child;
+	    }
+	}
+	return NULL;
     }
     
     /* ********************************************************************** */
@@ -371,8 +382,19 @@ class Directory extends Node implements IDirectory, IIterable, IMovable, IRename
     /*                         IRenameable                                    */
     /* ********************************************************************** */
 
+    
     public function rename($newName) {
-	throw new \Nette\NotImplementedException;
+	if(file_exists($this->getParent()->getFullPath()."/$newName")){
+		throw new \Exception('DIR_ALREADY_EXISTS',self::NAME_ALREADY_EXISTS);
+	}
+	
+	if(!rename($this->getFullPath(),$this->getParent()->getFullPath()."/$newName")){
+	    @chmod($this->getParent()->getFullPath(), 0777);
+	    @chmod($this->getFullPath(), 0777);
+	    if(!rename($this->getFullPath(),$this->getParent()->getFullPath()."/$newName")){
+		throw new \Nette\Application\ForbiddenRequestException;
+	    }
+	}
     }
 
 }

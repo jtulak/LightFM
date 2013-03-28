@@ -18,6 +18,7 @@ namespace LightFM;
  */
 interface INode {
 
+    const NAME_ALREADY_EXISTS = 1;
     /**
      * 
      * @author Jan Ťulák<jan@tulak.me>

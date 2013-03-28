@@ -157,7 +157,17 @@ class File extends Node implements IFile,  IMovable, IRenameable, IDeletable {
     /* ********************************************************************** */
     
     public function rename($newName) {
-	throw new \Nette\NotImplementedException;
+	if(file_exists($this->getParent()->getFullPath()."/$newName")){
+		throw new \Exception('FILE_ALREADY_EXISTS',self::NAME_ALREADY_EXISTS);
+	}
+	
+	if(!rename($this->getFullPath(),$this->getParent()->getFullPath()."/$newName")){
+	    @chmod($this->getParent()->getFullPath(), 0777);
+	    @chmod($this->getFullPath(), 0777);
+	    if(!rename($this->getFullPath(),$this->getParent()->getFullPath()."/$newName")){
+		throw new \Nette\Application\ForbiddenRequestException;
+	    }
+	}
     }
     
     

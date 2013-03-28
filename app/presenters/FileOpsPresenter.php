@@ -178,7 +178,76 @@ class FileOpsPresenter extends BasePresenter {
     public function actionRename() {
 	
     }
+/**
+     * Create form for creating a new dir
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param type $name
+     * @return \Nette\Application\UI\Form
+     */
+    protected function createComponentRename($name) {
 
+	$form = new Nette\Application\UI\Form($this, $name);
+
+	foreach($this->itemsArray as $i=>$item){
+	    $form->addText("name_$i", "$item")
+		->setDefaultValue($item)
+		->addRule($form::FILLED, 'You can\'t have empty name')
+		->addRule($form::REGEXP, 'You can\'t name a file as "." or ".."!', '/^([^.]+|\.[^.].*|...+)$/')
+		->addRule($form::REGEXP, 'Symbols \\ and / are forbidden!', '/^[^\/\\\\]+$/');
+	}
+	$form->addSubmit('submit', 'Rename');
+	$form->addSubmit('storno', 'Storno')
+		->setValidationScope(FALSE);
+
+	$form->addProtection('Time limit runs out. Please, try it again.');
+	$form->onSuccess[] = callback($this, 'renameSubmitted');
+	return $form;
+    }
+
+    /**
+     * Called after new dir form submit
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param Nette\Application\UI\Form $form
+     */
+    public function renameSubmitted(Nette\Application\UI\Form $form) {
+
+	if (!$this->viewed->isOwner($this->User->Id) || !$this->User->LoggedIn) {
+	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
+	}
+
+	try {
+	    $values = $form->getValues();
+	    
+	    if ($form->submitted->name == 'submit') {
+		
+		foreach($this->itemsArray as $i=>$item){
+		    // skip names without a change
+		    if($values["name_$i"] == $item) continue;
+		    // and rename
+		    $this->viewed->getChildByName($item)->rename($values["name_$i"]);
+		}
+		$this->flashMessage('Files were renamed.');
+	    }
+	    $this->redirect($this->viewed->Presenter . ':default');
+	    
+	    
+	    
+	} catch (\Nette\Application\ForbiddenRequestException $e) {
+	    $this->flashMessage('Can\'t rename a file. Probably the webserver has no write permissions there.', 'error');
+	    
+	    
+	} catch (\Exception $e) {
+	    if ($e->getCode() === \LightFM\INode::NAME_ALREADY_EXISTS) {
+		$this->flashMessage('A directory or a file with this name already exists!', 'error');
+	    } else {
+		throw $e;
+	    }
+	}
+    }
     /*     * *************************************************************************
      * 		ACTION MOVE
      * ************************************************************************ */

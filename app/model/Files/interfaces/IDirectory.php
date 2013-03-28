@@ -26,7 +26,6 @@ interface IDirectory {
     const ORDER_ASC = FALSE;
     const ORDER_DESC = TRUE;
     
-    const DIR_ALREADY_EXISTS = 1;
 
     /**
      * 
@@ -116,7 +115,19 @@ interface IDirectory {
      * 
      * @param string	$name
      * @param int	$mode [optional] 0777 by default
-     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     * @throws \Nette\Application\ForbiddenRequestException
+     * @throws \Exception
      */
     public function mkdir($name, $mode = 0777);
+    
+    /**
+     * Will find a child with given name
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param string $name
+     * @return \LightFM\INode Founded child or NULL
+     */
+    public function getChildByName($name);
+    
 }

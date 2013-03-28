@@ -23,6 +23,8 @@ interface IRenameable {
      * @author Jan Ťulák<jan@tulak.me>
      * 
      * @param string $newName
+     * @throws \Exception
+     * @throws \Nette\Application\ForbiddenRequestException
      */
     public function rename( $newName);
 
