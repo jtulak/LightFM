@@ -77,7 +77,7 @@
 	    
 		<table>
 		    <tr>
-			<td class="checkbox folder">
+			<td class="checkbox ">
 			    {if $isOwner || $viewed->Config->AllowZip}
 				<input class="fileSelector" type="checkbox" data-name="{$dir->Name}">
 			    {/if}
@@ -93,11 +93,11 @@
 	
 	
 	{foreach $listFiles as $file}
-	<section class="file {$file->IconName}">
+	<section class="file ">
 	    
 		<table>
 		    <tr>
-			<td class="checkbox file {$file->IconName}">
+			<td class="checkbox  {$file->IconName}">
 			    {if $isOwner || $viewed->Config->AllowZip}
 				<input class="fileSelector" type="checkbox" data-name="{$file->Name}{if $file->Suffix}.{$file->Suffix}{/if}">
 			    {/if}

@@ -10,16 +10,6 @@ $(function() {
 
     //computeSizes();
 
-    $(document).on("click", "section.folder, section.file ", function(event) {
-    /* Click on item changes the selection */
-    //$("section.folder,section.file").click(function(event) {
-	event.preventDefault();
-	$(this).find('input[type=checkbox]').click();
-    });
-    $(document).on("click", "section.folder a, section.file a,section.folder input, section.file input", function(e) {
-    //find("a,input").click(function(e) {
-	e.stopPropagation();
-    });
 });
 
 function computeSizes() {

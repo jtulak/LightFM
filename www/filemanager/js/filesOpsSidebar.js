@@ -2,7 +2,8 @@ $(function() {
     // disable/enable file manipulations on change state of select boxes
     
     $(document).on("change", ".fileSelector", function(event) {
-	if($(".fileSelector:checked").length){
+
+	if(this.checked){
 	    // if at least one select box is checked
 	    $(".filesManipulation").removeClass('disabled').removeAttr('disabled');
 	    addToList($(this).attr('data-name'));
@@ -22,25 +23,18 @@ $(function() {
     }
     
     
-    // download preparing message
-    $("#dialog-message-zip-preparing").dialog({
-	modal: true,
-	closeOnEscape: false,
-	autoOpen: false,
-	open: function(event, ui) {
-	    $(".ui-dialog-titlebar-close").hide()
-	}
+    
+    $(document).on("click", "section.folder, section.file, section.image", function(event) {
+    /* Click on item changes the selection */
+    //$("section.folder,section.file").click(function(event) {
+	event.preventDefault();
+	$(this).find('input[type=checkbox]').click();
     });
-    // download ready message
-    $("#dialog-message-zip").dialog({
-	modal: true,
-	autoOpen: false,
-	buttons: {
-	    Close: function() {
-		$(this).dialog("close");
-	    }
-	}
-
+    $(document).on("click", "section.folder a, section.file a, section.image a,\
+			    section.folder input, section.file input,\
+			    section.image input", function(e) {
+    // on the checkbox and the link we want to act normaly without any js..
+	e.stopPropagation();
     });
 
 
@@ -57,6 +51,8 @@ function addToList(data){
         text="[]";
     } 
     var obj = JSON.parse(text);
+    // try to remove before adding to prevent duplicities
+    removeA(obj,data);
     obj.push(data);
     $("#itemsList").attr('value',(JSON.stringify(obj)));  
 }
@@ -72,7 +68,7 @@ function delFromList(data){
         return;
     } 
     var obj = JSON.parse(text);
-    removeA(obj,data);
+    obj=removeA(obj,data);
     $("#itemsList").attr('value',(JSON.stringify(obj)));  
 }
 
@@ -113,13 +109,17 @@ if(!Array.prototype.indexOf) {
     };
 }
 
-function removeA(arr) {
-    var what, a = arguments, L = a.length, ax;
+function removeA(arr,val) {
+    /*var what, a = arguments, L = a.length, ax;
     while (L > 1 && arr.length) {
         what = a[--L];
         while ((ax= arr.indexOf(what)) !== -1) {
             arr.splice(ax, 1);
         }
+    }*/
+    var pos;
+    while((pos = arr.indexOf(val)) != -1){
+	arr.splice(pos,1);
     }
     return arr;
 }
