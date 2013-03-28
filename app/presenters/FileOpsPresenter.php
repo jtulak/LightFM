@@ -24,13 +24,27 @@ class FileOpsPresenter extends BasePresenter {
     
     protected $itemsArray;
     
+    /**
+     * @author Jan Ťulák<jan@tulak.me>
+     */
     public function startup() {
 	parent::startup();
-	$this->itemsArray = \Nette\Utils\Json::decode($this->items);
-	sort($this->itemsArray);
 	$this->template->viewed = $this->viewed;
+	
+	$this->itemsArray = \Nette\Utils\Json::decode($this->items);
+	
+	if($this->itemsArray !== NULL){
+	    sort($this->itemsArray);
+	}
     }
     
+    
+    /***************************************************************************
+     *		ACTION DELETE
+     **************************************************************************/
+    /**
+     * @author Jan Ťulák<jan@tulak.me>
+     */
     public function actionDelete(){
 	$this->template->list = array();
 	
@@ -92,19 +106,109 @@ class FileOpsPresenter extends BasePresenter {
     
     
     
+    /***************************************************************************
+     *		ACTION MKDIR
+     **************************************************************************/
+    /**
+     * @author Jan Ťulák<jan@tulak.me>
+     */
+    public function actionMkdir(){
+	
+    }
     
+    /**
+     * Create form for creating a new dir
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param type $name
+     * @return \Nette\Application\UI\Form
+     */
+    protected function createComponentMkdir($name) {
+
+	$form = new Nette\Application\UI\Form($this, $name);
+
+	$form->addText('name','Dir name')
+	    ->addRule($form::FILLED, 'You can\'t create an empty directory')
+	    ->addRule($form::REGEXP, 'You can\'t name a directory as "." or ".."!','/^([^.]+|\.[^.].*|...+)$/')
+	    ->addRule($form::REGEXP, 'Symbols \\ and / are forbidden!','/^[^\/\\\\]+$/');
+	$form->addSubmit('create', 'Create');
+	$form->addSubmit('storno', 'Storno')
+	    ->setValidationScope(FALSE);
+	
+	$form->addProtection('Time limit runs out. Please, try it again.');
+	$form->onSuccess[] = callback($this, 'mkdirSubmitted');
+	return $form;
+    }
+    /**
+     * Called after new dir form submit
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param Nette\Application\UI\Form $form
+     */
+    public function mkdirSubmitted(Nette\Application\UI\Form $form) {
+	
+	if (!$this->viewed->isOwner($this->User->Id) || !$this->User->LoggedIn) {
+	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
+	}
+	
+	try{
+	    $values = $form->getValues();
+	    if ($form->submitted->name == 'create'){
+		$this->viewed->mkdir($values['name']);
+		$this->flashMessage('The dir was created.');
+
+	    }
+	    $this->redirect($this->viewed->Presenter. ':default');
+	}catch(\Nette\Application\ForbiddenRequestException $e){
+		$this->flashMessage('Can\'t create the directory. Probably the webserver has no write permissions there.','error');
+	}catch(\Exception $e){
+	    if($e->getCode() === \LightFM\IDirectory::DIR_ALREADY_EXISTS){
+		$this->flashMessage('A directory or a file with this name already exists!','error');
+	    }else{
+		throw $e;
+	    }
+		
+	}
+    }
+    
+    /***************************************************************************
+     *		ACTION RENAME
+     **************************************************************************/
+    /**
+     * @author Jan Ťulák<jan@tulak.me>
+     */
     public function actionRename(){
 	
     }
     
+    /***************************************************************************
+     *		ACTION MOVE
+     **************************************************************************/
+    /**
+     * @author Jan Ťulák<jan@tulak.me>
+     */
     public function actionMove(){
 	
     }
     
+    /***************************************************************************
+     *		ACTION UPLOAD
+     **************************************************************************/
+    /**
+     * @author Jan Ťulák<jan@tulak.me>
+     */
     public function actionUpload(){
 	
     }
     
+    /***************************************************************************
+     *		ACTION DOWNLOAD
+     **************************************************************************/
+    /**
+     * @author Jan Ťulák<jan@tulak.me>
+     */
     public function actionDownload(){
 	//dump(\Nette\Utils\Json::decode($items));
 	$this->template->list = $this->items;

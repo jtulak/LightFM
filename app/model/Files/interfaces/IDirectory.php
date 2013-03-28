@@ -25,6 +25,8 @@ interface IDirectory {
     const ORDER_DATE = 'date';
     const ORDER_ASC = FALSE;
     const ORDER_DESC = TRUE;
+    
+    const DIR_ALREADY_EXISTS = 1;
 
     /**
      * 
@@ -105,4 +107,16 @@ interface IDirectory {
      * @param array $list
      */
     public function deleteList($list);
+    
+    
+    /**
+     * Will create a subdirectory.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param string	$name
+     * @param int	$mode [optional] 0777 by default
+     * @return bool <b>TRUE</b> on success or <b>FALSE</b> on failure.
+     */
+    public function mkdir($name, $mode = 0777);
 }

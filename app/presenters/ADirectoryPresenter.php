@@ -271,8 +271,10 @@ abstract class ADirectoryPresenter extends BasePresenter implements IDirectoryPr
 	    $this->redirect('fileOps:rename',array('items'=>$values['items']));
 	}else if ($form->submitted->name == 'upload') {
 	    $this->redirect('fileOps:upload',array('items'=>$values['items']));
-	}if ($form->submitted->name == 'download') {
+	}else if ($form->submitted->name == 'download') {
 	    $this->redirect('fileOps:download',array('items'=>$values['items']));
+	}elseif ($form->submitted->name == 'mkdir') {
+	    $this->redirect('fileOps:mkdir');
 	}
 	//throw new \Nette\NotImplementedException;
     }

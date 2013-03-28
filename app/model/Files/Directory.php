@@ -304,6 +304,20 @@ class Directory extends Node implements IDirectory, IIterable, IMovable, IRename
 	}
     }
 
+    
+    public function mkdir($name, $mode = 0777){
+	if(file_exists($this->getFullPath()."/$name")){
+		throw new \Exception('DIR_ALREADY_EXISTS',self::DIR_ALREADY_EXISTS);
+	}
+	
+	if(!mkdir($this->getFullPath()."/$name", $mode)){
+	    @chmod($this->getFullPath(), 0777);
+	    if(!mkdir($this->getFullPath()."/$name", $mode)){
+		throw new \Nette\Application\ForbiddenRequestException;
+	    }
+	}
+    }
+    
     /* ********************************************************************** */
     /*                         IMovable                                       */
     /* ********************************************************************** */

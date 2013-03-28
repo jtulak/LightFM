@@ -1,0 +1,41 @@
+{** 
+ * @param LightFM\File $viewed
+ * @param string $list - json string
+ *}
+
+{block subtitle}Download{/block}
+{block subtitleClass}{/block}
+
+{block content}
+<div id="fileOps-view">
+    
+    <div class="buttons">
+	<a  class="button back"  n:href="List:default, path=>$viewed->Path">Back to the directory</a>
+	
+	<div class="cleaner"></div>
+    </div>
+    <div class="content ">
+	    <h4>Enter the name of the new directory:</h4>
+	    {control mkdir}
+	    <p class='small'>Note: If the directory name begins with a dot (.example), the directory will be hidden.</p>
+    </div>
+    
+</div>
+{/block}
+
+
+{block scripts}
+{include #parent}
+	{*<script src="{$basePath}/{= FM_DATA_DIR}/js/filesOpsDownload.js"></script>*}
+{/block}
+
+
+{block head}
+{if $debug_less}
+<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.less" />
+{else}
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.css">
+{/if}
+<style>
+</style>
+{/block}
