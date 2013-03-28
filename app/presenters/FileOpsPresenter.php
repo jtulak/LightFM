@@ -154,9 +154,16 @@ class FileOpsPresenter extends BasePresenter {
 	    $values = $form->getValues();
 	    if ($form->submitted->name == 'create') {
 		$this->viewed->mkdir($values['name']);
-		$this->flashMessage('The dir was created.');
+		//$this->flashMessage('The directory "'.$values['name'].'" was created.');
+		
+		
+		$message = \Nette\Utils\Html::el('p');
+		$message->add(\Nette\Utils\Html::el('span','The directory '));
+		$message->add(\Nette\Utils\Html::el('i',$values['name']));
+		$message->add(\Nette\Utils\Html::el('span',' was created.'));
+		$this->flashMessage($message);
 	    }
-	    $this->redirect($this->viewed->Presenter . ':default');
+	    $this->redirect($this->viewed->Presenter . ':default',array('path'=>$this->viewed->Path.'/'.$values['name']));
 	} catch (\Nette\Application\ForbiddenRequestException $e) {
 	    $this->flashMessage('Can\'t create the directory. Probably the webserver has no write permissions there.', 'error');
 	} catch (\Exception $e) {

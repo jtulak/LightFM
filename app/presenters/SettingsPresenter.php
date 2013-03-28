@@ -444,7 +444,7 @@ class SettingsPresenter extends BasePresenter {
 
 	// TODO test for safe chars!
 
-	$this->redirect('this');
+	$this->redirect($this->viewed->Presenter . ':default');
     }
 
 }
