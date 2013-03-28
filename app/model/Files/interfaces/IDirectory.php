@@ -95,7 +95,7 @@ interface IDirectory {
      * @param booolean $order
      * @return \LightFM\IDirectory - provides fluid interface 
      */
-    public function sortBy($orderBy, $order);
+    public function sortBy($orderBy = self::ORDER_FILENAME, $order = self::ORDER_ASC);
     
     
     /**

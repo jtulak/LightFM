@@ -246,7 +246,7 @@ class Directory extends Node implements IDirectory, IIterable, IMovable, IRename
      * @param booolean $order
      * @return \LightFM\IDirectory - provides fluid interface 
      */
-    public function sortBy($orderBy, $order) {
+    public function sortBy($orderBy = self::ORDER_FILENAME, $order = self::ORDER_ASC) {
 	$this->listDirsObj = $this->sortList($this->getSubdirs(), $orderBy, $order);
 	$this->listFilesObj = $this->sortList($this->getFiles(), $orderBy, $order);
 	return $this;
@@ -334,7 +334,18 @@ class Directory extends Node implements IDirectory, IIterable, IMovable, IRename
     /* ********************************************************************** */
 
     public function move($targetDir) {
-	throw new \Nette\NotImplementedException;
+	$newPath="$targetDir/".$this->getName(TRUE);
+	if(file_exists($newPath)){
+		throw new \Exception('DIR_ALREADY_EXISTS',self::NAME_ALREADY_EXISTS);
+	}
+	
+	if(!rename($this->getFullPath(),$newPath)){
+	    @chmod($targetDir, 0777);
+	    @chmod($this->getFullPath(), 0777);
+	    if(!rename($this->getFullPath(),$newPath)){
+		throw new \Nette\Application\ForbiddenRequestException;
+	    }
+	}
     }
 
     /* ********************************************************************** */

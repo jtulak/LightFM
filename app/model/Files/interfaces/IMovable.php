@@ -22,7 +22,7 @@ interface IMovable {
      * 
      * @author Jan Ťulák<jan@tulak.me>
      * 
-     * @param \LightFM\IDirectory $targetDir
+     * @param string $targetDir	Full path to the targeted directory
      */
     public function move($targetDir);
 

@@ -1,0 +1,45 @@
+{** 
+ * @param LightFM\File $viewed
+ * @param string $list - json string
+ *}
+
+{block subtitle}Move{/block}
+{block subtitleClass}move{/block}
+
+{block content}
+<div id="fileOps-view">
+    
+    <div class="buttons">
+	<a  class="button back"  n:href="List:default, path=>$viewed->Path">Back to the directory</a>
+	
+	<div class="cleaner"></div>
+    </div>
+    <div class="content ">
+	    <h4>Select new location:</h4>
+	    {control move}
+	    <h4>Files which will be moved:</h4>
+	    <ul id='move-list' n:foreach='$list as $item'>
+		<li>{$item}
+	    </ul>
+	    <p class='small'>Note: If the name begins with a dot (.example), the file will be hidden.</p>
+    </div>
+    
+</div>
+{/block}
+
+
+{block scripts}
+{include #parent}
+	{*<script src="{$basePath}/{= FM_DATA_DIR}/js/filesOpsDownload.js"></script>*}
+{/block}
+
+
+{block head}
+{if $debug_less}
+<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.less" />
+{else}
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.css">
+{/if}
+<style>
+</style>
+{/block}

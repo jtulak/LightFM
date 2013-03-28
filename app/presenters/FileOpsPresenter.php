@@ -160,7 +160,7 @@ class FileOpsPresenter extends BasePresenter {
 	} catch (\Nette\Application\ForbiddenRequestException $e) {
 	    $this->flashMessage('Can\'t create the directory. Probably the webserver has no write permissions there.', 'error');
 	} catch (\Exception $e) {
-	    if ($e->getCode() === \LightFM\IDirectory::DIR_ALREADY_EXISTS) {
+	    if ($e->getCode() === \LightFM\INode::NAME_ALREADY_EXISTS) {
 		$this->flashMessage('A directory or a file with this name already exists!', 'error');
 	    } else {
 		throw $e;
@@ -254,7 +254,106 @@ class FileOpsPresenter extends BasePresenter {
      * @author Jan Ťulák<jan@tulak.me>
      */
     public function actionMove() {
+	$this->template->list = array();
+
+	foreach ($this->itemsArray as $item) {
+	    if (is_dir($this->viewed->FullPath . '/' . $item)) {
+		$this->template->list [] = $item . '/';
+	    } else {
+		$this->template->list [] = $item;
+	    }
+	}
+    }
+    
+    /**
+     * Will create the array for moving selectbox.
+     * As a key it place path relatively from the DATA_ROOT.
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @return array
+     */
+    private function createMoveTree(){
+	$tree = array();
 	
+	if($this->viewed->Parent && $this->viewed->Parent->isOwner($this->User->Id)){
+	    // if there is an parent directory and the user is its owner
+	    $tree[$this->viewed->Parent->Path] = 'Parent directory [../]';
+	}
+	
+	$subdirs = $this->viewed->Subdirs;
+	
+	if (!$this->showHidden)
+	    $this->removeHidden($subdirs);
+	
+	$this->viewed->sortBy();
+	foreach($subdirs as $child){
+	    //for each subdirectory
+	     $tree[$this->viewed->Path."/$child->Name"] = "$child->Name/";
+	}
+	return $tree;
+    }
+    
+    /**
+     * Create form for renaming 
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param type $name
+     * @return \Nette\Application\UI\Form
+     */
+    protected function createComponentMove($name) {
+
+	$form = new Nette\Application\UI\Form($this, $name);
+
+	$form->addSelect('target', NULL, $this->createMoveTree())
+		->setPrompt('Select new directory')
+		    ->addRule($form::FILLED, 'You have to select a path!');
+	$form->addSubmit('submit', 'Move');
+	$form->addSubmit('storno', 'Storno')
+		->setValidationScope(FALSE);
+
+	$form->addProtection('Time limit runs out. Please, try it again.');
+	$form->onSuccess[] = callback($this, 'moveSubmitted');
+	return $form;
+    }
+
+    /**
+     * Called after moving submit
+     * 
+     * @author Jan Ťulák<jan@tulak.me>
+     * 
+     * @param Nette\Application\UI\Form $form
+     */
+    public function moveSubmitted(Nette\Application\UI\Form $form) {
+
+	if (!$this->viewed->isOwner($this->User->Id) || !$this->User->LoggedIn) {
+	    throw new Nette\Application\ForbiddenRequestException('NOT_OWNER', 401);
+	}
+
+	try {
+	    $values = $form->getValues();
+
+	    if ($form->submitted->name == 'submit') {
+		    
+		foreach ($this->itemsArray as $i => $item) {
+		    // 
+		    $this->viewed->getChildByName($item)->move(DATA_ROOT.'/'.$values['target']);
+		}
+		$this->flashMessage('Files were moved.');
+		
+	    }
+	    // redirect to the new targeted dir
+	    $this->redirect($this->viewed->Presenter . ':default', array('path'=>$values['target']));
+	} catch (\Nette\Application\ForbiddenRequestException $e) {
+	    $this->flashMessage('Can\'t rename a file. Probably the webserver has no write permissions there.', 'error');
+	} catch (\Exception $e) {
+	    if ($e->getCode() === \LightFM\INode::NAME_ALREADY_EXISTS) {
+		$this->flashMessage('A directory or a file with this name already exists!', 'error');
+	    } else {
+		throw $e;
+	    }
+	}
     }
 
     /*     * *************************************************************************
