@@ -24,6 +24,8 @@
 
 {block scripts}
 {include #parent}
+	{<script src="{$basePath}/{= FM_DATA_DIR}/plupload/js/plupload.full.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/plupload/js/jquery.ui.plupload.js"></script>
 {/block}
 
 
@@ -33,6 +35,8 @@
 {else}
 <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.css">
 {/if}
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/plupload/css/jquery.plupload.queue.css">
+<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/plupload/css/jquery.ui.plupload.css">
 <style>
 </style>
 {/block}

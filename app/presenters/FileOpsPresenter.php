@@ -391,11 +391,11 @@ class FileOpsPresenter extends BasePresenter {
 	$uploader = new \Echo511\Plupload\Rooftop();
 
 	// Use magic for loading Js and Css?
-	// $uploader->disableMagic();
+	$uploader->disableMagic();
 	// Configuring paths
 	$uploader->setWwwDir(DATA_ROOT) // Full path to your frontend directory
 		->setBasePath($this->template->basePath) // BasePath provided by Nette
-		->setTempLibsDir(DATA_ROOT . '/' . FM_DATA_DIR . '/plupload/auto'); // Full path to the location of plupload libs (js, css)
+		->setTempLibsDir(DATA_ROOT . '/' . FM_DATA_DIR . '/plupload/'); // Full path to the location of plupload libs (js, css)
 	// Configuring plupload
 	$uploader->createSettings()
 		->setRuntimes(array('html5', 'flash')) // Available: gears, flash, silverlight, browserplus, html5
