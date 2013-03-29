@@ -17,7 +17,7 @@
  */
 class GalleryPresenter extends ADirectoryPresenter {
 
-    const DISPLAY_NAME = 'Only Images';
+    const DISPLAY_NAME = 'Images Only';
     const ORDER = 1;
 
     /**
