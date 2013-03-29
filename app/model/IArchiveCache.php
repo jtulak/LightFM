@@ -8,6 +8,8 @@
  * the file license.txt that was distributed with this source code.
  */
 namespace LightFM;
+define('CACHE_DIR_FULL', DATA_TEMP_FULL.'/download_cache/');
+define('CACHE_DIR', DATA_TEMP.'/download_cache/');
 /**
  * Description of ArchiveCache
  *
@@ -28,11 +30,11 @@ interface IArchiveCache {
     /**
      * Directory with the cache
      */
-    const CACHE_DIR_FULL=DATA_TEMP_FULL;
+    const CACHE_DIR_FULL=CACHE_DIR_FULL;
     /**
      * Directory with the cache
      */
-    const CACHE_DIR=DATA_TEMP;
+    const CACHE_DIR=CACHE_DIR;
     
     /**
      * Will add a new item to the cache. If it already exists, only extend its

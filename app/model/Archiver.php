@@ -187,7 +187,6 @@ class Archiver implements IArchiver {
     private static function zipMake($root, $files) {
 	// As the zip is created with pathes from the current dir
 	chdir($root);
-	$fullList = $files;
 	$fullList = array();
 	foreach ($files as $item) {
 	    if (is_dir($root . "/" . $item)) {
