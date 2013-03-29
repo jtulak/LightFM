@@ -4,27 +4,35 @@
 # If you don't protect this directory from direct web access, anybody will be able to see your passwords.
 # http://nette.org/security-warning
 #
+# You can use spaces or tabs for intendation, but not both at once!
+#
 common:
 	parameters:
 		dirConfig: '.filemanager.ini'
 		defaults:
 			accessPassword: ''
 			allowZip: false
-			modes:
-				- List
-				- Gallery
 			blacklist:
 				- "/filemanager"
-				- "/temp"
 				- ".filemanager.ini"
 				- ".htaccess"
 				- ".htpasswd"
 			#	- "blacklisted"
 
+			# You can disable one of these modes if you for example
+			# don't want to allow to use the gallery
+			modes:
+				- List
+				- Gallery
+
 	php:
 		date.timezone: Europe/Prague
 		# zlib.output_compression: yes
 
+
+################################################################################
+#	DO NOT EDIT BEHIND THIS
+################################################################################
 	nette:
 		application:
 			errorPresenter: Error
