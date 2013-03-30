@@ -16,9 +16,15 @@ lightFM.sidebar = new function (){
     this.toggle = function(){
 	var sidebarContent = $("#sidebar-content");
 	if(sidebarContent.width() == 0){
-	    sidebarContent.animate({'width':$(".sidebar-content-width").width()},200);
+	    sidebarContent.animate({'width':$(".sidebar-content-width").width()},200,function(){
+		lightFM.resized();
+	    
+	    });
 	}else{
-	    sidebarContent.animate({'width':0},200);
+	    sidebarContent.animate({'width':0},200,function(){
+		lightFM.resized();
+	    
+	    });
 	}
 	// simulate the resize event
 	lightFM.resized();
