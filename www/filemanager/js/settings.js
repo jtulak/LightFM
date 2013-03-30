@@ -1,11 +1,12 @@
 
 lightFM.settings = new function(){
     this.formToggle = function(){
+	var t=this;
 	$(".form-toggler input[type=checkbox]").each(function() {
-	    formToggle_one(this);
+	    t.formToggle_one(this);
 	});
     };
-    this.formToggle_one = function(){
+    this.formToggle_one = function(el){
 	// that do something on change
 	if (el.checked) {
 	    // find closest parent with class and find all inputs in it
@@ -41,7 +42,7 @@ lightFM.addOnLoadCallback(function(){
     /* toggler for enabling/disabling part of the form */
     // for each checkbox with class .form-toggler set and event
     $(document).on("change", ".form-toggler input[type=checkbox] ", function() {
-	formToggle(this);
+	lightFM.settings.formToggle(this);
 
     });
     $.nette.ext('formToggler', {

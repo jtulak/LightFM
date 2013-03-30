@@ -137,13 +137,13 @@
 
 {block scripts}
 {include #parent}
-<script type="text/javascript" src="{$basePath}/{= FM_DATA_DIR}/js/settings.js"></script>
+<script type="text/javascript" src="{$basePath}/{= FM_DATA_DIR}/js/settings.js"></script>{**}
 {/block}
 
 
 {block head}
 {if $debug_less}
-<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/settings.less" />
+<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/settings.less" />{**}
 {else}
 <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/settings.css">
 {/if}

@@ -19,7 +19,7 @@
 
 
 	<div style="clear:both"></div>
-	<div class="content" id='image-content'>
+	<div class="content" id='image-content' data-ajax={if $isAjax}"true"{else}"false"{/if}>
 	    {snippet image}
 		<img id='image' alt="{$viewed->Name}" src="{link Image:thumbnail, path=>$viewed->Path,crop=>true,bigSide=>880}" />
 		<a n:if="$prevImage !== NULL" n:href='this, path=>$prevImage->Path' title='Previous' class='ajax pager prev'><i></i></a>
@@ -64,7 +64,7 @@
 
 {block scripts}
 {include #parent}
-<script src="{$basePath}/{= FM_DATA_DIR}/js/imageFile.js"></script>
+<script src="{$basePath}/{= FM_DATA_DIR}/js/imageFile.js"></script>{**}
 {/block}
 
 

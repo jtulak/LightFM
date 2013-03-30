@@ -19,6 +19,8 @@ function LightFM(){
 	 */
 	this.sidebar = null;
 	this.settings = null;
+	
+	this.ajaxEnabled = false;
 	/****************
 	 * public methods
 	 */
@@ -93,7 +95,7 @@ $(function() {
  * Enabling AJAX
  */
 lightFM.addOnLoadCallback(function(){
-    if($('body').attr('data-no-ajax')){
+    if($('body').attr('data-no-ajax') || !lightFM.ajaxEnabled){
 	console.log('no ajax');
     }else{
 	console.log('ajax');
