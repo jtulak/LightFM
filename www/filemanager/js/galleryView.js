@@ -10,7 +10,6 @@ lightFM.gallery = new function() {
 	minMargin = $("#one-em").width();
 	width = $(wrapper).innerWidth();
 	itemWidth = $("section.image").width() + minMargin ;
-console.log(itemWidth+" - "+itemWidth*4+" - "+width);
 	// switch the width
 	if (width < 2 * itemWidth) {
 	    $(wrapper).addClass("col1");
