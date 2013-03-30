@@ -120,7 +120,9 @@ $(function() {
  * Handling of page hight change
  */
 lightFM.addOnResizeCallback(function(){
-
+	    // at first test that we are somewhere where it is possible to resize
+	    if(typeof $("#data").offset() == "undefined") return;
+	    
 	    var minHeight = $("#one-em").height()*20;
 	    var header=$("#data").offset().top;
 	    var footer=$("#footer").height();

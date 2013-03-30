@@ -59,6 +59,15 @@ lightFM.image = new function() {
     
 }
 
+/**
+ * scroll to image
+ */
+lightFM.addOnLoadCallback(function() {
+    if(window.location.hash == "#title") return;
+    $('html, body').animate({
+         scrollTop: $("#title").offset().top
+     }, 500);
+});
 
 
 /**
