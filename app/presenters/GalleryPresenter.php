@@ -20,6 +20,13 @@ class GalleryPresenter extends ADirectoryPresenter {
     const DISPLAY_NAME = 'Images Only';
     const ORDER = 1;
 
+    
+    
+    public function startup() {
+	parent::startup();
+	$this->template->showSidebar = $this->getUser()->isLoggedIn() || (!empty($this->viewed) && $this->viewed->Config->AllowZip);
+    }
+    
     /**
      * Only ajax
      * 

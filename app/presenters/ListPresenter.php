@@ -20,6 +20,13 @@ class ListPresenter extends ADirectoryPresenter {
     const DISPLAY_NAME = 'All files';
     const ORDER = 0;
 
+    
+    public function startup() {
+	parent::startup();
+	$this->template->showSidebar = $this->getUser()->isLoggedIn() || (!empty($this->viewed) && $this->viewed->Config->AllowZip);
+    }
+
+
     /**
      * Sort files and subdirs, hide hidden (if wanted).
      * 
