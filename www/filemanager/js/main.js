@@ -1,27 +1,108 @@
+
+
+
+/** **********************************************************************
+ *  LightFM Object
+ ** **********************************************************************/
+var lightFM = null;
+
+function LightFM(){
+	REVISION = "1";
+	
+	/*******************
+	 * private variables
+	 */
+	this._onLoadCallbacks = new Array();
+	
+	/******************
+	 * public variables
+	 */
+	this.sidebar = null;
+	this.settings = null;
+	/****************
+	 * public methods
+	 */
+	
+	/**
+	 * Add a function to be called once the page is loaded
+	 * 
+	 * @param {function} fn
+	 * @returns {undefined}
+	 */
+	this.addOnLoadCallback = function (fn){
+	    if(typeof fn != "function") throw "Error: Callback must be a function!";
+	    
+	    this._onLoadCallbacks.push(fn);
+	}
+	
+	/**
+	 * Will call all onLoad callbacks
+	 * @returns {LightFM}
+	 */
+	this.loaded = function(){
+	    var length = this._onLoadCallbacks.length;
+	    for (var i = 0; i < length; i++) {
+	      this._onLoadCallbacks[i]();
+	    }
+	    return this;
+	}
+};
+
+
 /**
- * This array of callbacks is called after finishing the animation of hiding/showing 
- * @type Array
+ * Arrays special thing
  */
-var sidebarOnChangeAfter = new Array();
+
+/** IE8 and below */
+if(!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function(what, i) {
+        i = i || 0;
+        var L = this.length;
+        while (i < L) {
+            if(this[i] === what) return i;
+            ++i;
+        }
+        return -1;
+    };
+}
+function removeA(arr,val) {
+    var pos;
+    while((pos = arr.indexOf(val)) != -1){
+	arr.splice(pos,1);
+    }
+    return arr;
+}
+
 /**
- * This array of callbacks is called before calling the animation of hiding/showing 
- * @type Array
+ * Initialization
  */
-var sidebarOnChangeBefore = new Array();
-/**
- * This array of callbacks is called during the animation of hiding/showing.
- * it is called each 50 ms;
- * @type Array
- */
-var sidebarOnChangeDuring = new Array();
-var sidebarOnChangeDuringTimer;
+
+lightFM = new LightFM();
+
 $(function() {
-    
+    // call callbacks
+    lightFM.loaded();
+});
+/*******************************************************************************
+ * OnLoad adding
+ ******************************************************************************/
+
+
+
+/**
+ * Enabling AJAX
+ */
+lightFM.addOnLoadCallback(function(){
     if($('body').attr('data-no-ajax')){
 	console.log('no ajax');
     }else{
 	console.log('ajax');
-	unsetAjaxOnBadBrowsers();
+	
+	// Unset on bad browsers
+	if (!(window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))) {
+	    $('.ajax').removeClass('ajax');
+	}
+	
 	//$.nette.init();
 	$.nette.ext('history').cache = false;
 	$('.no-ajax').off('click.nette');
@@ -35,79 +116,23 @@ $(function() {
 	    }
 	});
     }
+});
 
-    /** 
-     * showing/hiding the sidebar
-     */
-    $(document).on("click", "#sidebar-control ", function() {
-	//$("#sidebar-control ").click(function(){
-	// test if it is hidden or not
-	var width = $(".sidebar-content-width").width();
-	var sidebar = $("#sidebar-content");
-
-	// at first call callbacks Before
-	forEachCallback(sidebarOnChangeBefore);
-	// and during
-	sidebarOnChangeDuringTimer = setInterval(function() {
-	    forEachCallback(sidebarOnChangeDuring);
-	}, 50);
-
-
-	if (sidebar.width() != 0) {
-	    // if the sidebar is hidden show it
-	    sidebar.animate({'width': '0'}, 200, function() {
-		// call callbacks After and disable during
-		forEachCallback(sidebarOnChangeAfter);
-		// delay for ensuring that the callbacks will be called also after
-		// finishing
-		setTimeout(function() {
-		    clearInterval(sidebarOnChangeDuringTimer)
-		}, 50);
-	    });
-	    //sidebar.children().animate({'width':'0'},200).hide(200);
-	} else {
-	    // else hide it
-	    sidebar.animate({width: width}, 200, function() {
-		// call callbacks After and disable during
-		forEachCallback(sidebarOnChangeAfter);
-		// delay for ensuring that the callbacks will be called also after
-		// finishing
-		setTimeout(function() {
-		    clearInterval(sidebarOnChangeDuringTimer)
-		}, 50);
-	    });
-	    //sidebar.children().css({'width':width}).show(200);
-
-	}
-    }).hover(function(e) {
-	// http://www.2meter3.de/code/hoverFlow/
-	$(this).hoverFlow(e.type, {'opacity': 1}, 'fast');
-    }, function(e) {
-	$(this).hoverFlow(e.type, {opacity: 0.6}, 'fast');
-    });
-
-
-
-    /************************************************************************/
-
-
-
-
-    /*
-     * enabling scrolling sidebar
-     */
-    //$(".for-fixed").addClass("fixed");
-    /* sidebarFixing();
-     $(window).scroll(function(){
-     sidebarFixing();
-     });*/
-
+/**
+ * Disabling links with "disabled" class
+ */
+lightFM.addOnLoadCallback(function(){
     // disable disabled links
     $(document).on("click", "a.disabled ", function() {
 	//$("a.disabled").click(function(event){
 	event.preventDefault();
     });
+});
 
+/**
+ * Enabling the javascript confirmation on elements.
+ */
+lightFM.addOnLoadCallback(function(){
     $.fn.extend({
         triggerAndReturn: function (name, data) {
             var event = new $.Event(name);
@@ -115,7 +140,6 @@ $(function() {
             return event.result !== false;
         }
     });
-
    //$('a[data-confirm], button[data-confirm], input[data-confirm]').live('click', function (e) {
    $(document).on('click','a[data-confirm], button[data-confirm], input[data-confirm]', function(e){
        console.log("a");
@@ -126,62 +150,7 @@ $(function() {
             }
         }
     });
-
 });
 
-function unsetAjaxOnBadBrowsers() {
-    if (!(window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))) {
-	$('.ajax').removeClass('ajax');
-    }
-}
-
-/**
- * scrolling sidebar
- * 
- */
-function sidebarFixing() {
-//    var sidebar = $("#sidebar");
-//    // break if sidebar has nothing inside
-//    if(typeof sidebar.children('.border').offset() === 'undefined') return;
-//    
-//    var fixed = $(".fixed");
-//	
-//    var offset = sidebar.offset().top;
-//    /** menu */
-//    if($(window).height() > fixed.height()+offset){
-//	// if there is enough of space, then we can have the bar fixed
-//	fixed.css({"position":"fixed","top":Math.max(offset-$(this).scrollTop(),0)});
-//
-//    }else{
-//	// protection for small screens where some buttons could become inaccesible
-//	// so there keep the scrollbar static
-//	fixed.css({"position":"relative", "top":0});
-//    }
-//    
-//    
-//    var middle = fixed.offset().top+offset;
-//    //console.log(middle);
-//    /** control (the arrow on the side) */
-//    /*var middle = Math.max(
-//	    $(this).scrollTop()+$(window).height()/2-offset,
-//	    80
-//	);
-//    */
-//    $("#sidebar-controll").height(sidebar.height()).css({'background-position':'100% '+middle+'px'})
-//    .find(".gradient").height(sidebar.height());
-
-}
 
 
-
-
-function forEachCallback(arr) {
-    if (typeof arr !== 'object')
-	return;
-    var l = arr.length;
-    for (var i = 0; i < l; i++) {
-	if (typeof arr[i] === 'function') {
-	    arr[i]();
-	}
-    }
-}

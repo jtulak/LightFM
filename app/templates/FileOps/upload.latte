@@ -24,14 +24,14 @@
 
 {block scripts}
 {include #parent}
-	{<script src="{$basePath}/{= FM_DATA_DIR}/plupload/js/plupload.full.js"></script>
-	<script src="{$basePath}/{= FM_DATA_DIR}/plupload/js/jquery.ui.plupload.js"></script>
+	{*<script src="{$basePath}/{= FM_DATA_DIR}/plupload/js/plupload.full.js"></script>
+	<script src="{$basePath}/{= FM_DATA_DIR}/plupload/js/jquery.ui.plupload.js"></script>{**}
 {/block}
 
 
 {block head}
 {if $debug_less}
-<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.less" />
+{*<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.less" />{**}
 {else}
 <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.css">
 {/if}

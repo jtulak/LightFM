@@ -1,6 +1,7 @@
 {** 
  * @param LightFM\File $viewed
  * @param string $list - json string
+ * @param bool	$isAjax
  *}
 
 {block subtitle}Download{/block}
@@ -37,18 +38,33 @@
     </div>
     
 </div>
+{if $isAjax}
+<script>
+    lightFM.fileops.download.filesDownload($("#download-link"));
+</script>
+{/if}
+
 {/block}
 
 
 {block scripts}
 {include #parent}
-	<script src="{$basePath}/{= FM_DATA_DIR}/js/filesOpsDownload.js"></script>
+	{*<script src="{$basePath}/{= FM_DATA_DIR}/js/filesOpsDownload.js"></script> {**}
+
+{if !$isAjax}
+    <script>
+	
+lightFM.addOnLoadCallback(function() {
+    lightFM.fileops.download.filesDownload($("#download-link"));
+});
+    </script>
+{/if}
 {/block}
 
 
 {block head}
 {if $debug_less}
-<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.less" />
+{*<link rel="stylesheet/less" type="text/css" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.less" />{**}
 {else}
 <link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.css">
 {/if}

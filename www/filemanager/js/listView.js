@@ -1,5 +1,5 @@
 $(function() {
-    // dynamic resize of name
+  /*  // dynamic resize of name
     $(window).resize(function() {
 	nameWidthResize();
 	//computeSizes();
@@ -7,7 +7,7 @@ $(function() {
     sidebarOnChangeDuring.push(function() {
 	nameWidthResize();
     });
-
+*/
     //computeSizes();
 
 });
