@@ -20,7 +20,8 @@ lightFM.sidebar = new function (){
 	}else{
 	    sidebarContent.animate({'width':0},200);
 	}
-	
+	// simulate the resize event
+	lightFM.resized();
     };
     
 };

@@ -17,7 +17,7 @@
     
     
     <div style="clear:both"></div>
-    <div id="data"  n:class='!$isOwner && !$viewed->Config->AllowZip?no-checkbox'>
+    <div id="data"  n:class=' !$isOwner && !$viewed->Config->AllowZip?no-checkbox'>
 	<section class="header">
 	    <table n:class="($orderReversed)?desc:asc">
 		<tr>
@@ -79,34 +79,36 @@
 	
 	
 	{foreach $listFiles as $file}
-	<section class="image ">
-	    
-		<table>
-		    <tr>
-			
-			<td colspan="3" class="thumb">
-			    <a  n:href="{$file->Presenter}:default, path => $file->Path, dirView=>'Gallery'" >
-				<img alt="{$file->Name}" src="{link Image:thumbnail, path=>$file->Path,crop=>true,bigSide=>190}" width="190" height="190"/>
-			    </a>
-			</td>
-		    </tr>
-		    <tr>
-			<td colspan="3" class="name" >
-			    <span>{$file->Name}</span>
-			</td>
-		    </tr>
-		    <tr>
-			<td class="resolution">{$file->Resolution}</td>
-			<td class="checkbox">
-			    {if $isOwner || $viewed->Config->AllowZip}
-				<input class="fileSelector" type="checkbox" data-name="{$file->Name}">
-			    {/if}
-			</td>
-			<td class="date">{$file->Date|date:'%Y/%m/%d'}</td>
-		    </tr>
-		</table>
-	    
-	</section>
+	<span class="image-wrapper">
+	    <section class="image ">
+
+		    <table>
+			<tr>
+
+			    <td colspan="3" class="thumb">
+				<a  n:href="{$file->Presenter}:default, path => $file->Path, dirView=>'Gallery'" >
+				    <img alt="{$file->Name}" src="{link Image:thumbnail, path=>$file->Path,crop=>true,bigSide=>190}" width="190" height="190"/>
+				</a>
+			    </td>
+			</tr>
+			<tr>
+			    <td colspan="3" class="name" >
+				<span>{$file->Name}</span>
+			    </td>
+			</tr>
+			<tr>
+			    <td class="resolution">{$file->Resolution}</td>
+			    <td class="checkbox">
+				{if $isOwner || $viewed->Config->AllowZip}
+				    <input class="fileSelector" type="checkbox" data-name="{$file->Name}">
+				{/if}
+			    </td>
+			    <td class="date">{$file->Date|date:'%Y/%m/%d'}</td>
+			</tr>
+		    </table>
+
+	    </section>
+	</span>
 	{/foreach}
 	
     </div>

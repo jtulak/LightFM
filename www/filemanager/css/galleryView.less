@@ -198,8 +198,14 @@ ol,ul {
 		}
 	     }
 	    .thumb{
-		padding: 0.8em;
-		
+		padding: 0.5em 0;
+		width:100%;
+
+		a{
+		    width: 190px;  // from the template <img width=...>
+		    display:block; 
+		    margin: 0 auto;
+		}
 		img {
 		    display: block;
 		    background-image: url('../images/missing-image.svg');
@@ -347,9 +353,9 @@ ol,ul {
 	     }
 	    margin: 1em;
 	    display: inline-block;
-	    width: 15em;
+	    width: 14.3em;
 	    text-align: center;
-	    .rounded-corners(0.8em);
+	    .rounded-corners(0.5em);
 	    border:1px solid lighten(@color-outerBorder,20%);
 	}
    }
@@ -360,7 +366,30 @@ ol,ul {
 }
 
 } // end of gallery-view
-
+.js{#gallery-view{
+    #data {
+	.image-wrapper{
+	    display: inline-block;
+	    .image{
+		display: block;
+		margin: 1em auto;
+	    }
+	}
+	
+	&.col1 .image-wrapper{
+	    width:100%;
+	}
+	&.col2 .image-wrapper{
+	    width:49.5%;
+	}
+	&.col3 .image-wrapper{
+	    width:32.5%;
+	}
+	&.col4 .image-wrapper{
+	    width:24.5%;
+	}
+    }
+}}
  
 /* 
 
