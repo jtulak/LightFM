@@ -148,6 +148,7 @@ h1 {
 
 #sidebar {
     display: table-cell;
+    min-width:@sidebar-control-width;;
     width: @sidebar-width;
     overflow: hidden;
     height: 100%;
@@ -216,6 +217,7 @@ h1 {
 	background-color: lighten(@color-light,2%);
     }
 }
+#snippet--sidebar{height:100%; display:block;}
 .sidebar-content-width {
     width: @sidebar-content-width;
 }
@@ -224,18 +226,10 @@ h1 {
     overflow: hidden;
     width: 0;
     //display: none;
-    .for-fixed { 
-	width: 0;
-	display: none;
-    }
     @tmp: @screen-small + @sidebar-width;
     @media only screen and (min-width: @tmp){
 	width: @sidebar-content-width;
 	//display: block;
-	.for-fixed { 
-	    width: @sidebar-content-width;
-	    display: block;
-	}
     }
     .fixed{
 	//position: fixed;
@@ -290,4 +284,18 @@ form .required label {
 form .error {
 	color: #D00;
 	font-weight: bold;
+}
+
+#data {
+    min-height: 20em;
+    height: 100%;
+}
+.js{
+     #data {
+	min-height: inherit;
+	height: 20em;
+	//overflow: hidden;
+	overflow-y: scroll;
+    }
+    
 }

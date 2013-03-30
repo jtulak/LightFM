@@ -13,6 +13,7 @@ function LightFM(){
 	 * private variables
 	 */
 	this._onLoadCallbacks = new Array();
+	this._onResizeCallbacks = new Array();
 	
 	/******************
 	 * public variables
@@ -36,6 +37,17 @@ function LightFM(){
 	    
 	    this._onLoadCallbacks.push(fn);
 	}
+	/**
+	 * Add a function to be called when the page is resized
+	 * 
+	 * @param {function} fn
+	 * @returns {undefined}
+	 */
+	this.addOnResizeCallback = function (fn){
+	    if(typeof fn != "function") throw "Error: Callback must be a function!";
+	    
+	    this._onResizeCallbacks.push(fn);
+	}
 	
 	/**
 	 * Will call all onLoad callbacks
@@ -47,7 +59,22 @@ function LightFM(){
 	      this._onLoadCallbacks[i]();
 	    }
 	    return this;
-	}
+	};
+	
+	
+	/**
+	 * Will call all onResize callbacks
+	 * @returns {LightFM}
+	 */
+	this.resized = function(){
+	    var length = this._onResizeCallbacks.length;
+	    for (var i = 0; i < length; i++) {
+	      this._onResizeCallbacks[i]();
+	    }
+	    return this;
+	};
+	
+	
 };
 
 
@@ -89,6 +116,35 @@ $(function() {
  * OnLoad adding
  ******************************************************************************/
 
+/*
+ * Handling of page hight change
+ */
+lightFM.addOnResizeCallback(function(){
+
+	    var minHeight = $("#one-em").height()*20;
+	    var header=$("#data").offset().top;
+	    var footer=$("#footer").height();
+	    
+	    var newHeight = $(window).height()-header-footer-$("#one-em").height()*2;
+	    if(newHeight < minHeight) newHeight = minHeight;
+	    $("#data").height(newHeight)
+
+});
+/**
+ * scrolling for dir views and so
+ */
+lightFM.addOnLoadCallback(function(){
+    $(window).resize($.throttle(200, function(){
+	lightFM.resized();
+    }));
+    $(window).resize();
+    
+    setInterval(function(){
+	if(window.document.hasFocus()){
+	    $(window).resize();
+	}
+    },1000)
+});
 
 
 /**
