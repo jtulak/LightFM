@@ -67,6 +67,13 @@ Limits for creating Zip files (number of files and so...) can be changed in app/
 
 Changelog:
 ---------
+v0.5 beta 31. Mar. 2013
+- Ajax again enabled
+- Added basic IE support to make the system usable (not working mediaquery and so but I'm too lazy to work on it now)
+- LESS is now compiled to CSS
+- Various smaller enahncements
+- Various bugs correct
+
 v0.4 beta
 - Changed temp dirs
 - Refactored javascript
