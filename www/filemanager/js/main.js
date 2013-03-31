@@ -182,7 +182,7 @@ lightFM.addOnLoadCallback(function(){
 	
 	$.nette.init();
 	$.nette.ext('history').cache = false;
-	
+	$('a.no-ajax').off('click.nette');
 	
 	$('.no-ajax').off('click.nette');
 	$.nette.ext('resizeOnLoad', {

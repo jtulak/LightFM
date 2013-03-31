@@ -72,12 +72,15 @@ lightFM.fileops.sidebar = new function() {
 
 lightFM.addOnLoadCallback(function() {
     $(document).on("click", "#select-all", function(event) {
+	event.preventDefault();
 	lightFM.fileops.sidebar.selectAll();
     });
     $(document).on("click", "#select-none", function(event) {
+	event.preventDefault();
 	lightFM.fileops.sidebar.selectNone();
     });
     $(document).on("click", "#select-invert", function(event) {
+	event.preventDefault();
 	lightFM.fileops.sidebar.selectInvert();
     });
 });
