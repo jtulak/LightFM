@@ -1,19 +1,20 @@
 LightFM
 =======
-*Very early development stage, not ready for production work! :)*
-
-At v0.4 beta, the server side should be mostly done, so it *should* work, although the user interface (html,css, js) is still not complete and not tested in anything else than webkit (Chromium and so).
 
 A light file manager and browser written in PHP with Nette framework. 
 Directories can be protected by password from public access and directory owners can upload, move or delete their files. Does not needs any database.
 
+It was written for my own purpose, but I will be happy if it could help also someone else.
+
 Licensed under New BSD license and also GNU GPLv2 - use your preffered one (see LICENSE.txt file)
+
+At v0.5 beta, it should work although there are known issues with IE (not working media queries, some glitchess with js...).
 
 Installation
 ------------
 1) Place the files
 2) Give the webserver a full access (rwx) to directories LightFM/temp and LightFM/www (recursively)
-3) (Optional) Edit basepath in LightFM/www/.htaccess
+3) Set basepath in LightFM/www/.htaccess
 4) Change default configuration at the begining of LightFM/app/config/config.neon
 5) Change the usernames and password (or create new) in LightFM/www/.filenamanger.ini
 6) Use it :-)
