@@ -2,22 +2,38 @@
 #text-view {
   width: 100%;
 }
-#text-view h2 {
-  font-size: 150%;
+#text-view form {
+  display: inline-block;
+  float: right;
 }
 #text-view .buttons {
-  margin-bottom: 5pt;
+  margin-bottom: 0.5em;
+}
+#text-view .back {
+  background-image: url('../images/up.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0.3em 50%;
+  padding-left: 2em;
+}
+#text-view .raw {
+  background-image: url('../images/icon-save.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0.3em 50%;
+  padding-left: 2em;
 }
 #text-view .content {
+  font-size: 90%;
   background-color: #eeeeee;
-  border: 1px solid #aaaaaa;
+  border: 1px solid #aaa;
   padding: 0;
   margin: 0;
   counter-reset: listing;
   word-wrap: break-word;
   white-space: pre-wrap;
   overflow: hidden;
-  min-height: 300pt;
+  min-height: 10pt;
   display: block;
 }
 #text-view .content code {
@@ -34,4 +50,26 @@
   float: left;
   clear: both;
   min-width: 33pt;
+}
+#text-view .content .highlighted {
+  display: block;
+  background-color: #BBEDED;
+}
+#text-view .content .highlighted code {
+  background-color: #BBEDED;
+}
+#text-view .content .highlighted i:before {
+  font-weight: bold;
+}
+#text-view .content code:hover {
+  background-color: #EAEBBA;
+}
+#text-view small {
+  font-size: 80%;
+}
+#text-view small b {
+  font-weight: bold;
+}
+#text-view small i {
+  font-style: italic;
 }

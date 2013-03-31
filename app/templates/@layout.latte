@@ -11,7 +11,7 @@
  * @param bool	    $showSidebar
  *}
 
-{var $debug_less = TRUE }
+{var $debug_less = FALSE }
 
 <!DOCTYPE html>
 <html>
@@ -39,6 +39,9 @@
 	{else}
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/reset.css">
 	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/screen.css">
+	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/listView.css">
+	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/galleryView.css">
+	<link rel="stylesheet" media="screen,projection,tv" href="{$basePath}/{= FM_DATA_DIR}/css/fileOps.css">
 	{/if}
 	<link rel="stylesheet" media="screen,projection,tv" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico">
@@ -138,11 +141,9 @@
 	    
 	    <footer id="footer">
 		<p>2013 (c) Jan Ťulák - jan@tulak.me</p>
-		<p>Used mimetypes for debug: </p>
-		<p>{!= implode(', ',\LightFM\Filetypes::getUsedMimetypes())}
 	    </footer>
 	</div>
-
+{dump \LightFM\Filetypes::getUsedMimetypes()}
 
 	<div style="position:absolute; top:-100000;left:-100000;">
 	    <!-- some things for jquery... -->

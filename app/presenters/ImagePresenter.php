@@ -39,6 +39,7 @@ class ImagePresenter extends FilePresenter {
 	parent::startup();
 	$this->template->showSidebar = true;
 	$this->template->dirView = $this->dirView;
+	$this->template->noAjax = false;
     }
 
     /**

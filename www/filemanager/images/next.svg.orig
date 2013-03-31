@@ -15,7 +15,7 @@
    inkscape:label="Pozadí"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="previous.svg">
+   sodipodi:docname="next.svg">
   <defs
      id="defs3007" />
   <sodipodi:namedview
@@ -56,8 +56,8 @@
     <path
        inkscape:connector-curvature="0"
        id="path6762"
-       d="m 371.81761,503.34565 -173.27441,244.14088 173.27441,243.76002 -52.14527,0 L 146.39793,747.48653 319.67234,503.34565 z m -119.49959,0 -173.817595,244.14088 173.817595,243.76002 -52.14529,0 L 26.355145,747.48653 200.17274,503.34565 z"
-       style="fill:#ffffff;fill-opacity:0.47058823999999999;stroke:#616161;stroke-width:5;stroke-miterlimit:4;stroke-opacity:0.47058824;stroke-dasharray:none"
+       d="M 26.355145,503.34565 199.62955,747.48653 26.355145,991.24655 l 52.14527,0 L 251.77482,747.48653 78.500415,503.34565 z m 119.499585,0 173.8176,244.14088 -173.8176,243.76002 52.14529,0 173.81759,-243.76002 -173.8176,-244.14088 z"
+       style="fill:#ffffff;fill-opacity:0.78431373999999998;stroke:#616161;stroke-width:5;stroke-miterlimit:4;stroke-opacity:0.78431374;stroke-dasharray:none"
        inkscape:export-filename="/home/dragon/Obrázky/filemanager-mobile.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"

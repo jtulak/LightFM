@@ -16,7 +16,7 @@
    inkscape:label="Pozadí"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="file-text-css.svg"
+   sodipodi:docname="file-doc.svg"
    inkscape:export-filename="/home/dragon/public_html/LightFM/src/doc/SVG icons/34/file-text.png"
    inkscape:export-xdpi="5.4063606"
    inkscape:export-ydpi="5.4063606">
@@ -29,14 +29,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="1047.5299"
-     inkscape:cy="-84.779923"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="312.3649"
+     inkscape:cy="335.01528"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1616"
-     inkscape:window-height="1032"
+     inkscape:window-width="1860"
+     inkscape:window-height="1062"
      inkscape:window-x="-4"
      inkscape:window-y="-6"
      inkscape:window-maximized="1"
@@ -126,23 +126,23 @@
        style="fill:none;stroke:#ffffff;stroke-width:19.96610451;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        sodipodi:nodetypes="cc" />
     <rect
-       style="fill:#000000;fill-opacity:1;stroke:#b5b5b5;stroke-width:1.11825085;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:#000000;fill-opacity:1;stroke:#b5b5b5;stroke-width:1.16643918;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
        id="rect2995"
-       width="362.88177"
-       height="177.88174"
-       x="178.05911"
-       y="868.42133"
-       ry="60.085178" />
+       width="394.93765"
+       height="177.83356"
+       x="145.97914"
+       y="868.44537"
+       ry="60.068905" />
     <text
        xml:space="preserve"
        style="font-size:144px;font-style:normal;font-weight:bold;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans Bold"
-       x="205"
+       x="157.36038"
        y="1009.3622"
        id="text2997"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan2999"
-         x="205"
-         y="1009.3622">CSS</tspan></text>
+         x="157.36038"
+         y="1009.3622">DOC</tspan></text>
   </g>
 </svg>

@@ -1,16 +1,17 @@
-#list-view ol,
-#list-view ul {
+
+#gallery-view ol,
+#gallery-view ul {
   display: inline-block;
   margin: 0;
   padding: 0;
 }
-#list-view ol li,
-#list-view ul li {
+#gallery-view ol li,
+#gallery-view ul li {
   display: inline-block;
   list-style: none;
 }
-#list-view ol li a,
-#list-view ul li a {
+#gallery-view ol li a,
+#gallery-view ul li a {
   display: inline-block;
   padding: 0pt 1em;
   margin: 0;
@@ -20,13 +21,13 @@
   color: #666;
   text-decoration: none;
 }
-#list-view ol li a:hover,
-#list-view ul li a:hover {
+#gallery-view ol li a:hover,
+#gallery-view ul li a:hover {
   background-color: #eee;
   color: #000;
 }
-#list-view ol li a.inactive,
-#list-view ul li a.inactive {
+#gallery-view ol li a.inactive,
+#gallery-view ul li a.inactive {
   -moz-opacity: 0.5;
   opacity: 0.5;
   -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0.5);
@@ -34,29 +35,29 @@
   color: #666;
   cursor: default;
 }
-#list-view ol li:first-child a,
-#list-view ul li:first-child a {
+#gallery-view ol li:first-child a,
+#gallery-view ul li:first-child a {
   border-width: 1px;
 }
-#list-view #navigation {
+#gallery-view #navigation {
   display: inline-block;
   line-height: 130%;
   font-size: 110%;
   margin-bottom: 0.5em;
 }
 @media only screen and (max-width: 40em) {
-  #list-view #navigation {
+  #gallery-view #navigation {
     line-height: 150%;
   }
 }
-#list-view #navigation ol li a {
+#gallery-view #navigation ol li a {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
   -o-border-radius: 0;
   border-radius: 0;
 }
-#list-view #navigation ol li:first-child a {
+#gallery-view #navigation ol li:first-child a {
   -webkit-border-top-left-radius: 0.3em;
   -moz-border-radius-topleft: 0.3em;
   border-top-left-radius: 0.3em;
@@ -64,7 +65,7 @@
   -moz-border-radius-bottomleft: 0.3em;
   border-bottom-left-radius: 0.3em;
 }
-#list-view #navigation ol li:last-child a {
+#gallery-view #navigation ol li:last-child a {
   -webkit-border-top-right-radius: 0.3em;
   -moz-border-radius-topright: 0.3em;
   border-top-right-radius: 0.3em;
@@ -72,7 +73,7 @@
   -moz-border-radius-bottomright: 0.3em;
   border-bottom-right-radius: 0.3em;
 }
-#list-view #views {
+#gallery-view #views {
   position: relative;
   z-index: 10;
   display: inline-block;
@@ -82,43 +83,43 @@
   margin-top: 0.5em;
   margin-right: 0;
 }
-#list-view #views .tab {
+#gallery-view #views .tab {
   background-size: 1.4em;
   background-repeat: no-repeat;
   background-position: 5px 50%;
   padding-left: 2em;
 }
-#list-view #views .list {
+#gallery-view #views .list {
   background-image: url('../images/list-icon.svg');
 }
-#list-view #views .gallery {
+#gallery-view #views .gallery {
   background-image: url('../images/gallery.svg');
 }
-#list-view #views ul li a {
+#gallery-view #views ul li a {
   display: inline-block;
   border-color: #aaa;
   border-width: 1px 1px 0px 0px;
   border-bottom: 0;
   margin: 0;
 }
-#list-view #views ul li a.active {
+#gallery-view #views ul li a.active {
   background-color: #e1e1e1;
   border-bottom: 1px solid #e1e1e1;
   color: #333;
   cursor: default;
 }
-#list-view #views ul li:first-child a {
+#gallery-view #views ul li:first-child a {
   border-left-width: 1px;
   -webkit-border-top-left-radius: 0.3em;
   -moz-border-radius-topleft: 0.3em;
   border-top-left-radius: 0.3em;
 }
-#list-view #views ul li:last-child a {
+#gallery-view #views ul li:last-child a {
   -webkit-border-top-right-radius: 0.3em;
   -moz-border-radius-topright: 0.3em;
   border-top-right-radius: 0.3em;
 }
-#list-view #data {
+#gallery-view #data {
   position: relative;
   top: -1px;
   width: 100%;
@@ -128,114 +129,77 @@
   background-color: #e1e1e1;
   border: 1px solid #aaa;
 }
-#list-view #data section {
+#gallery-view #data section {
   position: relative;
   border-bottom: 1px solid #dddddd;
   background: #eeeeee;
 }
-#list-view #data section input {
-  margin: 0;
-  position: absolute;
-  left: 0.5em;
+#gallery-view #data section input {
+  margin: 0 auto;
   top: 0.5em;
   border: 1px solid #dddddd;
-  background-color: #d4d4d4;
+  background: #d4d4d4;
 }
 @media only screen and (min-width: 40em) {
-  #list-view #data section input {
+  #gallery-view #data section input {
     top: 0.35em;
   }
 }
-#list-view #data section table {
+#gallery-view #data section table {
   width: 100%;
 }
-#list-view #data section table .checkbox {
+#gallery-view #data section table .checkbox {
   width: 4.0em;
+  text-align: left;
 }
-#list-view #data section table .name {
+#gallery-view #data section table .name {
   padding-left: 0.3em;
 }
-#list-view #data section table .name span {
+#gallery-view #data section table .name span {
   display: block;
-  width: 100pt;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   line-height: 2.5em;
   height: 2.5em;
 }
-@media only screen and (min-width: 25em) {
-  #list-view #data section table .name span {
-    width: 14em;
-  }
-}
-@media only screen and (min-width: 29em) {
-  #list-view #data section table .name span {
-    width: 14em;
-  }
-}
-@media only screen and (min-width: 33em) {
-  #list-view #data section table .name span {
-    width: 18em;
-  }
-}
-@media only screen and (min-width: 37em) {
-  #list-view #data section table .name span {
-    width: 23em;
-  }
-}
 @media only screen and (min-width: 40em) {
-  #list-view #data section table .name span {
-    width: 15em;
-  }
-}
-@media only screen and (min-width: 48em) {
-  #list-view #data section table .name span {
-    width: 20em;
-  }
-}
-@media only screen and (min-width: 56em) {
-  #list-view #data section table .name span {
-    width: 28em;
-  }
-}
-@media only screen and (min-width: 40em) {
-  #list-view #data section table .name span {
+  #gallery-view #data section table .name span {
     line-height: 2.2em;
     height: 2.2em;
   }
 }
-#list-view #data section table .suffix {
-  width: 4.4em;
+#gallery-view #data section table .thumb {
+  padding: 0.5em 0;
+  width: 100%;
 }
-#list-view #data section table .size {
+#gallery-view #data section table .thumb a {
+  width: 190px;
+  display: block;
+  margin: 0 auto;
+}
+#gallery-view #data section table .thumb img {
+  display: block;
+  background-image: url('../images/missing-image.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#gallery-view #data section table .resolution {
+  width: 6.5em;
+}
+#gallery-view #data section table .date {
   white-space: nowrap;
-  width: 4.6em;
-  display: none;
+  width: 6.5em;
+  font-size: 90%;
 }
-@media only screen and (min-width: 29em) {
-  #list-view #data section table .size {
-    display: table-cell;
-  }
-}
-#list-view #data section table .date {
-  white-space: nowrap;
-  width: 11em;
-  display: none;
-}
-@media only screen and (min-width: 40em) {
-  #list-view #data section table .date {
-    display: table-cell;
-  }
-}
-#list-view #data section a {
+#gallery-view #data section a {
   color: #333;
   text-decoration: none;
 }
-#list-view #data section a:hover {
+#gallery-view #data section a:hover {
   text-decoration: underline;
 }
-#list-view #data section.header {
+#gallery-view #data section.header {
   background: -moz-linear-gradient(top,#e1e1e1 0%,#eeeeee 100%);
   background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#e1e1e1),color-stop(100%,#eeeeee));
   background: -webkit-linear-gradient(top,#e1e1e1 0%,#eeeeee 100%);
@@ -244,131 +208,166 @@
   background: linear-gradient(to bottom,#e1e1e1 0%,#eeeeee 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e1e1e1',endColorstr='#eeeeee',GradientType=0);
 }
-#list-view #data section.header a {
+#gallery-view #data section.header a {
   text-decoration: underline;
   color: #333;
   padding-right: 1.2em;
 }
-#list-view #data section.header a:hover {
+#gallery-view #data section.header a:hover {
   color: #666666;
 }
-#list-view #data section.header .asc a {
+#gallery-view #data section.header .asc a {
   background-image: url('../images/order-asc.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.header .desc a {
+#gallery-view #data section.header .desc a {
   background-image: url('../images/order-desc.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.header .sort-active {
+#gallery-view #data section.header .sort-active {
   font-weight: bold;
 }
-#list-view #data section.folder .checkbox {
+#gallery-view #data section.folder .date {
+  white-space: nowrap;
+  width: 11em;
+}
+#gallery-view #data section.folder .checkbox {
   background-image: url('../images/folder.svg');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: right center;
+  background-position: 2.2em 50%;
 }
-#list-view #data section.folder:hover,
-#list-view #data section.folder:active {
+#gallery-view #data section.folder:hover,
+#gallery-view #data section.folder:active {
   background-color: #e9e9e9;
 }
-#list-view #data section.folder a {
+#gallery-view #data section.folder a {
   color: #808080;
 }
-#list-view #data section.folder-up .checkbox {
+#gallery-view #data section.folder input {
+  position: absolute;
+  left: 0.5em;
+}
+#gallery-view #data section.folder-up .date {
+  white-space: nowrap;
+  width: 10em;
+}
+#gallery-view #data section.folder-up .checkbox {
   background-image: url('../images/up.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.folder-up:hover,
-#list-view #data section.folder-up:active {
+#gallery-view #data section.folder-up:hover,
+#gallery-view #data section.folder-up:active {
   background-color: #e9e9e9;
 }
-#list-view #data section.folder-up a {
+#gallery-view #data section.folder-up a {
   color: #808080;
 }
-#list-view #data section.file:hover,
-#list-view #data section.file:active {
+#gallery-view #data section.file:hover,
+#gallery-view #data section.file:active {
   background-color: #e9e9e9;
 }
-#list-view #data section.file .checkbox {
+#gallery-view #data section.file .checkbox {
   background-image: url('../images/file.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.file .checkbox.file-archive {
+#gallery-view #data section.file .checkbox.file-archive {
   background-image: url('../images/file-archive.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.file .checkbox.file-text {
+#gallery-view #data section.file .checkbox.file-text {
   background-image: url('../images/file-text.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.file .checkbox.file-text.css {
+#gallery-view #data section.file .checkbox.file-text.css {
   background-image: url('../images/file-text-css.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.file .checkbox.file-text.js {
+#gallery-view #data section.file .checkbox.file-text.js {
   background-image: url('../images/file-text-js.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.file .checkbox.file-text.ini {
+#gallery-view #data section.file .checkbox.file-text.ini {
   background-image: url('../images/file-text-ini.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.file .checkbox.file-text.xml {
+#gallery-view #data section.file .checkbox.file-text.xml {
   background-image: url('../images/file-text-xml.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.file .checkbox.file-text.php {
+#gallery-view #data section.file .checkbox.file-text.php {
   background-image: url('../images/file-text-php.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.file .checkbox.file-text.html {
+#gallery-view #data section.file .checkbox.file-text.html {
   background-image: url('../images/file-text-html.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data section.file .checkbox.file-pdf {
-  background-image: url('../images/file-pdf.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
-}
-#list-view #data section.file .checkbox.file-doc {
-  background-image: url('../images/file-doc.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
-}
-#list-view #data section.file .checkbox.file-image {
+#gallery-view #data section.file .checkbox.file-image {
   background-image: url('../images/file-image.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: right center;
 }
-#list-view #data.no-checkbox .checkbox {
+#gallery-view #data section.image {
+  margin: 1em;
+  display: inline-block;
+  width: 14.3em;
+  text-align: center;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  -o-border-radius: 0.5em;
+  border-radius: 0.5em;
+  border: 1px solid #dddddd;
+}
+#gallery-view #data section.image .checkbox {
+  width: auto;
+  text-align: center;
+}
+#gallery-view #data.no-checkbox .checkbox {
   width: 2.6em;
+}
+.js #gallery-view #data .image-wrapper {
+  display: inline-block;
+}
+.js #gallery-view #data .image-wrapper .image {
+  display: block;
+  margin: 1em auto;
+}
+.js #gallery-view #data.col1 .image-wrapper {
+  width: 100%;
+}
+.js #gallery-view #data.col2 .image-wrapper {
+  width: 49.5%;
+}
+.js #gallery-view #data.col3 .image-wrapper {
+  width: 32.5%;
+}
+.js #gallery-view #data.col4 .image-wrapper {
+  width: 24.5%;
 }

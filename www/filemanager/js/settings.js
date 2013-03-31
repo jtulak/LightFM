@@ -47,10 +47,10 @@ lightFM.addOnLoadCallback(function(){
     });
     $.nette.ext('formToggler', {
 	init: function() {
-	    lightFm.settings.formToggle();
+	    lightFM.settings.formToggle();
 	},
 	complete: function() {
-	    lightFm.settings.formToggle();
+	    lightFM.settings.formToggle();
 	}
     });
     // do it also on startup

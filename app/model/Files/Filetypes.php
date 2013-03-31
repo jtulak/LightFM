@@ -115,7 +115,9 @@ class Filetypes extends \Nette\Object {
      * @return string
      */
     public static function getMimeType($path) {
-	return finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
+	$mimetype = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $path);
+	array_push(self::$usedMimetypes, $mimetype);
+	return $mimetype;
     }
 
 }

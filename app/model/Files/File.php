@@ -20,7 +20,7 @@ namespace LightFM;
  * @property string $MimeType
  * @property-read string $Hash Hash of the file
  * 
- * @serializationVersion 2
+ * @serializationVersion 4
  */
 class File extends Node implements IFile,  IMovable, IRenameable, IDeletable {
 
@@ -36,8 +36,17 @@ class File extends Node implements IFile,  IMovable, IRenameable, IDeletable {
      * 	css class for the node
      * @var string 
      */
-    protected $iconName = '';
+    protected $iconName = null;
 
+    /**
+     * Array of some mimetypes and corresponding classes for icons
+     * @var array
+     */
+    private $knownIcons = array(
+	'application/pdf'=>'file-pdf',
+	'application/msword'=>'file-doc'
+    );
+    
     /**
      * 	Contain mimetype of this file
      * @var string
@@ -89,6 +98,13 @@ class File extends Node implements IFile,  IMovable, IRenameable, IDeletable {
     }
 
     public function getIconName() {
+	if($this->iconName==NULL){
+	    if(isset($this->knownIcons[$this->getMimeType()])){
+		$this->iconName = $this->knownIcons[$this->getMimeType()];
+	    }else{
+		$this->iconName = "";
+	    }
+	}
 	return $this->iconName;
     }
 

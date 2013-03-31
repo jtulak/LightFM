@@ -28,7 +28,7 @@ lightFM.image = new function() {
 		    width: img.width(),
 		    height: img.height()
 		}, 100).fadeOut(100, function() {
-		    this.remove()
+		    t.imageFile.placeholder.remove()
 		})
 	    }
 	});
@@ -92,12 +92,12 @@ lightFM.addOnLoadCallback(function() {
 	}
     }));
 
-    $(document).on("click", "#image", function() {
+    $(document).on("click", "#image", function(event) {
 	//$("#image").click(function(){
 	lightFM.image.imageFile.mouse = event.pageX - $(this).offset().left;
 	lightFM.image.imageFile.left = $(".pager.prev").width() * 2;
 	if (lightFM.image.imageFile.mouse < lightFM.image.imageFile.left) {
-	    if ($("#image-content").hasClass('ajax') && lightFM.ajaxEnabled) {
+	    if ($(".pager.next").hasClass('ajax') && lightFM.ajaxEnabled) {
 		$(".pager.prev").click();
 	    } else {
 		window.location = $(".pager.prev").attr('href');
@@ -121,6 +121,7 @@ lightFM.addOnLoadCallback(function() {
  * 
  */
 lightFM.addOnLoadCallback(function() {
+    if(!lightFM.ajaxEnabled){ return; }
     /* changer - it will keep the previous image until the new one is loaded 
      * and then make a transition
      * 
@@ -139,9 +140,9 @@ lightFM.addOnLoadCallback(function() {
 	    lightFM.image.imageFile.placeholder.appendTo($("#image-content"));
 	},
 	complete: function() {
-	    changeImageSize();
+	    lightFM.image.changeImageSize();
 	    //formToggle();
-	    highlightPagerSide(lightFM.image.imageFile.mouse, lightFM.image.imageFile.left);
+	    lightFM.image.highlightPagerSide(lightFM.image.imageFile.mouse, lightFM.image.imageFile.left);
 
 	}
     });

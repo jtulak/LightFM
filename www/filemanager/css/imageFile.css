@@ -1,0 +1,85 @@
+#image-view {
+  width: 100%;
+}
+#image-view form {
+  display: inline-block;
+  float: right;
+}
+#image-view .buttons {
+  margin-bottom: 0.5em;
+}
+#image-view .back {
+  background-image: url('../images/up.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0.3em 50%;
+  padding-left: 2em;
+}
+#image-view .raw {
+  background-image: url('../images/icon-save.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0.3em 50%;
+  padding-left: 2em;
+}
+#image-view .content {
+  padding: 0;
+  margin: 0;
+  display: block;
+  position: relative;
+}
+#image-view .content #image-content {
+  position: relative;
+  min-height: 10em;
+}
+#image-view .content img {
+  width: 100%;
+  cursor: pointer;
+  margin: 0;
+  background-color: #eeeeee;
+  border: 1px solid #aaa;
+}
+#image-view .content .pager {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  height: 8em;
+  width: 4em;
+  margin-top: -4em;
+  display: block;
+  -moz-opacity: 0;
+  opacity: 0;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+}
+#image-view .content .pager.prev {
+  left: 1em;
+  background-image: url('../images/previous.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+#image-view .content .pager.next {
+  right: 1em;
+  background-image: url('../images/next.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+#image-view small {
+  font-size: 80%;
+}
+#image-view small b {
+  font-weight: bold;
+}
+#image-view small i {
+  font-style: italic;
+}
+#sidebar .image-info h3 {
+  margin-top: 1em;
+  color: #000;
+  font-weight: bold;
+}
+#sidebar .image-info .data {
+  font-size: 80%;
+  color: #808080;
+}

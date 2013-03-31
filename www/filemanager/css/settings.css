@@ -1,0 +1,62 @@
+
+h2 {
+  background-image: url('../images/settings.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+#settings {
+  width: 100%;
+}
+#settings .warning {
+  background-image: url('../images/warning.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+#settings .buttons {
+  margin-bottom: 0.5em;
+}
+#settings .back {
+  background-image: url('../images/up.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0.3em 50%;
+  padding-left: 2em;
+}
+#settings .content {
+  font-size: 90%;
+  background-color: #eeeeee;
+  border: 1px solid #aaa;
+  padding: 1em;
+  min-height: 2em;
+}
+#settings .content th {
+  text-align: left;
+}
+#settings .content h3 {
+  font-size: 120%;
+  font-weight: bold;
+}
+#settings .content h4 {
+  font-weight: bold;
+}
+#settings .content .dir-name {
+  font-style: italic;
+}
+#settings .content .submit td {
+  padding-bottom: 2em;
+}
+#settings .content .views-allowed {
+  text-align: center;
+  width: 5em;
+}
+#settings small {
+  font-size: 80%;
+}
+#settings small b {
+  font-weight: bold;
+}
+#settings small i {
+  font-style: italic;
+}

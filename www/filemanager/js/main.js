@@ -1,4 +1,14 @@
-
+var alertFallback = true;
+if (typeof console === "undefined" || typeof console.log === "undefined") {
+  console = {};
+  if (alertFallback) {
+      console.log = function(msg) {
+	   //alert(msg);
+      };
+  } else {
+      console.log = function() {};
+  }
+}
 
 
 /** **********************************************************************
@@ -21,7 +31,7 @@ function LightFM(){
 	this.sidebar = null;
 	this.settings = null;
 	
-	this.ajaxEnabled = false;
+	this.ajaxEnabled = true;
 	/****************
 	 * public methods
 	 */
@@ -110,7 +120,13 @@ lightFM = new LightFM();
 
 $(function() {
     // call callbacks
+    if($('body').attr('data-no-ajax')) lightFM.ajaxEnabled = false;
+    //lightFM.ajaxEnabled = false;
     lightFM.loaded();
+});
+$.ajaxSetup ({
+    // Disable caching of AJAX responses
+    //cache: false
 });
 /*******************************************************************************
  * OnLoad adding
@@ -153,20 +169,28 @@ lightFM.addOnLoadCallback(function(){
  * Enabling AJAX
  */
 lightFM.addOnLoadCallback(function(){
-    if($('body').attr('data-no-ajax') || !lightFM.ajaxEnabled){
+    // Unset on bad browsers
+    if (!(window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))) {
+	lightFM.ajaxEnabled = false;
+    }
+    
+    if(!lightFM.ajaxEnabled){
 	console.log('no ajax');
     }else{
 	console.log('ajax');
 	
-	// Unset on bad browsers
-	if (!(window.history && history.pushState && window.history.replaceState && !navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/))) {
-	    $('.ajax').removeClass('ajax');
-	}
 	
-	//$.nette.init();
+	$.nette.init();
 	$.nette.ext('history').cache = false;
+	
+	
 	$('.no-ajax').off('click.nette');
-
+	$.nette.ext('resizeOnLoad', {
+	    complete: function(){
+		lightFM.resized();
+	    }
+	    
+	});
 	 $.nette.ext('customRedirect', {
 	    success: function(payload) {
 		if(payload.redirect){

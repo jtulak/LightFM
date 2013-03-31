@@ -201,6 +201,8 @@ var nette = function () {
 				off: settings.off || {}
 			}, xhr, settings);
 		};
+		// MY CHANGE TO DISABLE CACHING
+		settings.cache=false;
 
 		xhr = $.ajax(settings);
 

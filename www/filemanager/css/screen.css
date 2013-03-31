@@ -4,48 +4,116 @@ html {
   height: 100%;
 }
 body {
-  font-size: 11pt;
+  font-size: 90%;
   line-height: 1.6;
-  color: #333333;
-  background: #aaaaaa;
+  color: #333;
+  background: #aaa;
   font-family: 'Dejavu sans', arial, 'Liberation Sans', Freesans, sans-serif;
   height: 100%;
 }
-#cleaner {
+input[type=submit] {
+  font-size: 90%;
+  line-height: 1.6;
+  color: #333;
+  font-family: 'Dejavu sans', arial, 'Liberation Sans', Freesans, sans-serif;
+  cursor: pointer;
+}
+i {
+  font-style: italic;
+}
+.cleaner {
   clear: both;
 }
 h1 {
   color: #3484D2;
   font-size: 200%;
   font-weight: bold;
+  display: inline;
+}
+h2.subtitle {
+  font-size: 150%;
+  padding-left: 2em;
+  margin-bottom: 0em;
+  margin-left: 0.5em;
+  margin-top: 0.2em;
+}
+h2.subtitle.css {
+  background-image: url('../images/file-text-css.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+h2.subtitle.js {
+  background-image: url('../images/file-text-js.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+h2.subtitle.ini {
+  background-image: url('../images/file-text-ini.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+h2.subtitle.xml {
+  background-image: url('../images/file-text-xml.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+h2.subtitle.php {
+  background-image: url('../images/file-text-php.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+h2.subtitle.html {
+  background-image: url('../images/file-text-html.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+h2.subtitle.settings {
+  background-image: url('../images/settings.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+h2.subtitle.image {
+  background-image: url('../images/file-image.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left;
 }
 .button {
   display: inline-block;
-  padding: 0pt 10pt;
+  padding: 0pt 0.8em;
   margin: 0;
   margin-left: -1px;
-  border: 1px solid #c3c3c3;
+  border: 1px solid #c4c4c4;
   background-color: #fcfcfc;
-  color: #666666;
+  font-family: 'Dejavu sans', arial, 'Liberation Sans', Freesans, sans-serif;
+  color: #666;
   text-decoration: none;
   line-height: 150%;
-  -webkit-border-radius: 3pt;
-  -moz-border-radius: 3pt;
-  -ms-border-radius: 3pt;
-  -o-border-radius: 3pt;
-  border-radius: 3pt;
+  font-size: 100%;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  -ms-border-radius: 0.3em;
+  -o-border-radius: 0.3em;
+  border-radius: 0.3em;
 }
 .button:hover {
-  background-color: #eeeeee;
-  color: #000000;
-  border-color: #aaaaaa;
+  background-color: #eee;
+  color: #000;
+  border-color: #aaa;
 }
 .button.inactive {
   -moz-opacity: 0.5;
   opacity: 0.5;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0.5);
   background-color: #fcfcfc;
-  color: #666666;
+  color: #666;
   cursor: default;
 }
 .nowrap {
@@ -58,31 +126,21 @@ h1 {
 #outer-box {
   background-color: #f7f7f7;
   width: 100%;
-  box-shadow: 0 0 5pt rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0 0 5pt rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 0 5pt rgba(0, 0, 0, 0.3);
+  position: relative;
+  box-shadow: 0 0 5pt rgba(0,0,0,0.3);
+  -webkit-box-shadow: 0 0 5pt rgba(0,0,0,0.3);
+  -moz-box-shadow: 0 0 5pt rgba(0,0,0,0.3);
 }
-@media only screen and (min-width: 705pt) {
+@media only screen and (min-width: 700.5pt) {
   #outer-box {
     margin: 0 auto;
-    border: 0px solid #aaaaaa;
+    border: 0px solid #aaa;
     border-width: 0 1px 1px 1px;
     width: 700pt;
   }
 }
 #outer-box header {
   position: relative;
-}
-#outer-box section {
-  width: 100%;
-}
-#outer-box footer {
-  border-top: 1px solid #c3c3c3;
-  text-align: center;
-  line-height: 200%;
-  color: #ababab;
-  font-size: 80%;
-  background-color: #dedede;
 }
 #outer-box .options {
   position: absolute;
@@ -94,27 +152,39 @@ h1 {
 #outer-box .options ul {
   list-style: none;
 }
-header {
-  border-bottom: 1px solid #aaaaaa;
+#footer {
+  border-top: 1px solid #c4c4c4;
+  text-align: center;
+  line-height: 200%;
+  color: #ababab;
+  font-size: 80%;
+  background-color: #dedede;
+}
+#header {
+  border-bottom: 1px solid #aaa;
   background-color: white;
+  height: 5em;
 }
 #inner-box {
   padding: 8pt;
   display: table;
   table-layout: fixed;
+  height: 100%;
 }
 #outer-content {
   display: table-cell;
   width: 100%;
+  height: 100%;
 }
 #sidebar {
   display: table-cell;
-  width: 115pt;
   overflow: hidden;
+  height: 100%;
 }
 #sidebar .border {
-  padding-right: 20px;
+  padding-right: 2em;
   position: relative;
+  height: 100%;
 }
 #sidebar h3 {
   font-size: 100%;
@@ -122,88 +192,110 @@ header {
   font-weight: normal;
 }
 #sidebar ul {
-  padding: 0 15pt 15pt 0 ;
+  padding: 0 0 1em 0;
 }
 #sidebar li {
   list-style: none;
 }
-#sidebar a {
+#sidebar a,
+#sidebar input[type=submit] {
   display: block;
-  padding: 3pt 5pt;
-  color: #333333;
+  width: 100%;
+  padding: 0.3em 0.4em;
+  color: #333;
   text-decoration: none;
+  text-align: left;
   font-size: 110%;
   line-height: 100%;
-  -webkit-border-radius: 3pt;
-  -moz-border-radius: 3pt;
-  -ms-border-radius: 3pt;
-  -o-border-radius: 3pt;
-  border-radius: 3pt;
+  border: 0;
+  background-color: inherit;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  -ms-border-radius: 0.3em;
+  -o-border-radius: 0.3em;
+  border-radius: 0.3em;
 }
-@media only screen and (max-width: 500pt) {
-  #sidebar a {
+@media only screen and (max-width: 40em) {
+  #sidebar a,
+  #sidebar input[type=submit] {
     line-height: 150%;
   }
 }
-#sidebar a:hover {
+#sidebar a:hover,
+#sidebar input[type=submit]:hover {
   background-color: #BA3E23;
   color: #f7f7f7;
 }
-#sidebar-controll {
-  width: 16pt;
+#sidebar a.disabled,
+#sidebar input[type=submit].disabled {
+  color: #b3b3b3;
+  cursor: default;
+}
+#sidebar a.disabled:hover,
+#sidebar input[type=submit].disabled:hover {
+  background-color: inherit;
+  color: #b3b3b3;
+}
+#sidebar-control {
+  width: 1.7em;
+  height: 100%;
   cursor: pointer;
   position: absolute;
   right: 0;
-  background-image: url(../images/resize-horiz.svg);
-  background-size: 20px 19px;
+  background-image: url(../images/resize-horiz-2.svg);
+  background-size: contain;
   background-position: 100% 50%;
   background-repeat: no-repeat;
   -moz-opacity: 0.6;
   opacity: 0.6;
-  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0.6);
 }
-#sidebar-controll:hover {
+#sidebar-control:hover {
   background-color: #fcfcfc;
 }
+#snippet--sidebar {
+  height: 100%;
+  display: block;
+}
 .sidebar-content-width {
-  width: 99pt;
+  width: 6.3em;
 }
 #sidebar-content {
   position: relative;
   overflow: hidden;
   width: 0;
 }
-#sidebar-content .for-fixed {
-  width: 0;
-  display: none;
-}
-@media only screen and (min-width: 615pt) {
+@media only screen and (min-width: 48em) {
   #sidebar-content {
-    width: 99pt;
+    width: 6.3em;
   }
-  #sidebar-content .for-fixed {
-    width: 99pt;
-    display: block;
-  }
-}
-#sidebar-content .fixed {
-  position: fixed;
-  top: 0px;
 }
 #ajax-spinner {
+  position: absolute;
+  top: 0;
+  width: 90%;
+  height: 90%;
   margin: 15px 0 0 15px;
   padding: 13px;
-  background: #ffffff url('../images/spinner.gif') no-repeat 50% 50%;
+  background: url('../images/spinner.gif') no-repeat 50% 50%;
   font-size: 0;
   z-index: 123456;
   display: none;
 }
 div.flash {
   color: black;
-  background: #FFF9D7;
-  border: 1px solid #E2C822;
+  background: #D9FFD7;
+  border: 1px solid #A8E222;
   padding: 1em;
   margin: 1em 0;
+}
+div.warning {
+  background: #FFF9D7;
+  border: 1px solid #E2C822;
+}
+div.error {
+  background-color: #FFD7D7;
+  border: 1px solid #FAA;
 }
 a[href^="error:"] {
   background: red;
@@ -220,4 +312,13 @@ form .required label {
 form .error {
   color: #D00;
   font-weight: bold;
+}
+#data {
+  min-height: 20em;
+  height: 100%;
+}
+.js #data {
+  min-height: inherit;
+  height: 20em;
+  overflow-y: scroll;
 }

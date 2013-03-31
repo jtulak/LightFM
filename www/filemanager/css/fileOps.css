@@ -1,0 +1,49 @@
+#fileOps-view {
+  width: 100%;
+}
+#fileOps-view .buttons {
+  margin-bottom: 0.5em;
+}
+#fileOps-view .back {
+  background-image: url('../images/up.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0.3em 50%;
+  padding-left: 2em;
+}
+#fileOps-view .raw {
+  background-image: url('../images/icon-save.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0.3em 50%;
+  padding-left: 2em;
+}
+#fileOps-view .content {
+  font-size: 90%;
+  background-color: #eeeeee;
+  border: 1px solid #aaa;
+  padding: 0;
+  margin: 0;
+  min-height: 5em;
+  display: block;
+}
+#fileOps-view .content h4 {
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+#fileOps-view .content ul {
+  margin-left: 2em;
+}
+#fileOps-view .content ul li {
+  list-style-type: disc;
+}
+#fileOps-view small {
+  font-size: 80%;
+}
+#fileOps-view small b {
+  font-weight: bold;
+}
+#fileOps-view small i {
+  font-style: italic;
+}
