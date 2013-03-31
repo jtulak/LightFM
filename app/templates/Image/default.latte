@@ -21,7 +21,7 @@
 	<div style="clear:both"></div>
 	<div class="content" id='image-content' data-ajax={if $isAjax}"true"{else}"false"{/if}>
 	    {snippet image}
-		<img id='image' alt="{$viewed->Name}" src="{link Image:thumbnail, path=>$viewed->Path,crop=>true,bigSide=>880}" />
+		<img id='image' alt="{$viewed->Name}" src="{link Image:thumbnail, path=>$viewed->Path,crop=>false,bigSide=>880}" />
 		<a n:if="$prevImage !== NULL" n:href='this#title, path=>$prevImage->Path' title='Previous' class='ajax pager prev'><i></i></a>
 		<a n:if="$nextImage !== NULL" n:href='this#title, path=>$nextImage->Path' title='Next' class='ajax pager next'><i></i></a>{**}
 	   {/snippet}

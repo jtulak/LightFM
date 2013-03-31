@@ -137,7 +137,7 @@ class ImageFile extends File implements IImage {
      * 
      * @param type $bigSide	Size of the bigger side of image
      * @param bool $crop   If the image should be cropped to fit into a rectangle
-     * @return string Relative URL for the thumbnail
+     * @return string string encoded data of the image
      */
     public function createThumbnail($bigSide, $crop = TRUE) {
 	if ($this->isUnknown) {
@@ -157,11 +157,18 @@ class ImageFile extends File implements IImage {
 			\Nette\Diagnostics\Debugger::log('Generating thumbnail for ' . $t->getPath());
 			// create thumbnail
 			$image = \Nette\Image::fromFile($t->FullPath);
+			
+			
 			if ($crop) {
-			    $image->resize($bigSide, $bigSide, $image::EXACT);
+			    $image->resize($bigSide, $bigSide, $image::EXACT|$image::SHRINK_ONLY);
 			} else {
-			    $image->resize($bigSide, $bigSide);
+			    $image->resize($bigSide, $bigSide,$image::SHRINK_ONLY);
 			}
+			    // make so big image
+			    $blank = \Nette\Image::fromBlank($bigSide, $bigSide, \Nette\Image::rgb(0,0,0));
+			    $blank->place($image, '50%', '50%');
+			    $image = $blank;
+			
 			$image->sharpen();
 			return (string) $image;
 		    }, array(
