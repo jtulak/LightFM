@@ -28,7 +28,12 @@ class FilePresenter extends BasePresenter {
      * @param string $path
      */
     public function actionDownload($path) {
-	$this->redirectUrl($this->getHttpRequest()->url->basePath . $this->path);
+	if ($this->getHttpRequest()->url->basePath == "/"){
+	    // to prevent "//something/" pathes
+	    $this->redirectUrl( $this->path);
+	}else{
+	    $this->redirectUrl($this->getHttpRequest()->url->basePath . $this->path);
+	}
     }
 
     /**
