@@ -1,27 +1,29 @@
-
 h2 {
-  background-image: url('../images/settings.svg');
+  background: url('../images/33/settings.png') no-repeat left center;
+  background: rgba(0,0,0,0) url('../images/settings.svg') no-repeat left center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: left center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/settings.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/settings.png',sizingMethod='scale');
 }
 #settings {
   width: 100%;
 }
 #settings .warning {
-  background-image: url('../images/warning.svg');
+  background: url('../images/33/warning.png') no-repeat left center;
+  background: rgba(0,0,0,0) url('../images/warning.svg') no-repeat left center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: left center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/warning.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/warning.png',sizingMethod='scale');
 }
 #settings .buttons {
   margin-bottom: 0.5em;
 }
 #settings .back {
-  background-image: url('../images/up.svg');
+  background: url('../images/33/up.png') no-repeat 0.3em 50%;
+  background: rgba(0,0,0,0) url('../images/up.svg') no-repeat 0.3em 50%;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 0.3em 50%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/up.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/up.png',sizingMethod='scale');
   padding-left: 2em;
 }
 #settings .content {

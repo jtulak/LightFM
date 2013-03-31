@@ -21,7 +21,7 @@ foreach (scandir('.') as $file){
       // compile
       //$compiled =  $less->compile($data);
       //file_put_contents($newName,);
-      $less->checkedCompile($file, $newName);
+      $less->compileFile($file, $newName);
       
       
     }catch (Exception $e){

@@ -38,52 +38,60 @@ h2.subtitle {
   margin-top: 0.2em;
 }
 h2.subtitle.css {
-  background-image: url('../images/file-text-css.svg');
+  background: url('../images/33/file-text-css.png') no-repeat center left;
+  background: rgba(0,0,0,0) url('../images/file-text-css.svg') no-repeat center left;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center left;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-css.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-css.png',sizingMethod='scale');
 }
 h2.subtitle.js {
-  background-image: url('../images/file-text-js.svg');
+  background: url('../images/33/file-text-js.png') no-repeat center left;
+  background: rgba(0,0,0,0) url('../images/file-text-js.svg') no-repeat center left;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center left;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-js.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-js.png',sizingMethod='scale');
 }
 h2.subtitle.ini {
-  background-image: url('../images/file-text-ini.svg');
+  background: url('../images/33/file-text-ini.png') no-repeat center left;
+  background: rgba(0,0,0,0) url('../images/file-text-ini.svg') no-repeat center left;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center left;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-ini.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-ini.png',sizingMethod='scale');
 }
 h2.subtitle.xml {
-  background-image: url('../images/file-text-xml.svg');
+  background: url('../images/33/file-text-xml.png') no-repeat center left;
+  background: rgba(0,0,0,0) url('../images/file-text-xml.svg') no-repeat center left;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center left;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-xml.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-xml.png',sizingMethod='scale');
 }
 h2.subtitle.php {
-  background-image: url('../images/file-text-php.svg');
+  background: url('../images/33/file-text-php.png') no-repeat center left;
+  background: rgba(0,0,0,0) url('../images/file-text-php.svg') no-repeat center left;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center left;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-php.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-php.png',sizingMethod='scale');
 }
 h2.subtitle.html {
-  background-image: url('../images/file-text-html.svg');
+  background: url('../images/33/file-text-html.png') no-repeat center left;
+  background: rgba(0,0,0,0) url('../images/file-text-html.svg') no-repeat center left;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center left;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-html.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-html.png',sizingMethod='scale');
 }
 h2.subtitle.settings {
-  background-image: url('../images/settings.svg');
+  background: url('../images/33/settings.png') no-repeat center left;
+  background: rgba(0,0,0,0) url('../images/settings.svg') no-repeat center left;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center left;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/settings.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/settings.png',sizingMethod='scale');
 }
 h2.subtitle.image {
-  background-image: url('../images/file-image.svg');
+  background: url('../images/33/file-image.png') no-repeat center left;
+  background: rgba(0,0,0,0) url('../images/file-image.svg') no-repeat center left;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center left;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-image.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-image.png',sizingMethod='scale');
 }
 .button {
   display: inline-block;

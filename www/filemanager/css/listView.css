@@ -138,8 +138,6 @@
   position: absolute;
   left: 0.5em;
   top: 0.5em;
-  border: 1px solid #dddddd;
-  background-color: #d4d4d4;
 }
 @media only screen and (min-width: 40em) {
   #list-view #data section input {
@@ -253,25 +251,28 @@
   color: #666666;
 }
 #list-view #data section.header .asc a {
-  background-image: url('../images/order-asc.svg');
+  background: url('../images/33/order-asc.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/order-asc.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/order-asc.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/order-asc.png',sizingMethod='scale');
 }
 #list-view #data section.header .desc a {
-  background-image: url('../images/order-desc.svg');
+  background: url('../images/33/order-desc.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/order-desc.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/order-desc.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/order-desc.png',sizingMethod='scale');
 }
 #list-view #data section.header .sort-active {
   font-weight: bold;
 }
 #list-view #data section.folder .checkbox {
-  background-image: url('../images/folder.svg');
+  background: url('../images/33/folder.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/folder.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/folder.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/folder.png',sizingMethod='scale');
 }
 #list-view #data section.folder:hover,
 #list-view #data section.folder:active {
@@ -281,10 +282,11 @@
   color: #808080;
 }
 #list-view #data section.folder-up .checkbox {
-  background-image: url('../images/up.svg');
+  background: url('../images/33/up.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/up.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/up.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/up.png',sizingMethod='scale');
 }
 #list-view #data section.folder-up:hover,
 #list-view #data section.folder-up:active {
@@ -298,76 +300,88 @@
   background-color: #e9e9e9;
 }
 #list-view #data section.file .checkbox {
-  background-image: url('../images/file.svg');
+  background: url('../images/33/file.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-archive {
-  background-image: url('../images/file-archive.svg');
+  background: url('../images/33/file-archive.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-archive.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-archive.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-archive.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-text {
-  background-image: url('../images/file-text.svg');
+  background: url('../images/33/file-text.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-text.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-text.css {
-  background-image: url('../images/file-text-css.svg');
+  background: url('../images/33/file-text-css.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-text-css.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-css.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-css.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-text.js {
-  background-image: url('../images/file-text-js.svg');
+  background: url('../images/33/file-text-js.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-text-js.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-js.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-js.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-text.ini {
-  background-image: url('../images/file-text-ini.svg');
+  background: url('../images/33/file-text-ini.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-text-ini.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-ini.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-ini.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-text.xml {
-  background-image: url('../images/file-text-xml.svg');
+  background: url('../images/33/file-text-xml.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-text-xml.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-xml.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-xml.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-text.php {
-  background-image: url('../images/file-text-php.svg');
+  background: url('../images/33/file-text-php.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-text-php.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-php.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-php.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-text.html {
-  background-image: url('../images/file-text-html.svg');
+  background: url('../images/33/file-text-html.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-text-html.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-html.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-text-html.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-pdf {
-  background-image: url('../images/file-pdf.svg');
+  background: url('../images/33/file-pdf.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-pdf.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-pdf.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-pdf.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-doc {
-  background-image: url('../images/file-doc.svg');
+  background: url('../images/33/file-doc.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-doc.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-doc.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-doc.png',sizingMethod='scale');
 }
 #list-view #data section.file .checkbox.file-image {
-  background-image: url('../images/file-image.svg');
+  background: url('../images/33/file-image.png') no-repeat right center;
+  background: rgba(0,0,0,0) url('../images/file-image.svg') no-repeat right center;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: right center;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-image.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/file-image.png',sizingMethod='scale');
 }
 #list-view #data.no-checkbox .checkbox {
   width: 2.6em;

@@ -9,17 +9,19 @@
   margin-bottom: 0.5em;
 }
 #image-view .back {
-  background-image: url('../images/up.svg');
+  background: url('../images/33/up.png') no-repeat 0.3em 50%;
+  background: rgba(0,0,0,0) url('../images/up.svg') no-repeat 0.3em 50%;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 0.3em 50%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/up.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/up.png',sizingMethod='scale');
   padding-left: 2em;
 }
 #image-view .raw {
-  background-image: url('../images/icon-save.svg');
+  background: url('../images/33/icon-save.png') no-repeat 0.3em 50%;
+  background: rgba(0,0,0,0) url('../images/icon-save.svg') no-repeat 0.3em 50%;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 0.3em 50%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/icon-save.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/icon-save.png',sizingMethod='scale');
   padding-left: 2em;
 }
 #image-view .content {
@@ -53,17 +55,19 @@
 }
 #image-view .content .pager.prev {
   left: 1em;
-  background-image: url('../images/previous.svg');
+  background: url('../images/33/previous.png') no-repeat center left;
+  background: rgba(0,0,0,0) url('../images/previous.svg') no-repeat center left;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center left;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/previous.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/previous.png',sizingMethod='scale');
 }
 #image-view .content .pager.next {
   right: 1em;
-  background-image: url('../images/next.svg');
+  background: url('../images/33/next.png') no-repeat center left;
+  background: rgba(0,0,0,0) url('../images/next.svg') no-repeat center left;
   background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center left;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/next.png',sizingMethod='scale');
+  -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/next.png',sizingMethod='scale');
 }
 #image-view small {
   font-size: 80%;

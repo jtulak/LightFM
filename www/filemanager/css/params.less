@@ -137,9 +137,13 @@ opacity: @num;
 
 .filetype-icon (@name, @offset:2.2em 50%){
 
-    //background-image: url('../images/34/@{name}.png');
-    background-image: url('../images/@{name}.svg');
+    /* IE HACKS */
+    background: url('../images/33/@{name}.png') no-repeat @offset;
+    /* OTHER BROSERS */
+    // note the rgba - IE doesn't know it and ignores second parameter...
+    background: rgba(0,0,0,0) url('../images/@{name}.svg')  no-repeat @offset;
     background-size: contain;
-    background-repeat: no-repeat;
-    background-position: @offset;
+    /* IE HACKS */
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/@{name}.png',sizingMethod='scale');
+    -ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/33/@{name}.png', sizingMethod='scale');
 }

@@ -51,7 +51,16 @@
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.hoverflow.min.js"></script>
 	<script src="{$basePath}/{= FM_DATA_DIR}/js/jquery.throttle.min.js"></script>
-	
+	<!--[if lt IE 9]>
+	    <script>
+	      var e = ("abbr,article,aside,audio,canvas,datalist,details," +
+		"figure,footer,header,hgroup,mark,menu,meter,nav,output," +
+		"progress,section,time,video").split(',');
+	      for (var i = 0; i < e.length; i++) {
+		document.createElement(e[i]);
+	      }
+	    </script>
+	<![endif]-->
 	{block head}{/block}
 
 	{if $debug_less}

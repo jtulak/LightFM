@@ -46,15 +46,16 @@
 	 *}
 	{if count($path) > 1}
 	<section class="folder-up">
-	    <a class="ajax" n:href="default, path => $backpath ">
 		<table>
 		    <tr>
 			<td class="checkbox"></td>
-			<td class="name"><span>[..] Go to upper directory</span></td>
+			<td class="name">
+			    <a class="ajax" n:href="default, path => $backpath ">
+				<span>[..] Go to upper directory</span></td>
+			    </a>
 			<td class="date"></td>
 		    </tr>
 		</table>
-		</a>
 	</section>
 	{/if}
 	
