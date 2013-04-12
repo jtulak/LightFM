@@ -63,10 +63,14 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
 	// if path is empty, it means it is a root
 	if (strlen($this->path) == 0)
 	    $this->path = '/';
-	// test for forbidden "../" and similar
-	$this->path = $this->verifyPath($this->path);
-	// fill viewed
-	$this->loadFiles();
+	
+	
+	if (!($this instanceof ErrorPresenter)){
+	    // test for forbidden "../" and similar
+	    $this->path = $this->verifyPath($this->path);
+	    // fill viewed
+	    $this->loadFiles();
+	}
 
 	$this->template->user = $this->getUser();
 
