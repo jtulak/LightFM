@@ -68,6 +68,10 @@ Limits for creating Zip files (number of files and so...) can be changed in app/
 
 Changelog:
 ---------
+v0.5.2.1 beta 12. Apr. 2013
+- fixed bug with gps
+- fixed bug causing incorrect displaying of error presenters
+
 v0.5.2 beta 31. Mar. 2013
 - Changes in .htacces
 - Changed sidebar selecting buttons to do not fire ajax
