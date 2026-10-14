@@ -1,6 +1,10 @@
 LightFM
 =======
 
+> THIS REPO IS ARCHIVED
+>
+> I wrote this years and years ago. It is unmaintained, very likely insecure, and I do not use it anymore.
+
 A light file manager and browser written in PHP with Nette framework. 
 Directories can be protected by password from public access and directory owners can upload, move or delete their files. Does not needs any database.
 
